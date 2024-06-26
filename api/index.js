@@ -5,6 +5,7 @@ import cors from "cors";
 import morgan from "morgan";
 import mysql from 'mysql2' // npm instal mysql2 
 import path from 'path';
+import reviewRoute from "./routes/reviews.js"
 import { fileURLToPath } from 'url';
 
 // __filename과 __dirname을 생성
@@ -60,7 +61,7 @@ db.getConnection((err, connection) => {
     console.log('Connected to the database.');
     connection.release(); // 연결 반환
 });
-
+app.use("/api/reviews",reviewRoute);
 // app.use('/api/auth', authRoutes);
 // app.use('/api/users', userRoutes);
 // app.use('/api/books', BookRoutes);
