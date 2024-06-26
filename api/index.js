@@ -72,5 +72,3 @@ db.getConnection((err, connection) => {
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
 });
-
-console.log("커밋용")
