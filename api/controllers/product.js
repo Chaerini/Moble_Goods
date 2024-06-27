@@ -18,7 +18,7 @@ export const createProduct = async ( req, res ) => {
             [name, quantity, subCategory_id, discount_rate, price, discounted_price]
         );
         
-        res.status(201).json({ message: 'Product created successfully', productId: result.insertId, name, quantity, subCategory_id, discount_rate, price, discounted_price, date});
+        res.status(201).json({ message: 'Product created successfully', productId: result.insertId, name, quantity, subCategory_id, discount_rate, price, discounted_price });
     } catch (error) {
         res.status(500).json({ message: 'Error creating product', error: error.message });
     }
@@ -30,25 +30,52 @@ export const updateProduct = async (req, res) => {
     const { id } = req.params;
     const { name, quantity, subCategory_id, discount_rate, price } = req.body;
 
-    //discounted_price 계산
-    let discounted_price;
-    if (discount_rate === 0) {
-        discounted_price = price;
-    } else {
-        discounted_price = Math.round(price * (1 - discount_rate / 100));
-    }
-
     try {
+        // 현재 값 조회
+        const [rows] = await pool.query('SELECT * FROM product WHERE id = ?', [id]);
+
+        if (rows.length === 0) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+
+        const existingProduct = rows[0];
+
+        // 동적 필드 업데이트
+        const fieldsToUpdate = {};
+        if (name !== undefined) fieldsToUpdate.name = name;
+        if (quantity !== undefined) fieldsToUpdate.quantity = quantity;
+        if (subCategory_id !== undefined) fieldsToUpdate.subCategory_id = subCategory_id;
+        if (discount_rate !== undefined) fieldsToUpdate.discount_rate = discount_rate;
+        if (price !== undefined) fieldsToUpdate.price = price;
+
+        // discounted_price 계산
+        const updatedDiscountRate = fieldsToUpdate.discount_rate !== undefined ? fieldsToUpdate.discount_rate : existingProduct.discount_rate;
+        const updatedPrice = fieldsToUpdate.price !== undefined ? fieldsToUpdate.price : existingProduct.price;
+        fieldsToUpdate.discounted_price = updatedDiscountRate === 0 ? updatedPrice : Math.round(updatedPrice * (1 - updatedDiscountRate / 100));
+
+        // SQL 쿼리 생성
+        const setClause = Object.keys(fieldsToUpdate).map(field => `${field} = ?`).join(', ');
+        const values = [...Object.values(fieldsToUpdate), id];
+
         const [result] = await pool.query(
-            'UPDATE product SET name = ?, quantity = ?, subCategory_id = ?, discount_rate = ?, price = ?, discounted_price = ? WHERE id = ?',
-            [name, quantity, subCategory_id, discount_rate, price, discounted_price, id]
+            `UPDATE product SET ${setClause} WHERE id = ?`,
+            values
         );
 
         if (result.affectedRows === 0) {
             return res.status(404).json({ message: 'Product not found' });
         }
 
-        res.status(200).json({ message: 'Product updated successfully', id, name, quantity, subCategory_id, discount_rate, price, discounted_price});
+        res.status(200).json({ 
+            message: 'Product updated successfully', 
+            id, 
+            name: name || existingProduct.name, 
+            quantity: quantity || existingProduct.quantity, 
+            subCategory_id: subCategory_id || existingProduct.subCategory_id, 
+            discount_rate: updatedDiscountRate, 
+            price: updatedPrice, 
+            discounted_price: fieldsToUpdate.discounted_price
+        });
     } catch (error) {
         res.status(500).json({ message: 'Error updating product', error: error.message });
     }
