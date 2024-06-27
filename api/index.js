@@ -31,7 +31,6 @@ app.use(cors(corsOptions))
 app.use(morgan('combined'));
 app.use(cookieParser())
 app.use(express.json())
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use((err, req, res, next) => {
     const errorStatus = err.status || 500;
     const errorMessage = err.message || "Something went wrong!";
