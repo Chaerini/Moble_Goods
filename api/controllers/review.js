@@ -51,13 +51,9 @@ export const getAllReview = async(req,res) =>{
     try{
         const [rows] = await pool.query(
             `SELECT
-                r.id AS id,
-                r.title AS title,
-                r.writer AS writer,
-                r.detail As detail,
-                r.rating As rating
+                *
             FROM
-                reviews r`
+                reviews`
         );
         res.status(200).json({rows:rows});
         }catch(error){
