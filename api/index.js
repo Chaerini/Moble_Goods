@@ -66,8 +66,8 @@ db.getConnection((err, connection) => {
     console.log('Connected to the database.');
     connection.release(); // 연결 반환
 });
-// app.use("/api/reviews", reviewRoutes);
-// app.use("/api/review_image",reviewImageRoutes);
+app.use("/api/reviews", reviewRoutes);
+app.use("/api/review_image",reviewImageRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 // app.use('/api/books', BookRoutes);
