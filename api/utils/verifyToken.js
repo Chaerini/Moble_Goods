@@ -11,7 +11,6 @@ export const verifyToken = (req, res, next) => {
         if (err) return next(createError(403, "Token is not valid!"));
         req.user = user;
         console.log("verify 완료 후 user 정보 : ", req.user);
-        next();
     });
 };
 
@@ -32,6 +31,7 @@ export const verifyTokenNext = (req, res, next) => {
 
 export const verifyUser = (req, res, next) => {
     verifyToken(req, res, () => {
+        if (err) return next(err);
         // req.user.id , req.params.userId 정보가 같을때
         console.log(
             "verifyUser req.user.id , req.params.userId 정보 체크",
@@ -49,7 +49,8 @@ export const verifyUser = (req, res, next) => {
 };
 
 export const verifyAdmin = (req, res, next) => {
-    verifyToken(req, res, next);
+    verifyToken(req, res)
+
     console.log("req.user : ", req.user);
     if (req.user.isAdmin) {
         console.log("verifyAdmin req.user.isAdmin: true");
@@ -57,4 +58,5 @@ export const verifyAdmin = (req, res, next) => {
     } else {
         return next(createError(403, "You are not authorized!"));
     }
+    
 };

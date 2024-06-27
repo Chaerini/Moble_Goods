@@ -2,12 +2,12 @@ import express from 'express';
 import { 
     updateUser,
     updateUserMembership,
-    editPassword,
+    updatePassword,
     deleteUser,
     getIdUser,
     getAllUsers
     } from '../controllers/user.js';
-import { verifyAdmin, verifyToken, verifyUser } from '../utils/verifyToken.js';
+import { verifyAdmin, verifyToken, verifyUser, verifyTokenNext } from '../utils/verifyToken.js';
 
 const router = express.Router();
 
@@ -18,13 +18,13 @@ router.put('/users/:userId', verifyUser, updateUser);
 router.put('/membership/:userId', verifyAdmin, updateUserMembership);
 
 // UPDATE (edit pw)
-router.put('/changepw/:userId', verifyAdmin, editPassword);
+router.put('/changepw/:userId', verifyAdmin, updatePassword);
 
 // DELETE
 router.delete("/:userId", verifyUser, deleteUser);
 
 // GET ID
-router.get("/:userId", verifyUser, getIdUser);
+router.get("/:userId", verifyTokenNext, getIdUser);
 
 // GET ALL
 router.get("/", verifyAdmin, getAllUsers);

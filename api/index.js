@@ -3,16 +3,16 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import morgan from "morgan";
-import mysql from 'mysql2' // npm instal mysql2 
+import mysql from 'mysql2' // npm install mysql2 
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 // __filename과 __dirname을 생성
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-// import authRoutes from './routes/auth.js';
+import authRoutes from './routes/auth.js';
+import userRoutes from './routes/users.js';
 // import BookRoutes from './routes/books.js';
-// import userRoutes from './routes/users.js';
 // import loanRoutes from './routes/loans.js';
 // import orderRoutes from './routes/orders.js';
 // import paymentRoutes from './routes/payments.js';
@@ -61,8 +61,8 @@ db.getConnection((err, connection) => {
     connection.release(); // 연결 반환
 });
 
-// app.use('/api/auth', authRoutes);
-// app.use('/api/users', userRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/users', userRoutes);
 // app.use('/api/books', BookRoutes);
 // app.use('/api/loans', loanRoutes);
 // app.use('/api2/orders', orderRoutes);
