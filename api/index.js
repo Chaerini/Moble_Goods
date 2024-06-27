@@ -7,6 +7,9 @@ import mysql from 'mysql2' // npm instal mysql2
 import path from 'path';
 import reviewRoutes from "./routes/reviews.js";
 import reviewImageRoutes from "./routes/review_image.js"
+import ordersRoutes from "./routes/orders.js"
+import orderitemRoutes from "./routes/order_items.js"
+import statusesRoutes from "./routes/statuses.js"
 import { fileURLToPath } from 'url';
 
 // __filename과 __dirname을 생성
@@ -70,6 +73,10 @@ app.use("/api/review_image",reviewImageRoutes);
 // app.use('/api/loans', loanRoutes);
 // app.use('/api2/orders', orderRoutes);
 // app.use('/api2/payments', paymentRoutes);
+app.use('/api/order', ordersRoutes);
+app.use('/api/order_item', orderitemRoutes);
+app.use('/api/status', statusesRoutes);
+
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
