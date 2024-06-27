@@ -1,15 +1,26 @@
 import pool from "../db.js";
-export const createReview = async(req,res) =>{
-    const {userId}=req.params;
-    const {title,detail,rating} = req.body;
+export const createReview = async (req, res) => {
+    const { userId } = req.params;
+    const { title, detail, rating } = req.body;
     console.log(req.body);
-    try{
-        const [result] = await pool.query("INSERT INTO reviews (title,detail,rating,user_id) VALUES (?,?,?,?)",[title,detail,rating,userId]);
-        res.status(200).json({message:"리뷰 작성 완료"})
-    }catch(error){
-        res.status(400).json({error:error.message});
+    try {
+        // userId와 일치하는 username을 조회
+        const [userResult] = await pool.query("SELECT username FROM users WHERE id = ?", [userId]);
+        if (userResult.length === 0) {
+            return res.status(404).json({ error: "User not found" });
+        }
+        const username = userResult[0].username;
+
+        // 리뷰 작성
+        const [result] = await pool.query("INSERT INTO reviews (title, detail, rating, user_id) VALUES (?, ?, ?, ?)", [title, detail, rating, userId]);
+        
+        // 응답에 username 포함
+        res.status(200).json({ message: "리뷰 작성 완료", "작성자": username });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
     }
 };
+
 
 export const updateReview = async(req,res) =>{
     const {reviewId}=req.params;
