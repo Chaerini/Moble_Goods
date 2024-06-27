@@ -10,6 +10,7 @@ import reviewImageRoutes from "./routes/review_image.js"
 import ordersRoutes from "./routes/orders.js"
 import orderitemRoutes from "./routes/order_items.js"
 import statusesRoutes from "./routes/statuses.js"
+import productRoutes from './routes/products.js';
 import { fileURLToPath } from 'url';
 
 // __filename과 __dirname을 생성
@@ -21,6 +22,7 @@ import userRoutes from './routes/users.js';
 // import loanRoutes from './routes/loans.js';
 // import orderRoutes from './routes/orders.js';
 // import paymentRoutes from './routes/payments.js';
+
 const app = express();
 dotenv.config();
 
@@ -75,6 +77,7 @@ app.use("/api/review_image",reviewImageRoutes);
 app.use('/api/order', ordersRoutes);
 app.use('/api/order_item', orderitemRoutes);
 app.use('/api/status', statusesRoutes);
+app.use('/api/products', productRoutes);
 
 
 app.listen(process.env.PORT, () => {
