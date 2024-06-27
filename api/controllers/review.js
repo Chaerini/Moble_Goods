@@ -54,6 +54,18 @@ export const getAllReview = async(req,res) =>{
             res.status(400).json({error:error.message});
         }
 }
+export const getReviewByUserID = async(req,res) =>{
+    const{userId}=req.params;
+    console.log(userId);
+    try{
+        const reviews = await Review.find({userId});
+
+
+
+    }catch{
+
+    }
+}
 export const deleteReview = async(req,res) =>{
     const {reviewId} = req.params;
     console.log(req.params);
@@ -68,12 +80,3 @@ export const deleteReview = async(req,res) =>{
         res.status(400).json({error:error.message});
     }
 }
-export const createImage=async(req,res,next)=>{
-     const {reviewId} = req.params;
-     const{imageurl} = req.body;
-     try{
-        const [result] = await pool.query("INSERT INTO reviews (image_url) VALUES (?) WHERE id=?",[imageurl,reviewId])
-     }catch(error){
-        res.status(400).json({error:error.message})
-     }
-};
