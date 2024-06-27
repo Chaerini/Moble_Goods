@@ -1,9 +1,11 @@
 import pool from "../db.js";
 export const createReview = async(req,res) =>{
+    const {userId}=req.params;
     const {title,writer,detail,rating} = req.body;
     console.log(req.body);
     try{
-        const [result] = await pool.query("INSERT INTO reviews (title,writer,detail,rating) VALUES (?,?,?,?)",[title,writer,detail,rating]);
+        const [result] = await pool.query("INSERT INTO reviews (title,writer,detail,rating,user_id) VALUES (?,?,?,?,?)",[title,writer,detail,rating,userId]);
+        res.status(200).json({message:"리뷰 작성 완료"})
     }catch(error){
         res.status(400).json({error:error.message});
     }
@@ -12,6 +14,7 @@ export const createReview = async(req,res) =>{
 export const updateReview = async(req,res) =>{
     const {reviewId}=req.params;
     const {detail,rating}=req.body;
+    console.log(req.body);
     try{
     const[result]= await pool.query('UPDATE reviews SET detail=?,rating=? WHERE id=?',[detail,rating,reviewId]);
     if(result.affectedRows>0){
@@ -25,14 +28,10 @@ export const updateReview = async(req,res) =>{
 }
 export const getReviewID = async(req,res) =>{
     const {reviewId}=req.params;
-    
+    console.log(req.params);
     try{
-        const[result] = await pool.query("SELECT * FROM reviews WHERE id=?",[reviewId]);
-        if(result.length>0){
-            res.status(201).json({result});
-        }else{
-            res.status(404).json({error:"Review not found"});
-        }
+        const[rows] = await pool.query("SELECT * FROM reviews WHERE id=?",[reviewId]);
+        res.status(201).json({rows:rows});
     }catch(error){
         res.status(400).json({error:error.message});
     }
@@ -56,16 +55,18 @@ export const getAllReview = async(req,res) =>{
 }
 export const getReviewByUserID = async(req,res) =>{
     const{userId}=req.params;
-    console.log(userId);
+    console.log(req.params);
     try{
-        const reviews = await Review.find({userId});
-
-
-
-    }catch{
-
+        const [result]=await pool.query("SELECT * FROM reviews WHERE user_id=?",[userId])
+        if(result.length>0){
+            res.status(201).json({result});
+        }else{
+            res.status(404).json({error:"User not found"});
+        }
+    }catch(error){
+        res.status(400).json({error:error.message});
     }
-}
+};
 export const deleteReview = async(req,res) =>{
     const {reviewId} = req.params;
     console.log(req.params);
