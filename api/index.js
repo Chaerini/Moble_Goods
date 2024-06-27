@@ -5,6 +5,8 @@ import cors from "cors";
 import morgan from "morgan";
 import mysql from 'mysql2' // npm install mysql2 
 import path from 'path';
+import reviewRoutes from "./routes/reviews.js";
+import reviewImageRoutes from "./routes/review_image.js"
 import { fileURLToPath } from 'url';
 
 // __filename과 __dirname을 생성
@@ -29,7 +31,6 @@ app.use(cors(corsOptions))
 app.use(morgan('combined'));
 app.use(cookieParser())
 app.use(express.json())
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use((err, req, res, next) => {
     const errorStatus = err.status || 500;
     const errorMessage = err.message || "Something went wrong!";
@@ -60,9 +61,10 @@ db.getConnection((err, connection) => {
     console.log('Connected to the database.');
     connection.release(); // 연결 반환
 });
-
-app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
+app.use("/api/reviews", reviewRoutes);
+app.use("/api/review_image",reviewImageRoutes);
+// app.use('/api/auth', authRoutes);
+// app.use('/api/users', userRoutes);
 // app.use('/api/books', BookRoutes);
 // app.use('/api/loans', loanRoutes);
 // app.use('/api2/orders', orderRoutes);
