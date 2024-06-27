@@ -7,13 +7,17 @@ dotenv.config();
 
 // 회원가입
 export const register = async (req, res) => {
-    const { username, password, name, phone } = req.body;
-    console.log(`register: ${username}, ${password}, ${name}, ${phone}`);
+    const { username, password, name, phone, is_admin } = req.body;
+    console.log(`register: ${username}, ${password}, ${name}, ${phone}, ${is_admin}`);
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
+        
+        // is_admin 값이 null일 경우 디폴트값 0을 사용
+        const isAdminValue = is_admin !== undefined ? is_admin : 0;
+
         const [result] = await pool.query(
-            "INSERT INTO users (username, password, name, phone) VALUES (?, ?, ?, ?)",
-            [username, hashedPassword, name, phone]
+            "INSERT INTO users (username, password, name, phone, is_admin) VALUES (?, ?, ?, ?, ?)",
+            [username, hashedPassword, name, phone, isAdminValue]
         );
 
         res.status(200).json({
@@ -46,16 +50,20 @@ export const login = async (req, res) => {
             return res.status(400).json({ error: "Invalid credentials" });
         }
 
+        // JWT 비밀 키가 올바르게 설정되었는지 확인하는 로그
+        console.log('JWT:', process.env.JWT);
+        console.log("user.is_admin : ", user.is_admin)
+
         const token = jwt.sign(
-            { id: user.id, isAdmin: user.is_admin },
-            process.env.JWT_SECRET,
+            { userId: user.id, isAdmin: user.is_admin },
+            process.env.JWT,
             // {
             //     expiresIn: "1h",
             // }
         );
 
-        // user 객체에서 password와 is_admin을 제외한 나머지 속성만 포함
-        const { password, is_admin, ...otherDetails } = user;
+        // user 객체에서 password을 제외한 나머지 속성만 포함
+        const { password, ...otherDetails } = user;
         res.cookie("access_token", token, {
             httpOnly: true,
             sameSite: 'strict',
@@ -64,7 +72,6 @@ export const login = async (req, res) => {
             .status(200)
             .json({
                 details: { ...otherDetails, token },
-                is_admin,
             });
     } catch (error) {
         res.status(500).json({ error: error.message });
