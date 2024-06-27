@@ -1,10 +1,12 @@
 import express from 'express';
-const router = express.Router();
 import { 
     createProduct, updateProduct, deleteProduct, getAllProducts, getProductById,
     getProductsByMainCategory , getProductsBySubCategory, getProductsByPrice, getPopularProducts,
     createProductImage, updateProductImage, deleteProductImage, getProductImagesById
 } from '../controllers/product.js';
+
+
+const router = express.Router();
 
 // /products 경로에 핸들러 등록
 // 상품 전체 조회
