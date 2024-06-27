@@ -3,3 +3,5 @@
 
 .DS_Store
 /api/.env
+
+EC2_KEYPair.pem

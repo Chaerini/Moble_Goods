@@ -10,9 +10,11 @@ export const updateUser = async (req, res) => {
 
         const { name, phone, address } = req.body;
 
+        console.log("Received data:", { name, phone, address });
+
         const [result] = await pool.query(
             "UPDATE users SET name = ?, phone = ?, address = ? WHERE id = ?",
-            [name, phone, address]
+            [name, phone, address, userId]
         );
 
         if (result.affectedRows > 0) {
@@ -42,7 +44,7 @@ export const updateUserMembership = async (req, res) => {
 
         const [result] = await pool.query(
             "UPDATE users SET membership_id = ? WHERE id = ?",
-            [membership_id]
+            [membership_id, userId]
         );
 
         if (result.affectedRows > 0) {
@@ -63,7 +65,7 @@ export const updateUserMembership = async (req, res) => {
 // UPDATE (비밀번호 변경)
 export const updatePassword = async (req, res) => {
     const { userId } = req.params;
-    const { currentPassword, newPassword } = req.body;
+    const { password } = req.body;
 
     try {
         console.log(`Updating password for user: ${userId}`);
@@ -83,22 +85,8 @@ export const updatePassword = async (req, res) => {
 
         const user = users[0];
 
-        // 입력한 현재 비밀번호가 맞는지 확인
-        const isPasswordCorrect = await bcrypt.compare(
-            currentPassword,
-            user.password
-        );
-
-        // 비밀번호가 일치하지 않는 경우
-        if (!isPasswordCorrect) {
-            console.error("Invalid current password");
-            return res
-                .status(401)
-                .json({ success: false, message: "Invalid current password" });
-        }
-
         // 새 비밀번호를 암호화하여 저장
-        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        const hashedPassword = await bcrypt.hash(password, 10);
         const [updateResult] = await pool.query("UPDATE users SET password = ? WHERE id = ?", [
             hashedPassword,
             userId,
@@ -132,7 +120,7 @@ export const deleteUser = async (req, res) => {
         await connection.beginTransaction();
 
         // 유저가 작성한 리뷰 삭제
-        await connection.query("DELETE FROM musics WHERE user_id = ?", [userId]);
+        await connection.query("DELETE FROM reviews WHERE user_id = ?", [userId]);
 
         // 사용자 삭제
         const [result] = await connection.query("DELETE FROM users WHERE id = ?", [userId]);
@@ -171,11 +159,12 @@ export const getIdUser = async (req, res) => {
                     u.name AS name,
                     u.phone AS phone,
                     u.address AS address,
+                    u.is_admin AS is_admin,
                     m.name AS membership_name
                 FROM
                     users u
                 INNER JOIN
-                    membership ON user.membership_id = membership.id
+                    memberships m ON u.membership_id = m.id
                 WHERE 
                     u.id = ?
             `,

@@ -33,7 +33,7 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
     try {
         const [rows] = await pool.query(
-            "SELECT id, username, password, is_admin FROM users WHERE username = ?",
+            "SELECT id, username, password, name, phone, address, is_admin FROM users WHERE username = ?",
             [req.body.username]
         );
 

@@ -15,12 +15,26 @@ export const verifyToken = (req, res, next) => {
 };
 
 export const verifyTokenNext = (req, res, next) => {
-    const authHeader = req.headers.authorization;
-    const token = req.headers["auth-token"]?.split(" ")[1];
+    console.log("여기 들어옴")
+    // authHeader는 authorization 헤더 또는 auth-token 헤더에서 가져옴
+    const authHeader = req.headers.authorization || req.headers["auth-token"];
+    let token;
+    console.log("authHeader : ", authHeader)
+
+    // const token = req.headers["auth-token"]?.split(" ")[1];
+    
+    // authHeader 존재여부 확인
+    if (authHeader) {
+        // Bearer <token> 형태의 경우와 그 외 경우 처리
+        token = authHeader.startsWith("Bearer ") ? authHeader.split(" ")[1] : authHeader;
+    }    
+
     console.log(`verifying token: ${token}`);
+
     if (!token) {
         return next(createError(401, "You are not authenticated!"));
     }
+    
     jwt.verify(token, process.env.JWT, (err, user) => {
         if (err) return next(createError(403, "Token is not valid!"));
         req.user = user;
