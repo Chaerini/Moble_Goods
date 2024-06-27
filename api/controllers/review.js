@@ -1,10 +1,10 @@
 import pool from "../db.js";
 export const createReview = async(req,res) =>{
     const {userId}=req.params;
-    const {title,writer,detail,rating} = req.body;
+    const {title,detail,rating} = req.body;
     console.log(req.body);
     try{
-        const [result] = await pool.query("INSERT INTO reviews (title,writer,detail,rating,user_id) VALUES (?,?,?,?,?)",[title,writer,detail,rating,userId]);
+        const [result] = await pool.query("INSERT INTO reviews (title,detail,rating,user_id) VALUES (?,?,?,?)",[title,detail,rating,userId]);
         res.status(200).json({message:"리뷰 작성 완료"})
     }catch(error){
         res.status(400).json({error:error.message});
