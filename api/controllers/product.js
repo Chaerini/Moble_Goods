@@ -180,7 +180,8 @@ export const getProductsByMainCategory = async (req, res) => {
             FROM product p
             JOIN subcategory sc ON p.subcategory_id = sc.id
             JOIN maincategory mc ON sc.maincategory_id = mc.id
-            WHERE mc.id = ?;
+            WHERE mc.id = ?
+            ORDER BY date DESC;
         `, [mainCategoryId]);
 
         if (rows.length === 0) {
@@ -211,7 +212,8 @@ export const getProductsBySubCategory = async (req, res) => {
             FROM product p
             JOIN subcategory sc ON p.subcategory_id = sc.id
             JOIN maincategory mc ON sc.maincategory_id = mc.id
-            WHERE sc.id = ?;
+            WHERE sc.id = ?
+            ORDER BY date DESC;
         `, [subCategoryId]);
 
         if (rows.length === 0) {
