@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import { createError } from "../utils/error.js";
 
+// 토큰 확인 및 사용자 인증
 export const verifyToken = (req, res, next) => {
     const token = req.headers["auth-token"];
     console.log(`verifying token: ${token}`);
@@ -43,13 +44,13 @@ export const verifyTokenNext = (req, res, next) => {
     });
 };
 
+
+// verifyToken 실행 후 요청된 작업 인가
 export const verifyUser = (req, res, next) => {
     verifyToken(req, res)
 
     console.log("req.user : ", req.user);
-
     // req.user.id , req.params.userId 정보가 같을때
-
     console.log(
         "verifyUser req.user.id , req.params.userId 정보 체크 : ",
         req.params.userId
@@ -57,7 +58,7 @@ export const verifyUser = (req, res, next) => {
     // req.user.id가 undefined로 나옴 여기 수정해야돼!!!
     console.log(req.user.id)
     
-    if (req.user.id == req.params.userId) {
+    if (req.user.id === req.params.id || req.user.isAdmin) {
 
         console.log(
             "verifyUser req.user.id , req.params.userId 정보 일치함"
@@ -68,6 +69,7 @@ export const verifyUser = (req, res, next) => {
     }
 };
 
+// verifyToken 실행, 관리자 확인 후 요청된 작업 인가
 export const verifyAdmin = (req, res, next) => {
     verifyToken(req, res)
 
