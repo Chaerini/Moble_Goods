@@ -44,22 +44,28 @@ export const verifyTokenNext = (req, res, next) => {
 };
 
 export const verifyUser = (req, res, next) => {
-    verifyToken(req, res, () => {
-        if (err) return next(err);
-        // req.user.id , req.params.userId 정보가 같을때
+    verifyToken(req, res)
+
+    console.log("req.user : ", req.user);
+
+    // req.user.id , req.params.userId 정보가 같을때
+
+    console.log(
+        "verifyUser req.user.id , req.params.userId 정보 체크 : ",
+        req.params.userId
+    );
+    // req.user.id가 undefined로 나옴 여기 수정해야돼!!!
+    console.log(req.user.id)
+    
+    if (req.user.id == req.params.userId) {
+
         console.log(
-            "verifyUser req.user.id , req.params.userId 정보 체크",
-            req.params.userId
+            "verifyUser req.user.id , req.params.userId 정보 일치함"
         );
-        if (req.user.id == req.params.userId) {
-            console.log(
-                "verifyUser req.user.id , req.params.userId 정보가 같을때"
-            );
-            next();
-        } else {
-            return next(createError(403, "You are not authorized!"));
-        }
-    });
+        next();
+    } else {
+        return next(createError(403, "You are not authorized!"));
+    }
 };
 
 export const verifyAdmin = (req, res, next) => {
