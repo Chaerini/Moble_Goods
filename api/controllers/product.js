@@ -114,9 +114,9 @@ export const getAllProducts = async (req, res) => {
                 mc.name AS mainCategoryName, 
                 pi.url AS productImageUrl
             FROM product p
-            LEFT JOIN subCategory sc ON p.SubCategory_id = sc.id
-            LEFT JOIN mainCategory mc ON sc.MainCategory_id = mc.id
-            LEFT JOIN product_Image pi ON p.id = pi.product_id
+            LEFT JOIN subcategory sc ON p.subcategory_id = sc.id
+            LEFT JOIN maincategory mc ON sc.maincategory_id = mc.id
+            LEFT JOIN product_image pi ON p.id = pi.product_id
             ORDER BY p.date DESC;`
         );
         if (rows.length === 0) {
@@ -146,9 +146,9 @@ export const getProductById = async (req, res) => {
                 mc.name AS mainCategoryName, 
                 pi.url AS productImageUrl
             FROM product p
-            LEFT JOIN subCategory sc ON p.subCategory_id = sc.id
-            LEFT JOIN mainCategory mc ON sc.mainCategory_id = mc.id
-            LEFT JOIN product_Image pi ON p.id = pi.product_id
+            LEFT JOIN subcategory sc ON p.subcategory_id = sc.id
+            LEFT JOIN maincategory mc ON sc.maincategory_id = mc.id
+            LEFT JOIN product_image pi ON p.id = pi.product_id
             WHERE p.id = ?
         `, [id]);
         
@@ -178,8 +178,8 @@ export const getProductsByMainCategory = async (req, res) => {
                 sc.name AS subCategoryName, 
                 mc.name AS mainCategoryName
             FROM product p
-            JOIN subCategory sc ON p.SubCategory_id = sc.id
-            JOIN mainCategory mc ON sc.MainCategory_id = mc.id
+            JOIN subcategory sc ON p.subcategory_id = sc.id
+            JOIN maincategory mc ON sc.maincategory_id = mc.id
             WHERE mc.id = ?;
         `, [mainCategoryId]);
 
@@ -209,8 +209,8 @@ export const getProductsBySubCategory = async (req, res) => {
                 sc.name AS subCategoryName, 
                 mc.name AS mainCategoryName
             FROM product p
-            JOIN subCategory sc ON p.SubCategory_id = sc.id
-            JOIN mainCategory mc ON sc.MainCategory_id = mc.id
+            JOIN subcategory sc ON p.subcategory_id = sc.id
+            JOIN maincategory mc ON sc.maincategory_id = mc.id
             WHERE sc.id = ?;
         `, [subCategoryId]);
 
@@ -245,9 +245,9 @@ export const getProductsByPrice = async (req, res) => {
                 mc.name AS mainCategoryName, 
                 pi.url AS productImageUrl
             FROM product p
-            LEFT JOIN subCategory sc ON p.subCategory_id = sc.id
-            LEFT JOIN mainCategory mc ON sc.mainCategory_id = mc.id
-            LEFT JOIN product_Image pi ON p.id = pi.product_id
+            LEFT JOIN subcategory sc ON p.subcategory_id = sc.id
+            LEFT JOIN maincategory mc ON sc.maincategory_id = mc.id
+            LEFT JOIN product_image pi ON p.id = pi.product_id
             ORDER BY p.discounted_price ${sortOrder};
         `);
         
@@ -269,7 +269,7 @@ export const getPopularProducts = async (req, res) => {
                 p.id AS id, 
                 p.name AS name, 
                 p.quantity AS quantity, 
-                p.SubCategory_id AS subCategoryId, 
+                p.subcategory_id AS subCategoryId, 
                 p.discount_rate AS discountRate, 
                 p.price AS price, 
                 p.date AS date, 
@@ -300,7 +300,7 @@ export const createProductImage = async (req, res) => {
     const { url } = req.body;
     try {
         const [result] = await pool.query(
-            'INSERT INTO product_Image (product_id, url) VALUES (?, ?)',
+            'INSERT INTO product_image (product_id, url) VALUES (?, ?)',
             [id, url]
         );
         
@@ -317,11 +317,11 @@ export const updateProductImage = async(req, res) => {
     const { url } = req.body;
     try {
         const [result] = await pool.query(
-            'UPDATE product_Image SET url = ? WHERE product_id = ? AND id = ?',
+            'UPDATE product_image SET url = ? WHERE product_id = ? AND id = ?',
             [url, id, imageId]
         );
     if (result.affectedRows > 0) {
-        res.status(200).json({ id, product_id, url });
+        res.status(200).json({ id: imageId, product_id: id, url });
     } else {
         res.status(404).json({ error: 'Product not found' });
     }
@@ -334,7 +334,7 @@ export const deleteProductImage = async(req, res) => {
     // URL 파라미터로 상품 ID와 이미지 ID를 지정
     const { id, imageId } = req.params;
     try {
-        const [result] = await pool.query('DELETE FROM product_Image WHERE product_id = ? AND id = ?', [id, imageId]);
+        const [result] = await pool.query('DELETE FROM product_image WHERE product_id = ? AND id = ?', [id, imageId]);
         if (result.affectedRows === 0) {
             return res.status(404).json({ message: 'Product image not found' });
         }
@@ -354,7 +354,7 @@ export const getProductImagesById = async (req, res) => {
                  pi.id AS imageId,
                  pi.product_id AS productId,
                  pi.url AS ImageUrl
-            FROM product_Image pi
+            FROM product_image pi
             WHERE pi.product_id = ?
             `,[id]);
         
