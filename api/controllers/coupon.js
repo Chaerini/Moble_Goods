@@ -2,15 +2,15 @@ import pool from '../db.js';
 
 // 쿠폰 등록
 export const createCoupon = async (req, res) => {
-    const { name, discount, startdate, enddate, condition } = req.body;
+    const { name, discount, start_date, end_date, conditions } = req.body;
 
     try {
         const [result] = await pool.query(
-            `INSERT INTO coupon(name, discount, startdate, enddate, condition) VALUES (?, ?, ?, ?, ?)`,
-            [name, discount, startdate, enddate, condition]
+            `INSERT INTO coupon(name, discount, start_date, end_date, conditions) VALUES (?, ?, ?, ?, ?)`,
+            [name, discount, start_date, end_date, conditions]
         );
         let id = result.insertId;
-        res.status(200).json({ id, name, discount, startdate, enddate, condition });
+        res.status(200).json({ id, name, discount, start_date, end_date, conditions });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
@@ -19,17 +19,17 @@ export const createCoupon = async (req, res) => {
 // 쿠폰 수정
 export const updateCoupon = async (req, res) => {
     const { id } = req.params;
-    const { name, discount, startdate, enddate, condition } = req.body;
+    const { name, discount, start_date, end_date, conditions } = req.body;
 
     try {
         const [result] = await pool.query(
             `UPDATE coupon 
-            SET name = ?, discount = ?, startdate = ?, enddate = ? , condition = ?
+            SET name = ?, discount = ?, start_date = ?, end_date = ? , conditions = ?
             WHERE id = ?`,
-            [name, discount, startdate, enddate, condition, id]
+            [name, discount, start_date, end_date, conditions, id]
         );
         if (result.affectedRows > 0) {
-            res.status(200).json({ id, name, discount, startdate, enddate, condition });
+            res.status(200).json({ id, name, discount, start_date, end_date, conditions });
         } else {
             res.status(404).json({ error: '쿠폰을 찾을 수 없습니다.' });
         }
@@ -80,16 +80,14 @@ export const getCoupon = async (req, res) => {
     }
 };
 
-// 하나의 쿠폰 당 사용 된 횟수
+// 쿠폰 당 사용 된 횟수
 export const getCountCoupon = async (req, res) => {
-    const { id } = req.params;
-
     try {
         const [result] = await pool.query(
-            `SELECT coupon.name, COUNT(*) FROM usercoupon
+            `SELECT coupon.id, coupon.name, COUNT(*) AS coupon_used_count FROM coupon
             JOIN usercoupon ON coupon.id = usercoupon.coupon_id
-            WHERE coupon.id = ? AND usercoupon.used = 1`,
-            [id]
+            WHERE usercoupon.used = 1
+            GROUP BY coupon.id;`
         );
         res.status(200).json({ result });
     } catch (error) {

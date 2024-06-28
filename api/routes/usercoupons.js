@@ -1,6 +1,6 @@
 import express from 'express';
-import { verifyUser } from '../utils/verifyToken';
-import { createUserCoupon, deleteUserCoupon, getUserCoupon, updateUserCoupon } from '../controllers/usercoupon';
+import { verifyUser } from '../utils/verifyToken.js';
+import { createUserCoupon, deleteUserCoupon, getUserCoupon, updateUserCoupon } from '../controllers/usercoupon.js';
 
 const router = express.Router();
 
@@ -15,3 +15,5 @@ router.delete('/:id', verifyUser, deleteUserCoupon);
 
 // 유저 별 보유 쿠폰 조회
 router.get('/:userid', verifyUser, getUserCoupon);
+
+export default router;

@@ -7,15 +7,15 @@ export const createComment = async (req, res) => {
     currentDate.setHours(currentDate.getHours() + 9);
     const date = currentDate.toISOString().slice(0, 10);
 
-    const { admin_id, contents } = req.body;
+    const { admin_id, ask_id, contents } = req.body;
 
     try {
         const [result] = await pool.query(
-            `INSERT INTO comment(admin_id, contents, date) VALUES (?, ?, ?);`,
-            [admin_id, contents, date]
+            `INSERT INTO comment(admin_id, ask_id, contents, date) VALUES (?, ?, ?, ?);`,
+            [admin_id, ask_id, contents, date]
         );
         let id = result.insertId;
-        res.status(200).json({ success: true, id, admin_id, contents, date });
+        res.status(200).json({ success: true, id, admin_id, ask_id, contents, date });
     } catch (error) {
         res.status(400).json({ error: error.message })
     }
@@ -28,12 +28,11 @@ export const updateComment = async (req, res) => {
 
     try {
         const [result] = await pool.query(
-            `UPDATE comment SET content = ? WHERE id = ?`,
+            `UPDATE comment SET contents = ? WHERE id = ?`,
             [contents, id]
         );
-        let commentid = result.insertId;
         if (result.affectedRows > 0) {
-            res.status(200).json({ commentid, contents });
+            res.status(200).json({ id, contents });
         } else {
             res.status(404).json({ error: '댓글을 찾을 수 없습니다.' });
         }
@@ -62,7 +61,7 @@ export const getComment = async (req, res) => {
 
     try {
         const [result] = await pool.query(
-            `SELECT * FROM comment WHERE ask_id = ?`,
+            `SELECT comment.*, users.name FROM comment JOIN users ON users.id = comment.admin_id WHERE ask_id = ?`,
             [askid]
         );
         res.status(200).json({ result });
