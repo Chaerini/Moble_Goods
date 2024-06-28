@@ -1,8 +1,18 @@
 import express from 'express';
-import { getStatusById, getStatusesByWaybillNumber, createStatus, updateStatus, deleteStatus } from '../controllers/status.js';
+import { 
+    getAllOrdersWithStatus, 
+    getStatusById, 
+    getStatusesByWaybillNumber, 
+    createStatus, 
+    updateStatus, 
+    deleteStatus 
+} from '../controllers/status.js';
 
 const router = express.Router();
 
+
+
+router.get('/', getAllOrdersWithStatus);
 router.get('/:id', getStatusById);
 // router.get('/user/:user_id', getStatusesByUserId);
 router.post('/', createStatus);

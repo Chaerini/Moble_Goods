@@ -1,5 +1,16 @@
 import pool from '../db.js';
 
+
+//모든 주문 항목 조회
+export const getAllOrderItem = async (req, res) => {
+  try {
+    const [rows] = await pool.query('SELECT * FROM order_item');
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 //주문항목 아이디로 조회
 export const getOrderItemById = async (req, res) => {
   const { id } = req.params;
@@ -11,7 +22,7 @@ export const getOrderItemById = async (req, res) => {
   }
 };
 
-// 주문 아이디로 조회 
+// 주문항목 아이디로 조회 
 export const getOrderItemsByOrderId = async (req, res) => {
     const { order_id } = req.params;
     try {

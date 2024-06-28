@@ -1,7 +1,20 @@
 import pool from '../db.js';
 
+// 모든 배송상태와 관련된 주문 항목 조회
+export const getAllOrdersWithStatus = async (req, res) => {
+  try {
+    const [rows] = await pool.query(`
+      SELECT o.id AS order_id, o.user_id, o.total, s.id AS status_id, s.delivery_status, s.waybill_number
+      FROM \`order\` o
+      JOIN status s ON o.status_id = s.id
+    `);
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
 
-//주문항목 조회
+//주문항목 아이디로 조회
 export const getStatusById = async (req, res) => {
   const { id } = req.params;
   try {
@@ -11,7 +24,7 @@ export const getStatusById = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
-
+//
 //운송장 번호로 조회
 export const getStatusesByWaybillNumber = async (req, res) => {
   const { waybill_number } = req.params;
