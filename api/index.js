@@ -5,23 +5,23 @@ import cors from "cors";
 import morgan from "morgan";
 import mysql from 'mysql2' // npm install mysql2 
 import path from 'path';
+import { fileURLToPath } from 'url';
+
 import reviewRoutes from "./routes/reviews.js";
 import reviewImageRoutes from "./routes/review_image.js"
 import ordersRoutes from "./routes/orders.js"
 import orderitemRoutes from "./routes/order_items.js"
 import statusesRoutes from "./routes/statuses.js"
 import productRoutes from './routes/products.js';
-import { fileURLToPath } from 'url';
+import authRoutes from './routes/auth.js';
+import userRoutes from './routes/users.js';
+import commentRoutes from './routes/comments.js';
+import askRoutes from './routes/asks.js';
 
 // __filename과 __dirname을 생성
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-import authRoutes from './routes/auth.js';
-import userRoutes from './routes/users.js';
-// import BookRoutes from './routes/books.js';
-// import loanRoutes from './routes/loans.js';
-// import orderRoutes from './routes/orders.js';
-// import paymentRoutes from './routes/payments.js';
+
 
 const app = express();
 dotenv.config();
@@ -67,17 +67,15 @@ db.getConnection((err, connection) => {
     connection.release(); // 연결 반환
 });
 app.use("/api/reviews", reviewRoutes);
-app.use("/api/review_image",reviewImageRoutes);
+app.use("/api/review_image", reviewImageRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
-// app.use('/api/books', BookRoutes);
-// app.use('/api/loans', loanRoutes);
-// app.use('/api2/orders', orderRoutes);
-// app.use('/api2/payments', paymentRoutes);
 app.use('/api/order', ordersRoutes);
 app.use('/api/order_item', orderitemRoutes);
 app.use('/api/status', statusesRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/comments', commentRoutes);
+app.use('/api/asks', askRoutes);
 
 
 app.listen(process.env.PORT, () => {

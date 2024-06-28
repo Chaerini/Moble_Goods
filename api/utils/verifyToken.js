@@ -22,19 +22,19 @@ export const verifyTokenNext = (req, res, next) => {
     console.log("authHeader : ", authHeader)
 
     // const token = req.headers["auth-token"]?.split(" ")[1];
-    
+
     // authHeader 존재여부 확인
     if (authHeader) {
         // Bearer <token> 형태의 경우와 그 외 경우 처리
         token = authHeader.startsWith("Bearer ") ? authHeader.split(" ")[1] : authHeader;
-    }    
+    }
 
     console.log(`verifying token: ${token}`);
 
     if (!token) {
         return next(createError(401, "You are not authenticated!"));
     }
-    
+
     jwt.verify(token, process.env.JWT, (err, user) => {
         if (err) return next(createError(403, "Token is not valid!"));
         req.user = user;
@@ -72,5 +72,5 @@ export const verifyAdmin = (req, res, next) => {
     } else {
         return next(createError(403, "You are not authorized!"));
     }
-    
+
 };
