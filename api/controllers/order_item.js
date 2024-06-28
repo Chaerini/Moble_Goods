@@ -11,7 +11,7 @@ export const getAllOrderItem = async (req, res) => {
   }
 };
 
-//주문항목 아이디로 조회
+// 주문 항목 아이디로 조회 - 특정 주문 항목 아이디에 해당하는 주문 항목을 조회함
 export const getOrderItemById = async (req, res) => {
   const { id } = req.params;
   try {
@@ -22,7 +22,7 @@ export const getOrderItemById = async (req, res) => {
   }
 };
 
-// 주문항목 아이디로 조회 
+// 주문 아이디로 주문 항목 조회 - 특정 주문 아이디에 해당하는 모든 주문 항목을 조회함
 export const getOrderItemsByOrderId = async (req, res) => {
     const { order_id } = req.params;
     try {
@@ -33,7 +33,7 @@ export const getOrderItemsByOrderId = async (req, res) => {
     }
   };
 
-//주문항목 추가
+// 주문 항목 추가 - 새로운 주문 항목을 추가함
 export const createOrderItem = async (req, res) => {
   const { order_id, quantity, product_id, price } = req.body;
   try {
@@ -44,7 +44,7 @@ export const createOrderItem = async (req, res) => {
   }
 };
 
-//주문항목 업데이트
+// 주문 항목 업데이트 - 특정 주문 항목 아이디에 해당하는 주문 항목을 업데이트함
 export const updateOrderItem = async (req, res) => {
   const { id } = req.params;
   const { order_id, quantity, product_id, price } = req.body;
@@ -56,7 +56,7 @@ export const updateOrderItem = async (req, res) => {
   }
 };
 
-// 주문항목 삭제
+// 주문 항목 삭제 - 특정 주문 항목 아이디에 해당하는 주문 항목을 삭제함
 export const deleteOrderItem = async (req, res) => {
   const { id } = req.params;
   try {

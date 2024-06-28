@@ -1,5 +1,6 @@
 import pool from '../db.js';
 
+
 // 모든 배송상태와 관련된 주문 항목 조회
 export const getAllOrdersWithStatus = async (req, res) => {
   try {
