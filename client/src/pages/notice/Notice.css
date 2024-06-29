@@ -1,0 +1,25 @@
+.notice-view-wrapper{
+    width: 60%;
+    margin: 0 auto;
+}
+.notice-btn{
+    border:0;
+    padding: 10px;
+    align-content: center;
+}
+.notice-view-row{
+    margin: 10px 0;
+    display: flex;
+}
+.post-view-row>label:first-child{
+    margin:10px 0;
+    width: 30%;
+    font-weight: bold;
+}
+.post-view-row>*:nth-child(2){
+    margin: 10px 0;
+    width: 70%;
+}
+.h1{
+    align-items:center;
+}

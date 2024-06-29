@@ -19,6 +19,7 @@ import commentRoutes from './routes/comments.js';
 import askRoutes from './routes/asks.js';
 import couponRoutes from './routes/coupons.js';
 import usercouponRoutes from './routes/usercoupons.js'
+import noticeRoutes from "./routes/notices.js";
 
 // __filename과 __dirname을 생성
 const __filename = fileURLToPath(import.meta.url);
@@ -80,6 +81,7 @@ app.use('/api/comments', commentRoutes);
 app.use('/api/asks', askRoutes);
 app.use('/api/coupons', couponRoutes);
 app.use('/api/usercoupons', usercouponRoutes);
+app.use('/api/notice',noticeRoutes);
 
 
 app.listen(process.env.PORT, () => {
