@@ -36,7 +36,7 @@ function App() {
         <Route path='/addproduct' element={<Product />} />
         <Route path="/modal" element={<Modal />} />
         <Route path='/updateproduct/:id' element={<UpdateProduct />} />
-        <Route path="/" element={<Main />} />
+        {/* <Route path="/" element={<Main />} /> */}
         <Route path="/getuser" element={<GetUser />} />
         <Route path="/addcoupon" element={<Coupon />} />
         <Route path="/login" element={<Login />} />

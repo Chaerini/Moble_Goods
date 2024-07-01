@@ -28,11 +28,11 @@ const Product = () =>{
     return(
         <div className="addProduct">
             <h1>상품 추가하기</h1>
-            <input type="text" onChange={handleChange} placeholder="이름" name="name"/>
-            <input type="number" onChange={handleChange} placeholder="가격" name="price"/>
-            <input type="number" onChange={handleChange} placeholder="수량" name="quantity"/>
-            <input type="number" onChange={handleChange} placeholder="할인율" name="discount_rate"/>
-            <input type="number" onChange={handleChange} placeholder="할인된 가격" name="discounted_price"/>
+            <input type="text" onChange={handleChange} placeholder="이름" name="name" className="product-input"/>
+            <input type="number" onChange={handleChange} placeholder="가격" name="price" className="product-input"/>
+            <input type="number" onChange={handleChange} placeholder="수량" name="quantity" className="product-input"/>
+            <input type="number" onChange={handleChange} placeholder="할인율" name="discount_rate" className="product-input"/>
+            <input type="number" onChange={handleChange} placeholder="할인된 가격" name="discounted_price" className="product-input"/>
             <button onClick={handleClick}><Link to="/getproduct">추가</Link></button>
         </div>
     )

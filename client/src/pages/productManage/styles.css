@@ -1,10 +1,19 @@
-
+@import url("../../root.css");
+:root {
+    /* color */
+    --c-bg-white: #ffffff; /*root 컬러 건들지마세요*/
+    --c-darkgray: #757575;
+    --c-darkgray: #eeeeee;
+    --c-black: #000000;
+    --c-point: #ff5722;
+  }
 .product {
+    background-color: var(--c-darkgray);
     text-align: center;
     margin: 20px 0;
     font-size: 24px;
 }
-.th, td {
+.th{
     padding: 15px;
     text-align: center;
     border-bottom: 1px solid black;
@@ -47,13 +56,13 @@
 .delete{
     border:border;
     padding: 3px 6px;
-    background-color: white;
+    background-color: var(--c-point);
     cursor: pointer;
 }
 .update{
     border:border;
     padding: 3px 6px;
-    background-color: white;
+    background-color: var(--c-point);
     cursor: pointer;
     
 }
@@ -63,8 +72,7 @@
     gap:20px
 }
 .product-input{
-    width: 200px;
-    border: 1px solid gray;
-    align-content: center;
-    
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
