@@ -7,11 +7,14 @@ import{
   Routes
 } from "react-router-dom";
 import NoticeMain from './pages/notice/NoticeMain';
+import Cart from './pages/cart/Cart';
+
 function App(){
   return(
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<NoticeMain/>}/>
+      <Route path='/Cart' element={<Cart/>}/>
     </Routes>
     </BrowserRouter>
   )
