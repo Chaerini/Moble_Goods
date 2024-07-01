@@ -5,6 +5,7 @@
 
 .cart-container h1 {
   text-align: center;
+  font-weight: 400;
 }
 
 .cart-header {
@@ -96,7 +97,8 @@
   text-align: center;
 }
 
-.cart-item-price, .cart-item-total {
+.cart-item-price,
+.cart-item-total {
   flex: 1;
 }
 
