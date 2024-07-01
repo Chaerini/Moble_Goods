@@ -4,7 +4,7 @@ import pool from '../db.js';
 //상품등록
 export const createProduct = async ( req, res ) => {
     const { name, quantity, subCategory_id, discount_rate, price } = req.body;
-
+    console.log(req.body);
     //discounted_price를 계산
     let discounted_price;
     if (discount_rate === 0) {

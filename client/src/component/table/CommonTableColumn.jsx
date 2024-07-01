@@ -1,4 +1,5 @@
 import React from "react";
+import "../../pages/productManage/styles.css"
 
 const CommonTableColumn = ({children}) =>{
     return(
