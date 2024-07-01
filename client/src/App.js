@@ -39,6 +39,10 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="/getuser" element={<GetUser />} />
         <Route path="/addcoupon" element={<Coupon />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/myreview" element={<MyReview />} />
       </Routes>
     </BrowserRouter>
   )
