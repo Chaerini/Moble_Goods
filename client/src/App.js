@@ -8,6 +8,7 @@ import{
 } from "react-router-dom";
 import Cart from './pages/cart/Cart';
 import Order from './pages/order/Order';
+import OrderComplete from './pages/order/OrderComplete';
 import CartItemsProvider from './pages/cart/CartItems';
 import AddNotice from './pages/notice/AddNotice';
 import NoticeList from './pages/notice/NoticeList';
@@ -24,6 +25,7 @@ function App(){
     <Routes>
       <Route path='/Cart' element={<CartItemsProvider><Cart /></CartItemsProvider>} />
       <Route path='/Order' element={<CartItemsProvider><Order /></CartItemsProvider>} />
+      <Route path='/OrderComplete' element={<OrderComplete/>}/>
       <Route path="/addnotice" element={<AddNotice/>}/>
       <Route path="/noticelist" element={<NoticeList/>}/>
       <Route path="/getproduct" element={<GetProduct/>}/>
