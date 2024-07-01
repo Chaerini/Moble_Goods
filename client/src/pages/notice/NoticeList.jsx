@@ -37,7 +37,6 @@ const NOticeList = () => {
                         <CommonTableColumn>{notice.id}</CommonTableColumn>
                         <CommonTableColumn>{notice.title}</CommonTableColumn>
                         <CommonTableColumn>{notice.content}</CommonTableColumn>
-                        <button className='update'><Link to={`/updateproduct/${notice.id}`}>수정</Link></button>
                     </CommonTableRow>
                  ))}
             </ul>
