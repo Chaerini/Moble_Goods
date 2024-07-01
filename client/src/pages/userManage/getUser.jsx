@@ -5,6 +5,7 @@ import CommonTableColumn from "../../component/table/CommonTableColumn";
 import CommonTableRow from "../../component/table/CommonTableRow";
 import "../productManage/styles.css";
 import { Link } from 'react-router-dom';
+import "../../Context/ProductContext";
 const GetUser = () => {
     const [data, setData] = useState([]);
 
@@ -49,8 +50,6 @@ const GetUser = () => {
                         <CommonTableColumn>{user.username}</CommonTableColumn>
                         <CommonTableColumn>{user.address}</CommonTableColumn>
                         <CommonTableColumn>{user.memebership_id}</CommonTableColumn>
-                        <button className='delete' onClick={()=>handleDelete(user.id)}>삭제</button>
-                        <button className='update'><Link to={`/updateproduct/${user.id}`}>수정</Link></button>
                     </CommonTableRow>
                  ))}
             </ul>
