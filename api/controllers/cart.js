@@ -22,7 +22,7 @@ export const updateCart = async (req, res) => {
 
   try{
     const [result] = await pool.query (
-      `UPDATE cart SET quantity = ?, WHERE id = ?`,
+      `UPDATE cart SET quantity = ? WHERE id = ?`,
       [quantity, id] 
     );
     res.status(200).json({ result });

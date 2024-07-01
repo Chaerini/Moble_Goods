@@ -1,9 +1,8 @@
 
 import express from 'express';
-import { createCart, updateCart, deleteCart, getCartByUer } from '../controllers/cart';
+import { createCart, updateCart, deleteCart, getCartByUer } from '../controllers/cart.js';
 
-const router = express.Router('/');
-Node-Node.js
+const router = express.Router();
 
 router.post('/', createCart);
 router.put('/:id', updateCart);
