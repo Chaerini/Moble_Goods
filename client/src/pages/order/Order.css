@@ -3,7 +3,7 @@
   margin: auto;
 }
 
-h1 {
+.order-container h1 {
   text-align: center;
 }
 
@@ -143,22 +143,41 @@ h1 {
 
 .order-summary {
   flex: 1;
-  text-align: right;
-  border-top: 1px solid #ddd;
-  padding-top: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
 }
 
 .order-summary h2 {
   margin-bottom: 20px;
 }
 
-.order-summary p {
-  margin-bottom: 10px;
-  font-size: 1.1em;
+.summary-content {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: white;
 }
 
-.order-summary button {
-  padding: 10px 20px;
+.summary-total {
+  font-weight: bold;
+  color: red;
+  font-size: 1.2em;
+}
+
+.terms {
+  margin: 20px 0;
+}
+
+.terms label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 10px 0;
   background-color: #ff5722;
   color: #fff;
   border: none;
@@ -166,6 +185,6 @@ h1 {
   font-size: 1.1em;
 }
 
-.order-summary button:hover {
+.submit-button:hover {
   background-color: #e64a19;
 }

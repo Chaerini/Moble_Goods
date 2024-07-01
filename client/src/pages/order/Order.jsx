@@ -234,14 +234,22 @@ function Order() {
           </div>
           <div className="order-summary">
             <h2>최종 결제 금액 확인</h2>
-            <p>상품 금액: {cartItems.reduce((total, item) => total + item.price * item.quantity, 0)}원</p>
-            <p>할인 금액: 0원</p>
-            <p>특별 할인 금액: 0원</p>
-            <p>제휴카드 할인 금액: 0원</p>
-            <p>스탬프 머니: 0원</p>
-            <p>배송비: 3,000원</p>
-            <p>합계: {cartItems.reduce((total, item) => total + item.price * item.quantity, 0) + 3000}원</p>
-            <button onClick={handleSubmit}>결제하기</button>
+            <div className="summary-content">
+              <p>상품 금액: {cartItems.reduce((total, item) => total + item.price * item.quantity, 0)}원</p>
+              <p>할인 금액: 0원</p>
+              <p>특별 할인 금액: 0원</p>
+              <p>제휴카드 할인 금액: 0원</p>
+              <p>스탬프 머니: 0원</p>
+              <p>배송비: 3,000원</p>
+              <p className="summary-total">합계: {cartItems.reduce((total, item) => total + item.price * item.quantity, 0) + 3000}원</p>
+              <hr />
+              <div className="terms">
+                <label><input type="checkbox" /> 전체 선택</label>
+                <label><input type="checkbox" /> 개인정보 수집·이용 동의 (필수) <a href="#">약관보기</a></label>
+                <label><input type="checkbox" /> 이벤트, 할인쿠폰 등 혜택 제공을 위한 수신 동의 (선택)</label>
+              </div>
+              <button className="submit-button" onClick={handleSubmit}>결제하기</button>
+            </div>
           </div>
         </div>
       </div>

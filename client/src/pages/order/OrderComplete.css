@@ -8,16 +8,16 @@
     border-radius: 5px;
   }
   
-  h1 {
+  .order-complete-container h1 {
     color: #007bff;
   }
   
-  p {
+  .order-complete-container p {
     margin: 10px 0;
     font-size: 1.2em;
   }
   
-  button {
+  .order-complete-container button {
     padding: 10px 20px;
     background-color: #007bff;
     color: white;
@@ -27,7 +27,7 @@
     border-radius: 5px;
   }
   
-  button:hover {
+  .order-complete-container button:hover {
     background-color: #0056b3;
   }
   
