@@ -1,0 +1,8 @@
+:root {
+  /* color */
+  --c-bg-white: #ffffff; /*root 컬러 건들지마세요*/
+  --c-darkgray: #757575;
+  --c-lightgray: #eeeeee;
+  --c-black: #000000;
+  --c-point: #ff5722;
+}
