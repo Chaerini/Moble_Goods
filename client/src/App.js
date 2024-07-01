@@ -7,6 +7,7 @@ import{
   Routes
 } from "react-router-dom";
 import Cart from './pages/cart/Cart';
+import Order from './pages/order/Order';
 import AddNotice from './pages/notice/AddNotice';
 import NoticeList from './pages/notice/NoticeList';
 import GetProduct from "./pages/productManage/getProduct";
@@ -21,6 +22,7 @@ function App(){
     <BrowserRouter>
     <Routes>
       <Route path='/Cart' element={<Cart/>}/>
+      <Route path='/Order' element={<Order/>}/>
       <Route path="/addnotice" element={<AddNotice/>}/>
       <Route path="/noticelist" element={<NoticeList/>}/>
       <Route path="/getproduct" element={<GetProduct/>}/>

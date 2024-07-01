@@ -1,0 +1,82 @@
+.order-container {
+    width: 80%;
+    margin: auto;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  .order-header {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    padding: 10px 0;
+    border-bottom: 2px solid #ddd;
+  }
+  
+  .step {
+    flex: 1;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  .current-step {
+    background-color: #d1e7fd;
+    color: #007bff;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  .order-content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .order-info, .order-summary {
+    flex: 1;
+  }
+  
+  .order-info {
+    margin-right: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .order-summary {
+    text-align: right;
+  }
+  
+  .order-summary p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+  }
+  
+  .order-summary button {
+    padding: 10px 20px;
+    background-color: #ff5722;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .order-summary button:hover {
+    background-color: #e64a19;
+  }
+  

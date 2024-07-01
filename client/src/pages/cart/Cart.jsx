@@ -1,7 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'
 import './Cart.css';
 
 function Cart() {
+  const navigate = useNavigate();
+
+  const handleOrderClick = () => {
+    navigate('/order');
+  }
   return (
     <div className="cart-container">
       <h1>장바구니</h1>
@@ -40,7 +46,7 @@ function Cart() {
       </div>
       <div className="cart-summary">
         <span>결제 예정 금액(1): </span><span>1,900원</span>
-        <button>선택상품 주문하기</button>
+        <button onClick={ handleOrderClick}>선택상품 주문하기</button>
       </div>
     </div>
   );
