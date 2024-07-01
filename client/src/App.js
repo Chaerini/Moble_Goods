@@ -22,6 +22,7 @@ import Login from './component/login/Login';
 import Register from './component/register/Register';
 import Profile from './pages/profile/Profile';
 import MyReview from './pages/myreview/MyReview';
+import MyCoupon from './pages/mycoupon/MyCoupon';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/myreview" element={<MyReview />} />
+        <Route path="/mycoupon" element={<MyCoupon />} />
       </Routes>
     </BrowserRouter>
   )
