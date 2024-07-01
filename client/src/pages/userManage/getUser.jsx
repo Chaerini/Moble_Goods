@@ -50,7 +50,7 @@ const GetUser = () => {
                         <CommonTableColumn>{user.username}</CommonTableColumn>
                         <CommonTableColumn>{user.address}</CommonTableColumn>
                         <CommonTableColumn>{user.memebership_id}</CommonTableColumn>
-                        <button className='update'><Link to={`/updateuser/${user.id}`}>수정</Link></button>
+                        <button className='delete' onClick={()=>handleDelete(user.id)}>삭제</button>
                         <button className='update'><Link to={`/updateuser/${user.id}`}>수정</Link></button>
                     </CommonTableRow>
                  ))}

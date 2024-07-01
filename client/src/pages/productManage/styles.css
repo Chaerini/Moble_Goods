@@ -21,50 +21,11 @@
     text-align: center;
     border-bottom: 1px solid black;
 }
-.notice-view-wrapper {
-    width: 100%;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.notice-view-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.notice-view-row label {
-    font-weight: bold;
-}
-
-.notice-view-go-list-btn {
-    display: block;
-    width: 200px;
-    margin: 20px auto;
-    padding: 10px;
-    border: none;
-    background-color: #007bff;
-    color: #fff;
-    text-align: center;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.notice-view-go-list-btn:hover {
-    background-color: #0056b3;
-}
-.delete{
-    border:border;
-    padding: 3px 6px;
-    background-color: var(--c-point);
-    cursor: pointer;
-}
-.update{
-    border:border;
-    padding: 3px 6px;
+.btn{
+    width: 100px;
+    padding: 10px 0;
+    color: white;
+    border: 1px solid black;
     background-color: var(--c-point);
     cursor: pointer;
     
@@ -82,9 +43,15 @@
     border-radius: 5px;
     text-align: center;
 }
-.addProduct{
-    text-align: center;
+.Product{
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        color:black;
+        margin-bottom: 200px;
+        position:relative;
+        min-height: 100%;
 }
-.updateUser{
-    text-align: center;
+.tr{
+    background-color: #757575;
 }

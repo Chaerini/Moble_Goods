@@ -26,16 +26,18 @@ const Product = () =>{
 
 }
     return(
-        <div className="addProduct">
+        <div className="Product">
             <h1>상품 추가하기</h1>
+            <div className="product">
             <input type="text" onChange={handleChange} placeholder="이름" name="name" className="product-input"/>
             <input type="number" onChange={handleChange} placeholder="가격" name="price" className="product-input"/>
             <input type="number" onChange={handleChange} placeholder="수량" name="quantity" className="product-input"/>
             <input type="number" onChange={handleChange} placeholder="할인율" name="discount_rate" className="product-input"/>
             <input type="number" onChange={handleChange} placeholder="할인된 가격" name="discounted_price" className="product-input"/>
-            <button onClick={handleClick}><Link to="/getproduct">추가</Link></button>
+            <input type="file" name="img1" accept="img/*"></input>
+            <button onClick={handleClick}><Link to="/getproduct" className="btn" type="submit">추가</Link></button>
+            </div>
         </div>
     )
-    }
-
+}
 export default Product;

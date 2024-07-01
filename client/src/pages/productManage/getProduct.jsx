@@ -36,7 +36,7 @@ const GetProduct = () => {
         <ul>
             <h2 className='product'>상품</h2>
             <thead>
-            <tr>
+            <tr className='tr'>
                 <th className='th'>번호</th>
                 <th className='th'>이름</th>
                 <th className='th'>수량</th>
@@ -56,8 +56,8 @@ const GetProduct = () => {
                         <CommonTableColumn>{product.discount_rate}</CommonTableColumn>
                         <CommonTableColumn>{product.discounted_price}</CommonTableColumn>
                         <CommonTableColumn>{product.date}</CommonTableColumn>
-                        <button className='delete' onClick={()=>handleDelete(product.id)}>삭제</button>
-                        <button className='update'><Link to={`/updateproduct/${product.id}`}>수정</Link></button>
+                        <button className='btn' onClick={()=>handleDelete(product.id)}>삭제</button>
+                        <button className='btn'><Link to={`/updateproduct/${product.id}`}>수정</Link></button>
                     </CommonTableRow>
                  ))}
             </ul>
@@ -67,16 +67,17 @@ const GetProduct = () => {
                                 let copy=[...data];
                                 copy.sort((a,b)=>a.price<b.price?1:-1);
                                 setData(copy);
+                                
                             }
-                        }}>가격순 정렬</button>
+                        }} className='btn'>가격순 정렬</button>
             <button onClick={()=>{
                             {
                                 let copy=[...data];
                                 copy.sort((a,b)=>a.id<b.id?1:-1);
                                 setData(copy);
                             }
-                        }}>번호순 정렬</button>
-            <button><Link to="/addProduct">상품추가하기</Link></button>
+                        }} className='btn'>번호순 정렬</button>
+            <button><Link to="/addProduct" className='btn'>상품추가하기</Link></button>
         </div>
     );
 };

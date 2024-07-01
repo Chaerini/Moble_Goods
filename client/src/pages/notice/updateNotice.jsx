@@ -23,12 +23,12 @@ const UpdateNotice = () => {
 
 }
     return(
-        <div className="addProduct">
+        <div className="Product">
             <h1>공지사항 수정하기</h1>
             <div className="product">
             <input type="text" onChange={handleChange} placeholder="제목" name="title" className="product-input"/>
             <input type="text" onChange={handleChange} placeholder="내용" name="content" className="product-input"/>
-            <button onClick={handleClick}><Link to="/noticelist">수정</Link></button>
+            <button onClick={handleClick}><Link to="/getnotice">수정</Link></button>
             </div>
         </div>
     )

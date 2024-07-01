@@ -20,7 +20,7 @@ import Profile from "./pages/profile/Profile";
 import MyReview from "./pages/myreview/MyReview";
 import MyCoupon from "./pages/mycoupon/MyCoupon";
 import UpdateUser from "./pages/userManage/updateUser";
-
+import GetCoupon from "./pages/couponManage/getCoupon";
 function App() {
   return (
     <BrowserRouter>
@@ -42,6 +42,7 @@ function App() {
         <Route path="/myreview" element={<MyReview />} />
         <Route path="/mycoupon" element={<MyCoupon />} />
         <Route path="/updateuser" element={<UpdateUser/>}/>
+        <Route path="/getcoupon" element={<GetCoupon/>}/>
       </Routes>
     </BrowserRouter>
   );

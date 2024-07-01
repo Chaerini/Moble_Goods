@@ -13,7 +13,7 @@ const Modal = () =>{
         const apiUrl = process.env.REACT_APP_API_URL;
         const fetchData = async () => {
             try {
-                const response = await axios.get(`${apiUrl}/products`);
+                const response = await axios.get(`http://localhost:8080/api/products`);
                 setData(response.data);
                 console.log(apiUrl);
             } catch (error) {

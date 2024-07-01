@@ -24,11 +24,13 @@ const Product = () =>{
 
 }
     return(
-        <div className="addNotice">
+        <div className="Product">
             <h1>공지사항 추가하기</h1>
+            <div className="product">
             <input type="text" onChange={handleChange} placeholder="이름" name="title"/>
             <input type="text" onChange={handleChange} placeholder="내용" name="content"/>
             <button onClick={handleClick}>추가</button>
+            </div>
         </div>
     )
 }
