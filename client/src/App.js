@@ -8,6 +8,7 @@ import{
 } from "react-router-dom";
 import Cart from './pages/cart/Cart';
 import Order from './pages/order/Order';
+import CartItems from './pages/cart/CartItems';
 import AddNotice from './pages/notice/AddNotice';
 import NoticeList from './pages/notice/NoticeList';
 import GetProduct from "./pages/productManage/getProduct";
