@@ -1,0 +1,54 @@
+.writablereview-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.writablereview-th {
+    height: 50px;
+    background-color: #fafafa;
+    font-size: 13px;
+}
+
+.writablereview-tr {
+    border-bottom: 1px solid #eee;
+}
+
+.writablereview-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.writablereview-image {
+    padding: 15px;
+    width: 110px;
+    height: 110px;
+}
+
+.writablereview-right {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.writablereview-title {
+    font-size: 17px;
+    font-weight: 500;
+    padding-bottom: 5px;
+}
+
+.writablereview-quantity {
+    font-size: 13px;
+    color: #666;
+}
+
+.writablereview-td {
+    text-align: center;
+}
+
+.writablereview-button {
+    border: 1px solid #eee;
+    background-color: #fff;
+    color: #191919;
+    padding: 5px 10px;
+}

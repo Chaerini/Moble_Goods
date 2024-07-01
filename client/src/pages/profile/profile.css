@@ -1,0 +1,153 @@
+* {
+    margin: 0px;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+.profile {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-container {
+    width: 760px;
+}
+
+.profile-top {
+    font-size: 16px;
+    padding: 17px 0px;
+    border-bottom: 1px solid #666;
+    font-weight: bold;
+}
+
+.profile-h1 {
+    width: 100%;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 400;
+}
+
+.profile-list {
+    width: 100%;
+    min-height: 40px;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid #eee;
+    padding: 5px 0px;
+    align-items: center;
+}
+
+.profile-pwd-list {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 5px 0px;
+    align-items: center;
+    font-size: 12px;
+}
+
+.profile-left {
+    width: 150px;
+    font-size: 12px;
+}
+
+.profile-pwd-left {
+    width: 150px;
+    font-size: 12px;
+}
+
+.profile-right {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-em {
+    color: red;
+}
+
+.profile-input {
+    width: 420px;
+    height: 34px;
+    border: 1px solid #eee;
+    font-size: 12px;
+    padding: 0px 10px;
+}
+
+.profile-pwd-input {
+    width: 270px;
+    height: 34px;
+    border: 1px solid #eee;
+    font-size: 12px;
+    padding: 0px 10px;
+}
+
+.profile-agreement {
+    width: 100%;
+    display: flex;
+    font-size: 12px;
+    padding: 3px 0px;
+}
+
+.profile-change-btn {
+    height: 34px;
+    font-size: 11px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    text-align: center;
+    padding: 0px 12px;
+    color: #191919;
+    cursor: pointer;
+}
+
+.profile-cancel {
+    font-size: 12px;
+    display: flex;
+    justify-content: flex-end;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.profile-bottom {
+    font-size: 12px;
+    display: flex;
+    justify-content: flex-end;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 15px 0px;
+}
+
+.profile-button {
+    width: 100%;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+}
+
+.profile-cancel-btn {
+    margin-right: 6px;
+    font-size: 12px;
+    color: #191919;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 0px 30px;
+    cursor: pointer;
+}
+
+.profile-check-btn {
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    background-color: #757575;
+    border: 1px solid #757575;
+    padding: 0px 30px;
+    cursor: pointer;
+}

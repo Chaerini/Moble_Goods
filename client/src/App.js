@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { useCallback, useState } from "react";
-import{
+import {
   BrowserRouter,
   Route,
   Routes
@@ -18,22 +18,28 @@ import Product from './pages/productManage/addProduct';
 import UpdateProduct from './pages/productManage/updateProduct';
 import GetUser from './pages/userManage/getUser';
 import Coupon from './pages/couponManage/addCoupon';
-function App(){
-  return(
+import Login from './component/login/Login';
+import Register from './component/register/Register';
+import Profile from './pages/profile/Profile';
+import MyReview from './pages/myreview/MyReview';
+
+function App() {
+  return (
     <BrowserRouter>
-    <Routes>
-      <Route path='/Cart' element={<CartItemsProvider><Cart /></CartItemsProvider>} />
-      <Route path='/Order' element={<CartItemsProvider><Order /></CartItemsProvider>} />
-      <Route path='/Order-Complete' element={<OrderComplete/>}/>
-      <Route path="/addnotice" element={<AddNotice/>}/>
-      <Route path="/noticelist" element={<NoticeList/>}/>
-      <Route path="/getproduct" element={<GetProduct/>}/>
-      <Route path='/addproduct' element={<Product/>}/>
-      <Route path="/modal" element={<Modal/>}/>
-      <Route path='/updateproduct/:id' element={<UpdateProduct/>}/>
-      <Route path="/getuser" element={<GetUser/>}/>
-      <Route path="/addcoupon" element={<Coupon/>}/>
-    </Routes>
+      <Routes>
+        <Route path='/Cart' element={<CartItemsProvider><Cart /></CartItemsProvider>} />
+        <Route path='/Order' element={<CartItemsProvider><Order /></CartItemsProvider>} />
+        <Route path='/Order-Complete' element={<OrderComplete />} />
+        <Route path="/addnotice" element={<AddNotice />} />
+        <Route path="/noticelist" element={<NoticeList />} />
+        <Route path="/getproduct" element={<GetProduct />} />
+        <Route path='/addproduct' element={<Product />} />
+        <Route path="/modal" element={<Modal />} />
+        <Route path='/updateproduct/:id' element={<UpdateProduct />} />
+        <Route path="/" element={<Main />} />
+        <Route path="/getuser" element={<GetUser />} />
+        <Route path="/addcoupon" element={<Coupon />} />
+      </Routes>
     </BrowserRouter>
   )
 }
