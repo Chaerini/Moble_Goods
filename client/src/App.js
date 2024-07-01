@@ -25,7 +25,7 @@ function App(){
     <Routes>
       <Route path='/Cart' element={<CartItemsProvider><Cart /></CartItemsProvider>} />
       <Route path='/Order' element={<CartItemsProvider><Order /></CartItemsProvider>} />
-      <Route path='/OrderComplete' element={<OrderComplete/>}/>
+      <Route path='/Order-Complete' element={<OrderComplete/>}/>
       <Route path="/addnotice" element={<AddNotice/>}/>
       <Route path="/noticelist" element={<NoticeList/>}/>
       <Route path="/getproduct" element={<GetProduct/>}/>
