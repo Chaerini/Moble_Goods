@@ -19,7 +19,6 @@ const ProductContextProvider = (props) => {
           Accept: 'application/form-data',
           'auth-token': `${user.token}`,
           'Content-Type': 'application/json',
-        
         },
       })
         .then((resp) => resp.json())

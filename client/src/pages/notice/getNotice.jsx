@@ -5,22 +5,28 @@ import CommonTableColumn from "../../component/table/CommonTableColumn";
 import CommonTableRow from "../../component/table/CommonTableRow";
 import "../productManage/styles.css";
 import { Link } from 'react-router-dom';
-const NOticeList = () => {
+const GetNotice = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        const apiUrl = process.env.REACT_APP_API_URL;
         const fetchData = async () => {
             try {
-                const response = await axios.get(`${apiUrl}/notice`);
+                const response = await axios.get(`http://localhost:8080/api/notice`);
                 setData(response.data);
-                console.log(apiUrl);
             } catch (error) {
                 console.error('Error fetching data', error);
             }
         };
         fetchData();
     }, []);
+    const handleDelete  = async(id) =>{
+        try{
+            await axios.delete(`http://localhost:8080/api/notice/`+id)
+            window.location.reload();
+        }catch(err){
+            console.log(err)
+        }
+    };
     return (
         <div className="CommonTable">
         <CommonTable headersName={[]}>
@@ -37,6 +43,8 @@ const NOticeList = () => {
                         <CommonTableColumn>{notice.id}</CommonTableColumn>
                         <CommonTableColumn>{notice.title}</CommonTableColumn>
                         <CommonTableColumn>{notice.content}</CommonTableColumn>
+                        <button className='delete' onClick={()=>handleDelete(notice.id)}>삭제</button>
+                        <button className='update'><Link to={`/updatenotice/${notice.id}`}>수정</Link></button>
                     </CommonTableRow>
                  ))}
             </ul>
@@ -44,4 +52,4 @@ const NOticeList = () => {
         </div>
     );
 };
-export default NOticeList;
+export default GetNotice;

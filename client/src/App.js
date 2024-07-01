@@ -7,7 +7,7 @@ import Order from "./pages/order/Order";
 import OrderComplete from "./pages/order/OrderComplete";
 import CartItemsProvider from "./pages/cart/CartItems";
 import AddNotice from "./pages/notice/AddNotice";
-import NoticeList from "./pages/notice/NoticeList";
+import GetNotice from "./pages/notice/getNotice";
 import GetProduct from "./pages/productManage/getProduct";
 import Modal from "./pages/notice/Modal";
 import Product from "./pages/productManage/addProduct";
@@ -19,6 +19,7 @@ import Register from "./component/register/Register";
 import Profile from "./pages/profile/Profile";
 import MyReview from "./pages/myreview/MyReview";
 import MyCoupon from "./pages/mycoupon/MyCoupon";
+import UpdateUser from "./pages/userManage/updateUser";
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
         <Route path="/Order" element={ <CartItemsProvider><Order /></CartItemsProvider>}/>
         <Route path="/Order-Complete" element={<OrderComplete />} />
         <Route path="/addnotice" element={<AddNotice />} />
-        <Route path="/noticelist" element={<NoticeList />} />
+        <Route path="/getnotice" element={<GetNotice/>} />
         <Route path="/getproduct" element={<GetProduct />} />
         <Route path="/addproduct" element={<Product />} />
         <Route path="/modal" element={<Modal />} />
@@ -40,6 +41,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/myreview" element={<MyReview />} />
         <Route path="/mycoupon" element={<MyCoupon />} />
+        <Route path="/updateuser" element={<UpdateUser/>}/>
       </Routes>
     </BrowserRouter>
   );

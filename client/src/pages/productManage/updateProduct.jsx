@@ -20,21 +20,23 @@ const UpdateProduct = () => {
     const handleClick = async e =>{
         e.preventDefault()
         try{
-            await axios.put(`${apiUrl}/products/`+productId,product);
+            await axios.put(`http://localhost:8080/api/products/`+productId,product);
         }catch(err){
             console.log(err);
         }
 
 }
     return(
-        <div className="updateProduct">
+        <div className="addProduct">
             <h1>상품 수정하기</h1>
+            <div className="product">
             <input type="text" onChange={handleChange} placeholder="이름" name="name" className="product-input"/>
             <input type="number" onChange={handleChange} placeholder="가격" name="price" className="product-input"/>
             <input type="number" onChange={handleChange} placeholder="수량" name="quantity" className="product-input"/>
             <input type="number" onChange={handleChange} placeholder="할인율" name="discount_rate" className="product-input"/>
             <input type="number" onChange={handleChange} placeholder="할인된 가격" name="discounted_price" className="product-input"/>
             <button onClick={handleClick}><Link to="/getproduct">수정</Link></button>
+            </div>
         </div>
     )
 }

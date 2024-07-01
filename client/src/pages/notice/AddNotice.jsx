@@ -17,6 +17,7 @@ const Product = () =>{
         e.preventDefault()
         try{
             await axios.post(`${apiUrl}/notice`,product);
+            console.log("등록 완료");
         }catch(err){
             console.log(err);
         }

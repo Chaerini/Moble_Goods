@@ -19,7 +19,7 @@ const Product = () =>{
     const handleClick = async e =>{
         e.preventDefault()
         try{
-            await axios.post(`${apiUrl}/products`,product);
+            await axios.post(`http://localhost:8080/api/products`,product);
         }catch(err){
             console.log(err);
         }

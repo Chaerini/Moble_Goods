@@ -12,7 +12,7 @@ const GetProduct = () => {
         const apiUrl = process.env.REACT_APP_API_URL;
         const fetchData = async () => {
             try {
-                const response = await axios.get(`${apiUrl}/products`);
+                const response = await axios.get(`http://localhost:8080/api/products`);
                 setData(response.data);
                 console.log(apiUrl);
             } catch (error) {
@@ -24,7 +24,7 @@ const GetProduct = () => {
     const handleDelete  = async(id) =>{
         const apiUrl = process.env.REACT_APP_API_URL;
         try{
-            await axios.delete(`${apiUrl}/products/`+id)
+            await axios.delete(`http://localhost:8080/api/products/`+id)
             window.location.reload();
         }catch(err){
             console.log(err)
@@ -56,7 +56,6 @@ const GetProduct = () => {
                         <CommonTableColumn>{product.discount_rate}</CommonTableColumn>
                         <CommonTableColumn>{product.discounted_price}</CommonTableColumn>
                         <CommonTableColumn>{product.date}</CommonTableColumn>
-                        <CommonTableColumn>{product.img}</CommonTableColumn>
                         <button className='delete' onClick={()=>handleDelete(product.id)}>삭제</button>
                         <button className='update'><Link to={`/updateproduct/${product.id}`}>수정</Link></button>
                     </CommonTableRow>

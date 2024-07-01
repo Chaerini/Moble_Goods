@@ -5,7 +5,7 @@ import CommonTableColumn from "../../component/table/CommonTableColumn";
 import CommonTableRow from "../../component/table/CommonTableRow";
 import "../productManage/styles.css";
 import { Link } from 'react-router-dom';
-import "../../Context/ProductContext";
+import "../../Context/ProductContext"
 const GetUser = () => {
     const [data, setData] = useState([]);
 
@@ -25,7 +25,7 @@ const GetUser = () => {
     const handleDelete  = async(id) =>{
         const apiUrl = process.env.REACT_APP_API_URL;
         try{
-            await axios.delete(`${apiUrl}/products/`+id)
+            await axios.delete(`http://localhost:8080/api/users/`+id)
             window.location.reload();
         }catch(err){
             console.log(err)
@@ -50,10 +50,13 @@ const GetUser = () => {
                         <CommonTableColumn>{user.username}</CommonTableColumn>
                         <CommonTableColumn>{user.address}</CommonTableColumn>
                         <CommonTableColumn>{user.memebership_id}</CommonTableColumn>
+                        <button className='update'><Link to={`/updateuser/${user.id}`}>수정</Link></button>
+                        <button className='update'><Link to={`/updateuser/${user.id}`}>수정</Link></button>
                     </CommonTableRow>
                  ))}
             </ul>
             </CommonTable>
+            
         </div>
     );
 };
