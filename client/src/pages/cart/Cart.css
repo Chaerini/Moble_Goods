@@ -21,7 +21,6 @@
   font-size: 15px;
   font-family: YoonGothicPro740, dotum, 돋움, Arial, "sans-serif";
   text-rendering: auto !important;
-
 }
 
 .step {
@@ -44,7 +43,6 @@
   margin-bottom: 20px;
   padding: 0 12px;
   line-height: 32px;
-
 }
 
 .cart-controls button {
@@ -63,16 +61,19 @@
 }
 
 .cart-items {
-  border-top: 2px solid #ddd;
-  padding-top: 10px;
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.cart-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
+.cart-items th, .cart-items td {
+  padding: 20px;
+  text-align: center;
+}
+
+.cart-items-menu {
+  font-size: 15px;
   border-bottom: 1px solid #ddd;
+  background-color: #fafafa;
 }
 
 .cart-item-checkbox {
@@ -83,7 +84,6 @@
 .cart-item-info {
   display: flex;
   align-items: center;
-  flex: 1;
 }
 
 .cart-item-info img {
@@ -107,18 +107,15 @@
 .cart-item-quantity {
   display: flex;
   align-items: center;
-  flex: 0 0 200px;
-  text-align: center;
+  justify-content: center;
+  transform: translateY(30px);
 }
 
 .cart-item-price {
-  flex: 1;
-  font-size: 15px;
-
+  font-size: 20px;
 }
 .cart-item-total {
-  flex: 1;
-  font-size: 19px;
+  font-size: 25px;
 }
 
 .quantity-controls {
@@ -140,31 +137,41 @@
 
 .cart-summary {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
+  align-items: center;
   margin-top: 20px;
   padding-top: 10px;
   border-top: 2px solid #ddd;
-  margin-left: auto;
-  width: fit-content;
+  width: 100%;
   font-size: 18px;
 }
 
+.cart-summary-info {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.cart-summary-info span {
+  margin-right: 10px;
+}
+
+.cart-summary-info h1 {
+  font-size: 35px;
+  font-weight: bold;
+  color: red;
+
+}
+
 .cart-summary button {
-  padding: 24px 17px;
+  padding: 10px 20px;
   background-color: #ff5722;
   color: #fff;
   border: none;
   cursor: pointer;
   font-size: 14px;
 }
-.cart-summary span,
-.cart-summary button {
-  margin-top: 10px; /* Add space between elements */
-}
 
 .cart-summary button:hover {
   background-color: #e64a19;
 }
-
-
