@@ -12,3 +12,11 @@ export const createNotice = async(req,res) =>{
         res.status(400).json({error:error.message});
     }
 }
+export const getAllNotice = async(req,res) => {
+    try{
+        const [rows] = await pool.query(`SELECT * FROM notice`);
+        res.status(200).json({rows});
+    }catch(error){
+        res.status(400).json({error:error.message});
+    }
+}

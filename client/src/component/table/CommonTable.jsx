@@ -1,5 +1,5 @@
 import React from "react";
-import "./CommonTable.css"
+import "../../pages/productManage/styles.css"
 
 const CommonTable = props =>{
     const {headersName, children} = props;
