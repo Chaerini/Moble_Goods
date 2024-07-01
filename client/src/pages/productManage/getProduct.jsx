@@ -34,17 +34,17 @@ const GetProduct = () => {
         <div className="CommonTable">
         <CommonTable headersName={[]}>
         <ul>
-            <h2>상품</h2>
+            <h2 className='product'>상품</h2>
             <thead>
             <tr>
-                <th>번호</th>
-                <th>이름</th>
-                <th>수량</th>
-                <th>가격</th>
-                <th>할인율</th>
-                <th>할인된 가격</th>
-                <th>날짜</th>
-                <th>이미지</th>
+                <th className='th'>번호</th>
+                <th className='th'>이름</th>
+                <th className='th'>수량</th>
+                <th className='th'>가격</th>
+                <th className='th'>할인율</th>
+                <th className='th'>할인된 가격</th>
+                <th className='th'>날짜</th>
+                <th className='th'>이미지</th>
             </tr>
         </thead>
                 {data.map((product) => (

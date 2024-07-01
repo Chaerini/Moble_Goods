@@ -6,7 +6,7 @@ const CommonTable = props =>{
 
     return(
         <table className="common-table">
-            <thead>
+            <thead className="common-head">
                 <tr>
                     {
                         headersName.map((item,index) =>{

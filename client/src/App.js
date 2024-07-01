@@ -16,7 +16,6 @@ import GetProduct from "./pages/productManage/getProduct";
 import Modal from './pages/notice/Modal';
 import Product from './pages/productManage/addProduct';
 import UpdateProduct from './pages/productManage/updateProduct';
-import Main from './pages/productManage/main';
 import GetUser from './pages/userManage/getUser';
 import Coupon from './pages/couponManage/addCoupon';
 function App(){
@@ -32,7 +31,6 @@ function App(){
       <Route path='/addproduct' element={<Product/>}/>
       <Route path="/modal" element={<Modal/>}/>
       <Route path='/updateproduct/:id' element={<UpdateProduct/>}/>
-      <Route path="/" element={<Main/>}/>
       <Route path="/getuser" element={<GetUser/>}/>
       <Route path="/addcoupon" element={<Coupon/>}/>
     </Routes>
