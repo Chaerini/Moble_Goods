@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-import { useCallback, useState } from "react";
-import{
-  BrowserRouter,
-  Route,
-  Routes
-} from "react-router-dom";
-// import NoticeMain from './pages/notice/NoticeMain';
-import Dashboard from './pages/admin/dashboard/Dashboard';
-
-
-function App(){
-  return(
-    <BrowserRouter>
-    <Routes>
-      {/* <Route path="/" element={<NoticeMain/>}/> */}
-      <Route path="/admin" element={<Dashboard/>}/>
-    </Routes>
-=======
 import logo from "./logo.svg";
 import "./App.css";
 import { useCallback, useState } from "react";
@@ -40,6 +21,8 @@ import MyReview from "./pages/myreview/MyReview";
 import MyCoupon from "./pages/mycoupon/MyCoupon";
 import UpdateUser from "./pages/userManage/updateUser";
 import GetCoupon from "./pages/couponManage/getCoupon";
+import Dashboard from "./pages/admin/dashboard/Dashboard";
+
 function App() {
   return (
     <BrowserRouter>
@@ -61,9 +44,9 @@ function App() {
         <Route path="/myreview" element={<MyReview />} />
         <Route path="/mycoupon" element={<MyCoupon />} />
         <Route path="/updateuser" element={<UpdateUser/>}/>
-        <Route path="/getcoupon" element={<GetCoupon/>}/>
+        <Route path="/getcoupon" element={<GetCoupon />} />
+        <Route path="/admin" element={<Dashboard />} />
       </Routes>
->>>>>>> 7e03026a541a99bfdf9135a2735bd8c3d9f630e8
     </BrowserRouter>
   );
 }
