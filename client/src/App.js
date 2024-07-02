@@ -33,6 +33,7 @@ import MyCoupon from "./pages/mycoupon/MyCoupon";
 import MyReview from './pages/myreview/MyReview';
 import PomProduct from "./pages/product/sanrio/pompom/pomproduct";
 import CinnaProduct from "./pages/product/sanrio/cinnamo/cinnaproduct";
+import Dashboard from "./pages/admin/dashboard/Dashboard";
 function App() {
   return (
     <BrowserRouter>
@@ -63,6 +64,7 @@ function App() {
       <Route path="/mycoupon" element={<MyCoupon />} />
       <Route path="sanrio/pomproduct" element={<PomProduct />} />
       <Route path="sanrio/cinnaproduct" element={<CinnaProduct />} />
+      <Route path="/admin" element={<Dashboard/>}/>
     </Routes>
     <Footer />
     </BrowserRouter>
