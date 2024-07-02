@@ -13,16 +13,16 @@ function ghibli() {
     <div className="ghibli">
       <h1>지브리 상품 목록</h1>
       <div className="product-list">
-        <Link to="/ghibli/castle">
+        <Link to="/ghibli/castleproduct">
           <div className="product-card">하울의 움직이는 성</div>
         </Link>
-        <Link to="/ghibli/ponyo">
+        <Link to="/ghibli/ponyoproduct">
           <div className="product-card">벼랑위의 포뇨</div>
         </Link>
-        <Link to="/ghibli/totoro">
+        <Link to="/ghibli/totoroproduct">
           <div className="product-card">이웃집 토토로</div>
         </Link>
-        <Link to="/ghibli/spiriteaway">
+        <Link to="/ghibli/spiritproduct">
           <div className="product-card">센과 치히로의 행방불명</div>
         </Link>
       </div>
