@@ -16,7 +16,7 @@ const Product = () =>{
     const handleClick = async e =>{
         e.preventDefault()
         try{
-            await axios.post(`${apiUrl}/notice`,product);
+            await axios.post(`http://localhost:8080/api/notice`,product);
             console.log("등록 완료");
         }catch(err){
             console.log(err);

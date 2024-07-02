@@ -5,6 +5,7 @@ import CommonTableColumn from "../../component/table/CommonTableColumn";
 import CommonTableRow from "../../component/table/CommonTableRow";
 import "./styles.css";
 import { Link } from 'react-router-dom';
+import Navbar from '../../component/navbar/navbar';
 const GetProduct = () => {
     const [data, setData] = useState([]);
 
@@ -32,6 +33,8 @@ const GetProduct = () => {
     }
     return (
         <div className="CommonTable">
+            <Navbar/>
+            <Navbar/>
         <CommonTable headersName={[]}>
         <ul>
             <h2 className='product'>상품</h2>
