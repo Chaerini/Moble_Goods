@@ -91,6 +91,7 @@
 
 .review-modal-text {
   margin-bottom: 20px;
+  overflow-y: auto;
 }
 
 .review-modal-text textarea {
@@ -99,6 +100,8 @@
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
+  resize: none;
+  height: 150px;
 }
 
 .char-count {

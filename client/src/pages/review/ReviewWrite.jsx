@@ -66,7 +66,6 @@ function ReviewWrite({ onClose }) {
                     />
                     <p className="char-count">{review.length} / 5,000</p>
                 </div>
-                <br />
                 <div className="review-modal-attachment">
                     <button className="review-modal-attachment-button">사진 첨부하기</button>
                     <p className="review-modal-attachment-note">상품과 무관한 사진을 첨부한 리뷰는 통보없이 삭제됩니다.</p>
