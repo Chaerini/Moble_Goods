@@ -78,10 +78,10 @@ function Navbar() {
                   <div className="dropdown-row">
                     <div className="dropdown-column">
                       <h3>상품</h3>
-                      <Link to="/sanrio/pompompurin">폼폼푸린</Link>
-                      <Link to="/sanrio/cinnamoroll">시나모롤</Link>
-                      <Link to="/sanrio/kuromi">쿠로미</Link>
-                      <Link to="/sanrio/hellokitty">헬로키티</Link>
+                      <Link to="/sanrio/pomproduct">폼폼푸린</Link>
+                      <Link to="/sanrio/cinnaproduct">시나모롤</Link>
+                      <Link to="/sanrio/kuroproduct">쿠로미</Link>
+                      <Link to="/sanrio/kittyproduct">헬로키티</Link>
                     </div>
                   </div>
                 </div>
@@ -100,10 +100,10 @@ function Navbar() {
                   <div className="dropdown-row">
                     <div className="dropdown-column">
                       <h3>상품</h3>
-                      <Link to="/disney/frozen">겨울왕국</Link>
-                      <Link to="/disney/rapunzel">라푼젤</Link>
-                      <Link to="/disney/littlemermaid">인어공주</Link>
-                      <Link to="/disney/insideout">인사이드아웃</Link>
+                      <Link to="/disney/frozenproduct">겨울왕국</Link>
+                      <Link to="/disney/rapunzelproduct">라푼젤</Link>
+                      <Link to="/disney/littleproduct">인어공주</Link>
+                      <Link to="/disney/insideoutproduct">인사이드아웃</Link>
 
                     </div>
                   </div>
@@ -123,10 +123,10 @@ function Navbar() {
                   <div className="dropdown-row">
                     <div className="dropdown-column">
                       <h3>상품</h3>
-                      <Link to="/ghibli/totoro">이웃집 토토로</Link>
-                      <Link to="/ghibli/spiritedaway">센과 치히로의 행방불명</Link>
-                      <Link to="/ghibli/howlsmovingcastle">하울의 움직이는 성</Link>
-                      <Link to="/ghibli/ponyo">벼랑 위의 포뇨</Link>
+                      <Link to="/ghibli/totoroproduct">이웃집 토토로</Link>
+                      <Link to="/ghibli/spiritproduct">센과 치히로의 행방불명</Link>
+                      <Link to="/ghibli/castleproduct">하울의 움직이는 성</Link>
+                      <Link to="/ghibli/ponyoproduct">벼랑 위의 포뇨</Link>
 
                     </div>
                   </div>
@@ -146,10 +146,10 @@ function Navbar() {
                   <div className="dropdown-row">
                     <div className="dropdown-column">
                       <h3>상품</h3>
-                      <Link to="/marvel/ironman">아이언맨</Link>
-                      <Link to="/marvel/captainamerica">캡틴 아메리카</Link>
-                      <Link to="/marvel/thor">토르</Link>
-                      <Link to="/marvel/spiderman">스파이더맨</Link>
+                      <Link to="/marvel/ironproduct">아이언맨</Link>
+                      <Link to="/marvel/captainproduct">캡틴 아메리카</Link>
+                      <Link to="/marvel/thorproduct">토르</Link>
+                      <Link to="/marvel/spiderproduct">스파이더맨</Link>
                     </div>
                   </div>
                 </div>
@@ -168,10 +168,10 @@ function Navbar() {
                   <div className="dropdown-row">
                     <div className="dropdown-column">
                       <h3>상품</h3>
-                      <Link to="/mobile/phonecase">폰케이스</Link>
-                      <Link to="/mobile/charger">충전기</Link>
-                      <Link to="/mobile/earphone">이어폰</Link>
-                      <Link to="/mobile/stand">거치대</Link>
+                      <Link to="/mobile/phonecaseproduct">폰케이스</Link>
+                      <Link to="/mobile/chargerproduct">충전기</Link>
+                      <Link to="/mobile/earphoneproduct">이어폰</Link>
+                      <Link to="/mobile/standproduct">거치대</Link>
                     </div>
                   </div>
                 </div>
