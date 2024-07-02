@@ -1,7 +1,8 @@
 import './mycoupon.css';
 import { faCrown, faTicket, faGift } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import WrittenReview from '../../component/myreview/WrittenReview.jsx';
+import MineCoupon from '../../component/mycoupon/MineCoupon';
+
 
 const MyCoupon = () => {
     return (
@@ -35,7 +36,7 @@ const MyCoupon = () => {
                     <button className='mycoupon-mine'>내 쿠폰</button>
                 </div>
                 <div className='myreview-middle'>
-                    <WrittenReview />
+                    <MineCoupon />
                 </div>
                 <div className='mycoupon-notice'>
                     <p className='mycoupon-notice-top'>굿포유 쿠폰 이용 안내</p>

@@ -1,0 +1,28 @@
+.minecoupon-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.minecoupon-th {
+    height: 50px;
+    background-color: #fafafa;
+    font-size: 13px;
+}
+
+.minecoupon-tr {
+    height: 50px;
+    border-bottom: 1px solid #eee;
+}
+
+.minecoupon-td {
+    font-size: 12px;
+    text-align: center;
+}
+
+.minecoupon-button {
+    font-size: 12px;
+    padding: 4px;
+    border: 1px solid red;
+    background-color: #fff;
+    color: red;
+}
