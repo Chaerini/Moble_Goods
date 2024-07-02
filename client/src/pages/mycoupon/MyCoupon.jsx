@@ -10,8 +10,9 @@ import Footer from '../../component/footer/footer';
 const MyCoupon = () => {
     return (
         <>
-            <Navbar />
             <Header />
+            <Navbar />
+
             <div className='mycoupon'>
 
                 <div className='mycoupon-container'>
