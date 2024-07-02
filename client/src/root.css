@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 *,
 ::after,
 ::before,
@@ -12,19 +11,20 @@
 
 :root {
   /* color */
-  --c-bg-white: #ffffff; /*root 컬러 건들지마세요*/
+  --c-bg-white: #ffffff;
+  /*root 컬러 건들지마세요*/
   --c-darkgray: #757575;
   --c-lightgray: #eeeeee;
   --c-black: #000000;
   --c-point: #ff5722;
 }
-=======
+
 :root {
   /* color */
-  --c-bg-white: #ffffff; /*root 컬러 건들지마세요*/
+  --c-bg-white: #ffffff;
+  /*root 컬러 건들지마세요*/
   --c-darkgray: #757575;
   --c-lightgray: #eeeeee;
   --c-black: #000000;
   --c-point: #ff5722;
 }
->>>>>>> 7e03026a541a99bfdf9135a2735bd8c3d9f630e8

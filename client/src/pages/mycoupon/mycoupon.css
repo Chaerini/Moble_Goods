@@ -138,3 +138,59 @@
     font-size: 12px;
     font-weight: 400;
 }
+
+.mycoupon-menu {
+    width: 100%;
+}
+
+.mycoupon-all {
+    width: 50%;
+    height: 50px;
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-bottom: 1px solid #191919;
+}
+
+.mycoupon-all-click {
+    width: 50%;
+    height: 50px;
+    background-color: #fff;
+    border: 1px solid #191919;
+    border-bottom: none;
+}
+
+.mycoupon-mine {
+    width: 50%;
+    height: 50px;
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-bottom: 1px solid #191919;
+}
+
+.mycoupon-mine-click {
+    width: 50%;
+    height: 50px;
+    background-color: #fff;
+    border: 1px solid #191919;
+    border-bottom: none;
+}
+
+.mycoupon-notice-top {
+    font-size: 16px;
+    font-weight: 600;
+    color: #191919;
+    padding-bottom: 15px;
+}
+
+.mycoupon-notice-bottom {
+    font-size: 12px;
+    padding-bottom: 4px;
+    padding-left: 4px;
+}
+
+.mycoupon-notice-bottom-red {
+    font-size: 12px;
+    padding-bottom: 4px;
+    padding-left: 4px;
+    color: red;
+}

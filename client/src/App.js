@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-import { useCallback, useState } from "react";
-import{
-  BrowserRouter,
-  Route,
-  Routes
-} from "react-router-dom";
-// import NoticeMain from './pages/notice/NoticeMain';
-import Dashboard from './pages/admin/dashboard/Dashboard';
-
-
-function App(){
-  return(
-    <BrowserRouter>
-    <Routes>
-      {/* <Route path="/" element={<NoticeMain/>}/> */}
-      <Route path="/admin" element={<Dashboard/>}/>
-    </Routes>
-=======
 import logo from "./logo.svg";
 import "./App.css";
 import { useCallback, useState } from "react";
@@ -44,11 +25,11 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/Cart" element={<CartItemsProvider><Cart /></CartItemsProvider>}/>
-        <Route path="/Order" element={ <CartItemsProvider><Order /></CartItemsProvider>}/>
+        <Route path="/Cart" element={<CartItemsProvider><Cart /></CartItemsProvider>} />
+        <Route path="/Order" element={<CartItemsProvider><Order /></CartItemsProvider>} />
         <Route path="/Order-Complete" element={<OrderComplete />} />
         <Route path="/addnotice" element={<AddNotice />} />
-        <Route path="/getnotice" element={<GetNotice/>} />
+        <Route path="/getnotice" element={<GetNotice />} />
         <Route path="/getproduct" element={<GetProduct />} />
         <Route path="/addproduct" element={<Product />} />
         <Route path="/modal" element={<Modal />} />
@@ -60,10 +41,9 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/myreview" element={<MyReview />} />
         <Route path="/mycoupon" element={<MyCoupon />} />
-        <Route path="/updateuser" element={<UpdateUser/>}/>
-        <Route path="/getcoupon" element={<GetCoupon/>}/>
+        <Route path="/updateuser" element={<UpdateUser />} />
+        <Route path="/getcoupon" element={<GetCoupon />} />
       </Routes>
->>>>>>> 7e03026a541a99bfdf9135a2735bd8c3d9f630e8
     </BrowserRouter>
   );
 }
