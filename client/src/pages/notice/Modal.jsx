@@ -2,9 +2,9 @@ import React, { useState,useRef,useEffect } from "react"
 import "./Modal.css";
 import "./Notice.css";
 import axios from "axios";
-import CommonTable from "../../component/table/CommonTable";
-import CommonTableColumn from "../../component/table/CommonTableColumn";
-import CommonTableRow from "../../component/table/CommonTableRow";
+import CommonTable from "../productManage/CommonTable";
+import CommonTableColumn from "../productManage/CommonTableColumn";
+import CommonTableRow from "../productManage/CommonTableRow";
 const Modal = () =>{
     const [data, setData] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);

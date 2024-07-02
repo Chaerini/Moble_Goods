@@ -14,7 +14,7 @@ const ProductContextProvider = (props) => {
 
     if (user) {
       console.log("user",user.token);
-      fetch(`${apiUrl}/users`, {
+      fetch(`http://localhost:8080/api/users`, {
         headers: {
           Accept: 'application/form-data',
           'auth-token': `${user.token}`,

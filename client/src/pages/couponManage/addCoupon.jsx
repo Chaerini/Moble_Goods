@@ -19,22 +19,23 @@ const Coupon = () =>{
     const handleClick = async e =>{
         e.preventDefault()
         try{
-            await axios.post(`http://localhost:8080/api/coupons`,coupon);
+            await axios.post(`http://localhost:8080/api/coupons`,coupon)
         }catch(err){
             console.log(err);
         }
-
 }
     return(
         <header>
-        <div className="addCoupon">
-            <h1>쿠폰 추가하기</h1>
-            <input type="text" onChange={handleChange} placeholder="이름" name="name"/>
-            <input type="number" onChange={handleChange} placeholder="할인" name="discount"/>
-            <input type="date" onChange={handleChange} placeholder="시작일" name="start_date"/>
-            <input type="date" onChange={handleChange} placeholder="만료일" name="end_date"/>
-            <input type="number" onChange={handleChange} placeholder="조건" name="conditions"/>
-            <button onClick={handleClick}>추가</button>
+        <div className="Product">
+            <div className="product">
+            <label>쿠폰 추가하기</label>
+            <input type="text" onChange={handleChange} placeholder="이름" name="name" className="product-input"/>
+            <input type="number" onChange={handleChange} placeholder="할인" name="discount" className="product-input"/>
+            <input type="date" onChange={handleChange} placeholder="시작일" name="start_date" className="product-input"/>
+            <input type="date" onChange={handleChange} placeholder="만료일" name="end_date" className="product-input"/>
+            <input type="number" onChange={handleChange} placeholder="조건" name="conditions" className="product-input"/>
+            <button onClick={handleClick} className="btn">추가</button>
+            </div>
         </div>
         </header>
     )

@@ -1,8 +1,9 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import CommonTable from "../../component/table/CommonTable";
-import CommonTableColumn from "../../component/table/CommonTableColumn";
-import CommonTableRow from "../../component/table/CommonTableRow";
+import CommonTable from "../productManage/CommonTable";
+import CommonTableColumn from "../productManage/CommonTableColumn";
+import CommonTableRow from "../productManage/CommonTableRow";
 import "../productManage/product.css";
 import { Link } from 'react-router-dom';
 import "../../Context/ProductContext"
@@ -21,7 +22,6 @@ const GetUser = () => {
                         },
             });
                 setData(response.data);
-                console.log()
             }catch (error) {
                 console.error('Error fetching data', error);
             }

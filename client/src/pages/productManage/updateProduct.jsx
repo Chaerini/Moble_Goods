@@ -28,8 +28,8 @@ const UpdateProduct = () => {
 }
     return(
         <div className="Product">
-            <h2>상품 수정하기</h2>
             <div className="product">
+            <label>상품 수정하기</label>
             <input type="text" onChange={handleChange} placeholder="이름" name="name" className="product-input"/>
             <input type="number" onChange={handleChange} placeholder="가격" name="price" className="product-input"/>
             <input type="number" onChange={handleChange} placeholder="수량" name="quantity" className="product-input"/>

@@ -1,17 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useContext } from 'react';
 import axios from 'axios';
-import CommonTable from "../../component/table/CommonTable";
-import CommonTableColumn from "../../component/table/CommonTableColumn";
-import CommonTableRow from "../../component/table/CommonTableRow";
-import "../productManage/styles.css";
+import CommonTable from '../productManage/CommonTable';
+import CommonTableColumn from '../productManage/CommonTableColumn';
+import CommonTableRow from '../productManage/CommonTableRow';
+import { AuthContext } from '../../Context/AuthContext';
 import { Link } from 'react-router-dom';
 const GetCoupon = () => {
     const [data, setData] = useState([]);
+    const {user}=useContext(AuthContext)
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/api/coupons`);
+                const response = await axios.get(`http://localhost:8080/api/coupons`,{
+                    headers: {
+                        Authorization: `Bearer ${user.token}`,
+                      },
+                });
                 setData(response.data);
+                console.log("data",data);
+                console.log("token",user.token);
             } catch (error) {
                 console.error('Error fetching data', error);
             }
@@ -19,7 +26,6 @@ const GetCoupon = () => {
         fetchData();
     }, []);
     const handleDelete  = async(id) =>{
-        const apiUrl = process.env.REACT_APP_API_URL;
         try{
             await axios.delete(`http://localhost:8080/api/coupons/`+id)
             window.location.reload();
@@ -53,21 +59,6 @@ const GetCoupon = () => {
                  ))}
             </ul>
             </CommonTable>
-            <button onClick={()=>{
-                            {
-                                let copy=[...data];
-                                copy.sort((a,b)=>a.price<b.price?1:-1);
-                                setData(copy);
-                            }
-                        }}>가격순 정렬</button>
-            <button onClick={()=>{
-                            {
-                                let copy=[...data];
-                                copy.sort((a,b)=>a.id<b.id?1:-1);
-                                setData(copy);
-                            }
-                        }}>번호순 정렬</button>
-            <button><Link to="/addProduct">상품추가하기</Link></button>
         </div>
     );
 };

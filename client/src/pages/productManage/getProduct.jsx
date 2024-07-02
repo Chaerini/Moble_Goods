@@ -1,21 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useContext } from 'react';
 import axios from 'axios';
-import CommonTable from "../../component/table/CommonTable";
-import CommonTableColumn from "../../component/table/CommonTableColumn";
-import CommonTableRow from "../../component/table/CommonTableRow";
-import "./styles.css";
+import CommonTable from "./CommonTable";
+import CommonTableColumn from "./CommonTableColumn";
+import CommonTableRow from "./CommonTableRow";
 import { Link } from 'react-router-dom';
-
+import AdminHeader from '../admin/adminHeader/AdminHeader';
+import AdminSidebar from '../admin/adminSidebar/AdminSidebar';
+import { AuthContext } from '../../Context/AuthContext';
 const GetProduct = () => {
     const [data, setData] = useState([]);
-
+    const {user}=useContext(AuthContext)
     useEffect(() => {
         const apiUrl = process.env.REACT_APP_API_URL;
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/api/products`);
+                const response = await axios.get(`http://localhost:8080/api/products`,{
+                    headers: {
+                        Authorization: `Bearer ${user.token}`,
+                      },
+                });
                 setData(response.data);
-                console.log(apiUrl);
+                console.log("data",data);
             } catch (error) {
                 console.error('Error fetching data', error);
             }
@@ -38,28 +43,25 @@ const GetProduct = () => {
             <h2 className='product'>상품</h2>
             <thead>
             <tr className='tr'>
-                <th className='th'>번호</th>
                 <th className='th'>이름</th>
                 <th className='th'>수량</th>
                 <th className='th'>가격</th>
                 <th className='th'>할인율</th>
                 <th className='th'>할인된 가격</th>
                 <th className='th'>날짜</th>
-                <th className='th'>이미지</th>
             </tr>
         </thead>
                 {data.map((product) => (
-                    <CommonTableRow key={product.id}>
-                        <CommonTableColumn>{product.id}</CommonTableColumn>
-                        <CommonTableColumn>{product.name}</CommonTableColumn>
-                        <CommonTableColumn>{product.quantity}</CommonTableColumn>
-                        <CommonTableColumn>{product.price}</CommonTableColumn>
-                        <CommonTableColumn>{product.discount_rate}</CommonTableColumn>
-                        <CommonTableColumn>{product.discounted_price}</CommonTableColumn>
-                        <CommonTableColumn>{product.date}</CommonTableColumn>
+                    <tr key={product.id} className='tr'>
+                        <th className='th'>{product.name}</th>
+                        <th className='th'>{product.quantity}</th>
+                        <th className='th'>{product.price}</th>
+                        <th className='th'>{product.discount_rate}</th>
+                        <th className='th'>{product.discounted_price}</th>
+                        <th className='th'>{product.date}</th>
                         <button className='btn' onClick={()=>handleDelete(product.id)}>삭제</button>
                         <button className='btn'><Link to={`/updateproduct/${product.id}`}>수정</Link></button>
-                    </CommonTableRow>
+                    </tr>
                  ))}
             </ul>
             </CommonTable>
@@ -71,13 +73,6 @@ const GetProduct = () => {
                                 
                             }
                         }} className='btn'>가격순 정렬</button>
-            <button onClick={()=>{
-                            {
-                                let copy=[...data];
-                                copy.sort((a,b)=>a.id<b.id?1:-1);
-                                setData(copy);
-                            }
-                        }} className='btn'>번호순 정렬</button>
             <button><Link to="/addProduct" className='btn'>상품추가하기</Link></button>
         </div>
     );

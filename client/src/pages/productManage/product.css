@@ -13,6 +13,7 @@
     text-align: center;
     border-bottom: 1px solid black;
     text-align: left;
+    border: 1px solid black;
 }
 .btn{
     padding: 10px 20px;
@@ -30,11 +31,10 @@
     text-align: center;
 }
 .product-input{
-    width:50%;
+    width:100%;
     padding: 10px;
     border: 1px solid black;
     border-radius: 5px;
-    text-align: center;
 }
 .Product{
         display: flex;
@@ -46,7 +46,8 @@
         min-height: 100%;
 }
 .tr{
-    background-color: #757575;
+    background-color: #fff;
+    border: 1px solid #000000;
 }
 .product-container{
     width: 100%;

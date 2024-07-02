@@ -1,6 +1,6 @@
 .common-table{
     width: 100%;
-    margin: 0 auto;
+    margin: auto;
     border-collapse: collapse;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
