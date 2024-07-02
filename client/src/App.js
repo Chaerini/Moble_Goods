@@ -45,6 +45,7 @@ import PhoneCaseProduct from "./pages/product/moble/phonecase/phonecaseproduct";
 import ChargerProduct from "./pages/product/moble/charger/chargerproduct";
 import EarphoneProduct from "./pages/product/moble/earphone/earphoneproduct";
 import StandProduct from "./pages/product/moble/stand/standproduct";
+import PomDetail from "./pages/product/sanrio/pompom/pomdetail";
 function App() {
   return (
     <BrowserRouter>
@@ -105,6 +106,7 @@ function App() {
         <Route path="moble/chargerproduct" element={<ChargerProduct />} />
         <Route path="moble/earphoneproduct" element={<EarphoneProduct />} />
         <Route path="moble/standproduct" element={<StandProduct />} />
+        <Route path="/product/pomdetail/1" element={<PomDetail />} />
       </Routes>
     </BrowserRouter>
   );

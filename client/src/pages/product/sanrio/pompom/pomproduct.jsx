@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './pomproduct.css';
 import Navbar from '../../../../component/navbar/navbar';
 import Header from '../../../../component/header/header';
@@ -14,21 +15,23 @@ function PomProduct() {
 
   return (
     <>
-    <Header/>
-    <Navbar/>
-    <div className="pomproduct">
-      <h2>폼폼푸린 상품 목록</h2>
-      <div className="product-list">
-        {products.map(product => (
-          <div key={product.id} className="product-card">
-            <img src={product.image} alt={product.name} className="product-image" />
-            <h3 className="product-name">{product.name}</h3>
-            <p className="product-price">{product.price}</p>
-          </div>
-        ))}
+      <Header />
+      <Navbar />
+      <div className="pomproduct">
+        <h2>폼폼푸린 상품 목록</h2>
+        <div className="product-list">
+          {products.map(product => (
+            <div key={product.id} className="product-card">
+              <Link to={`/product/pomdetail/${product.id}`}>
+                <img src={product.image} alt={product.name} className="product-image" />
+                <h3 className="product-name">{product.name}</h3>
+                <p className="product-price">{product.price}</p>
+              </Link>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-    <Footer/>
+      <Footer />
     </>
   );
 }
