@@ -33,7 +33,7 @@
 }
 
 .review-modal-content h1 {
-  font-size: 28px;
+  font-size: 25px;
   font-weight: normal;
   margin-bottom: 20px;
   border-bottom: 1px solid #ddd;
@@ -53,6 +53,7 @@
 
 .review-product-info p {
   margin: 0;
+  font-size: 17px;
 }
 
 .review-modal-rating {
@@ -90,7 +91,7 @@
 }
 
 .review-modal-text {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   overflow-y: auto;
 }
 
@@ -101,12 +102,13 @@
   border: 1px solid #ddd;
   border-radius: 4px;
   resize: none;
+  font-size: 15px;
 }
 
 .char-count {
   text-align: right;
   margin-top: 5px;
-  font-size: 18px;
+  font-size: 15px;
 }
 
 .review-modal-attachment {
@@ -144,7 +146,7 @@
   padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .review-modal-submit-button {
@@ -154,7 +156,7 @@
   padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .review-modal-submit-button:disabled {
