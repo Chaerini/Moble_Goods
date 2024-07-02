@@ -29,8 +29,25 @@ import CinnaProduct from "./pages/product/sanrio/cinnamo/cinnaproduct";
 import Dashboard from "./pages/admin/dashboard/Dashboard";
 import KittyProduct from "./pages/product/sanrio/kitty/kittyproduct";
 import KuroProduct from "./pages/product/sanrio/kuromi/kuroproduct";
-import GetNotice from "./pages/notice/getNotice";
+import FrozenProduct from "./pages/product/disney/frozen/frozenproduct";
+import InsideOutProduct from "./pages/product/disney/insideout/insideoutproduct";
+import LittleMermaidProduct from "./pages/product/disney/littlemermaid/littleproduct";
+import RapunzelProduct from "./pages/product/disney/rapunzel/rapunzelproduct";
+import CastleProduct from "./pages/product/ghibli/castle/castleproduct";
+import PonyoProduct from "./pages/product/ghibli/ponyo/ponyoproduct";
+import SpiritProduct from "./pages/product/ghibli/spiritedaway/spiritproduct";
+import TotoroProduct from "./pages/product/ghibli/totoro/totoroproduct";
+import IronProduct from "./pages/product/marvel/ironman/ironproduct";
+import CaptainProduct from "./pages/product/marvel/captainamerica/captainproduct";
+import ThorProduct from "./pages/product/marvel/thor/thorproduct";
+import SpiderProduct from "./pages/product/marvel/spiderman/spiderproduct";
+import PhoneCaseProduct from "./pages/product/moble/phonecase/phonecaseproduct";
+import ChargerProduct from "./pages/product/moble/charger/chargerproduct";
+import EarphoneProduct from "./pages/product/moble/earphone/earphoneproduct";
+import StandProduct from "./pages/product/moble/stand/standproduct";
+import PomDetail from "./pages/product/sanrio/pompom/pomdetail";
 import GetCoupon from "./pages/couponManage/getCoupon";
+import GetNotice from "./pages/notice/getNotice";
 function App() {
   return (
     <BrowserRouter>
@@ -70,13 +87,13 @@ function App() {
         <Route path="/moble" element={<Mblist />} />
         <Route path="/myreview" element={<MyReview />} />
         <Route path="/mycoupon" element={<MyCoupon />} />
+        <Route path="/getcoupon" element={<GetCoupon/>}/>
+        <Route path="/getnotice" element={<GetNotice/>}/>
         <Route path="sanrio/pomproduct" element={<PomProduct />} />
         <Route path="sanrio/cinnaproduct" element={<CinnaProduct />} />
-        <Route path="/admin" element={<Dashboard />} />``
+        <Route path="/admin" element={<Dashboard />} />
         <Route path="sanrio/kittyproduct" element={<KittyProduct />} />
         <Route path="sanrio/kuroproduct" element={<KuroProduct />} />
-        <Route path="/getnotice" element={<GetNotice/>}/>
-        <Route path="/getcoupon" element={<GetCoupon/>}/>
       </Routes>
     </BrowserRouter>
   );
