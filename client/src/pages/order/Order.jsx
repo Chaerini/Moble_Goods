@@ -261,7 +261,7 @@ function Order() {
                 <p>0원</p>
               </div>
               <div className="summary-details">
-                <p>특별 할인 금액:</p>
+                <p>쿠폰 할인 금액:</p>
                 <p>0원</p>
               </div>
               <div className="summary-details">
