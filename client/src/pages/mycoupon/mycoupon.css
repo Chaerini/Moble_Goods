@@ -82,7 +82,6 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 24px 0px;
     border-right: 1px solid #eee;
 }
 
@@ -119,7 +118,6 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 24px 0px;
 }
 
 .mycoupon-icon-download {
@@ -143,6 +141,7 @@
 
 .mycoupon-menu {
     width: 100%;
+    padding-top: 20px;
 }
 
 .mycoupon-all {
