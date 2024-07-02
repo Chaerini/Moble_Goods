@@ -175,3 +175,8 @@
 .cart-summary button:hover {
   background-color: #e64a19;
 }
+
+.cart-guide {
+  font-size: 14px;
+  color: red;
+}

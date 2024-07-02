@@ -45,41 +45,60 @@ function Order() {
   };
 
   const handleSubmit = () => {
-    // 여기에 결제 처리 로직을 추가하세요.
-    // 결제 처리 완료 후 주문 완료 페이지로 이동합니다.
     navigate('/order-complete');
   };
 
   return (
     <div className="order-container">
-      <h1>주문 결제</h1>
+      <h1>주문·결제</h1>
       <div className="order-header">
         <div className="step">01. 장바구니</div>
         <div className="step current-step">02. 주문 결제</div>
         <div className="step">03. 주문 완료</div>
       </div>
-      <div className="order-items">
-        <h2>장바구니 상품</h2>
-        {cartItems.map((item) => (
-          <div className="order-item" key={item.id}>
-            <img src={item.image} alt={item.name} />
-            <div className="order-item-details">
-              <span className="order-item-name">{item.name}</span>
-              <span className="order-item-option">옵션: {item.option}</span>
-              <span className="order-item-quantity">수량: {item.quantity}</span>
-              <span className="order-item-price">가격: {item.price}원</span>
-            </div>
-          </div>
-        ))}
-      </div>
+      <table className="order-items">
+        <thead>
+          <tr className='order-items-menu'>
+            <th>주문 상품 정보</th>
+            <th>수량</th>
+            <th>상품 금액</th>
+            <th>할인 금액</th>
+            <th>구매예정가</th>
+          </tr>
+        </thead>
+        <tbody>
+          {cartItems.map((item) => (
+            <tr className="order-item" key={item.id}>
+              <td className="order-item-info">
+                <img src={item.image} alt={item.name} />
+                <div className="order-item-details">
+                  <span className="order-item-name">{item.name}</span>
+                  <span className="order-item-option">옵션: {item.option}</span>
+                </div>
+              </td>
+              <td className="order-item-quantity">
+                <div className="quantity-controls">
+                  <button>-</button>
+                  <span>{item.quantity}</span>
+                  <button>+</button>
+                </div>
+              </td>
+              <td className="order-item-price">{item.price}원</td>
+              <td className="order-item-discount">0원</td>
+              <td className="order-item-total">{item.price * item.quantity}원</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
       <div className="order-content">
         <div className="order-form-summary">
           <div className="order-form">
-            <fieldset className="form-section">
-              <legend className="form-section-toggle" onClick={() => handleToggle('shippingInfo')}>
+            <div className="form-section">
+              <div className="form-section-toggle" onClick={() => handleToggle('shippingInfo')}>
                 배송 정보
                 <span>{activeSection === 'shippingInfo' ? '▲' : '▼'}</span>
-              </legend>
+              </div>
+              <br />
               {activeSection === 'shippingInfo' && (
                 <div className="form-section-content">
                   <div className="form-group">
@@ -112,6 +131,7 @@ function Order() {
                       onChange={handleOrdererChange}
                     />
                   </div>
+                  <br />
                   <div className="form-group">
                     <label>받으시는 분</label>
                     <input
@@ -155,12 +175,13 @@ function Order() {
                   <button className="next-button" onClick={handleNextClick}>다음</button>
                 </div>
               )}
-            </fieldset>
-            <fieldset className="form-section">
-              <legend className="form-section-toggle" onClick={() => handleToggle('discountShipping')}>
+            </div>
+            <div className="form-section">
+              <div className="form-section-toggle" onClick={() => handleToggle('discountShipping')}>
                 할인 · 배송비
                 <span>{activeSection === 'discountShipping' ? '▲' : '▼'}</span>
-              </legend>
+              </div>
+              <br />
               {activeSection === 'discountShipping' && (
                 <div className="form-section-content">
                   <div className="form-group">
@@ -187,12 +208,13 @@ function Order() {
                   <button className="next-button" onClick={handleNextClick}>다음</button>
                 </div>
               )}
-            </fieldset>
-            <fieldset className="form-section">
-              <legend className="form-section-toggle" onClick={() => handleToggle('paymentMethod')}>
+            </div>
+            <div className="form-section">
+              <div className="form-section-toggle" onClick={() => handleToggle('paymentMethod')}>
                 결제 수단
                 <span>{activeSection === 'paymentMethod' ? '▲' : '▼'}</span>
-              </legend>
+              </div>
+              <br />
               {activeSection === 'paymentMethod' && (
                 <div className="form-section-content">
                   <div className="form-group">
@@ -230,10 +252,10 @@ function Order() {
                   </div>
                 </div>
               )}
-            </fieldset>
+            </div>
           </div>
           <div className="order-summary">
-            <h2>최종 결제 금액 확인</h2>
+            <h3>최종 결제 금액 확인</h3>
             <div className="summary-content">
               <p>상품 금액: {cartItems.reduce((total, item) => total + item.price * item.quantity, 0)}원</p>
               <p>할인 금액: 0원</p>

@@ -5,6 +5,10 @@
 
 .order-container h1 {
   text-align: center;
+  font-weight: 400;
+  display: block;
+  margin-top: 70px;
+  margin-bottom: 70px;
 }
 
 .order-header {
@@ -13,12 +17,15 @@
   margin: 20px 0;
   padding: 10px 0;
   border-bottom: 2px solid #ddd;
+  color: #191919;
+  font-size: 15px;
+  font-family: YoonGothicPro740, dotum, 돋움, Arial, "sans-serif";
+  text-rendering: auto !important;
 }
 
 .step {
   flex: 1;
   text-align: center;
-  font-weight: bold;
 }
 
 .current-step {
@@ -30,15 +37,23 @@
 }
 
 .order-items {
+  width: 100%;
+  border-collapse: collapse;
   margin-bottom: 20px;
 }
 
-.order-item {
-  display: flex;
-  align-items: center;
-  padding: 10px 0;
-  border-bottom: 1px solid #ddd;
+.order-items th,
+.order-items td {
+  padding: 10px;
+  text-align: center;
 }
+
+.order-items-menu {
+  font-size: 15px;
+  border-bottom: 1px solid #ddd;
+  background-color: #fafafa;
+}
+
 
 .order-item img {
   width: 80px;
@@ -48,15 +63,14 @@
 .order-item-details {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
 
 .order-item-name {
-  font-weight: bold;
+  font-weight: 400;
 }
 
-.order-item-option,
-.order-item-quantity,
-.order-item-price {
+.order-item-option {
   color: #888;
 }
 
@@ -83,7 +97,6 @@
 }
 
 .form-section legend {
-  font-weight: bold;
   cursor: pointer;
 }
 
@@ -94,6 +107,7 @@
 }
 
 .form-group {
+  font-size: 15px;
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
@@ -101,7 +115,6 @@
 
 .form-group label {
   margin-bottom: 5px;
-  font-weight: bold;
 }
 
 .form-group input {
@@ -144,13 +157,12 @@
 .order-summary {
   flex: 1;
   padding: 20px;
-  border: 1px solid #ddd;
   border-radius: 5px;
-  background-color: #f9f9f9;
 }
 
-.order-summary h2 {
+.order-summary h3 {
   margin-bottom: 20px;
+
 }
 
 .summary-content {
@@ -161,7 +173,6 @@
 }
 
 .summary-total {
-  font-weight: bold;
   color: red;
   font-size: 1.2em;
 }
