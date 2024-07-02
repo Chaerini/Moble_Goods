@@ -36,13 +36,14 @@ function ReviewWrite({ onClose }) {
                 {onClose && <button className="review-modal-close-button" onClick={onClose}>X</button>}
                 <h1>리뷰 작성</h1>
                 <div className="review-modal-product">
-                    <img src="path_to_image.png" alt="상품 이미지" />
+                    <img src="photo.jpg" alt="상품 이미지" />
                     <div className="review-product-info">
-                        <p>상품이름</p>
+                        <p>포토북</p>
                     </div>
                 </div>
+                <br />
                 <div className="review-modal-rating">
-                    <p>상품은 만족하셨나요?</p>
+                    상품은 만족하셨나요?
                     <div className="modal-rating-stars">
                         {[1, 2, 3, 4, 5].map((index) => (
                             <span
@@ -65,8 +66,9 @@ function ReviewWrite({ onClose }) {
                     />
                     <p className="char-count">{review.length} / 5,000</p>
                 </div>
+                <br />
                 <div className="review-modal-attachment">
-                    <button className="review-modal-attachment-button">사진/동영상 첨부하기</button>
+                    <button className="review-modal-attachment-button">사진 첨부하기</button>
                     <p className="review-modal-attachment-note">상품과 무관한 사진을 첨부한 리뷰는 통보없이 삭제됩니다.</p>
                 </div>
                 <div className="review-modal-actions">
