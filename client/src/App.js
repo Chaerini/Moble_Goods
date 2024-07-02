@@ -21,6 +21,8 @@ import MyReview from "./pages/myreview/MyReview";
 import MyCoupon from "./pages/mycoupon/MyCoupon";
 import UpdateUser from "./pages/userManage/updateUser";
 import GetCoupon from "./pages/couponManage/getCoupon";
+import Dashboard from "./pages/admin/dashboard/Dashboard";
+
 function App() {
   return (
     <BrowserRouter>
@@ -43,6 +45,7 @@ function App() {
         <Route path="/mycoupon" element={<MyCoupon />} />
         <Route path="/updateuser" element={<UpdateUser />} />
         <Route path="/getcoupon" element={<GetCoupon />} />
+        <Route path="/admin" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
   );
