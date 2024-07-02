@@ -84,6 +84,7 @@
 .cart-item-info {
   display: flex;
   align-items: center;
+  height: 200px;
 }
 
 .cart-item-info img {
@@ -108,14 +109,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: translateY(30px);
+  /* transform: translateY(30px); */
+  font-size: 20px;
+  height: 200px;
 }
 
 .cart-item-price {
   font-size: 20px;
+  height: 200px;
 }
 .cart-item-total {
-  font-size: 25px;
+  font-size: 20px;
+  height: 200px;
 }
 
 .quantity-controls {
@@ -178,5 +183,8 @@
 
 .cart-guide {
   font-size: 14px;
+  color: black;
+}
+.cart-guide p {
   color: red;
 }
