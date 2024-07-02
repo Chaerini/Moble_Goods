@@ -1,9 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import './main.css';
+import Navbar from "../../component/navbar/navbar";
+import Footer from "../../component/footer/footer";
+import Header from "../../component/header/header";
 
 function Main() {
   return (
+  <>
+  <Header/>
+  <Navbar/>
+  
     <div className="main-container">
       <div className="hero-section">
         <div className="hero-content">
@@ -34,6 +41,8 @@ function Main() {
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 }
 

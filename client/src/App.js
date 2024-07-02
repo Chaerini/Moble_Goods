@@ -9,12 +9,12 @@ import CartItemsProvider from "./pages/cart/CartItems";
 import ReviewWrite from "./pages/review/ReviewWrite";
 import AddNotice from "./pages/notice/AddNotice";
 import GetProduct from "./pages/productManage/getProduct";
-import Modal from "./pages/notice/Modal";
-import Product from "./pages/productManage/addProduct";
-import UpdateProduct from "./pages/productManage/updateProduct";
-import Main from "./pages/productManage/main";
-import GetUser from "./pages/userManage/getUser";
-import Coupon from "./pages/couponManage/addCoupon";
+import Modal from './pages/notice/Modal';
+import Product from './pages/productManage/addProduct';
+import UpdateProduct from './pages/productManage/updateProduct';
+import Main from './pages/productManage/main';
+import GetUser from './pages/userManage/getUser';
+import Coupon from './pages/couponManage/addCoupon';
 import Login from "./component/login/Login";
 import Register from "./component/register/Register";
 import Sanlist from "./pages/product/sanrio/sanlist/sanlist";
@@ -27,6 +27,8 @@ import MyReview from "./pages/myreview/MyReview";
 import PomProduct from "./pages/product/sanrio/pompom/pomproduct";
 import CinnaProduct from "./pages/product/sanrio/cinnamo/cinnaproduct";
 import Dashboard from "./pages/admin/dashboard/Dashboard";
+import KittyProduct from "./pages/product/sanrio/kitty/kittyproduct";
+import KuroProduct from "./pages/product/sanrio/kuromi/kuroproduct";
 function App() {
   return (
     <BrowserRouter>
@@ -68,7 +70,9 @@ function App() {
         <Route path="/mycoupon" element={<MyCoupon />} />
         <Route path="sanrio/pomproduct" element={<PomProduct />} />
         <Route path="sanrio/cinnaproduct" element={<CinnaProduct />} />
-        <Route path="/admin" element={<Dashboard />} />
+        <Route path="/admin" element={<Dashboard />} />``
+        <Route path="sanrio/kittyproduct" element={<KittyProduct />} />
+        <Route path="sanrio/kuroproduct" element={<KuroProduct />} />
       </Routes>
     </BrowserRouter>
   );
