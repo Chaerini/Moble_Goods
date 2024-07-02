@@ -115,7 +115,7 @@
   font-size: 20px;
 }
 .cart-item-total {
-  font-size: 25px;
+  font-size: 20px;
 }
 
 .quantity-controls {
@@ -178,5 +178,8 @@
 
 .cart-guide {
   font-size: 14px;
+  color: black;
+}
+.cart-guide p {
   color: red;
 }
