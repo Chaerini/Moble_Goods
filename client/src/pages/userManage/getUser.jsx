@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import CommonTable from "../../component/table/CommonTable";
 import CommonTableColumn from "../../component/table/CommonTableColumn";
@@ -6,20 +6,24 @@ import CommonTableRow from "../../component/table/CommonTableRow";
 import "../productManage/styles.css";
 import { Link } from 'react-router-dom';
 import "../../Context/ProductContext"
+import { AuthContext } from '../../Context/AuthContext';
 const GetUser = () => {
     const [data, setData] = useState([]);
-
+    const {user}=useContext(AuthContext)
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://1ocalhost:8080/api/users`);
+                const response = await axios.get(`http://localhost:8080/api/users`,
+                        {headers:{token:user.token},
+            });
                 setData(response.data);
-            } catch (error) {
+                console.log(user.token);
+            }catch (error) {
                 console.error('Error fetching data', error);
             }
         };
         fetchData();
-    }, []);
+    }, [user.token]);
     const handleDelete  = async(id) =>{
         try{
             await axios.delete(`http://localhost:8080/api/users/`+id)
@@ -30,17 +34,8 @@ const GetUser = () => {
     }
     return (
         <div className="CommonTable">
-        <CommonTable headersName={[]}>
+        <CommonTable headersName={['이름','아이디','주소','멤버십 아이디']}>
         <ul>
-            <h2>고객</h2>
-            <thead>
-            <tr>
-                <th>이름</th>
-                <th>아이디</th>
-                <th>주소</th>
-                <th>멤버십 아이디</th>
-            </tr>
-        </thead>
                 {data.map((user) => (
                     <CommonTableRow key={user.id}>
                         <CommonTableColumn>{user.name}</CommonTableColumn>
