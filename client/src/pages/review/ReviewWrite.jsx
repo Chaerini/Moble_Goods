@@ -3,10 +3,19 @@ import './ReviewWrite.css';
 
 function ReviewWrite({ onClose }) {
     const [rating, setRating] = useState(0);
+    const [hoverRating, setHoverRating] = useState(0);
     const [review, setReview] = useState('');
 
     const handleRatingClick = (index) => {
         setRating(index);
+    };
+
+    const handleMouseEnter = (index) => {
+        setHoverRating(index);
+    };
+
+    const handleMouseLeave = () => {
+        setHoverRating(0);
     };
 
     const handleReviewChange = (e) => {
@@ -38,8 +47,10 @@ function ReviewWrite({ onClose }) {
                         {[1, 2, 3, 4, 5].map((index) => (
                             <span
                                 key={index}
-                                className={index <= rating ? 'star filled' : 'star'}
+                                className={(index <= (hoverRating || rating)) ? 'star-filled' : 'star'}
                                 onClick={() => handleRatingClick(index)}
+                                onMouseEnter={() => handleMouseEnter(index)}
+                                onMouseLeave={handleMouseLeave}
                             >
                                 ★
                             </span>

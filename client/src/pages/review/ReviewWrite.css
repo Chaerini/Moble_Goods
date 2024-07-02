@@ -1,150 +1,158 @@
 .review-modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .review-modal-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    width: 100%;
-    position: relative;
-    height: auto;
-  }
-  
-  .review-modal-close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-  }
-  
-  .review-modal-content h1 {
-    font-size: 28px;
-    font-weight: normal;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 15px;
-  }
-  
-  .review-modal-product {
-    display: flex;
-    margin-bottom: 20px;
-  }
-  
-  .review-modal-product img {
-    width: 100px;
-    height: 100px;
-    margin-right: 20px;
-  }
-  
-  .review-product-info p {
-    margin: 0;
-  }
-  
-  .review-modal-rating {
-    margin-bottom: 20px;
-    font-size: 20px;
-    font-weight: bold;
-  }
-  
-  .modal-rating-stars {
-    display: flex;
-  }
-  
-  .star {
-    font-size: 24px;
-    cursor: pointer;
-    margin-right: 5px;
-    color: #9e9b9b;
-  }
-  
-  .filled {
-    color: gold;
-  }
-  
-  .rating-text {
-    margin-top: 10px;
-  }
-  
-  .review-modal-text {
-    margin-bottom: 20px;
-  }
-  
-  .review-modal-text textarea {
-    width: 100%;
-    height: 100px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
-  .char-count {
-    text-align: right;
-    margin-top: 5px;
-    font-size: 20px;
-  }
-  
-  .review-modal-attachment {
-    margin-bottom: 20px;
-    border: 1px dashed #ddd;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  .review-modal-attachment-button {
-    display: inline-block;
-    margin-bottom: 10px;
-    background: #f8f8f8;
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 20px;
-  }
-  
-  .review-modal-attachment-note {
-    margin: 10px 0;
-    color: red;
-    font-size: 12px;
-  }
-  
-  .review-modal-actions {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .review-modal-cancel-button {
-    background: #f0f0f0;
-    border: 1px solid #ddd;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .review-modal-submit-button {
-    background: #ff5722;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .review-modal-submit-button:disabled {
-    background: #ddd;
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.review-modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+  position: relative;
+  height: auto;
+}
+
+.review-modal-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.review-modal-content h1 {
+  font-size: 28px;
+  font-weight: normal;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 15px;
+}
+
+.review-modal-product {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.review-modal-product img {
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+}
+
+.review-product-info p {
+  margin: 0;
+}
+
+.review-modal-rating {
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.modal-rating-stars {
+  display: flex;
+}
+
+.star {
+  font-size: 24px;
+  cursor: pointer;
+  margin-right: 5px;
+  color: #9e9b9b;
+}
+
+.star:hover,
+.star:hover ~ .star {
+  font-size: 24px;
+  margin-right: 5px;
+  color: gold;
+}
+
+.star-filled {
+  font-size: 24px;
+  margin-right: 5px;
+  color: gold;
+}
+
+.rating-text {
+  margin-top: 10px;
+}
+
+.review-modal-text {
+  margin-bottom: 20px;
+}
+
+.review-modal-text textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.char-count {
+  text-align: right;
+  margin-top: 5px;
+  font-size: 20px;
+}
+
+.review-modal-attachment {
+  margin-bottom: 20px;
+  border: 1px dashed #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.review-modal-attachment-button {
+  display: inline-block;
+  margin-bottom: 10px;
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.review-modal-attachment-note {
+  margin: 10px 0;
+  color: red;
+  font-size: 12px;
+}
+
+.review-modal-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.review-modal-cancel-button {
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.review-modal-submit-button {
+  background: #ff5722;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.review-modal-submit-button:disabled {
+  background: #ddd;
+}
