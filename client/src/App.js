@@ -10,6 +10,7 @@ import Cart from './pages/cart/Cart';
 import Order from './pages/order/Order';
 import OrderComplete from './pages/order/OrderComplete';
 import CartItemsProvider from './pages/cart/CartItems';
+import ReviewWrite from './pages/review/ReviewWrite';
 import AddNotice from './pages/notice/AddNotice';
 import GetProduct from "./pages/productManage/getProduct";
 import Modal from './pages/notice/Modal';
@@ -42,6 +43,7 @@ function App() {
       <Route path='/Cart' element={<CartItemsProvider><Cart /></CartItemsProvider>} />
       <Route path='/Order' element={<CartItemsProvider><Order /></CartItemsProvider>} />
       <Route path='/Order-Complete' element={<OrderComplete />} />
+      <Route path='/ReviewWrite' element={<ReviewWrite/>}/>
       <Route path="/addnotice" element={<AddNotice />} />
       <Route path="/getproduct" element={<GetProduct />} />
       <Route path='/addproduct' element={<Product />} />
