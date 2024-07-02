@@ -25,7 +25,7 @@ function ReviewWrite({ onClose }) {
         <div className="review-modal-overlay">
             <div className="review-modal-content">
                 {onClose && <button className="review-modal-close-button" onClick={onClose}>X</button>}
-                <h1>리뷰쓰기</h1>
+                <h1>리뷰 작성</h1>
                 <div className="review-modal-product">
                     <img src="path_to_image.png" alt="상품 이미지" />
                     <div className="review-product-info">
@@ -56,8 +56,7 @@ function ReviewWrite({ onClose }) {
                 </div>
                 <div className="review-modal-attachment">
                     <button className="review-modal-attachment-button">사진/동영상 첨부하기</button>
-                    <p className="review-modal-attachment-note">상품과 무관한 사진/동영상을 첨부한 리뷰는 통보없이 삭제 및 적립 혜택이 회수됩니다.</p>
-                    <p className="review-modal-attachment-reward">사진 또는 동영상 첨부시 300원 적립!</p>
+                    <p className="review-modal-attachment-note">상품과 무관한 사진을 첨부한 리뷰는 통보없이 삭제됩니다.</p>
                 </div>
                 <div className="review-modal-actions">
                     <button className="review-modal-cancel-button" onClick={onClose}>취소</button>

@@ -33,8 +33,10 @@
   }
   
   .review-modal-content h1 {
-    font-size: 24px;
+    font-size: 28px;
+    font-weight: normal;
     margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
   }
   
   .review-modal-product {
@@ -54,6 +56,8 @@
   
   .review-modal-rating {
     margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: bold;
   }
   
   .modal-rating-stars {
@@ -89,6 +93,7 @@
   .char-count {
     text-align: right;
     margin-top: 5px;
+    font-size: 20px;
   }
   
   .review-modal-attachment {
@@ -106,18 +111,13 @@
     padding: 10px;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 22px;
   }
   
   .review-modal-attachment-note {
     margin: 10px 0;
     color: red;
     font-size: 12px;
-  }
-  
-  .review-modal-attachment-reward {
-    margin: 10px 0;
-    color: green;
-    font-size: 14px;
   }
   
   .review-modal-actions {
@@ -134,7 +134,7 @@
   }
   
   .review-modal-submit-button {
-    background: #007bff;
+    background: #ff5722;
     color: white;
     border: none;
     padding: 10px 20px;
