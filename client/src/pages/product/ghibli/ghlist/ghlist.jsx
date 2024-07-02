@@ -1,9 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './ghlist.css';
+import Navbar from '../../../../component/navbar/navbar';
+import Header from '../../../../component/header/header';
+import Footer from '../../../../component/footer/footer';
 
 function ghibli() {
   return (
+    <>
+    <Header/>
+    <Navbar/>
     <div className="ghibli">
       <h1>지브리 상품 목록</h1>
       <div className="product-list">
@@ -21,6 +27,8 @@ function ghibli() {
         </Link>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 }
 

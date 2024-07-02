@@ -1,5 +1,8 @@
 import React from 'react';
 import './pomproduct.css';
+import Navbar from '../../../../component/navbar/navbar';
+import Header from '../../../../component/header/header';
+import Footer from '../../../../component/footer/footer';
 
 function PomProduct() {
   const products = [
@@ -10,6 +13,9 @@ function PomProduct() {
   ];
 
   return (
+    <>
+    <Header/>
+    <Navbar/>
     <div className="pomproduct">
       <h2>폼폼푸린 상품 목록</h2>
       <div className="product-list">
@@ -22,6 +28,8 @@ function PomProduct() {
         ))}
       </div>
     </div>
+    <Footer/>
+    </>
   );
 }
 

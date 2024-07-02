@@ -1,9 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './sanlist.css';
+import Header from '../../../../component/header/header';
+import Navbar from '../../../../component/navbar/navbar';
+import Footer from '../../../../component/footer/footer';
 
 function Sanrio() {
   return (
+    <>
+    <Header/>
+    <Navbar/>
     <div className="sanrio">
       <h1>산리오 상품 목록</h1>
       <div className="product-list">
@@ -21,6 +27,8 @@ function Sanrio() {
         </Link>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 }
 

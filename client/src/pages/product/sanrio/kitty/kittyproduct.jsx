@@ -1,5 +1,8 @@
 import React from 'react';
 import './kittyproduct.css';
+import Header from '../../../../component/header/header';
+import Navbar from '../../../../component/navbar/navbar';
+import Footer from '../../../../component/footer/footer';
 
 function KittyProduct() {
   const products = [
@@ -10,6 +13,9 @@ function KittyProduct() {
   ];
 
   return (
+    <>
+    <Header/>
+    <Navbar/>
     <div className="kittyproduct">
       <h2>헬로키티 상품 목록</h2>
       <div className="product-list">
@@ -22,6 +28,8 @@ function KittyProduct() {
         ))}
       </div>
     </div>
+    <Footer/>
+    </>
   );
 }
 
