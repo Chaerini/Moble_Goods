@@ -4,7 +4,7 @@ import { createCoupon, deleteCoupon, getCountCoupon, getCoupon, getCoupons, upda
 const router = express.Router();
 
 // 쿠폰 등록
-router.post('/', verifyAdmin, createCoupon);
+router.post('/', createCoupon);
 
 // 쿠폰 수정
 router.put('/:id', verifyAdmin, updateCoupon);
@@ -13,7 +13,7 @@ router.put('/:id', verifyAdmin, updateCoupon);
 router.delete('/:id', verifyAdmin, deleteCoupon);
 
 // 쿠폰 전체 조회
-router.get('/', verifyUser, getCoupons);
+router.get('/', getCoupons);
 
 // 쿠폰 ID 조회
 router.get('/:id', verifyAdmin, getCoupon);

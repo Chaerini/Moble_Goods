@@ -29,6 +29,8 @@ import CinnaProduct from "./pages/product/sanrio/cinnamo/cinnaproduct";
 import Dashboard from "./pages/admin/dashboard/Dashboard";
 import KittyProduct from "./pages/product/sanrio/kitty/kittyproduct";
 import KuroProduct from "./pages/product/sanrio/kuromi/kuroproduct";
+import GetNotice from "./pages/notice/getNotice";
+import GetCoupon from "./pages/couponManage/getCoupon";
 function App() {
   return (
     <BrowserRouter>
@@ -73,6 +75,8 @@ function App() {
         <Route path="/admin" element={<Dashboard />} />``
         <Route path="sanrio/kittyproduct" element={<KittyProduct />} />
         <Route path="sanrio/kuroproduct" element={<KuroProduct />} />
+        <Route path="/getnotice" element={<GetNotice/>}/>
+        <Route path="/getcoupon" element={<GetCoupon/>}/>
       </Routes>
     </BrowserRouter>
   );
