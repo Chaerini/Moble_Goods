@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
-import './styles.css';
+import './product.css';
 const UpdateProduct = () => {
     const apiUrl=process.env.REACT_APP_API_URL
     const [product,setProduct] = useState({

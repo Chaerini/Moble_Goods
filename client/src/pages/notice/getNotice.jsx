@@ -29,7 +29,7 @@ const GetNotice = () => {
     };
     return (
         <div className="CommonTable">
-        <CommonTable headersName={[]}>
+        <table headersName={[]}>
         <ul>
             <h2>공지사항</h2>
             <thead>
@@ -39,16 +39,16 @@ const GetNotice = () => {
             </tr>
         </thead>
                 {data.map((notice) => (
-                    <CommonTableRow key={notice.id}>
-                        <CommonTableColumn>{notice.id}</CommonTableColumn>
-                        <CommonTableColumn>{notice.title}</CommonTableColumn>
-                        <CommonTableColumn>{notice.content}</CommonTableColumn>
+                    <div key={notice.id}>
+                        <>{notice.id}</>
+                        <>{notice.title}</>
+                        <>{notice.content}</>
                         <button className='delete' onClick={()=>handleDelete(notice.id)}>삭제</button>
                         <button className='update'><Link to={`/updatenotice/${notice.id}`}>수정</Link></button>
-                    </CommonTableRow>
+                    </div>
                  ))}
             </ul>
-            </CommonTable>
+            </table>
         </div>
     );
 };

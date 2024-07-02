@@ -3,7 +3,7 @@ import axios from 'axios';
 import CommonTable from "../../component/table/CommonTable";
 import CommonTableColumn from "../../component/table/CommonTableColumn";
 import CommonTableRow from "../../component/table/CommonTableRow";
-import "../productManage/styles.css";
+import "../productManage/product.css";
 import { Link } from 'react-router-dom';
 import "../../Context/ProductContext"
 import { AuthContext } from '../../Context/AuthContext';
@@ -14,16 +14,20 @@ const GetUser = () => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(`http://localhost:8080/api/users`,
-                        {headers:{token:user.token},
+                    null,
+                        {headers:{
+                            token: `${user.token}`
+                            
+                        },
             });
                 setData(response.data);
-                console.log(user.token);
+                console.log()
             }catch (error) {
                 console.error('Error fetching data', error);
             }
         };
         fetchData();
-    }, [user.token]);
+    }, []);
     const handleDelete  = async(id) =>{
         try{
             await axios.delete(`http://localhost:8080/api/users/`+id)
@@ -34,8 +38,17 @@ const GetUser = () => {
     }
     return (
         <div className="CommonTable">
-        <CommonTable headersName={['이름','아이디','주소','멤버십 아이디']}>
+        <CommonTable headersName={[]}>
         <ul>
+            <h2>고객</h2>
+            <thead>
+            <tr>
+                <th>이름</th>
+                <th>아이디</th>
+                <th>주소</th>
+                <th>멤버십 아이디</th>
+            </tr>
+        </thead>
                 {data.map((user) => (
                     <CommonTableRow key={user.id}>
                         <CommonTableColumn>{user.name}</CommonTableColumn>
