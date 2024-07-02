@@ -10,12 +10,10 @@ const GetUser = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        const apiUrl = process.env.REACT_APP_API_URL;
         const fetchData = async () => {
             try {
-                const response = await axios.get(`${apiUrl}/users`);
+                const response = await axios.get(`http://1ocalhost:8080/api/users`);
                 setData(response.data);
-                console.log(apiUrl);
             } catch (error) {
                 console.error('Error fetching data', error);
             }
@@ -23,7 +21,6 @@ const GetUser = () => {
         fetchData();
     }, []);
     const handleDelete  = async(id) =>{
-        const apiUrl = process.env.REACT_APP_API_URL;
         try{
             await axios.delete(`http://localhost:8080/api/users/`+id)
             window.location.reload();

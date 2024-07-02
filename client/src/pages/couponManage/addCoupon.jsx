@@ -19,13 +19,14 @@ const Coupon = () =>{
     const handleClick = async e =>{
         e.preventDefault()
         try{
-            await axios.post(`${apiUrl}/coupons`,coupon);
+            await axios.post(`http://localhost:8080/api/coupons`,coupon);
         }catch(err){
             console.log(err);
         }
 
 }
     return(
+        <header>
         <div className="addCoupon">
             <h1>쿠폰 추가하기</h1>
             <input type="text" onChange={handleChange} placeholder="이름" name="name"/>
@@ -35,6 +36,7 @@ const Coupon = () =>{
             <input type="number" onChange={handleChange} placeholder="조건" name="conditions"/>
             <button onClick={handleClick}>추가</button>
         </div>
+        </header>
     )
 }
 export default Coupon;
