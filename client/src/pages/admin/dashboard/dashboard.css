@@ -16,13 +16,13 @@
   background-color: var(--c-lightgray);
 }
 
-/* card */
+/* 카드 1 */
 .dashboard-card-wrapper {
   display: flex;
   width: 700px;
   height: 300px;
   flex-direction: column;
-  border-radius: 16px;
+  border-radius: 5px;
   background-color: var(--c-bg-white);
   margin: 10px;
   padding: 10px 20px;
@@ -103,7 +103,7 @@
   width: 130px;
   height: 135px;
   display: flex;
-  border-radius: 16px;
+  border-radius: 10px;
   padding: 10px;
   margin-right: 10px;
   background-color: var(--c-bg-white);
@@ -131,7 +131,7 @@
   height: 300px;
   flex-direction: column;
   background-color: var(--c-bg-white);
-  border-radius: 16px;
+  border-radius: 5px;
   margin: 10px;
   padding: 10px 20px;
 }
@@ -143,7 +143,7 @@
   height: 250px;
   flex-direction: column;
   background-color: var(--c-bg-white);
-  border-radius: 16px;
+  border-radius: 5px;
   margin: 10px;
   padding: 10px 20px;
 }
@@ -156,7 +156,7 @@
   height: 250px;
   flex-direction: column;
   background-color: var(--c-bg-white);
-  border-radius: 16px;
+  border-radius: 5px;
   margin: 10px;
   padding: 10px 20px;
 }

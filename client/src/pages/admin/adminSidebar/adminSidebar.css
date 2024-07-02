@@ -46,13 +46,14 @@
 }
 .sidebar-menu-list {
   list-style: none;
+  width: 100%;
 }
 
 .sidebar-menu-item {
   display: flex;
   width: 100%;
   align-items: center;
-  padding: 9px 50px;
+  padding: 9px 70px;
   font-size: 16px;
   font-weight: 600;
   color: var(--c-darkgray);
