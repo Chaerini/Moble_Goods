@@ -257,13 +257,24 @@ function Order() {
           <div className="order-summary">
             <h3>최종 결제 금액 확인</h3>
             <div className="summary-content">
-              <p>상품 금액: {cartItems.reduce((total, item) => total + item.price * item.quantity, 0)}원</p>
-              <p>할인 금액: 0원</p>
-              <p>특별 할인 금액: 0원</p>
-              <p>제휴카드 할인 금액: 0원</p>
-              <p>스탬프 머니: 0원</p>
-              <p>배송비: 3,000원</p>
               <p className="summary-total">합계: {cartItems.reduce((total, item) => total + item.price * item.quantity, 0) + 3000}원</p>
+              <br />
+              <div className="summary-details">
+                <p>상품 금액:</p>
+                <p>{cartItems.reduce((total, item) => total + item.price * item.quantity, 0)}원</p>
+              </div>
+              <div className="summary-details">
+                <p>할인 금액:</p>
+                <p>0원</p>
+              </div>
+              <div className="summary-details">
+                <p>특별 할인 금액:</p>
+                <p>0원</p>
+              </div>
+              <div className="summary-details">
+                <p>배송비:</p>
+                <p>3,000원</p>
+              </div>
               <hr />
               <div className="terms">
                 <label><input type="checkbox" /> 전체 선택</label>

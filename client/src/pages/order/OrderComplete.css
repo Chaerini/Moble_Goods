@@ -9,7 +9,7 @@
   }
   
   .order-complete-container h1 {
-    color: #007bff;
+    color: red;
   }
   
   .order-complete-container p {
@@ -19,7 +19,7 @@
   
   .order-complete-container button {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #ff5722;
     color: white;
     border: none;
     cursor: pointer;
@@ -28,6 +28,6 @@
   }
   
   .order-complete-container button:hover {
-    background-color: #0056b3;
+    background-color: #e64a19;
   }
   
