@@ -1,5 +1,8 @@
 import React from 'react';
 import './cinnaproduct.css';
+import Navbar from '../../../../component/navbar/navbar';
+import Footer from '../../../../component/footer/footer';
+import Header from '../../../../component/header/header';
 
 function CinnaProduct() {
   const products = [
@@ -10,6 +13,9 @@ function CinnaProduct() {
   ];
 
   return (
+    <>
+    <Header/>
+    <Navbar/>
     <div className="cinnaproduct">
       <h2>시나모롤 상품 목록</h2>
       <div className="product-list">
@@ -22,6 +28,8 @@ function CinnaProduct() {
         ))}
       </div>
     </div>
+    <Footer/>
+    </>
   );
 }
 

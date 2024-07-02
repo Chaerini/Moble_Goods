@@ -19,9 +19,6 @@ import UpdateProduct from './pages/productManage/updateProduct';
 import Main from './pages/productManage/main';
 import GetUser from './pages/userManage/getUser';
 import Coupon from './pages/couponManage/addCoupon';
-import Navbar from "./component/navbar/navbar";
-import Header from "./component/header/header";
-import Footer from "./component/footer/footer";
 import Login from "./component/login/Login";
 import Register from "./component/register/Register";
 import Sanlist from './pages/product/sanrio/sanlist/sanlist';
@@ -34,6 +31,8 @@ import MyReview from './pages/myreview/MyReview';
 import PomProduct from "./pages/product/sanrio/pompom/pomproduct";
 import CinnaProduct from "./pages/product/sanrio/cinnamo/cinnaproduct";
 import Dashboard from "./pages/admin/dashboard/Dashboard";
+import KittyProduct from "./pages/product/sanrio/kitty/kittyproduct";
+import KuroProduct from "./pages/product/sanrio/kuromi/kuroproduct";
 function App() {
   return (
     <BrowserRouter>
@@ -61,7 +60,9 @@ function App() {
         <Route path="/mycoupon" element={<MyCoupon />} />
         <Route path="sanrio/pomproduct" element={<PomProduct />} />
         <Route path="sanrio/cinnaproduct" element={<CinnaProduct />} />
-        <Route path="/admin" element={<Dashboard />} />
+        <Route path="/admin" element={<Dashboard />} />``
+        <Route path="sanrio/kittyproduct" element={<KittyProduct />} />
+        <Route path="sanrio/kuroproduct" element={<KuroProduct />} />
       </Routes>
     </BrowserRouter>
   );
