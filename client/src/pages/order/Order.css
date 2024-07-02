@@ -53,7 +53,9 @@
   border-bottom: 1px solid #ddd;
   background-color: #fafafa;
 }
-
+.order-item {
+  font-size: 18px;
+}
 
 .order-item img {
   width: 80px;
