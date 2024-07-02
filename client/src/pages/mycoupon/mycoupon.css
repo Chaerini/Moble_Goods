@@ -1,0 +1,140 @@
+.mycoupon {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.mycoupon-container {
+    width: 1140px;
+    height: 140px;
+}
+
+.mycoupon-title {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    font-weight: 400;
+}
+
+.mycoupon-dashboard {
+    width: 100%;
+    height: 160px;
+    background-color: #fafafa;
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: row;
+}
+
+.mycoupon-membership {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    border-right: 1px solid #eee;
+}
+
+.mycoupon-membership-left {
+    height: 100%;
+    padding-left: 30px;
+    padding-right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mycoupon-icon-bronze {
+    width: 66px;
+    height: 66px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 100%;
+    color: #9b6c1f;
+}
+
+.mycoupon-membership-right {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.mycoupon-membership-p-top {
+    font-size: 15px;
+    padding-bottom: 12px;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.mycoupon-membership-p-bottom {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.mycoupon-use {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 24px 0px;
+    border-right: 1px solid #eee;
+}
+
+.mycoupon-icon-ticket {
+    width: 27px;
+    height: 27px;
+    padding: 13px;
+    background-color: #757575;
+    border-radius: 100%;
+    color: #fff;
+}
+
+.mycoupon-use-p-top {
+    padding: 10px 0px;
+    font-size: 12px;
+}
+
+.mycoupon-use-p-bottom {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.mycoupon-em {
+    font-size: 16px;
+    font-style: normal;
+    color: red;
+    padding-right: 2px;
+}
+
+.mycoupon-download {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 24px 0px;
+}
+
+.mycoupon-icon-download {
+    width: 27px;
+    height: 27px;
+    padding: 13px;
+    background-color: #757575;
+    border-radius: 100%;
+    color: #fff;
+}
+
+.mycoupon-download-p-top {
+    padding: 10px 0px;
+    font-size: 12px;
+}
+
+.mycoupon-download-p-bottom {
+    font-size: 12px;
+    font-weight: 400;
+}
