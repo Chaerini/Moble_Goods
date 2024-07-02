@@ -192,13 +192,6 @@ function Order() {
                     </div>
                   </div>
                   <div className="form-group">
-                    <label>스탬프 머니</label>
-                    <div className="input-group">
-                      <input type="text" value="0원" readOnly />
-                      <button className="apply-coupon-button">전액 사용</button>
-                    </div>
-                  </div>
-                  <div className="form-group">
                     <label>배송비</label>
                     <div className="input-group">
                       <input type="text" value="3,000원" readOnly />

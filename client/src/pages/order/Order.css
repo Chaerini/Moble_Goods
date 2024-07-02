@@ -92,7 +92,6 @@
 .form-section {
   margin-bottom: 20px;
   padding: 20px;
-  border: 1px solid #ddd;
   border-radius: 5px;
 }
 
@@ -104,6 +103,8 @@
   display: flex;
   justify-content: space-between;
   cursor: pointer;
+  border-bottom: 1px solid #ddd;
+  font-size: 22px;
 }
 
 .form-group {
