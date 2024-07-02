@@ -7,16 +7,16 @@ function Mblist() {
     <div className="mblist">
       <h1>모블 상품 목록</h1>
       <div className="product-list">
-        <Link to="/mobile/phonecase">
+        <Link to="/moble/phonecase">
           <div className="product-card">폰케이스</div>
         </Link>
-        <Link to="/mobile/charger">
+        <Link to="/moble/charger">
           <div className="product-card">충전기</div>
         </Link>
-        <Link to="/mobile/earphone">
+        <Link to="/moble/earphone">
           <div className="product-card">이어폰</div>
         </Link>
-        <Link to="/mobile/stand">
+        <Link to="/moble/stand">
           <div className="product-card">거치대</div>
         </Link>
       </div>

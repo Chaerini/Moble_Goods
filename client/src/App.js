@@ -10,7 +10,6 @@ import Cart from './pages/cart/Cart';
 import Order from './pages/order/Order';
 import OrderComplete from './pages/order/OrderComplete';
 import CartItemsProvider from './pages/cart/CartItems';
-
 import AddNotice from './pages/notice/AddNotice';
 import GetProduct from "./pages/productManage/getProduct";
 import Modal from './pages/notice/Modal';
@@ -19,11 +18,11 @@ import UpdateProduct from './pages/productManage/updateProduct';
 import Main from './pages/productManage/main';
 import GetUser from './pages/userManage/getUser';
 import Coupon from './pages/couponManage/addCoupon';
-import Navbar from "./component/Navbar/navbar";
-import Header from "./component/Header/header";
-import Footer from "./component/Footer/footer";
+import Navbar from "./component/navbar/navbar";
+import Header from "./component/header/header";
+import Footer from "./component/footer/footer";
 import Login from "./component/login/Login";
-import Register from "./component/register/Register"
+import Register from "./component/register/Register";
 import Sanlist from './pages/product/sanrio/sanlist/sanlist';
 import Dislist from './pages/product/disney/dislist/dislist';
 import Ghlist from './pages/product/ghibli/ghlist/ghlist';
