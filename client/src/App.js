@@ -37,36 +37,32 @@ import Dashboard from "./pages/admin/dashboard/Dashboard";
 function App() {
   return (
     <BrowserRouter>
-      <Header />
-      <Navbar />
-
-    <Routes>
-      <Route path='/Cart' element={<CartItemsProvider><Cart /></CartItemsProvider>} />
-      <Route path='/Order' element={<CartItemsProvider><Order /></CartItemsProvider>} />
-      <Route path='/Order-Complete' element={<OrderComplete />} />
-      <Route path='/ReviewWrite' element={<ReviewWrite/>}/>
-      <Route path="/addnotice" element={<AddNotice />} />
-      <Route path="/getproduct" element={<GetProduct />} />
-      <Route path='/addproduct' element={<Product />} />
-      <Route path="/modal" element={<Modal />} />
-      <Route path='/updateproduct/:id' element={<UpdateProduct />} />
-      <Route path="/" element={<Main />} />
-      <Route path="/getuser" element={<GetUser />} />
-      <Route path="/addcoupon" element={<Coupon />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/sanrio" element={<Sanlist />} />
-      <Route path="/disney" element={<Dislist />} />
-      <Route path="/ghibli" element={<Ghlist />} />
-      <Route path="/marvel" element={<Mvlist />} />
-      <Route path="/moble" element={<Mblist />} />
-      <Route path="/myreview" element={<MyReview />} />
-      <Route path="/mycoupon" element={<MyCoupon />} />
-      <Route path="sanrio/pomproduct" element={<PomProduct />} />
-      <Route path="sanrio/cinnaproduct" element={<CinnaProduct />} />
-      <Route path="/admin" element={<Dashboard/>}/>
-    </Routes>
-    <Footer />
+      <Routes>
+        <Route path='/Cart' element={<CartItemsProvider><Cart /></CartItemsProvider>} />
+        <Route path='/Order' element={<CartItemsProvider><Order /></CartItemsProvider>} />
+        <Route path='/Order-Complete' element={<OrderComplete />} />
+        <Route path='/ReviewWrite' element={<ReviewWrite />} />
+        <Route path="/addnotice" element={<AddNotice />} />
+        <Route path="/getproduct" element={<GetProduct />} />
+        <Route path='/addproduct' element={<Product />} />
+        <Route path="/modal" element={<Modal />} />
+        <Route path='/updateproduct/:id' element={<UpdateProduct />} />
+        <Route path="/" element={<Main />} />
+        <Route path="/getuser" element={<GetUser />} />
+        <Route path="/addcoupon" element={<Coupon />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/sanrio" element={<Sanlist />} />
+        <Route path="/disney" element={<Dislist />} />
+        <Route path="/ghibli" element={<Ghlist />} />
+        <Route path="/marvel" element={<Mvlist />} />
+        <Route path="/moble" element={<Mblist />} />
+        <Route path="/myreview" element={<MyReview />} />
+        <Route path="/mycoupon" element={<MyCoupon />} />
+        <Route path="sanrio/pomproduct" element={<PomProduct />} />
+        <Route path="sanrio/cinnaproduct" element={<CinnaProduct />} />
+        <Route path="/admin" element={<Dashboard />} />
+      </Routes>
     </BrowserRouter>
   );
 }
