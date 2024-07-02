@@ -1,64 +1,56 @@
 @import url("../../root.css");
-:root {
-    /* color */
-    --c-bg-white: #ffffff; /*root 컬러 건들지마세요*/
-    --c-darkgray: #757575;
-    --c-darkgray: #eeeeee;
-    --c-black: #000000;
-    --c-point: #ff5722;
-  }
+
 .product {
-    text-align: center;
-    margin: 20px 0;
-    font-size: 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap:10px;
+  text-align: center;
+  margin: 20px 0;
+  font-size: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
-.th{
-    padding: 15px;
-    text-align: center;
-    border-bottom: 1px solid black;
+.th {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid black;
 }
-.btn{
-    padding: 10px 20px;
-    background-color: #ff5722;
-    color: #fff;
-    border: 1px solid #000000;
-    cursor: pointer;
-    font-size: 14px;
-    
+.btn {
+  padding: 10px 20px;
+  background-color: #ff5722;
+  color: #fff;
+  border: 1px solid #000000;
+  cursor: pointer;
+  font-size: 14px;
 }
-.form{
-    display: flex;
-    flex-direction: column;
-    gap:20px;
-    text-align: center;
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
 }
-.product-input{
-    width:50%;
-    padding: 10px;
-    border: 1px solid black;
-    border-radius: 5px;
-    text-align: center;
+.product-input {
+  width: 50%;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  text-align: center;
 }
-.Product{
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-        color:black;
-        margin-bottom: 200px;
-        position:relative;
-        min-height: 100%;
+.Product {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  color: black;
+  margin-bottom: 200px;
+  position: relative;
+  min-height: 100%;
 }
-.tr{
-    background-color: #757575;
+.tr {
+  background-color: #757575;
 }
-.product-container{
-    width: 100%;
-    margin: 0 auto;
-    border-collapse: collapse;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.product-container {
+  width: 100%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
