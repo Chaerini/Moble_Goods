@@ -10,8 +10,8 @@ import Cart from './pages/cart/Cart';
 import Order from './pages/order/Order';
 import OrderComplete from './pages/order/OrderComplete';
 import CartItemsProvider from './pages/cart/CartItems';
+
 import AddNotice from './pages/notice/AddNotice';
-import NoticeList from './pages/notice/NoticeList';
 import GetProduct from "./pages/productManage/getProduct";
 import Modal from './pages/notice/Modal';
 import Product from './pages/productManage/addProduct';
@@ -40,7 +40,6 @@ function App(){
       <Route path='/Order' element={<CartItemsProvider><Order /></CartItemsProvider>} />
       <Route path='/Order-Complete' element={<OrderComplete/>}/>
       <Route path="/addnotice" element={<AddNotice/>}/>
-      <Route path="/noticelist" element={<NoticeList/>}/>
       <Route path="/getproduct" element={<GetProduct/>}/>
       <Route path='/addproduct' element={<Product/>}/>
       <Route path="/modal" element={<Modal/>}/>
