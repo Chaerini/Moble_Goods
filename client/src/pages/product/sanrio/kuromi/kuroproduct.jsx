@@ -1,5 +1,8 @@
 import React from 'react';
 import './kuroproduct.css';
+import Navbar from '../../../../component/navbar/navbar';
+import Header from '../../../../component/header/header';
+import Footer from '../../../../component/footer/footer';
 
 function KuroProduct() {
   const products = [
@@ -10,6 +13,9 @@ function KuroProduct() {
   ];
 
   return (
+    <>
+    <Header/>
+    <Navbar/>
     <div className="kuroproduct">
       <h2>쿠로미 상품 목록</h2>
       <div className="product-list">
@@ -22,6 +28,8 @@ function KuroProduct() {
         ))}
       </div>
     </div>
+    <Footer/>
+    </>
   );
 }
 

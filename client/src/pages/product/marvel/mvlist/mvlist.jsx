@@ -1,9 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './mvlist.css';
+import Header from '../../../../component/header/header';
+import Navbar from '../../../../component/navbar/navbar';
+import Footer from '../../../../component/footer/footer';
 
 function marvel() {
   return (
+    <>
+    <Header/>
+    <Navbar/>
     <div className="marvel">
       <h1>마블 상품 목록</h1>
       <div className="product-list">
@@ -21,6 +27,8 @@ function marvel() {
         </Link>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 }
 

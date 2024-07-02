@@ -1,9 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './dislist.css';
+import Header from '../../../../component/header/header';
+import Navbar from '../../../../component/navbar/navbar';
+import Footer from '../../../../component/footer/footer';
 
 function disney() {
   return (
+    <>
+    <Header/>
+    <Navbar/>
     <div className="disney">
       <h1>디즈니 상품 목록</h1>
       <div className="product-list">
@@ -21,6 +27,8 @@ function disney() {
         </Link>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 }
 
