@@ -37,6 +37,7 @@
     font-weight: normal;
     margin-bottom: 20px;
     border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
   }
   
   .review-modal-product {
@@ -68,6 +69,7 @@
     font-size: 24px;
     cursor: pointer;
     margin-right: 5px;
+    color: #9e9b9b;
   }
   
   .filled {
@@ -111,7 +113,7 @@
     padding: 10px;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 22px;
+    font-size: 20px;
   }
   
   .review-modal-attachment-note {
