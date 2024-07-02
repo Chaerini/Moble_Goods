@@ -7,6 +7,10 @@
   border-width: 0;
   border-style: solid;
   border-color: #7b7a7a;
+  margin: 0px;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
 }
 
 :root {
