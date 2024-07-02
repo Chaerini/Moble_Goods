@@ -1,12 +1,12 @@
 import React from "react";
-import "./CommonTable.css"
+import "../../pages/productManage/styles.css"
 
 const CommonTable = props =>{
     const {headersName, children} = props;
 
     return(
         <table className="common-table">
-            <thead>
+            <thead className="common-head">
                 <tr>
                     {
                         headersName.map((item,index) =>{

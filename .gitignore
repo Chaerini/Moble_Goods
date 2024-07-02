@@ -3,6 +3,7 @@
 
 .DS_Store
 /api/.env
+/client/.env
 
 EC2_KEYPair.pem
 

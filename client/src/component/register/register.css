@@ -1,0 +1,70 @@
+.register {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.418);
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.register-container {
+    width: 380px;
+    height: 480px;
+    padding: 40px 30px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-h1 {
+    font-size: 24px;
+    font-weight: 400;
+    padding-bottom: 20px;
+}
+
+.register-list {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid #eee;
+    padding: 5px 0px;
+    align-items: center;
+}
+
+.register-left {
+    width: 120px;
+    font-size: 12px;
+}
+
+.register-em {
+    color: red;
+}
+
+.register-input {
+    width: 80%;
+    height: 34px;
+    border: 1px solid #eee;
+    font-size: 12px;
+    padding: 0px 10px;
+}
+
+.register-agreement {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    padding: 20px 0px;
+}
+
+.register-button {
+    width: 100%;
+    height: 50px;
+    font-size: 12px;
+    border: none;
+    background-color: #757575;
+    color: #fff;
+}

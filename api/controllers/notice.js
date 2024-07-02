@@ -12,3 +12,42 @@ export const createNotice = async(req,res) =>{
         res.status(400).json({error:error.message});
     }
 }
+export const updateNotice = async(req,res) => {
+    const {noticeId} = req.params;
+    const {title,content}=req.body;
+    console.log(req.body);
+    console.log(req.params);
+    try{
+        const [result] = await pool.query(`UPDATE notice SET title=?,content=? WHERE id=?`,[title,content,noticeId]);
+        res.status(200).json({message:"수정 완료"})
+    }catch(error){
+        res.status(400).json({error:error.message});
+    }
+}
+export const deleteNotice = async(req,res) => {
+    const {noticeId} = req.params;
+    console.log(req.params);
+    try{
+        const [result] = await pool.query(`DELETE FROM notice WHERE id=?`,[noticeId]);
+        res.status(200).json({message:"삭제 완료"})
+    }catch(error){
+        res.status(400).json({error:error.message});
+    }
+}
+export const getAllNotice = async(req,res) => {
+    try{
+        const [rows] = await pool.query(`SELECT * FROM notice`);
+        res.status(200).json({rows});
+    }catch(error){
+        res.status(400).json({error:error.message});
+    }
+}
+export const getNoticeById = async(req,res) => {
+    const {noticeId} =req.params;
+    try{
+        const [result] = await pool.query(`SELECT * FROM notice WHERE id=?`,[noticeId]);
+        res.status(200).json({result});
+    }catch(error){
+        res.status(400).json({error:error.message});
+    }
+}

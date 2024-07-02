@@ -1,0 +1,83 @@
+.writtenreview-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.writtenreview-th {
+    height: 50px;
+    background-color: #fafafa;
+    font-size: 13px;
+}
+
+.writtenreview-tr {
+    border-bottom: 1px solid #eee;
+}
+
+.writtenreview-tr-2 {
+    border-bottom: 1px solid #ddd;
+}
+
+.writtenreview-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.writtenreview-image {
+    width: 45px;
+    height: 45px;
+    border: 1px solid #eee;
+}
+
+.writtenreview-bottom-image {
+    width: 80px;
+    height: 80px;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+.writtenreview-top-right {
+    display: flex;
+    justify-content: center;
+}
+
+.writtenreview-right {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.writtenreview-title {
+    font-size: 13px;
+    font-weight: 600;
+    padding-top: 10px;
+    padding-left: 7px;
+}
+
+.writtenreview-td {
+    text-align: center;
+}
+
+.writtenreview-button {
+    border: 1px solid #eee;
+    background-color: #fff;
+    color: #191919;
+    padding: 5px 10px;
+}
+
+.writtenreview-top {
+    display: flex;
+    flex-direction: row;
+    padding-top: 5px;
+}
+
+.writtenreview-rating {
+    color: rgb(223, 223, 51);
+    font-size: 20px;
+}
+
+.writtenreview-contents {
+    font-size: 12px;
+    padding-left: 3px;
+    padding-bottom: 20px;
+}
