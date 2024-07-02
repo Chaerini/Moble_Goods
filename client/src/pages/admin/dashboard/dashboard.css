@@ -1,0 +1,185 @@
+@import url("../../../root.css");
+
+.dashboard-container {
+  display: flex;
+  /* background-color: var(--c-lightgray); */
+}
+
+.dashboard-main-content {
+  display: flex;
+  width: calc(100vw - 300px);
+  height: calc(100vh - 70px);
+  margin-left: 300px;
+  padding: 20px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-color: var(--c-lightgray);
+}
+
+/* card */
+.dashboard-card-wrapper {
+  display: flex;
+  width: 700px;
+  height: 300px;
+  flex-direction: column;
+  border-radius: 16px;
+  background-color: var(--c-bg-white);
+  margin: 10px;
+  padding: 10px 20px;
+}
+
+/* 헤더, 타이틀, 텍스트  */
+
+.dashboard-card-header,
+.dashboard-visitor-insights-header,
+.dashboard-revenue-header,
+.dashboard-customer-satisfaction-header,
+.dashboard-target-reality-header {
+  display: flex;
+  height: 25px;
+  margin: 15px;
+}
+
+.dashboard-card-header-title,
+.dashboard-visitor-insights-title,
+.dashboard-revenue-title,
+.dashboard-customer-satisfaction-title,
+.dashboard-target-reality-title {
+  display: flex;
+  flex: 3;
+  color: var(--c-black);
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard-card-header-title-text,
+.dashboard-visitor-insights-title-text,
+.dashboard-revenue-title-text,
+.dashboard-customer-satisfaction-title-text,
+.dashboard-target-reality-title-text {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.dashboard-export-btn-box {
+  flex: 1;
+  display: flex;
+  width: 100%;
+}
+
+.dashboard-export-btn {
+  width: 70px;
+  height: 30px;
+  font-weight: 600;
+  font-size: 13px;
+  border-radius: 10px;
+  background-color: var(--c-lightgray); /*export 버튼 컬러 정해야 됨*/
+  cursor: pointer;
+}
+
+.dashboard-export-btn:focus {
+  outline: 1px solid black;
+}
+
+.dashboard-card-contents-wrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.dashboard-card {
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard-card-background {
+  width: 130px;
+  height: 135px;
+  display: flex;
+  border-radius: 16px;
+  padding: 10px;
+  margin-right: 10px;
+  background-color: var(--c-bg-white);
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-card-title {
+  font-size: 13px;
+  margin: 2px;
+  padding: 0;
+}
+
+.dashboard-card-value {
+  font-size: 11px;
+  border: 1px solid var(--c-darkgray);
+  width: 100%;
+  height: 100%;
+}
+
+/* 카드 2 */
+.dashboard-visitor-insights-wrapper {
+  display: flex;
+  width: 400px;
+  height: 300px;
+  flex-direction: column;
+  background-color: var(--c-bg-white);
+  border-radius: 16px;
+  margin: 10px;
+  padding: 10px 20px;
+}
+
+/* 카드 3 */
+.dashboard-revenue-wrapper {
+  display: flex;
+  width: 500px;
+  height: 250px;
+  flex-direction: column;
+  background-color: var(--c-bg-white);
+  border-radius: 16px;
+  margin: 10px;
+  padding: 10px 20px;
+}
+
+/* 카드 4, 5 */
+.dashboard-customer-satisfaction-wrapper,
+.dashboard-target-reality-wrapper {
+  display: flex;
+  width: 300px;
+  height: 250px;
+  flex-direction: column;
+  background-color: var(--c-bg-white);
+  border-radius: 16px;
+  margin: 10px;
+  padding: 10px 20px;
+}
+
+.dashboard-target-reality-chart {
+  width: 250px;
+  height: 230px;
+
+  border: 1px solid var(--c-black);
+}
+
+.green {
+  background-color: #cfffcf;
+}
+
+.purple {
+  background-color: #efcfff;
+}
+
+.yellow {
+  background-color: #fff9cf;
+}
+
+.red {
+  background-color: #f9cfcf;
+}
