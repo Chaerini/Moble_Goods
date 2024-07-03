@@ -14,6 +14,7 @@ import Product from './pages/productManage/addProduct';
 import UpdateProduct from './pages/productManage/updateProduct';
 import Main from './pages/productManage/main';
 import GetUser from './pages/userManage/getUser';
+import UpdateUser from "./pages/userManage/updateUser";
 import Coupon from './pages/couponManage/addCoupon';
 import Login from "./component/login/Login";
 import Register from "./component/register/Register";
@@ -24,32 +25,13 @@ import Mvlist from "./pages/product/marvel/mvlist/mvlist";
 import Mblist from "./pages/product/moble/mblist/mblist";
 import MyCoupon from "./pages/mycoupon/MyCoupon";
 import MyReview from "./pages/myreview/MyReview";
-import PomProduct from "./pages/product/sanrio/pompom/pomproduct";
-import CinnaProduct from "./pages/product/sanrio/cinnamo/cinnaproduct";
 import Dashboard from "./pages/admin/dashboard/Dashboard";
-import KittyProduct from "./pages/product/sanrio/kitty/kittyproduct";
-import KuroProduct from "./pages/product/sanrio/kuromi/kuroproduct";
-import FrozenProduct from "./pages/product/disney/frozen/frozenproduct";
-import InsideOutProduct from "./pages/product/disney/insideout/insideoutproduct";
-import LittleMermaidProduct from "./pages/product/disney/littlemermaid/littleproduct";
-import RapunzelProduct from "./pages/product/disney/rapunzel/rapunzelproduct";
-import CastleProduct from "./pages/product/ghibli/castle/castleproduct";
-import PonyoProduct from "./pages/product/ghibli/ponyo/ponyoproduct";
-import SpiritProduct from "./pages/product/ghibli/spiritedaway/spiritproduct";
-import TotoroProduct from "./pages/product/ghibli/totoro/totoroproduct";
-import IronProduct from "./pages/product/marvel/ironman/ironproduct";
-import CaptainProduct from "./pages/product/marvel/captainamerica/captainproduct";
-import ThorProduct from "./pages/product/marvel/thor/thorproduct";
-import SpiderProduct from "./pages/product/marvel/spiderman/spiderproduct";
-import PhoneCaseProduct from "./pages/product/moble/phonecase/phonecaseproduct";
-import ChargerProduct from "./pages/product/moble/charger/chargerproduct";
-import EarphoneProduct from "./pages/product/moble/earphone/earphoneproduct";
-import StandProduct from "./pages/product/moble/stand/standproduct";
-import PomDetail from "./pages/product/sanrio/pompom/pomdetail";
 import GetCoupon from "./pages/couponManage/getCoupon";
 import GetNotice from "./pages/notice/getNotice";
 import UpdateNotice from "./pages/notice/updateNotice";
 import Withdraw from "./pages/withdraw/Withdraw";
+import Search from "./component/search/search";
+import UpdateUserMember from "./pages/userManage/updateUserMember";
 
 function App() {
   return (
@@ -78,7 +60,7 @@ function App() {
         <Route path="/addproduct" element={<Product />} />
         <Route path="/modal" element={<Modal />} />
         <Route path="/updateproduct/:id" element={<UpdateProduct />} />
-        <Route path="/updatenotice/:id" element={<UpdateNotice/>}/>
+        <Route path="/updatenotice/:id" element={<UpdateNotice />} />
         <Route path="/" element={<Main />} />
         <Route path="/getuser" element={<GetUser />} />
         <Route path="/addcoupon" element={<Coupon />} />
@@ -90,12 +72,11 @@ function App() {
         <Route path="/ghibli" element={<Ghlist />} />
         <Route path="/marvel" element={<Mvlist />} />
         <Route path="/moble" element={<Mblist />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/myreview" element={<MyReview />} />
         <Route path="/mycoupon" element={<MyCoupon />} />
         <Route path="/getcoupon" element={<GetCoupon />} />
         <Route path="/getnotice" element={<GetNotice />} />
-        <Route path="sanrio/pomproduct" element={<PomProduct />} />
-        <Route path="sanrio/cinnaproduct" element={<CinnaProduct />} />
         <Route path="/admin" element={<Dashboard />} />
         <Route path="sanrio/kittyproduct" element={<KittyProduct />} />
         <Route path="sanrio/kuroproduct" element={<KuroProduct />} />
@@ -115,6 +96,9 @@ function App() {
         <Route path="moble/chargerproduct" element={<ChargerProduct />} />
         <Route path="moble/earphoneproduct" element={<EarphoneProduct />} />
         <Route path="moble/standproduct" element={<StandProduct />} />
+        <Route path="/search" element={<Search/>}/>
+        <Route path="/updateuser/:id" element={<UpdateUser/>}/>
+        <Route path="/updateusermember/:id" element={<UpdateUserMember/>}/>
       </Routes>
     </BrowserRouter>
   );

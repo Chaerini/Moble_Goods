@@ -31,7 +31,7 @@ const GetNotice = () => {
         }
     }
     return (
-        <div className="CommonTable">
+        <div className="notice-table">
         <CommonTable headersName={[]}>
         <ul>
             <h2 className='product'>공지</h2>

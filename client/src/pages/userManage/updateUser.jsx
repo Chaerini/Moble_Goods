@@ -1,13 +1,13 @@
 import React,{useState} from "react";
 import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
-import "../productManage/styles.css"
+import "../productManage/product.css"
 const UpdateUser = () => {
     const [user,setUser] = useState({
         name:"",
         username:"",
         address:"",
-        memebership_id:"",
+        phone:""
     });
     const location = useLocation();
     const  userId = location.pathname.split("/")[2]
@@ -18,12 +18,20 @@ const UpdateUser = () => {
     const handleClick = async e =>{
         e.preventDefault()
         try{
-            await axios.put(`http://localhost:8080/api/products/`+userId,user);
+            await axios.put(`http://localhost:8080/api/users/`+userId,user);
         }catch(err){
-            console.log(err);
+            console.log("error",err);
+            console.log("user",user);
         }
-
 }
+    const handlMemberClick = async e =>{
+        e.preventDefault()
+        try{
+            await axios.put(`http://localhost:8080/api/users/membership`+userId,user);
+        }catch(err){
+            console.log("error",err);
+        }
+    }
 return (
         <div className="Product">
             <h1>고객정보 수정하기</h1>
@@ -31,8 +39,8 @@ return (
             <input type="text" onChange={handleChange} placeholder="이름" name="name" className="product-input"/>
             <input type="text" onChange={handleChange} placeholder="아이디" name="username" className="product-input"/>
             <input type="text" onChange={handleChange} placeholder="주소" name="address" className="product-input"/>
-            <input type="number" onChange={handleChange} placeholder="멤버십 아이디" name="discount_rate" className="product-input"/>
-            <button onClick={handleClick}><Link to="/getproduct">수정</Link></button>
+            <input type="numbe" onChange={handleChange} placeholder="핸드폰" name="phone" className="product-input"/>
+            <button onClick={handleClick}><Link to="/getuser">수정</Link></button>
             </div>
         </div>
     );
