@@ -18,6 +18,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    box-sizing: content-box;
 }
 
 .login-input {
@@ -26,6 +27,7 @@
     border: none;
     border-bottom: 1px solid #eee;
     font-size: 14px;
+    margin-bottom: 15px;
 }
 
 .login-button {
@@ -47,4 +49,9 @@
 .login-line {
     padding: 0px 10px;
     color: #ddd;
+}
+
+.login-a {
+    color: inherit;
+    text-decoration: none;
 }

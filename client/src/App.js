@@ -32,6 +32,7 @@ import UpdateNotice from "./pages/notice/updateNotice";
 import Withdraw from "./pages/withdraw/Withdraw";
 import Search from "./component/search/search";
 import UpdateUserMember from "./pages/userManage/updateUserMember";
+import Profile from './pages/profile/Profile';
 
 function App() {
   return (
@@ -78,6 +79,7 @@ function App() {
         <Route path="/getcoupon" element={<GetCoupon />} />
         <Route path="/getnotice" element={<GetNotice />} />
         <Route path="/admin" element={<Dashboard />} />
+        {/** 
         <Route path="sanrio/kittyproduct" element={<KittyProduct />} />
         <Route path="sanrio/kuroproduct" element={<KuroProduct />} />
         <Route path="disney/frozenproduct" element={<FrozenProduct />} />
@@ -96,9 +98,10 @@ function App() {
         <Route path="moble/chargerproduct" element={<ChargerProduct />} />
         <Route path="moble/earphoneproduct" element={<EarphoneProduct />} />
         <Route path="moble/standproduct" element={<StandProduct />} />
-        <Route path="/search" element={<Search/>}/>
-        <Route path="/updateuser/:id" element={<UpdateUser/>}/>
-        <Route path="/updateusermember/:id" element={<UpdateUserMember/>}/>
+        */}
+        <Route path="/search" element={<Search />} />
+        <Route path="/updateuser/:id" element={<UpdateUser />} />
+        <Route path="/updateusermember/:id" element={<UpdateUserMember />} />
       </Routes>
     </BrowserRouter>
   );
