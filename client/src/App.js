@@ -14,6 +14,7 @@ import Product from './pages/productManage/addProduct';
 import UpdateProduct from './pages/productManage/updateProduct';
 import Main from './pages/productManage/main';
 import GetUser from './pages/userManage/getUser';
+import UpdateUser from "./pages/userManage/updateUser";
 import Coupon from './pages/couponManage/addCoupon';
 import Login from "./component/login/Login";
 import Register from "./component/register/Register";
@@ -50,6 +51,8 @@ import GetCoupon from "./pages/couponManage/getCoupon";
 import GetNotice from "./pages/notice/getNotice";
 import UpdateNotice from "./pages/notice/updateNotice";
 import Withdraw from "./pages/withdraw/Withdraw";
+import Search from "./component/search/search";
+import UpdateUserMember from "./pages/userManage/updateUserMember";
 
 function App() {
   return (
@@ -115,6 +118,9 @@ function App() {
         <Route path="moble/chargerproduct" element={<ChargerProduct />} />
         <Route path="moble/earphoneproduct" element={<EarphoneProduct />} />
         <Route path="moble/standproduct" element={<StandProduct />} />
+        <Route path="/search" element={<Search/>}/>
+        <Route path="/updateuser/:id" element={<UpdateUser/>}/>
+        <Route path="/updateusermember/:id" element={<UpdateUserMember/>}/>
       </Routes>
     </BrowserRouter>
   );

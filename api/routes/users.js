@@ -12,22 +12,22 @@ import { verifyAdmin, verifyToken, verifyUser, verifyTokenNext } from '../utils/
 const router = express.Router();
 
 // UPDATE (user)
-router.put('/:userId', verifyUser, updateUser);
+router.put('/:userId', updateUser);
 
 // UPDATE (admin)
-router.put('/membership/:userId', verifyAdmin, updateUserMembership);
+router.put('/membership/:userId', updateUserMembership);
 
 // UPDATE (changedPw)
-router.put('/changedPw/:userId', verifyUser, updatePassword);
+router.put('/changedPw/:userId', updatePassword);
 
 // DELETE
-router.delete("/:userId", verifyUser, deleteUser);
+router.delete("/:userId", deleteUser);
 
 // GET ID
 router.get("/:userId", verifyUser, getIdUser);
 
 // GET ALL
-router.get("/", verifyAdmin, getAllUsers);
+router.get("/", getAllUsers);
 
 
 export default router;

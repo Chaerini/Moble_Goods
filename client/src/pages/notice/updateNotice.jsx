@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
-import "../../pages/productManage/product.css";
-
+import "./Notice.css"
 const UpdateNotice = () => {
   const [notice, setNotice] = useState({
     title: "",
@@ -24,8 +23,8 @@ const UpdateNotice = () => {
   };
   return (
     <div className="Product">
-      <h1>공지사항 수정하기</h1>
       <div className="product">
+      <label>공지사항 수정하기</label>
         <input
           type="text"
           onChange={handleChange}
@@ -40,7 +39,7 @@ const UpdateNotice = () => {
           name="content"
           className="product-input"
         />
-        <button onClick={handleClick}>
+        <button onClick={handleClick} className="btn">
           <Link to="/getnotice">수정</Link>
         </button>
       </div>

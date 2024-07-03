@@ -7,11 +7,11 @@ import { Link } from 'react-router-dom';
 import AdminHeader from '../admin/adminHeader/AdminHeader';
 import AdminSidebar from '../admin/adminSidebar/AdminSidebar';
 import { AuthContext } from '../../Context/AuthContext';
+import Search from '../../component/search/search';
 const GetProduct = () => {
     let [data, setData] = useState([]);
     const {user}=useContext(AuthContext)
     useEffect(() => {
-        const apiUrl = process.env.REACT_APP_API_URL;
         const fetchData = async () => {
             try {
                 const response = await axios.get(`http://localhost:8080/api/products`,{
@@ -38,6 +38,7 @@ const GetProduct = () => {
     }
     return (
         <div className="CommonTable">
+        <Search/>
         <CommonTable headersName={[]}>
         <ul>
             <h2 className='product'>상품</h2>
@@ -73,6 +74,14 @@ const GetProduct = () => {
                                 
                             }
                         }} className='btn'>가격순 정렬</button>
+                        <button onClick={()=>{
+                            {
+                                let copy=[...data];
+                                copy.sort((a,b)=>a.name<b.name?1:-1);
+                                setData(copy);
+                                
+                            }
+                        }} className='btn'>이름순 정렬</button>
             <button><Link to="/addProduct" className='btn'>상품추가하기</Link></button>
         </div>
     );

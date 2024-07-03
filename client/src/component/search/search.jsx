@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMagnifyingGlass,
   faCircleUser,
 } from "@fortawesome/free-solid-svg-icons";
-const Search = () => {
+const Search = ({value,onChange}) => {
+    const [product,setProduct]=useState([]);
     return (
       <div className="header-container">
         <div className="header-search">
@@ -18,17 +19,12 @@ const Search = () => {
             <input
               id="header-search"
               name="header-search"
-              type="text"
+              type="search"
+              value={value}
+              onChange={onChange}
               className="header-search-input"
               placeholder="Search here..."
             />
-          </div>
-        </div>
-  
-        <div className="header-profile">
-          <FontAwesomeIcon icon={faCircleUser} className="header-profile-icon" />
-          <div className="header-profile-info">
-            <p className="header-profile-name">이름름</p>
           </div>
         </div>
       </div>
