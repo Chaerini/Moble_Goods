@@ -13,7 +13,7 @@ function PomDetail() {
       { size: 'S (35 x 35cm)', price: '₩25,000' },
       { size: 'M (45 x 45cm)', price: '₩30,000' },
     ],
-    image: '/images/pom1.jpg',
+    image: '/images/',
     description: '폼폼푸린 인형의 상세 설명입니다.',
   };
 
