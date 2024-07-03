@@ -10,7 +10,7 @@ import {
 const AdminHeader = () => {
   return (
     <div className="header-container">
-      <div className="header-search">
+      {/* <div className="header-search">
         <div className="header-search-box">
           <div className="header-search-icon-box">
             <FontAwesomeIcon
@@ -26,7 +26,7 @@ const AdminHeader = () => {
             placeholder="Search here..."
           />
         </div>
-      </div>
+      </div> */}
 
       <div className="header-profile">
         <FontAwesomeIcon icon={faCircleUser} className="header-profile-icon" />

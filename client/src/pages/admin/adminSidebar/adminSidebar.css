@@ -89,4 +89,8 @@
   letter-spacing: 1.5px;
 }
 
+.topline {
+  border-top: 1px solid var(--c-darkgray);
+}
+
 /*  */
