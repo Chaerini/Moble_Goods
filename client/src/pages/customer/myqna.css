@@ -54,7 +54,7 @@
     background-color: #f0f0f0;
   }
   
-  button {
+  /* button {
     padding: 10px;
     background-color: #007BFF;
     color: white;
@@ -65,12 +65,12 @@
   
   button:hover {
     background-color: #0056b3;
-  }
+  } */
   
-  input[type="text"], textarea {
+  /* input[type="text"], textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-  }
+  } */
   
