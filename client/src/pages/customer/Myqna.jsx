@@ -18,7 +18,7 @@ const ToggleSection = ({ label, options, onSelect }) => {
 
   return (
     <div className="toggle-section">
-      <button onClick={toggleOpen}>
+      <button onClick={toggleOpen} className="toggle-button">
         {selectedOption || label}
       </button>
       {isOpen && (
@@ -68,7 +68,7 @@ const MessageAlertCheckbox = ({ onChange }) => (
 
 // SubmitButton 컴포넌트: 폼 제출 버튼
 const SubmitButton = ({ onSubmit }) => (
-  <button type="button" onClick={onSubmit}>
+  <button type="button" onClick={onSubmit} className="submit-button">
     Submit
   </button>
 );
@@ -128,8 +128,8 @@ const ContactForm = () => {
 // Myqna 컴포넌트: 전체 페이지를 감싸는 컴포넌트
 const Myqna = () => {
   return (
-    <div>
-      <div>
+    <div className="myqna-container">
+      <div className="myqna-header">
         <h1>1:1 문의</h1>
       </div>
       <ContactForm />

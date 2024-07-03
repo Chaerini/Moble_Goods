@@ -1,76 +1,113 @@
-.contact-form {
+/* 전체 폼 컨테이너 */
+.myqna-container {
     display: flex;
     flex-direction: column;
-    width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f9f9f9;
   }
   
-  .contact-form h1 {
-    text-align: center;
+  /* 헤더 스타일 */
+  .myqna-header {
     margin-bottom: 20px;
   }
   
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  
+  /* 폼 제목 스타일 */
+  .contact-form h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  /* 입력 그룹 스타일 */
   .input-group {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
   }
   
+  /* 문의 유형 및 세부 선택 제목 스타일 */
   .input-group h2 {
     margin-right: 10px;
+    font-size: 16px;
   }
   
+  /* 입력 필드, 체크박스, 토글 섹션 스타일 */
   .input-field, .checkbox-field, .toggle-section {
     margin-bottom: 20px;
   }
   
+  /* 라벨 및 버튼 스타일 */
   .input-field label, .checkbox-field label, .toggle-section button {
     display: block;
     margin-bottom: 5px;
+    font-size: 14px;
   }
   
+  /* 토글 버튼 스타일 */
   .toggle-section button {
     padding: 10px;
     background-color: #f0f0f0;
     border: 1px solid #ccc;
     cursor: pointer;
+    width: 200px;
+    text-align: left;
   }
   
+  /* 드롭다운 메뉴 스타일 */
   .toggle-section .dropdown {
     margin-top: 10px;
     border: 1px solid #ccc;
     background-color: #fff;
+    position: absolute;
+    width: 200px;
+    z-index: 1000;
   }
   
+  /* 드롭다운 항목 스타일 */
   .toggle-section .dropdown div {
     padding: 10px;
     cursor: pointer;
   }
   
+  /* 드롭다운 항목 호버 스타일 */
   .toggle-section .dropdown div:hover {
     background-color: #f0f0f0;
   }
   
-  /* button {
+  /* 제출 버튼 스타일 */
+  .submit-button {
     padding: 10px;
     background-color: #007BFF;
     color: white;
     border: none;
     cursor: pointer;
-    align-self: flex-end;
+    width: 100%;
+    text-align: center;
   }
   
-  button:hover {
+  /* 제출 버튼 호버 스타일 */
+  .submit-button:hover {
     background-color: #0056b3;
-  } */
+  }
   
-  /* input[type="text"], textarea {
+  /* 입력 필드 스타일 */
+  .contact-form input[type="text"], .contact-form textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-  } */
+  }
   
