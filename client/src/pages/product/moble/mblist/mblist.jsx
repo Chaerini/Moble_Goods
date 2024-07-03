@@ -13,16 +13,16 @@ function Mblist() {
     <div className="mblist">
       <h1>모블 상품 목록</h1>
       <div className="product-list">
-        <Link to="/moble/phonecase">
+        <Link to="/moble/phonecaseproduct">
           <div className="product-card">폰케이스</div>
         </Link>
-        <Link to="/moble/charger">
+        <Link to="/moble/chargerproduct">
           <div className="product-card">충전기</div>
         </Link>
-        <Link to="/moble/earphone">
+        <Link to="/moble/earphoneproduct">
           <div className="product-card">이어폰</div>
         </Link>
-        <Link to="/moble/stand">
+        <Link to="/moble/standproduct">
           <div className="product-card">거치대</div>
         </Link>
       </div>

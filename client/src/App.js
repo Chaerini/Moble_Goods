@@ -94,6 +94,22 @@ function App() {
         <Route path="/admin" element={<Dashboard />} />
         <Route path="sanrio/kittyproduct" element={<KittyProduct />} />
         <Route path="sanrio/kuroproduct" element={<KuroProduct />} />
+        <Route path="disney/frozenproduct" element={<FrozenProduct />} />
+        <Route path="disney/insideoutproduct" element={<InsideOutProduct />} />
+        <Route path="disney/littleproduct" element={<LittleMermaidProduct />} />
+        <Route path="disney/rapunzelproduct" element={<RapunzelProduct />} />
+        <Route path="ghibli/castleproduct" element={<CastleProduct />} />
+        <Route path="ghibli/ponyoproduct" element={<PonyoProduct />} />
+        <Route path="ghibli/spiritproduct" element={<SpiritProduct />} />
+        <Route path="ghibli/totoroproduct" element={<TotoroProduct />} />
+        <Route path="marvel/ironproduct" element={<IronProduct />} />
+        <Route path="marvel/captainproduct" element={<CaptainProduct />} />
+        <Route path="marvel/thorproduct" element={<ThorProduct />} />
+        <Route path="marvel/spiderproduct" element={<SpiderProduct />} />
+        <Route path="moble/phonecaseproduct" element={<PhoneCaseProduct />} />
+        <Route path="moble/chargerproduct" element={<ChargerProduct />} />
+        <Route path="moble/earphoneproduct" element={<EarphoneProduct />} />
+        <Route path="moble/standproduct" element={<StandProduct />} />
       </Routes>
     </BrowserRouter>
   );

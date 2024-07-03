@@ -168,10 +168,10 @@ function Navbar() {
                   <div className="dropdown-row">
                     <div className="dropdown-column">
                       <h3>상품</h3>
-                      <Link to="/mobile/phonecaseproduct">폰케이스</Link>
-                      <Link to="/mobile/chargerproduct">충전기</Link>
-                      <Link to="/mobile/earphoneproduct">이어폰</Link>
-                      <Link to="/mobile/standproduct">거치대</Link>
+                      <Link to="/moble/phonecaseproduct">폰케이스</Link>
+                      <Link to="/moble/chargerproduct">충전기</Link>
+                      <Link to="/moble/earphoneproduct">이어폰</Link>
+                      <Link to="/moble/standproduct">거치대</Link>
                     </div>
                   </div>
                 </div>

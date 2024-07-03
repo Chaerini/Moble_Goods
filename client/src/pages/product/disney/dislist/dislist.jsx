@@ -13,16 +13,16 @@ function disney() {
     <div className="disney">
       <h1>디즈니 상품 목록</h1>
       <div className="product-list">
-        <Link to="/disney/frozen">
+        <Link to="/disney/frozenproduct">
           <div className="product-card">겨울왕국</div>
         </Link>
-        <Link to="/disney/rapunzel">
+        <Link to="/disney/rapunzelproduct">
           <div className="product-card">라푼젤</div>
         </Link>
-        <Link to="/disney/littlemermaid">
+        <Link to="/disney/littleproduct">
           <div className="product-card">인어공주</div>
         </Link>
-        <Link to="/disney/insideout">
+        <Link to="/disney/insideoutproduct">
           <div className="product-card">인사이드아웃</div>
         </Link>
       </div>

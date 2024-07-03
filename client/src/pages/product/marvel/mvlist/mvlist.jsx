@@ -13,16 +13,16 @@ function marvel() {
     <div className="marvel">
       <h1>마블 상품 목록</h1>
       <div className="product-list">
-        <Link to="/marvel/ironman">
+        <Link to="/marvel/ironproduct">
           <div className="product-card">아이언맨</div>
         </Link>
-        <Link to="/marvel/captainamerica">
+        <Link to="/marvel/captainproduct">
           <div className="product-card">캡틴 아메리카</div>
         </Link>
-        <Link to="/marvel/thor">
+        <Link to="/marvel/thorproduct">
           <div className="product-card">토르</div>
         </Link>
-        <Link to="/marvel/spiderman">
+        <Link to="/marvel/spiderproduct">
           <div className="product-card">스파이더맨</div>
         </Link>
       </div>
