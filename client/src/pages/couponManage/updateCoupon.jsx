@@ -69,5 +69,4 @@ const UpdateCoupon = () => {
     </div>
   );
 };
-
 export default UpdateCoupon;

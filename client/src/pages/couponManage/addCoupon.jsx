@@ -5,7 +5,6 @@ import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import AdminSidebar from "../admin/adminSidebar/AdminSidebar";
 const Coupon = () =>{
-    const apiUrl=process.env.REACT_APP_API_URL
     const [coupon,setCoupon] = useState({
         name:"",
         discount:"",
@@ -16,15 +15,14 @@ const Coupon = () =>{
     const handleChange = (e) =>{
         setCoupon((prev) => ({...prev,[e.target.name]:e.target.value}));
     };
-    console.log(coupon)
     const handleClick = async e =>{
         e.preventDefault()
         try{
+            console.log(coupon)
             await axios.post(`http://localhost:8080/api/coupons`,coupon);
             console.log("추가완료");
-            console.log("쿠폰",coupon);
         }catch(err){
-            console.log(err);
+            console.log("error",err);
         }
 }
     return(

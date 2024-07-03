@@ -30,7 +30,7 @@ const Product = () =>{
             <label>공지사항 추가하기</label>
             <input type="text" onChange={handleChange} placeholder="이름" name="title" className="product-input"/>
             <input type="text" onChange={handleChange} placeholder="내용" name="content" className="product-input"/>
-            <button onClick={handleClick} className="btn">추가</button>
+            <button onClick={handleClick} className="btn"><Link to="/getnotice">추가</Link></button>
             </div>
         </div>
     )

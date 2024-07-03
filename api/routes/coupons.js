@@ -4,13 +4,13 @@ import { createCoupon, deleteCoupon, getCountCoupon, getCoupon, getCoupons, upda
 const router = express.Router();
 
 // 쿠폰 등록
-router.post('/', verifyAdmin, createCoupon);
+router.post('/', createCoupon);
 
 // 쿠폰 수정
-router.put('/:id', verifyAdmin, updateCoupon);
+router.put('/:id', updateCoupon);
 
 // 쿠폰 삭제
-router.delete('/:id', verifyAdmin, deleteCoupon);
+router.delete('/:id', deleteCoupon);
 
 // 쿠폰 전체 조회
 router.get('/',getCoupons);

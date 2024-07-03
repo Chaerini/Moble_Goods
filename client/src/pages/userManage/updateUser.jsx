@@ -5,7 +5,6 @@ import "../productManage/product.css"
 const UpdateUser = () => {
     const [user,setUser] = useState({
         name:"",
-        username:"",
         address:"",
         phone:""
     });
@@ -37,10 +36,9 @@ return (
             <h1>고객정보 수정하기</h1>
             <div className="product">
             <input type="text" onChange={handleChange} placeholder="이름" name="name" className="product-input"/>
-            <input type="text" onChange={handleChange} placeholder="아이디" name="username" className="product-input"/>
             <input type="text" onChange={handleChange} placeholder="주소" name="address" className="product-input"/>
-            <input type="numbe" onChange={handleChange} placeholder="핸드폰" name="phone" className="product-input"/>
-            <button onClick={handleClick}><Link to="/getuser">수정</Link></button>
+            <input type="number" onChange={handleChange} placeholder="핸드폰" name="phone" className="product-input"/>
+            <button onClick={handleClick}><Link to="/getuser" className="btn">수정</Link></button>
             </div>
         </div>
     );
