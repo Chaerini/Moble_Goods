@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./adminSidebar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -32,9 +32,8 @@ const AdminSidebar = () => {
       </div>
       <div className="sidebar-menu">
         <ul className="sidebar-menu-list">
-          <li>
-            {" "}
-            <div className="sidebar-menu-item" onClick={refreshPage}>
+          <li onClick={refreshPage}>
+            <div className="sidebar-menu-item">
               <FontAwesomeIcon
                 icon={faChartSimple}
                 className="sidebar-menu-icon"
@@ -42,28 +41,37 @@ const AdminSidebar = () => {
               <p className="sidebar-menu-text">대시보드</p>
             </div>
           </li>
-          <li>
-            <div className="sidebar-menu-item">
-              <FontAwesomeIcon
-                icon={faShoppingCart}
-                className="sidebar-menu-icon"
-              />
-              <p className="sidebar-menu-text">주문</p>
-            </div>
+          <li id="order">
+            <Link to="order" className="sidebar-link">
+              <div className="sidebar-menu-item">
+                <FontAwesomeIcon
+                  icon={faShoppingCart}
+                  className="sidebar-menu-icon"
+                />
+                <p className="sidebar-menu-text">주문</p>
+              </div>
+            </Link>
           </li>
-          <li>
-            <div className="sidebar-menu-item">
-              <FontAwesomeIcon icon={faBoxOpen} className="sidebar-menu-icon" />
-              <p className="sidebar-menu-text">상품</p>
-            </div>
+          <li id="product">
+            <Link to="product" className="sidebar-link">
+              <div className="sidebar-menu-item">
+                <FontAwesomeIcon
+                  icon={faBoxOpen}
+                  className="sidebar-menu-icon"
+                />
+                <p className="sidebar-menu-text">상품</p>
+              </div>
+            </Link>
           </li>
-          <li>
-            <div className="sidebar-menu-item">
-              <FontAwesomeIcon icon={faUser} className="sidebar-menu-icon" />
-              <p className="sidebar-menu-text">고객</p>
-            </div>
+          <li id="customer">
+            <Link to="customer" className="sidebar-link">
+              <div className="sidebar-menu-item">
+                <FontAwesomeIcon icon={faUser} className="sidebar-menu-icon" />
+                <p className="sidebar-menu-text">고객</p>
+              </div>
+            </Link>
           </li>
-          <li>
+          <li id="board">
             <div className="sidebar-menu-item">
               <FontAwesomeIcon
                 icon={faClipboardList}
@@ -73,27 +81,14 @@ const AdminSidebar = () => {
             </div>
           </li>
           <li>
-            <div className="sidebar-menu-item">
-              <FontAwesomeIcon
-                icon={faChartLine}
-                className="sidebar-menu-icon"
-              />
-              <p className="sidebar-menu-text">통계</p>
-            </div>
-          </li>
-          <li>
-            <div className="sidebar-menu-item">
-              <FontAwesomeIcon icon={faCog} className="sidebar-menu-icon" />
-              <p className="sidebar-menu-text">설정</p>
-            </div>
-          </li>
-          <li>
-            <div className="sidebar-menu-item topline" onClick={handleSignOut}>
-              <FontAwesomeIcon
-                icon={faSignOutAlt}
-                className="sidebar-menu-icon"
-              />
-              <p className="sidebar-menu-text">Sign Out</p>
+            <div className="sidebar-menu-line">
+              <div className="sidebar-menu-item" onClick={handleSignOut}>
+                <FontAwesomeIcon
+                  icon={faSignOutAlt}
+                  className="sidebar-menu-icon"
+                />
+                <p className="sidebar-menu-text">Sign Out</p>
+              </div>
             </div>
           </li>
         </ul>
