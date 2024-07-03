@@ -9,9 +9,7 @@ import {
   faShoppingCart,
   faUser,
   faBoxOpen,
-  faChartLine,
   faClipboardList,
-  faCog,
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
