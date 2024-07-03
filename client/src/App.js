@@ -34,6 +34,7 @@ import Search from "./component/search/search";
 import UpdateUserMember from "./pages/userManage/updateUserMember";
 import Profile from './pages/profile/Profile';
 import Myqna from './pages/customer/Myqna';
+import UpdateCoupon from "./pages/couponManage/updateCoupon";
 
 function App() {
   return (
@@ -80,6 +81,7 @@ function App() {
         <Route path="/getcoupon" element={<GetCoupon />} />
         <Route path="/getnotice" element={<GetNotice />} />
         <Route path="/admin" element={<Dashboard />} />
+        <Route path="/updatecoupon/:id" element={<UpdateCoupon/>}/>
         {/** 
         <Route path="sanrio/kittyproduct" element={<KittyProduct />} />
         <Route path="sanrio/kuroproduct" element={<KuroProduct />} />
