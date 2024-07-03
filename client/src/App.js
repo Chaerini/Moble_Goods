@@ -9,7 +9,6 @@ import CartItemsProvider from "./pages/cart/CartItems";
 import ReviewWrite from "./pages/review/ReviewWrite";
 import AddNotice from "./pages/notice/AddNotice";
 import GetProduct from "./pages/productManage/getProduct";
-import Modal from './pages/notice/Modal';
 import Product from './pages/productManage/addProduct';
 import UpdateProduct from './pages/productManage/updateProduct';
 import Main from './pages/productManage/main';
@@ -61,7 +60,6 @@ function App() {
         <Route path="/addnotice" element={<AddNotice />} />
         <Route path="/getproduct" element={<GetProduct />} />
         <Route path="/addproduct" element={<Product />} />
-        <Route path="/modal" element={<Modal />} />
         <Route path="/updateproduct/:id" element={<UpdateProduct />} />
         <Route path="/updatenotice/:id" element={<UpdateNotice />} />
         <Route path="/" element={<Main />} />
