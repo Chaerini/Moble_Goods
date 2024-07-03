@@ -139,7 +139,7 @@
 /* 카드 3 */
 .dashboard-revenue-wrapper {
   display: flex;
-  width: 500px;
+  width: 400px;
   height: 250px;
   flex-direction: column;
   background-color: var(--c-bg-white);
@@ -152,7 +152,7 @@
 .dashboard-customer-satisfaction-wrapper,
 .dashboard-target-reality-wrapper {
   display: flex;
-  width: 300px;
+  width: 350px;
   height: 250px;
   flex-direction: column;
   background-color: var(--c-bg-white);
