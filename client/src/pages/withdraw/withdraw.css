@@ -81,6 +81,7 @@
     text-align: center;
     background-color: #fff;
     border: 1px solid #ccc;
+    cursor: pointer;
 }
 
 .withdraw-withdraw {
@@ -91,4 +92,5 @@
     text-align: center;
     background-color: #303030;
     border: 1px solid #303030;
+    cursor: pointer;
 }

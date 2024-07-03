@@ -9,12 +9,12 @@ import CartItemsProvider from "./pages/cart/CartItems";
 import ReviewWrite from "./pages/review/ReviewWrite";
 import AddNotice from "./pages/notice/AddNotice";
 import GetProduct from "./pages/productManage/getProduct";
-import Modal from './pages/notice/Modal';
-import Product from './pages/productManage/addProduct';
-import UpdateProduct from './pages/productManage/updateProduct';
-import Main from './pages/productManage/main';
-import GetUser from './pages/userManage/getUser';
-import Coupon from './pages/couponManage/addCoupon';
+import Modal from "./pages/notice/Modal";
+import Product from "./pages/productManage/addProduct";
+import UpdateProduct from "./pages/productManage/updateProduct";
+import Main from "./pages/productManage/main";
+import GetUser from "./pages/userManage/getUser";
+import Coupon from "./pages/couponManage/addCoupon";
 import Login from "./component/login/Login";
 import Register from "./component/register/Register";
 import Sanlist from "./pages/product/sanrio/sanlist/sanlist";
@@ -29,6 +29,7 @@ import GetCoupon from "./pages/couponManage/getCoupon";
 import GetNotice from "./pages/notice/getNotice";
 import UpdateNotice from "./pages/notice/updateNotice";
 import Withdraw from "./pages/withdraw/Withdraw";
+import Profile from "./pages/profile/Profile";
 
 function App() {
   return (
@@ -57,7 +58,7 @@ function App() {
         <Route path="/addproduct" element={<Product />} />
         <Route path="/modal" element={<Modal />} />
         <Route path="/updateproduct/:id" element={<UpdateProduct />} />
-        <Route path="/updatenotice/:id" element={<UpdateNotice/>}/>
+        <Route path="/updatenotice/:id" element={<UpdateNotice />} />
         <Route path="/" element={<Main />} />
         <Route path="/getuser" element={<GetUser />} />
         <Route path="/addcoupon" element={<Coupon />} />
@@ -69,6 +70,7 @@ function App() {
         <Route path="/ghibli" element={<Ghlist />} />
         <Route path="/marvel" element={<Mvlist />} />
         <Route path="/moble" element={<Mblist />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/myreview" element={<MyReview />} />
         <Route path="/mycoupon" element={<MyCoupon />} />
         <Route path="/getcoupon" element={<GetCoupon />} />
