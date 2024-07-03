@@ -36,7 +36,10 @@ export const deleteNotice = async(req,res) => {
 }
 export const getAllNotice = async(req,res) => {
     try{
+        console.log("======getAllNotice=========");
         const [rows] = await pool.query(`SELECT * FROM notice`);
+
+        console.log(rows);
         res.status(200).json({rows});
     }catch(error){
         res.status(400).json({error:error.message});

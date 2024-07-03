@@ -6,19 +6,17 @@ import CommonTableRow from '../productManage/CommonTableRow';
 import { AuthContext } from '../../Context/AuthContext';
 import { Link } from 'react-router-dom';
 const GetCoupon = () => {
-    const [data, setData] = useState([]);
+    let [data, setData] = useState([]);
+    let [coupon,setCoupon]=useState([])
     const {user}=useContext(AuthContext)
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/api/coupons`,{
-                    headers: {
-                        Authorization: `Bearer ${user.token}`,
-                      },
-                });
-                setData(response.data);
+                const response = await axios.get(`http://localhost:8080/api/coupons`,                );
+                setCoupon(response.data.result);
                 console.log("data",data);
                 console.log("token",user.token);
+                console.log("response.data.rows : ",response.data.result)
             } catch (error) {
                 console.error('Error fetching data', error);
             }
@@ -47,15 +45,16 @@ const GetCoupon = () => {
                 <th className='th'>조건</th>
             </tr>
         </thead>
-                {data.map((coupon) => (
-                    <CommonTableRow key={coupon.id}>
-                        <CommonTableColumn>{coupon.name}</CommonTableColumn>
-                        <CommonTableColumn>{coupon.discount}</CommonTableColumn>
-                        <CommonTableColumn>{coupon.start_date}</CommonTableColumn>
-                        <CommonTableColumn>{coupon.end_date}</CommonTableColumn>
-                        <CommonTableColumn>{coupon.conditions}</CommonTableColumn>
-                        <button className='delete' onClick={()=>handleDelete(coupon.id)}>삭제</button>
-                    </CommonTableRow>
+        {coupon.map((coupon) => (
+                    <tr key={coupon.id} className='tr'>
+                        <th className='th'>{coupon.name}</th>
+                        <th className='th'>{coupon.discount}</th>
+                        <th className='th'>{coupon.start_date}</th>
+                        <th className='th'>{coupon.end_date}</th>
+                        <th className='th'>{coupon.conditions}</th>
+                        <button className='btn' onClick={()=>handleDelete(coupon.id)}>삭제</button>
+                        <button className='btn'><Link to="/addcoupon">쿠폰 추가하기</Link></button>
+                    </tr>
                  ))}
             </ul>
             </CommonTable>

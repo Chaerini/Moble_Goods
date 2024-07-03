@@ -8,7 +8,7 @@ import AdminHeader from '../admin/adminHeader/AdminHeader';
 import AdminSidebar from '../admin/adminSidebar/AdminSidebar';
 import { AuthContext } from '../../Context/AuthContext';
 const GetProduct = () => {
-    const [data, setData] = useState([]);
+    let [data, setData] = useState([]);
     const {user}=useContext(AuthContext)
     useEffect(() => {
         const apiUrl = process.env.REACT_APP_API_URL;

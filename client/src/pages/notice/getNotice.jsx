@@ -1,51 +1,56 @@
 import React, { useEffect, useState,useContext} from 'react';
 import axios from 'axios';
 import CommonTable from "../productManage/CommonTable";
-import CommonTableColumn from "../productManage/CommonTableColumn";
-import CommonTableRow from "../productManage/CommonTableRow";
 import { AuthContext } from '../../Context/AuthContext';
 import { Link } from 'react-router-dom';
+import "../productManage/product.css";
 const GetNotice = () => {
-    const [data, setData] = useState([]);
+     
+    const [notice,setNotice]=useState([]);
     const {user}=useContext(AuthContext)
+
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/api/notice`,{
-                    headers: {
-                        Authorization: `Bearer ${user.token}`,
-                      },
-                });
-                setData(response.data);
-                console.log("data",data);
-                console.log("token",user.token)
+                const response = await axios.get(`http://localhost:8080/api/notice`);  
+                console.log("response.data.rows : ",response.data.rows)
+                setNotice(response.data.rows);
             } catch (error) {
                 console.error('Error fetching data', error);
             }
         };
         fetchData();
     }, []);
+    const handleDelete  = async(id) =>{
+        try{
+            await axios.delete(`http://localhost:8080/api/products/`+id)
+            window.location.reload();
+        }catch(err){
+            console.log(err)
+        }
+    }
     return (
         <div className="CommonTable">
-        <table headersName={[]}>
+        <CommonTable headersName={[]}>
         <ul>
-            <h2>공지사항</h2>
+            <h2 className='product'>공지</h2>
             <thead>
-            <tr>
-                <th>제목</th>
-                <th>내용</th>
+            <tr className='tr'>
+                <th className='th'>제목</th>
+                <th className='th'>내용</th>
             </tr>
         </thead>
-                {data.map((notice) => (                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
-                    <div>
-                        <>{notice.id}</>
-                        <>{notice.title}</>
-                        <>{notice.content}</>
-                        <button className='update'><Link to={`/updatenotice/${notice.id}`}>수정</Link></button>
-                        </div>
+                {notice.map((notice) => (                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+                    <tr key={notice.id} className='tr'>
+                        <th className='th'>{notice.title}</th>
+                        <th className='th'>{notice.content}</th>
+                        <button className='btn' onClick={handleDelete}>삭제</button>
+                        <button className='btn'><Link to={`/updatenotice/${notice.id}`}>수정</Link></button>
+                    </tr>
                  ))}
             </ul>
-            </table>
+            </CommonTable>
         </div>
     );
 };

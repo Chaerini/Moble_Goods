@@ -3,6 +3,7 @@ import Axios from "axios";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import AdminSidebar from "../admin/adminSidebar/AdminSidebar";
 const Coupon = () =>{
     const apiUrl=process.env.REACT_APP_API_URL
     const [coupon,setCoupon] = useState({
@@ -19,13 +20,16 @@ const Coupon = () =>{
     const handleClick = async e =>{
         e.preventDefault()
         try{
-            await axios.post(`http://localhost:8080/api/coupons`,coupon)
+            await axios.post(`http://localhost:8080/api/coupons`,coupon);
+            console.log("추가완료");
+            console.log("쿠폰",coupon);
         }catch(err){
             console.log(err);
         }
 }
     return(
         <header>
+            <AdminSidebar/>
         <div className="Product">
             <div className="product">
             <label>쿠폰 추가하기</label>
