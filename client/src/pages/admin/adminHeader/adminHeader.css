@@ -10,12 +10,13 @@
   background: var(--c-bg-white);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   /* border-bottom: 2px solid var(--c-lightgray); */
   z-index: 1;
+  justify-content: end;
 }
 
-.header-search {
+/* .header-search {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -50,13 +51,13 @@
 
 .header-search-text:focus {
   outline: 2px solid var(--c-darkgray);
-}
+} */
 
 .header-profile {
   display: flex;
   align-items: center;
-  margin-right: 5px;
-  flex: 1;
+  margin-right: 55px;
+  /* justify-content: end; */
 }
 
 .header-profile-icon {

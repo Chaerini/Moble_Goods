@@ -22,29 +22,29 @@ const AdminSidebar = () => {
     window.location.reload();
   };
 
-  const goToOrder = () => {
-    navigate("order");
-  };
+  // const goToOrder = () => {
+  //   navigate("order");
+  // };
 
-  const goToProduct = () => {
-    navigate("product");
-  };
+  // const goToProduct = () => {
+  //   navigate("product");
+  // };
 
-  const goToCustomer = () => {
-    navigate("customer");
-  };
+  // const goToCustomer = () => {
+  //   navigate("customer");
+  // };
 
-  const goToBoard = () => {
-    navigate("board");
-  };
+  // const goToBoard = () => {
+  //   navigate("board");
+  // };
 
-  const goToStatistics = () => {
-    navigate("statistics");
-  };
+  // const goToStatistics = () => {
+  //   navigate("statistics");
+  // };
 
-  const goToSetting = () => {
-    navigate("setting");
-  };
+  // const goToSetting = () => {
+  //   navigate("setting");
+  // };
 
   const handleSignOut = () => {
     // 로그아웃 함수
@@ -69,7 +69,7 @@ const AdminSidebar = () => {
             </div>
           </li>
           <li>
-            <div className="sidebar-menu-item" onClick={goToOrder}>
+            <div className="sidebar-menu-item">
               <FontAwesomeIcon
                 icon={faShoppingCart}
                 className="sidebar-menu-icon"
@@ -78,19 +78,19 @@ const AdminSidebar = () => {
             </div>
           </li>
           <li>
-            <div className="sidebar-menu-item" onClick={goToProduct}>
+            <div className="sidebar-menu-item">
               <FontAwesomeIcon icon={faBoxOpen} className="sidebar-menu-icon" />
               <p className="sidebar-menu-text">상품</p>
             </div>
           </li>
           <li>
-            <div className="sidebar-menu-item" onClick={goToCustomer}>
+            <div className="sidebar-menu-item">
               <FontAwesomeIcon icon={faUser} className="sidebar-menu-icon" />
               <p className="sidebar-menu-text">고객</p>
             </div>
           </li>
           <li>
-            <div className="sidebar-menu-item" onClick={goToBoard}>
+            <div className="sidebar-menu-item">
               <FontAwesomeIcon
                 icon={faClipboardList}
                 className="sidebar-menu-icon"
@@ -99,7 +99,7 @@ const AdminSidebar = () => {
             </div>
           </li>
           <li>
-            <div className="sidebar-menu-item" onClick={goToStatistics}>
+            <div className="sidebar-menu-item">
               <FontAwesomeIcon
                 icon={faChartLine}
                 className="sidebar-menu-icon"
@@ -108,13 +108,13 @@ const AdminSidebar = () => {
             </div>
           </li>
           <li>
-            <div className="sidebar-menu-item" onClick={goToSetting}>
+            <div className="sidebar-menu-item">
               <FontAwesomeIcon icon={faCog} className="sidebar-menu-icon" />
               <p className="sidebar-menu-text">설정</p>
             </div>
           </li>
           <li>
-            <div className="sidebar-menu-item" onClick={handleSignOut}>
+            <div className="sidebar-menu-item topline" onClick={handleSignOut}>
               <FontAwesomeIcon
                 icon={faSignOutAlt}
                 className="sidebar-menu-icon"
