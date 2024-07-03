@@ -1,0 +1,61 @@
+@import url("../../../root.css");
+
+.orderManage-wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background-color: var(--c-lightgray);
+  flex-direction: column;
+}
+
+.orderManage-main-content {
+  display: flex;
+  width: calc(100% - 300px);
+  border: 5px solid var(--c-black);
+  height: 100%;
+  margin-left: 300px;
+  padding: 30px;
+  flex-direction: column;
+  /* justify-content: space-around; */
+}
+
+.orderManage-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.orderManage-select-cate-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.orderManage-search-input {
+  width: 300px;
+  border: 1px solid black;
+  font-size: 13px;
+  padding: 6px 5px;
+}
+
+.orderManage-table {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.orderManage-table th,
+.orderManage-table td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  height: 50px;
+}
+
+.orderManage-table-head {
+  font-size: 15px;
+}
+
+.orderManage-table-body {
+  font-size: 13px;
+  text-align: start;
+  padding-left: 5px;
+}

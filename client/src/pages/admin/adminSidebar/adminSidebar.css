@@ -38,6 +38,10 @@
 }
 
 /* 사이드바 메뉴 */
+.sidebar-hidden-text {
+  display: none;
+}
+
 .sidebar-menu {
   width: 100%;
   display: flex;
