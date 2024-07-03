@@ -50,6 +50,7 @@ import GetCoupon from "./pages/couponManage/getCoupon";
 import GetNotice from "./pages/notice/getNotice";
 import UpdateNotice from "./pages/notice/updateNotice";
 import Withdraw from "./pages/withdraw/Withdraw";
+import Profile from "./pages/profile/Profile";
 
 function App() {
   return (
@@ -90,6 +91,7 @@ function App() {
         <Route path="/ghibli" element={<Ghlist />} />
         <Route path="/marvel" element={<Mvlist />} />
         <Route path="/moble" element={<Mblist />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/myreview" element={<MyReview />} />
         <Route path="/mycoupon" element={<MyCoupon />} />
         <Route path="/getcoupon" element={<GetCoupon />} />

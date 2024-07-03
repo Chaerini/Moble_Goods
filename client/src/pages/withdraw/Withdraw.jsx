@@ -2,8 +2,11 @@ import './withdraw.css';
 import Navbar from '../../component/navbar/navbar';
 import Header from '../../component/header/header';
 import Footer from '../../component/footer/footer';
+import { useNavigate } from "react-router-dom";
 
 const Withdraw = () => {
+    const navigate = useNavigate();
+
     return (
         <>
             <Header />
@@ -31,7 +34,7 @@ const Withdraw = () => {
                     </div>
                     <div className='withdraw-bottom'>
                         <button className='withdraw-cancel'>취소</button>
-                        <button className='withdraw-withdraw'>회원탈퇴</button>
+                        <button className='withdraw-withdraw' onClick={() => navigate('/profile')}>회원탈퇴</button>
                     </div>
                 </div>
             </div>
