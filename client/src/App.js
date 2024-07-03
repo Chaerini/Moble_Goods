@@ -33,6 +33,7 @@ import Withdraw from "./pages/withdraw/Withdraw";
 import Search from "./component/search/search";
 import UpdateUserMember from "./pages/userManage/updateUserMember";
 import Profile from './pages/profile/Profile';
+import Myqna from './pages/customer/Myqna';
 
 function App() {
   return (
@@ -102,6 +103,7 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/updateuser/:id" element={<UpdateUser />} />
         <Route path="/updateusermember/:id" element={<UpdateUserMember />} />
+        <Route path="/myqna" element={<Myqna/>} />
       </Routes>
     </BrowserRouter>
   );
