@@ -48,6 +48,8 @@ import StandProduct from "./pages/product/moble/stand/standproduct";
 import PomDetail from "./pages/product/sanrio/pompom/pomdetail";
 import GetCoupon from "./pages/couponManage/getCoupon";
 import GetNotice from "./pages/notice/getNotice";
+import Withdraw from "./pages/withdraw/Withdraw";
+
 function App() {
   return (
     <BrowserRouter>
@@ -80,6 +82,7 @@ function App() {
         <Route path="/addcoupon" element={<Coupon />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/withdraw" element={<Withdraw />} />
         <Route path="/sanrio" element={<Sanlist />} />
         <Route path="/disney" element={<Dislist />} />
         <Route path="/ghibli" element={<Ghlist />} />
@@ -87,8 +90,8 @@ function App() {
         <Route path="/moble" element={<Mblist />} />
         <Route path="/myreview" element={<MyReview />} />
         <Route path="/mycoupon" element={<MyCoupon />} />
-        <Route path="/getcoupon" element={<GetCoupon/>}/>
-        <Route path="/getnotice" element={<GetNotice/>}/>
+        <Route path="/getcoupon" element={<GetCoupon />} />
+        <Route path="/getnotice" element={<GetNotice />} />
         <Route path="sanrio/pomproduct" element={<PomProduct />} />
         <Route path="sanrio/cinnaproduct" element={<CinnaProduct />} />
         <Route path="/admin" element={<Dashboard />} />
