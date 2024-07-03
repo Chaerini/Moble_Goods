@@ -41,8 +41,10 @@ const Login = () => {
         <div className="login">
             <div className="login-container">
                 <h1>로고</h1>
-                <input type='text' placeholder='아이디 입력' className='login-input' id='username' onChange={handleChange}></input>
-                <input type='password' placeholder='비밀번호 입력' className='login-input' id='password' onChange={handleChange} onKeyDown={handleKeyPress}></input>
+                <div className='login-input-wrap'>
+                    <input type='text' placeholder='아이디 입력' className='login-input' id='username' onChange={handleChange}></input>
+                    <input type='password' placeholder='비밀번호 입력' className='login-input' id='password' onChange={handleChange} onKeyDown={handleKeyPress}></input>
+                </div>
                 <button className='login-button' disabled={loading} onClick={handleClick}>로그인</button>
                 <div className='login-div-a'>
                     <a className='login-a' href='/register'>회원가입</a>
