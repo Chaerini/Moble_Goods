@@ -16,35 +16,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const AdminSidebar = () => {
-  const navigate = useNavigate();
-
   const refreshPage = () => {
     window.location.reload();
   };
-
-  // const goToOrder = () => {
-  //   navigate("order");
-  // };
-
-  // const goToProduct = () => {
-  //   navigate("product");
-  // };
-
-  // const goToCustomer = () => {
-  //   navigate("customer");
-  // };
-
-  // const goToBoard = () => {
-  //   navigate("board");
-  // };
-
-  // const goToStatistics = () => {
-  //   navigate("statistics");
-  // };
-
-  // const goToSetting = () => {
-  //   navigate("setting");
-  // };
 
   const handleSignOut = () => {
     // 로그아웃 함수
