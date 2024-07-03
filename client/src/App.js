@@ -48,6 +48,7 @@ import StandProduct from "./pages/product/moble/stand/standproduct";
 import PomDetail from "./pages/product/sanrio/pompom/pomdetail";
 import GetCoupon from "./pages/couponManage/getCoupon";
 import GetNotice from "./pages/notice/getNotice";
+import UpdateNotice from "./pages/notice/updateNotice";
 function App() {
   return (
     <BrowserRouter>
@@ -75,6 +76,7 @@ function App() {
         <Route path="/addproduct" element={<Product />} />
         <Route path="/modal" element={<Modal />} />
         <Route path="/updateproduct/:id" element={<UpdateProduct />} />
+        <Route path="/updatenotice/:id" element={<UpdateNotice/>}/>
         <Route path="/" element={<Main />} />
         <Route path="/getuser" element={<GetUser />} />
         <Route path="/addcoupon" element={<Coupon />} />
