@@ -11,7 +11,7 @@ const Myqna = () => {
               <th>내용</th>
             </tr>
           </thead>
-          {notice.map((notice) => (
+          {/* {notice.map((notice) => (
             <div>
               <>{notice.id}</>
               <>{notice.title}</>
@@ -20,7 +20,7 @@ const Myqna = () => {
                 <Link to={`/updatenotice/${notice.id}`}>수정</Link>
               </button>
             </div>
-          ))}
+          ))} */}
         </ul>
       </table>
     </div>

@@ -50,7 +50,6 @@ import GetCoupon from "./pages/couponManage/getCoupon";
 import GetNotice from "./pages/notice/getNotice";
 import UpdateNotice from "./pages/notice/updateNotice";
 import Withdraw from "./pages/withdraw/Withdraw";
-import Myqna from "./pages/customer/Myqna";
 
 function App() {
   return (
@@ -116,7 +115,6 @@ function App() {
         <Route path="moble/chargerproduct" element={<ChargerProduct />} />
         <Route path="moble/earphoneproduct" element={<EarphoneProduct />} />
         <Route path="moble/standproduct" element={<StandProduct />} />
-        <Route path="/myqna" element={<Myqna />} />
       </Routes>
     </BrowserRouter>
   );
