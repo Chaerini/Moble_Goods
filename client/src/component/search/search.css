@@ -1,0 +1,43 @@
+
+.search-container {
+  width: 100vw;
+  height: 70px;
+  position: relative;
+  overflow: hidden;
+  background: var(--c-bg-white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* border-bottom: 2px solid var(--c-lightgray); */
+  z-index: 1;
+}
+
+.header-profile {
+  margin-right: 50px;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.header-profile-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.header-profile-info {
+  margin-left: 10px;
+  width: 100%;
+}
+
+.header-profile-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--c-black);
+  text-align: left;
+}
+
+.header-profile-icon {
+  width: 35px;
+  color: var(--c-darkgray);
+}

@@ -4,10 +4,14 @@ import {
   faMagnifyingGlass,
   faCircleUser,
 } from "@fortawesome/free-solid-svg-icons";
+import "./search.css";
 const Search = ({value,onChange}) => {
     const [product,setProduct]=useState([]);
+    const handleChange = () =>{
+
+    }
     return (
-      <div className="header-container">
+      <div className="search-container">
         <div className="header-search">
           <div className="header-search-box">
             <div className="header-search-icon-box">
