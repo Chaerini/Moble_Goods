@@ -1,6 +1,4 @@
-import React, { useMemo } from "react";
-import { useNavigate } from "react-router-dom";
-import { useParams, Link } from "react-router-dom";
+import React from "react";
 import "./adminSidebar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,53 +10,22 @@ import {
   faClipboardList,
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import OrderManage from "../orderManage/OrderManage";
-import Dashboard from "../dashboard/Dashboard";
 
-const AdminSidebar = () => {
-  const navigate = useNavigate();
-  const { id } = useParams();
+const AdminSidebar = ({ setActiveComponent }) => {
+  console.log("사이드바:", typeof setActiveComponent);
 
-  const handleItemClick = (itemId) => {
-    switch (itemId) {
-      case "1":
-        navigate("/admin/order");
-        break;
-      case "2":
-        navigate("/admin/product");
-        break;
-      case "3":
-        navigate("/admin/customer");
-        break;
-      case "4":
-        navigate("/admin/board");
-        break;
-      default:
-        navigate("/admin");
+  const handleMenuClick = (componentName) => {
+    console.log("클릭한 메뉴:", componentName);
+    if (typeof setActiveComponent === "function") {
+      setActiveComponent(componentName);
+    } else {
+      console.error("setActiveComponent is not a function");
     }
-  };
-
-  const renderComponent = useMemo(() => {
-    switch (id) {
-      case "order":
-        return <OrderManage />;
-      // case "product":
-      //   return <ProductManage />;
-      // case "customer":
-      //   return <CustomerManage />;
-      // case "board":
-      //   return <BoardManage />;
-      // default:
-        return <Dashboard />;
-    }
-  }, [id]);
-
-  const gotoDashboard = () => {
-    navigate("/admin");
   };
 
   const handleSignOut = () => {
-    // 로그아웃 함수
+    console.log("User signed out");
+    // 여기에 로그아웃 로직을 추가하세요
   };
 
   return (
@@ -69,7 +36,7 @@ const AdminSidebar = () => {
       </div>
       <div className="sidebar-menu">
         <ul className="sidebar-menu-list">
-          <li onClick={gotoDashboard}>
+          <li onClick={() => handleMenuClick("Dashboard")}>
             <div className="sidebar-menu-item">
               <FontAwesomeIcon
                 icon={faChartSimple}
@@ -78,8 +45,7 @@ const AdminSidebar = () => {
               <p className="sidebar-menu-text">대시보드</p>
             </div>
           </li>
-
-          <li id="1">
+          <li onClick={() => handleMenuClick("OrderManage")}>
             <div className="sidebar-menu-item">
               <FontAwesomeIcon
                 icon={faShoppingCart}
@@ -88,19 +54,19 @@ const AdminSidebar = () => {
               <p className="sidebar-menu-text">주문</p>
             </div>
           </li>
-          <li id="2">
+          <li onClick={() => handleMenuClick("Dashboard")}>
             <div className="sidebar-menu-item">
               <FontAwesomeIcon icon={faBoxOpen} className="sidebar-menu-icon" />
               <p className="sidebar-menu-text">상품</p>
             </div>
           </li>
-          <li id="3">
+          <li onClick={() => handleMenuClick("OrderManage")}>
             <div className="sidebar-menu-item">
               <FontAwesomeIcon icon={faUser} className="sidebar-menu-icon" />
               <p className="sidebar-menu-text">고객</p>
             </div>
           </li>
-          <li id="4">
+          <li onClick={() => handleMenuClick("Dashboard")}>
             <div className="sidebar-menu-item">
               <FontAwesomeIcon
                 icon={faClipboardList}
