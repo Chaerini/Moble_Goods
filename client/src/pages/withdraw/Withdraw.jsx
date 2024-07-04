@@ -12,6 +12,8 @@ const Withdraw = () => {
     const { user, dispatch } = useContext(AuthContext);
     console.log(user);
 
+    const apiUrl = process.env.REACT_APP_API_URL;
+
     const handleClick = async () => {
         try {
             // const res = await axios.delete(`${apiUrl}/users/${user.id}`, { headers: { 'auth-token': user.token }, withCredentials: true });
