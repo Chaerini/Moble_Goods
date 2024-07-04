@@ -1,20 +1,19 @@
 .sanrio-navbar {
-    display: flex;
-    justify-content: center;
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
-    padding: 10px 0;
-    margin-top: 20px;
-  }
-  
-  .sanrio-navbar a {
-    margin: 0 15px;
-    color: #333;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
-  .sanrio-navbar a:hover {
-    color: #007bff;
-  }
-  
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+  margin-top: 20px;
+}
+
+.sanrio-navbar a {
+  margin: 0 15px;
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.sanrio-navbar a:hover {
+  color: #007bff;
+}
