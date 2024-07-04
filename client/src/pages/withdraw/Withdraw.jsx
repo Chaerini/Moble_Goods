@@ -3,9 +3,27 @@ import Navbar from '../../component/navbar/navbar';
 import Header from '../../component/header/header';
 import Footer from '../../component/footer/footer';
 import { useNavigate } from "react-router-dom";
+import { useContext } from 'react';
+import { AuthContext } from '../../Context/AuthContext';
+import axios from 'axios';
 
 const Withdraw = () => {
     const navigate = useNavigate();
+    const { user, dispatch } = useContext(AuthContext);
+    console.log(user);
+
+    const handleClick = async () => {
+        try {
+            // const res = await axios.delete(`${apiUrl}/users/${user.id}`, { headers: { 'auth-token': user.token }, withCredentials: true });
+            const logout = await axios.post(`${apiUrl}/auth/logout`, { headers: { 'auth-token': user.token }, withCredentials: true });
+            dispatch({ type: "LOGOUT" });
+            console.log(logout.data);
+
+            // navigate('/');
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     return (
         <>
@@ -33,8 +51,8 @@ const Withdraw = () => {
                         </div>
                     </div>
                     <div className='withdraw-bottom'>
-                        <button className='withdraw-cancel'>취소</button>
-                        <button className='withdraw-withdraw' onClick={() => navigate('/profile')}>회원탈퇴</button>
+                        <button className='withdraw-cancel' onClick={() => navigate('/profile')}>취소</button>
+                        <button className='withdraw-withdraw' onClick={handleClick}>회원탈퇴</button>
                     </div>
                 </div>
             </div>
