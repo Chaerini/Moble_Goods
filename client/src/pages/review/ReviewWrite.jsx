@@ -57,6 +57,7 @@ function ReviewWrite({ onClose }) {
                             </span>
                         ))}
                     </div>
+                    <br />
                 </div>
                 <div className="review-modal-text">
                     <textarea

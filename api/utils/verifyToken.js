@@ -12,6 +12,7 @@ export const verifyToken = (req, res, next) => {
         if (err) return next(createError(403, "Token is not valid!"));
         req.user = user;
         console.log("verify 완료 후 user 정보 : ", req.user);
+        next();
     });
 };
 

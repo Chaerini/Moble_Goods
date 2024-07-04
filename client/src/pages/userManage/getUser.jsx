@@ -13,7 +13,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
 const GetUser = () => {
     const navigate=useNavigate();
-    const [data, setData] = useState([]);
     const [user,setUser]=useState([]);
     useEffect(() => {
         const fetchData = async () => {

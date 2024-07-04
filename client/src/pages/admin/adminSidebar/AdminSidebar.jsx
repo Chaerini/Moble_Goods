@@ -34,7 +34,7 @@ const AdminSidebar = ({ setActiveComponent }) => {
         <FontAwesomeIcon icon={faG} className="sidebar-logo-icon" />
         <div className="sidebar-logo-text">굿포유</div>
       </div>
-      <div className="sidebar-menu">
+      <div tabindex="0" className="sidebar-menu">
         <ul className="sidebar-menu-list">
           <li onClick={() => handleMenuClick("Dashboard")}>
             <div className="sidebar-menu-item">
@@ -46,7 +46,7 @@ const AdminSidebar = ({ setActiveComponent }) => {
             </div>
           </li>
           <li onClick={() => handleMenuClick("OrderManage")}>
-            <div className="sidebar-menu-item">
+            <div tabindex="0" className="sidebar-menu-item">
               <FontAwesomeIcon
                 icon={faShoppingCart}
                 className="sidebar-menu-icon"

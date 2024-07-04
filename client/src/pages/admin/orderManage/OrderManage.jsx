@@ -27,13 +27,17 @@ const OrderManage = () => {
                   className="orderManage-orderNumber-search-input"
                   type="text"
                 />
-                <button type="submit" className="orderManage-search-btn">
-                  검색
-                </button>
+
+                <div>
+                  <button type="submit" className="orderManage-search-btn">
+                    검색
+                  </button>
+                </div>
               </div>
 
               <div className="orderManage-select-box">
                 <label className="orderManage-select-label">주문 상태</label>
+
                 <div className="orderManage-select-item">
                   <label>
                     <input
@@ -94,6 +98,7 @@ const OrderManage = () => {
 
               <div className="orderManage-select-box">
                 <label className="orderManage-select-label">결제 수단</label>
+
                 <div className="orderManage-select-item">
                   <label>
                     <input
@@ -169,7 +174,7 @@ const OrderManage = () => {
               <div className="orderManage-select-box">
                 <label className="orderManage-select-label">주문 일자</label>
                 <div className="orderManage-select-item">
-                  <select>
+                  <select className="orderManage-select-date">
                     <option>전체</option>
                     <option>오늘</option>
                     <option>어제</option>
@@ -178,71 +183,80 @@ const OrderManage = () => {
                   </select>
                 </div>
               </div>
-              <button type="submit" className="orderManage-search-btn">
-                검색
-              </button>
+              <div className="orderManage-search-last-btn-box">
+                <button type="submit" className="orderManage-search-last-btn">
+                  검색
+                </button>
+              </div>
             </form>
           </div>
           <div className="orderManage-table-container">
-            <div className="orderManage-table-summary">검색 결과 : 0 건</div>
-            <table className="orderManage-table">
-              <thead className="orderManage-table-head">
-                <tr>
-                  <th>주문 상태</th>
-                  <th>결제 수단</th>
-                  <th>주문 번호</th>
-                  <th>주문자</th>
-                  <th>연락처</th>
-                  <th>받는 분</th>
-                  <th>누적 주문수</th>
-                  <th>주문 합계</th>
-                  <th>입금 합계</th>
-                  <th>주문 주소</th>
-                  <th>쿠폰</th>
-                  <th>미수금</th>
-                  <th>보기</th>
-                </tr>
-              </thead>
-              <tbody className="orderManage-table-body">
-                <tr>
-                  <td>주문 상태</td>
-                  <td>결제 수단</td>
-                  <td>주문 번호</td>
-                  <td>주문자</td>
-                  <td>연락처</td>
-                  <td>받는 분</td>
-                  <td>누적 주문수</td>
-                  <td>주문 합계</td>
-                  <td>입금 합계</td>
-                  <td>주문 주소</td>
-                  <td>쿠폰</td>
-                  <td>미수금</td>
-                  <td>보기</td>
-                </tr>
-              </tbody>
-              <tbody className="orderManage-table-body">
-                <tr>
-                  <td>주문 상태</td>
-                  <td>결제 수단</td>
-                  <td>주문 번호</td>
-                  <td>주문자</td>
-                  <td>연락처</td>
-                  <td>받는 분</td>
-                  <td>누적 주문수</td>
-                  <td>주문 합계</td>
-                  <td>입금 합계</td>
-                  <td>주문 주소</td>
-                  <td>쿠폰</td>
-                  <td>미수금</td>
-                  <td>보기</td>
-                </tr>
-              </tbody>
-            </table>
+            <div className="orderManage-table-con">
+              <div className="orderManage-top">
+                <div className="orderManage-table-summary">
+                  검색 결과 : 0 건
+                </div>
+                <div>
+                  <button className="orderManage-status-change-btn">
+                    선택수정
+                  </button>
+                </div>
+              </div>
+              <div className="orderManage-table-box">
+                <table style={{ width: "100%" }} className="orderManage-table">
+                  <thead className="orderManage-table-head">
+                    <tr>
+                      <th>주문번호</th>
+                      <th>주문일시</th>
+                      <th>상품명</th>
+                      <th>주문자명</th>
+                      <th>결제금액</th>
+                      <th>주문수량</th>
+                      <th>배송상태</th>
+                      <th>취소</th>
+                    </tr>
+                  </thead>
+                  <tbody className="orderManage-table-body">
+                    <tr>
+                      <th>
+                        <a href="#" className="orderManage-table-item-orderNum">
+                          주문번호
+                        </a>
+                      </th>
+                      <th>주문일시</th>
+                      <th>상품명</th>
+                      <th>주문자명</th>
+                      <th>결제금액</th>
+                      <th>주문수량</th>
+                      <th>배송상태</th>
+                      <th>취소</th>
+                    </tr>
+                  </tbody>
+                  <tbody className="orderManage-table-body">
+                    <tr>
+                      <th>
+                        <a href="#" className="orderManage-table-item-orderNum">
+                          주문번호
+                        </a>
+                      </th>
+                      <th>주문일시</th>
+                      <th>상품명</th>
+                      <th>주문자명</th>
+                      <th>결제금액</th>
+                      <th>주문수량</th>
+                      <th>배송상태</th>
+                      <th>취소</th>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div className="orderManage-page-btn-box">
+              <button className="orderManage-page-btn">이전</button>
+              <button className="orderManage-page-num">1</button>
+              <button className="orderManage-page-btn">다음</button>
+            </div>
           </div>
-        </div>
-        <div className="orderManage-status-change">
-          <label>주문상태 변경</label>
-          <button>선택수정</button>
         </div>
       </div>
     </div>

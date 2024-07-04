@@ -65,13 +65,8 @@
   transition: background 0.4s ease-in-out;
 }
 
-.sidebar-menu-item:hover {
-  background: var(--c-darkgray);
-  color: var(--c-bg-white);
-}
-
 .sidebar-menu-item:focus,
-.sidebar-menu-item.active {
+.sidebar-menu-item:hover {
   color: var(--c-bg-white);
   background: var(--c-darkgray);
   border: none;

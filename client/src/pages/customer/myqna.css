@@ -13,22 +13,28 @@
     margin-bottom: 20px;
   }
   
+  /* 폼 제목 스타일 */
+  .myqna-header h1 {
+    font-size: 20px; /* 글자 크기 줄임 */
+  }
+  
+  /* 폼 스타일 */
   .contact-form {
     display: flex;
     flex-direction: column;
     width: 600px;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd; /* 연한 그레이 색으로 변경 */
     border-radius: 5px;
     background-color: #fff;
   }
   
-  /* 폼 제목 스타일 */
-  .contact-form h1 {
-    text-align: center;
+  /* 입력 그룹 행 스타일 */
+  .input-group-row {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 20px;
-    font-size: 24px;
-    font-weight: bold;
+    align-items: center;
   }
   
   /* 입력 그룹 스타일 */
@@ -36,43 +42,54 @@
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    flex-grow: 1;
   }
   
-  /* 문의 유형 및 세부 선택 제목 스타일 */
   .input-group h2 {
-    margin-right: 10px;
-    font-size: 16px;
-  }
-  
-  /* 입력 필드, 체크박스, 토글 섹션 스타일 */
-  .input-field, .checkbox-field, .toggle-section {
-    margin-bottom: 20px;
-  }
-  
-  /* 라벨 및 버튼 스타일 */
-  .input-field label, .checkbox-field label, .toggle-section button {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 14px;
-  }
-  
-  /* 토글 버튼 스타일 */
-  .toggle-section button {
-    padding: 10px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    width: 200px;
+    flex-basis: 30%; /* 제목의 폭을 30%로 설정 */
     text-align: left;
   }
   
+  .input-group .toggle-section {
+    flex-basis: 70%; /* 선택 박스의 폭을 70%로 설정 */
+  }
+  
+  .input-group label {
+    flex-basis: 30%; /* 라벨의 폭을 30%로 설정 */
+    text-align: left;
+  }
+  
+  .input-field input,
+  .input-field textarea {
+    flex-basis: 70%; /* 입력 필드의 폭을 70%로 설정 */
+  }
+  
+  /* 토글 버튼 스타일 */
+  .toggle-button {
+    padding: 10px;
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: right; /* 오른쪽 정렬 */
+    position: relative;
+  }
+  
+  /* 삼각형 모양 스타일 */
+  .arrow {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
   /* 드롭다운 메뉴 스타일 */
-  .toggle-section .dropdown {
+  .dropdown {
     margin-top: 10px;
     border: 1px solid #ccc;
     background-color: #fff;
     position: absolute;
-    width: 200px;
+    width: 100px;
     z-index: 1000;
   }
   
@@ -83,7 +100,7 @@
   }
   
   /* 드롭다운 항목 호버 스타일 */
-  .toggle-section .dropdown div:hover {
+  .dropdown div:hover {
     background-color: #f0f0f0;
   }
   
@@ -104,10 +121,55 @@
   }
   
   /* 입력 필드 스타일 */
-  .contact-form input[type="text"], .contact-form textarea {
+  .contact-form input[type="text"],
+  .contact-form textarea {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd; /* 연한 그레이 색으로 변경 */
     border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  /* 입력 필드 플레이스홀더 스타일 */
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder {
+    color: #999;
+  }
+  
+  /* 체크박스 필드 스타일 */
+  .checkbox-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  /* 글자 수 제한 표시 스타일 */
+  .char-count {
+    text-align: right;
+    font-size: 12px;
+    color: #999;
+  }
+  
+  /* 입력 필드 오른쪽 정렬 */
+  .input-field input,
+  .input-field textarea {
+    text-align: right;
+  }
+  
+  /* 필드 제목 빨간색 스타일 */
+  .required {
+    color: red;
+  }
+  
+  /* 체크박스 줄 */
+  .checkbox-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .checkbox-row label {
+    margin-left: 5px;
   }
   
