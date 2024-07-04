@@ -21,7 +21,7 @@ import MyCoupon from "./pages/mycoupon/MyCoupon";
 import MyReview from "./pages/myreview/MyReview";
 import AdminMain from "./pages/admin/adminMain/AdminMain";
 import GetCoupon from "./pages/couponManage/getCoupon";
-import GetNotice from "./pages/notice/getNotice";
+// import GetNotice from "./pages/notice/getNotice";
 import UpdateNotice from "./pages/notice/updateNotice";
 import Withdraw from "./pages/withdraw/Withdraw";
 import Search from "./component/search/search";
@@ -69,7 +69,7 @@ function App() {
         <Route path="/myreview" element={<MyReview />} />
         <Route path="/mycoupon" element={<MyCoupon />} />
         <Route path="/getcoupon" element={<GetCoupon />} />
-        <Route path="/getnotice" element={<GetNotice />} />
+        {/* <Route path="/getnotice" element={<GetNotice />} /> */}
         <Route path="/admin" element={<AdminMain />} />
         <Route path="/updatecoupon/:id" element={<UpdateCoupon />} />
         <Route path="/search" element={<Search />} />

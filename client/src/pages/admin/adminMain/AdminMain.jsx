@@ -3,6 +3,9 @@ import AdminSidebar from "../adminSidebar/AdminSidebar";
 import AdminHeader from "../adminHeader/AdminHeader";
 import Dashboard from "../dashboard/Dashboard";
 import OrderManage from "../orderManage/OrderManage";
+import ProductManage from "../../productManage/getProduct";
+import UserManage from "../../userManage/getUser";
+import getNotice from "../../notice/getNotice";
 
 const AdminMain = () => {
   const [activeComponent, setActiveComponent] = useState("Dashboard");
@@ -11,10 +14,14 @@ const AdminMain = () => {
   const renderComponent = useCallback(() => {
     console.log("어드민 메인:", activeComponent);
     switch (activeComponent) {
-      // case "Dashboard":
-      //   return <Dashboard />;
       case "OrderManage":
         return <OrderManage />;
+      case "ProductManage":
+        return <ProductManage />;
+      case "UserManage":
+        return <UserManage />;
+      case "getNotice":
+        return <getNotice />;
       default:
         return <Dashboard />;
     }
