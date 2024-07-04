@@ -34,35 +34,56 @@ import SanDetail from "./pages/product/sanrio/sandetail/sandetail";
 function App() {
   return (
     <BrowserRouter>
-        <Routes>
-          <Route path="/Cart" element={<CartProvider><Cart /></CartProvider>}/>
-          <Route path="/Order" element={<CartProvider><Order /></CartProvider>}/>
-          <Route path="/Order-Complete" element={<OrderComplete />} />
-          <Route path="/ReviewWrite" element={<ReviewWrite />} />
-          <Route path="/addnotice" element={<AddNotice />} />
-          <Route path="/getproduct" element={<GetProduct />} />
-          <Route path="/addproduct" element={<Product />} />
-          <Route path="/updateproduct/:id" element={<UpdateProduct />} />
-          <Route path="/updatenotice/:id" element={<UpdateNotice />} />
-          <Route path="/" element={<Main />} />
-          <Route path="/getuser" element={<GetUser />} />
-          <Route path="/addcoupon" element={<Coupon />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/withdraw" element={<Withdraw />} />
-          <Route path="/sanrio" element={<Sanlist />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/myreview" element={<MyReview />} />
-          <Route path="/mycoupon" element={<MyCoupon />} />
-          <Route path="/getcoupon" element={<GetCoupon />} />
-          <Route path="/getnotice" element={<GetNotice />} />
-          <Route path="/admin" element={<Dashboard />} />
-          <Route path="/updatecoupon/:id" element={<UpdateCoupon/>}/>
-          <Route path="/search" element={<Search />} />
-          <Route path="/updateuser/:id" element={<UpdateUser />} />
-          <Route path="/updateusermember/:id" element={<UpdateUserMember />} />
-          <Route path="/myqna" element={<Myqna/>} />
-          <Route path="/sanrio/:category/:id" element={<CartProvider><SanDetail /></CartProvider>}/>
+      <Routes>
+        <Route
+          path="/Cart"
+          element={
+            <CartProvider>
+              <Cart />
+            </CartProvider>
+          }
+        />
+        <Route
+          path="/Order"
+          element={
+            <CartProvider>
+              <Order />
+            </CartProvider>
+          }
+        />
+        <Route path="/Order-Complete" element={<OrderComplete />} />
+        <Route path="/ReviewWrite" element={<ReviewWrite />} />
+        <Route path="/addnotice" element={<AddNotice />} />
+        <Route path="/getproduct" element={<GetProduct />} />
+        <Route path="/addproduct" element={<Product />} />
+        <Route path="/updateproduct/:id" element={<UpdateProduct />} />
+        <Route path="/updatenotice/:id" element={<UpdateNotice />} />
+        <Route path="/" element={<Main />} />
+        <Route path="/getuser" element={<GetUser />} />
+        <Route path="/addcoupon" element={<Coupon />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/withdraw" element={<Withdraw />} />
+        <Route path="/sanrio" element={<Sanlist />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/myreview" element={<MyReview />} />
+        <Route path="/mycoupon" element={<MyCoupon />} />
+        <Route path="/getcoupon" element={<GetCoupon />} />
+        <Route path="/getnotice" element={<GetNotice />} />
+        <Route path="/admin" element={<AdminMain />} />
+        <Route path="/updatecoupon/:id" element={<UpdateCoupon />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/updateuser/:id" element={<UpdateUser />} />
+        <Route path="/updateusermember/:id" element={<UpdateUserMember />} />
+        <Route path="/myqna" element={<Myqna />} />
+        <Route
+          path="/sanrio/:category/:id"
+          element={
+            <CartProvider>
+              <SanDetail />
+            </CartProvider>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
