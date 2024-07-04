@@ -45,9 +45,11 @@ const GetProduct = () => {
 
     return (
         <div>
-==        <div className="product-container">
+        <AdminHeader/>
+        <AdminSidebar/>
+        <div className="product-container">
             <Search />
-            {/* <FontAwesomeIcon icon={faPlus} onClick={() => navigate("/addproduct")} />
+            <FontAwesomeIcon icon={faPlus} onClick={() => navigate("/addproduct")} />
             <h2 className='notice'>상품</h2>
             <table className='notice-table'>
                 <thead>
@@ -87,7 +89,7 @@ const GetProduct = () => {
                     const sortedData = [...data].sort((a, b) => b.name.localeCompare(a.name));
                     setData(sortedData);
                 }} className='btn'>이름순 정렬</button>
-            </div> */}
+            </div>
         </div>
     </div>
     );

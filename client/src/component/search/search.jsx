@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect,useState,useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMagnifyingGlass,
@@ -15,7 +15,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { AuthContext } from "../../Context/AuthContext";
 const UserManage = () => {
   const [userData, setUserData] = useState([]);
   const [openModal, setOpenModal] = useState(false);
@@ -23,7 +23,8 @@ const UserManage = () => {
   const [searchWord, setSearchWord] = useState();
   const apiUrl = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
-
+  const [data, setData] = useState([]);
+  const { user } = useContext(AuthContext);
   // 사용자 정보가 업데이트 됐을 경우 렌더링
  // 검색 버튼 클릭 했을 때
   const handleSearch = async (e) => {
@@ -37,64 +38,74 @@ const UserManage = () => {
           console.log(err);
       }
   }
-
   const handleKeyPress = (e) => {
       if (e.key === 'Enter') {
           handleSearch(e);
       }
   }
+  const handleDelete = async (id) => {
+    try {
+        await axios.delete(`http://localhost:8080/api/products/${id}`, {
+            headers: {
+                Authorization: `Bearer ${user.token}`,
+            },
+        });
+        setData(data.filter(product => product.id !== id));
+    } catch (err) {
+        console.log(err);
+    }
+}
   return (
       <div className="admin">
           <div className="admin-left">
               <img className="admin-menu-logo"></img>
           </div>
-
           <div className="admin-center">
               <div className="admin-search-bg">
-                  <div className="admin-search-input">
-                      <input type="text" placeholder="검색할 사용자 이름을 적어주세요" onChange={(e) => setSearchWord(e.target.value)} onKeyDown={handleKeyPress}></input>
-                      <FontAwesomeIcon icon={faMagnifyingGlass} onClick={handleSearch}/>
-                  </div>
-              </div>
+                <div className="admin-search-input">
+                  <div className="orderManage-select-box">
+                <label htmlFor="orderManage-orderNumber" className="orderManage-select-label">
+                  상품명
+                </label>
+                <input type="text" onChange={(e) => setSearchWord(e.target.value)} onKeyDown={handleKeyPress} 
+                       className="orderManage-orderNumber-search-input">    
+                </input>
+                      <FontAwesomeIcon icon={faMagnifyingGlass} onClick={handleSearch}></FontAwesomeIcon>
 
+                </div>
+              </div>
+           </div>
               <div className="admin-container">
-                  <div className="admin-info-bg">
-
-                      <table className="admin-table">
-                          <colgroup>
-                              <col style={{ width: '20%' }} />
-                              <col style={{ width: '20%' }} />
-                              <col style={{ width: '30%' }} />
-                              <col style={{ width: '10%' }} />
-                              <col style={{ width: '5%' }} />
-                              <col style={{ width: '5%' }} />
-                          </colgroup>
-                          <tr className="table-title">
-                              <th className="th">아이디</th>
-                              <th className="th">이름</th>
-                              <th className="th">전화번호</th>
-                              <th className="th">주소</th>
-                          </tr>
+                      <table className="notice-table">
                           {(!userData || userData.length < 0) ? (
-                              <tr className="table-content"><td colSpan="6">사용자 정보가 없습니다.</td></tr>
-                          ) : (
-                              userData.map((user, index) => (
-                                  <tr className="table-content" key={index}>
-                                    
-                                      <td className="content-title">{user.username}</td>
-                                      <td>{user.name}</td>
-                                      <td>{user.phone}</td>
-                                      <td>{user.address}</td>
-                                  </tr>
-                              )))}
-
+                              alert("사용자 정보가 없습니다.")
+                          ) : (     
+                    <tbody>
+                    <tr>
+                        <th className='th'>이름</th>
+                        <th className='th'>수량</th>
+                        <th className='th'>가격</th>
+                        <th className='th'>할인율</th>
+                        <th className='th'>할인된 가격</th>
+                        <th className='th'>날짜</th>
+                        <th className="th">삭제/수정</th>
+                    </tr>
+                            {userData.map((product) => (
+                                <tr key={product.id} className='tr'>
+                                    <td className='td'>{product.name}</td>
+                                    <td className='td'>{product.quantity}</td>
+                                    <td className='td'>{product.price}</td>
+                                    <td className='td'>{product.discount_rate}</td>
+                                    <td className='td'>{product.discounted_price}</td>
+                                    <td className='td'>{product.date}</td>
+                                <FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(product.id)} />
+                                <FontAwesomeIcon icon={faPen} onClick={() => navigate(`/updateproduct/${product.id}`)} />
+                                </tr>
+                            ))}
+                        </tbody>)}
                       </table>
-
-
                   </div>
               </div>
-
-          </div>
       </div >
   );
 };

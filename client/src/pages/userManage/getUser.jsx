@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import CommonTable from "../productManage/CommonTable";
 import "../productManage/product.css";
 import "../../Context/ProductContext"
 import { AuthContext } from '../../Context/AuthContext';
@@ -51,7 +50,7 @@ const GetUser = () => {
     const handleClick = async (e) =>{
         setModalOpen(false);
         try {
-            const res = await axios.put(`http://localhost:8080/api/users/${user.id}`, mpData, { withCredentials: true });
+            const res = await axios.put(`http://localhost:8080/api/users/`+user.id, mpData, { withCredentials: true });
             alert('회원 정보가 수정되었습니다.');
         } catch (err) {
             alert('회원정보 수정을 실패했습니다. 다시 시도해주세요.')
@@ -60,7 +59,7 @@ const GetUser = () => {
     }
     return (
         <div>
-        <div className="product-container">
+=        <div className="product-container">
             <h2 className='notice'>회원</h2>
             <table className='notice-table'>
                 <thead>
@@ -96,9 +95,6 @@ const GetUser = () => {
                 <input type="number" onChange={handleChange} name="phone" placeholder="핸드폰" className="product-input"/>
                 <input type="number" onChange={handleChange} name="membership_id" placeholder="멤버십" className="product-input" />
                 <button onClick={handleClick} className="btn">수정</button>
-                <button className='btn' onClick={() => setModalOpen(false)}>
-                모달 닫기
-              </button>
             </div>
         </div>
     </div>

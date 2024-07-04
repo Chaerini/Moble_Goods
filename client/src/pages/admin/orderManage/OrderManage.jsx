@@ -25,7 +25,6 @@ const OrderManage = () => {
                   className="orderManage-orderNumber-search-input"
                   type="text"
                 />
-
                 <div>
                   <button type="submit" className="orderManage-search-btn">
                     검색

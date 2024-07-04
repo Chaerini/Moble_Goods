@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import CommonTable from "../productManage/CommonTable";
 import { AuthContext } from "../../Context/AuthContext";
 import { Link } from "react-router-dom";
 import "../productManage/product.css";
