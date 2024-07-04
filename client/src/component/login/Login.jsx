@@ -22,7 +22,7 @@ const Login = () => {
         dispatch({ type: "LOGIN_START" });
         try {
             const apiUrl = process.env.REACT_APP_API_URL;
-            const res = await axios.post(`http://localhost:8080/api/auth/login`, credentials, { withCredentials: true });
+            const res = await axios.post(`${apiUrl}/auth/login`, credentials, { withCredentials: true });
             dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
             console.log(res.data.details);
             navigate('/');

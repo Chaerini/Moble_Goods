@@ -1,14 +1,18 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import CommonTable from "../productManage/CommonTable";
-import CommonTableColumn from "../productManage/CommonTableColumn";
-import CommonTableRow from "../productManage/CommonTableRow";
 import "../productManage/product.css";
 import { Link } from 'react-router-dom';
 import "../../Context/ProductContext"
 import { AuthContext } from '../../Context/AuthContext';
+import AdminHeader from "../admin/adminHeader/AdminHeader";
+import AdminSidebar from "../admin/adminSidebar/AdminSidebar";
+import Search from "../../component/search/search";
+import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
 const GetUser = () => {
+    const navigate=useNavigate();
     const [data, setData] = useState([]);
     const [user,setUser]=useState([]);
     useEffect(() => {
@@ -32,35 +36,41 @@ const GetUser = () => {
         }
     }
     return (
-        <div className="CommonTable">
-        <CommonTable headersName={[]}>
-        <ul>
-            <thead>
-                <th>고객</th>
-            <tr>
-                <th className="th">이름</th>
-                <th className="th">아이디</th>
-                <th className="th">주소</th>
-                <th className="th">핸드폰</th>
-                <th className="th">멤버십 아이디</th>
-            </tr>
-        </thead>
-                {user.map((user) => (
-                    <tr key={user.id} className='tr'>
-                        <th className='th'>{user.name}</th>
-                        <th className='th'>{user.username}</th>
-                        <th className='th'>{user.address}</th>
-                        <th className="th">{user.phone}</th>
-                        <th className='th'>{user.memebership_id}</th>
-                        <button className='btn' onClick={()=>handleDelete(user.id)}>삭제</button>
-                        <button className='btn'><Link to={`/updateuser/${user.id}`}>수정</Link></button>
-                        <button className="btn"><Link to={`/updateusermember/${user.id}`}>멤버십 수정</Link></button>
+        <div>
+        <AdminHeader/>
+        <AdminSidebar/>
+        <div className="product-container">
+            <Search />
+            <h2 className='notice'>회원</h2>
+            <table className='notice-table'>
+                <thead>
+                    <tr>
+                        <th className='th'>이름</th>
+                        <th className='th'>아이디</th>
+                        <th className='th'>주소</th>
+                        <th className='th'>핸드폰</th>
+                        <th className='th'>멤버십</th>
+                        <th className='th'>삭제/수정</th>
                     </tr>
-                 ))}
-            </ul>
-            </CommonTable>
-            
+                </thead>
+                <tbody>
+                    {user.map((user) => (
+                        <tr key={user.id} className='tr'>
+                            <td className='td'>{user.name}</td>
+                            <td className='td'>{user.username}</td>
+                            <td className='td'>{user.address}</td>
+                            <td className='td'>{user.phone}</td>
+                            <td className='td'>{user.membership_name}</td>
+                            <td className='td'>
+                                <FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(user.id)} />
+                                <FontAwesomeIcon icon={faPen} onClick={() => navigate(`/updateuser/${user.id}`)} />
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
+    </div>
     );
 };
 export default GetUser;

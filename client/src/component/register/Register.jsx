@@ -20,65 +20,62 @@ const Register = () => {
         passwordcheck: undefined
     });
 
-    const [isCheck, setIsCheck] = useState(false);
+    const [isPasswordCheck, setIsPasswordCheck] = useState(undefined);
 
     const navigate = useNavigate();
 
     const handleChange = (e) => {
+        const { id, value } = e.target;
         setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-        // console.log("id:", e.target.id, "value:", e.target.value);
+
+        // 비밀번호 확인
+        if (id === 'passwordcheck') {
+            if (credentials.password !== value) {
+                setIsPasswordCheck(false);
+                console.log(credentials.password, ",", value);
+            } else {
+                setIsPasswordCheck(true);
+                console.log(credentials.password, ",", value);
+            }
+        }
     };
 
     const handleClick = async (e) => {
         e.preventDefault();
         try {
-            const apiUrl = process.env.REACT_APP_API_URL;
-            const { passwordcheck, ...userData } = credentials;
+            console.log(AllCheck());
+            if (AllCheck()) {
+                const apiUrl = process.env.REACT_APP_API_URL;
+                const { passwordcheck, ...userData } = credentials;
 
-            const res = await axios.post(`${apiUrl}/auth/register`, userData);
-            navigate('/login');
+                const res = await axios.post(`${apiUrl}/auth/register`, userData);
+                navigate('/login');
+            } else {
+                alert('모든 필수 입력 항목을 입력하세요.');
+            }
+
         } catch (err) {
             console.log(err);
         }
     }
 
-    const PasswordCheck = () => {
-        if (credentials.password !== credentials.passwordcheck) {
-            setIsCheck(false);
-        } else {
-            setIsCheck(true);
-        }
+    const credentialsCheck = (e) => {
+        const { id, value } = e.target;
+        setIsCredentialsCheck(prev => ({
+            ...prev,
+            [id]: value !== undefined && value.trim() !== ''
+        }));
     }
 
-    const credentialsCheck = () => {
-        if (credentials.username === undefined || credentials.username === '') {
-            setIsCredentialsCheck(prev => ({
-                ...prev,
-                username: false
-            }))
-            console.log(isCredentialsCheck.username);
-        } else if (credentials.password === undefined || credentials.password === '') {
-            setIsCredentialsCheck(prev => ({
-                ...prev,
-                password: false
-            }))
-        } else if (credentials.passwordcheck === undefined || credentials.passwordcheck === '') {
-            setIsCredentialsCheck(prev => ({
-                ...prev,
-                passwordcheck: false
-            }))
-        } else if (credentials.name === undefined || credentials.name === '') {
-            setIsCredentialsCheck(prev => ({
-                ...prev,
-                name: false
-            }))
-        } else if (credentials.phone === undefined || credentials.phone === '') {
-            setIsCredentialsCheck(prev => ({
-                ...prev,
-                phone: false
-            }))
-        }
-    }
+    const AllCheck = () => {
+        return (
+            isCredentialsCheck.username &&
+            isCredentialsCheck.password &&
+            isCredentialsCheck.passwordcheck &&
+            isCredentialsCheck.name &&
+            isCredentialsCheck.phone
+        );
+    };
 
     return (
         <div className="register">
@@ -87,26 +84,44 @@ const Register = () => {
                 <div className='register-list'>
                     <span className='register-left'>아이디<em className='register-em'>*</em></span>
                     <div className='register-input-wrap'>
-                        <input type='text' placeholder='아이디 입력' className='register-input' id='username' onChange={handleChange} onBlur={credentialsCheck}></input>
+                        <input type='text' placeholder='아이디 입력' className={isCredentialsCheck.username === false ? ('register-input-red') : ('register-input')} id='username' onChange={handleChange} onBlur={credentialsCheck}></input>
                         {isCredentialsCheck.username === false ? (
                             <div><span className='register-input-error'>필수 항목입니다.</span></div>) : (<></>)}
                     </div>
                 </div>
                 <div className='register-list'>
                     <span className='register-left'>비밀번호<em className='register-em'>*</em></span>
-                    <input type='text' placeholder='비밀번호(영문·숫자 조합 8~15자리)' className='register-input' id='password' onChange={handleChange}></input>
+                    <div className='register-input-wrap'>
+                        <input type='text' placeholder='비밀번호(영문·숫자 조합 8~15자리)' className={isCredentialsCheck.password === false ? ('register-input-red') : ('register-input')} id='password' onChange={handleChange} onBlur={credentialsCheck}></input>
+                        {isCredentialsCheck.password === false ? (
+                            <div><span className='register-input-error'>필수 항목입니다.</span></div>) : (<></>)}
+                    </div>
                 </div>
                 <div className='register-list'>
                     <span className='register-left'>비밀번호 확인<em className='register-em'>*</em></span>
-                    <input type='text' placeholder='비밀번호 확인' className='register-input' id='passwordcheck' onChange={handleChange} onBlur={PasswordCheck}></input>
+                    <div className='register-input-wrap'>
+                        <input type='text' placeholder='비밀번호 확인' className={isCredentialsCheck.passwordcheck === false ? ('register-input-red') : ('register-input')} id='passwordcheck' onChange={handleChange} onBlur={credentialsCheck}></input>
+                        {isCredentialsCheck.passwordcheck === false ? (
+                            <div><span className='register-input-error'>필수 항목입니다.</span></div>) : (<></>)}
+                        {isPasswordCheck === false && isCredentialsCheck.passwordcheck === true ? (
+                            <div><span className='register-input-error'>비밀번호가 일치하지 않습니다.</span></div>) : (<></>)}
+                    </div>
                 </div>
                 <div className='register-list'>
                     <span className='register-left'>이름<em className='register-em'>*</em></span>
-                    <input type='text' placeholder='이름 입력' className='register-input' id='name' onChange={handleChange}></input>
+                    <div className='register-input-wrap'>
+                        <input type='text' placeholder='이름 입력' className={isCredentialsCheck.name === false ? ('register-input-red') : ('register-input')} id='name' onChange={handleChange} onBlur={credentialsCheck}></input>
+                        {isCredentialsCheck.name === false ? (
+                            <div><span className='register-input-error'>필수 항목입니다.</span></div>) : (<></>)}
+                    </div>
                 </div>
                 <div className='register-list'>
                     <span className='register-left'>연락처<em className='register-em'>*</em></span>
-                    <input type='text' placeholder='연락처(숫자만 입력)' className='register-input' id='phone' onChange={handleChange}></input>
+                    <div className='register-input-wrap'>
+                        <input type='text' placeholder='연락처(숫자만 입력)' className={isCredentialsCheck.phone === false ? ('register-input-red') : ('register-input')} id='phone' onChange={handleChange} onBlur={credentialsCheck}></input>
+                        {isCredentialsCheck.phone === false ? (
+                            <div><span className='register-input-error'>필수 항목입니다.</span></div>) : (<></>)}
+                    </div>
                 </div>
                 <div className='register-agreement'>
                     <div><input type='checkbox'></input><label><b>전체동의</b></label></div>

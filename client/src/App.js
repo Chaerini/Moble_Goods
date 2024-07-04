@@ -9,7 +9,6 @@ import CartItemsProvider from "./pages/cart/CartItems";
 import ReviewWrite from "./pages/review/ReviewWrite";
 import AddNotice from "./pages/notice/AddNotice";
 import GetProduct from "./pages/productManage/getProduct";
-import Modal from './pages/notice/Modal';
 import Product from './pages/productManage/addProduct';
 import UpdateProduct from './pages/productManage/updateProduct';
 import Main from './pages/productManage/main';
@@ -33,6 +32,8 @@ import Withdraw from "./pages/withdraw/Withdraw";
 import Search from "./component/search/search";
 import UpdateUserMember from "./pages/userManage/updateUserMember";
 import Profile from './pages/profile/Profile';
+import Myqna from './pages/customer/Myqna';
+import UpdateCoupon from "./pages/couponManage/updateCoupon";
 
 function App() {
   return (
@@ -59,7 +60,6 @@ function App() {
         <Route path="/addnotice" element={<AddNotice />} />
         <Route path="/getproduct" element={<GetProduct />} />
         <Route path="/addproduct" element={<Product />} />
-        <Route path="/modal" element={<Modal />} />
         <Route path="/updateproduct/:id" element={<UpdateProduct />} />
         <Route path="/updatenotice/:id" element={<UpdateNotice />} />
         <Route path="/" element={<Main />} />
@@ -79,6 +79,7 @@ function App() {
         <Route path="/getcoupon" element={<GetCoupon />} />
         <Route path="/getnotice" element={<GetNotice />} />
         <Route path="/admin" element={<Dashboard />} />
+        <Route path="/updatecoupon/:id" element={<UpdateCoupon/>}/>
         {/** 
         <Route path="sanrio/kittyproduct" element={<KittyProduct />} />
         <Route path="sanrio/kuroproduct" element={<KuroProduct />} />
@@ -102,6 +103,7 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/updateuser/:id" element={<UpdateUser />} />
         <Route path="/updateusermember/:id" element={<UpdateUserMember />} />
+        <Route path="/myqna" element={<Myqna/>} />
       </Routes>
     </BrowserRouter>
   );

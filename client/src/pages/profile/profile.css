@@ -73,6 +73,14 @@
     padding: 0px 10px;
 }
 
+.profile-input-readonly {
+    width: 420px;
+    height: 34px;
+    border: none;
+    font-size: 12px;
+    padding: 0px 10px;
+}
+
 .profile-pwd-input {
     width: 270px;
     height: 34px;

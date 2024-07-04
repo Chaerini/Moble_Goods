@@ -8,8 +8,17 @@ import WrittenReview from '../../component/myreview/WrittenReview.jsx';
 import Navbar from '../../component/navbar/navbar.jsx';
 import Header from '../../component/header/header.jsx';
 import Footer from '../../component/footer/footer.jsx';
+import { useNavigate } from "react-router-dom";
+import { useContext, useState } from 'react';
+import { AuthContext } from '../../Context/AuthContext.js';
 
 const MyReview = () => {
+    const apiUrl = process.env.REACT_APP_API_URL;
+    const navigate = useNavigate();
+    const { user } = useContext(AuthContext);
+
+    const [isMenu, setIsMenu] = useState("writable");
+
     return (
         <>
             <Header />
@@ -18,15 +27,15 @@ const MyReview = () => {
                 <div className='myreview-container'>
                     <h1 className='myreview-h1'>나의 리뷰</h1>
                     <div className='myreview-button'>
-                        <button className='myreview-writable'>작성 가능한 리뷰</button>
-                        <button className='myreview-written-click'>작성한 리뷰</button>
+                        <button className={isMenu === 'writable' ? ('myreview-writable-click') : ('myreview-writable')} onClick={() => setIsMenu('writable')}>작성 가능한 리뷰</button>
+                        <button className={isMenu === 'written' ? ('myreview-written-click') : ('myreview-written')} onClick={() => setIsMenu('written')}>작성한 리뷰</button>
                     </div>
                     <div className='myreview-info'>
                         <FontAwesomeIcon icon={faCircleExclamation} className='myreview-icon' />
                         <span>리뷰는 구매 후 구매하신 제품에만 작성이 가능합니다.</span>
                     </div>
                     <div className='myreview-middle'>
-                        <WrittenReview />
+                        {isMenu === 'writable' ? (<WritableReview />) : (<WrittenReview />)}
                     </div>
                     <div className='myreview-notice'>
                         <p className='myreview-notice-top'>리뷰 작성 안내</p>
