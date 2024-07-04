@@ -1,7 +1,7 @@
 import pool from "../db.js";
 export const createReview = async (req, res) => {
     const { userId } = req.params;
-    const { title, detail, rating } = req.body;
+    const { product_id, order_id, detail, rating } = req.body;
     console.log(req.body);
     try {
         // userId와 일치하는 username을 조회
@@ -12,8 +12,10 @@ export const createReview = async (req, res) => {
         const name = userResult[0].name;
 
         // 리뷰 작성
-        const [result] = await pool.query("INSERT INTO reviews (title, detail, rating, user_id) VALUES (?, ?, ?, ?)", [title, detail, rating, userId]);
-        
+        const [result] = await pool.query(
+            "INSERT INTO reviews (product_id, order_id, detail, rating, user_id) VALUES (?, ?, ?, ?, ?)",
+            [product_id, order_id, detail, rating, userId]);
+
         // 응답에 username 포함
         res.status(200).json({ message: "리뷰 작성 완료", "작성자": name });
     } catch (error) {
@@ -22,69 +24,109 @@ export const createReview = async (req, res) => {
 };
 
 
-export const updateReview = async(req,res) =>{
-    const {reviewId}=req.params;
-    const {detail,rating}=req.body;
+export const updateReview = async (req, res) => {
+    const { reviewId } = req.params;
+    const { detail, rating } = req.body;
     console.log(req.body);
-    try{
-    const[result]= await pool.query('UPDATE reviews SET detail=?,rating=? WHERE id=?',[detail,rating,reviewId]);
-    if(result.affectedRows>0){
-        res.status(200).json({message:"수정 완료"})
-    }else{
-        res.status(404).json({error:"Review not found"});
+    try {
+        const [result] = await pool.query('UPDATE reviews SET detail=?,rating=? WHERE id=?', [detail, rating, reviewId]);
+        if (result.affectedRows > 0) {
+            res.status(200).json({ message: "수정 완료" })
+        } else {
+            res.status(404).json({ error: "Review not found" });
         }
-    }catch(error){
-        res.status(400).json({error:error.message});
+    } catch (error) {
+        res.status(400).json({ error: error.message });
     }
 }
-export const getReviewID = async(req,res) =>{
-    const {reviewId}=req.params;
+export const getReviewID = async (req, res) => {
+    const { reviewId } = req.params;
     console.log(req.params);
-    try{
-        const[rows] = await pool.query("SELECT * FROM reviews WHERE id=?",[reviewId]);
-        res.status(201).json({rows:rows});
-    }catch(error){
-        res.status(400).json({error:error.message});
+    try {
+        const [rows] = await pool.query("SELECT * FROM reviews WHERE id=?", [reviewId]);
+        res.status(201).json({ rows: rows });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
     }
 }
-export const getAllReview = async(req,res) =>{
-    try{
+export const getAllReview = async (req, res) => {
+    try {
         const [rows] = await pool.query(
             `SELECT
                 *
             FROM
                 reviews`
         );
-        res.status(200).json({rows:rows});
-        }catch(error){
-            res.status(400).json({error:error.message});
-        }
+        res.status(200).json({ rows: rows });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
 }
-export const getReviewByUserID = async(req,res) =>{
-    const{userId}=req.params;
+export const getReviewByUserID = async (req, res) => {
+    const { userId } = req.params;
     console.log(req.params);
-    try{
-        const [result]=await pool.query("SELECT * FROM reviews WHERE user_id=?",[userId])
-        if(result.length>0){
-            res.status(201).json({result});
-        }else{
-            res.status(404).json({error:"User not found"});
+    try {
+        const [result] = await pool.query("SELECT * FROM reviews WHERE user_id=?", [userId])
+        if (result.length > 0) {
+            res.status(201).json({ result });
+        } else {
+            res.status(404).json({ error: "User not found" });
         }
-    }catch(error){
-        res.status(400).json({error:error.message});
+    } catch (error) {
+        res.status(400).json({ error: error.message });
     }
 };
-export const deleteReview = async(req,res) =>{
-    const {reviewId} = req.params;
+export const deleteReview = async (req, res) => {
+    const { reviewId } = req.params;
     console.log(req.params);
-    try{
-        const [result] = await pool.query('DELETE FROM reviews WHERE id=?',[reviewId]);
-        if(result.affectedRows>0){
-            res.status(200).json({message:"삭제 완료"});
-        }else{
-            res.status(404).json({error:"Review not found"});
+    try {
+        const [result] = await pool.query('DELETE FROM reviews WHERE id=?', [reviewId]);
+        if (result.affectedRows > 0) {
+            res.status(200).json({ message: "삭제 완료" });
+        } else {
+            res.status(404).json({ error: "Review not found" });
         }
-    }catch(error){
-        res.status(400).json({error:error.message});
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
+
+export const getWritableReview = async (req, res) => {
+    const { userId } = req.params;
+
+    try {
+        const [result] = await pool.query(
+            `SELECT
+            \`order\`.id AS order_id,
+            \`order\`.user_id AS user_id,
+            \`order\`.order_date AS order_date,
+            order_item.quantity AS quantity,
+            product.id AS product_id,
+            product.name AS name,
+            MIN(product_image.url) AS image
+            FROM \`order\`
+            JOIN order_item ON \`order\`.id = order_item.order_id
+            JOIN product ON product.id = order_item.product_id
+            JOIN product_image ON product_image.product_id = product.id
+            JOIN status ON status.id = \`order\`.status_id
+            WHERE \`order\`.user_id = ? AND status.delivery_status = "배송완료"
+            AND \`order\`.id NOT IN (
+                SELECT \`order\`.id
+                FROM \`order\`
+                JOIN reviews ON reviews.order_id = \`order\`.id
+                WHERE \`order\`.user_id = ?
+            )
+            GROUP BY
+                \`order\`.id,
+                \`order\`.user_id,
+                \`order\`.order_date,
+                order_item.quantity,
+                product.id,
+                product.name;`,
+            [userId, userId]
+        );
+        res.status(200).json({ result });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
     }
 }

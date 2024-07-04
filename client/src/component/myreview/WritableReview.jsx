@@ -1,6 +1,7 @@
 import './writablereview.css';
 
 const WritableReview = () => {
+
     return (
         <div className="writablereview">
             <table className="writablereview-table">

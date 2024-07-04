@@ -16,12 +16,11 @@ const Withdraw = () => {
 
     const handleClick = async () => {
         try {
-            // const res = await axios.delete(`${apiUrl}/users/${user.id}`, { headers: { 'auth-token': user.token }, withCredentials: true });
-            const logout = await axios.post(`${apiUrl}/auth/logout`, { headers: { 'auth-token': user.token }, withCredentials: true });
+            const res = await axios.delete(`${apiUrl}/users/${user.id}`, { headers: { 'auth-token': user.token }, withCredentials: true });
+            const logout = await axios.post(`${apiUrl}/auth/logout`, {}, { headers: { 'auth-token': user.token }, withCredentials: true });
             dispatch({ type: "LOGOUT" });
             console.log(logout.data);
-
-            // navigate('/');
+            navigate('/');
         } catch (err) {
             console.log(err);
         }
