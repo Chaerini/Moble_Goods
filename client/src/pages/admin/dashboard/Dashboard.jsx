@@ -4,8 +4,9 @@ import AdminHeader from "../adminHeader/AdminHeader";
 import "./dashboard.css";
 
 const Dashboard = () => {
+  
   return (
-    <div className="dashboard">
+    <div className="admin-dashboard-wrapper">
       <div className="dashboard-main-wrapper">
         <AdminSidebar />
         <AdminHeader />
