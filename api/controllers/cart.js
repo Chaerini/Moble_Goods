@@ -70,7 +70,9 @@ import pool from '../db.js';
 // 장바구니 생성
 export const createCart = async (req, res) => {
   const { product_id, quantity, check } = req.body;
+  console.log(req.user)
   const user_id = req.user.id; // 현재 로그인된 사용자 ID
+  console
 
   try {
     const [result] = await pool.query(
