@@ -1,8 +1,9 @@
-import React from 'react';
+import { React, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from '../../../../component/navbar/navbar';
 import Header from '../../../../component/header/header';
 import Footer from '../../../../component/footer/footer';
+import { CartContext } from '../../../cart/CartItems';
 import './sandetail.css';
 
 const productsData = {
@@ -35,6 +36,7 @@ const productsData = {
 function SanDetail() {
   const { category, id } = useParams();
   const categoryData = productsData[category];
+  const { addToCart } = useContext(CartContext);
 
   if (!categoryData) {
     return (
@@ -64,6 +66,13 @@ function SanDetail() {
     );
   }
 
+  const handleAddToCart = () => {
+    addToCart({
+      id: product.id, name: product.name, option: '기본 옵션', price: parseInt(product.price.replace('₩', '').replace(',', '')),
+      quantity: 1, check: true, image: product.image
+    });
+  };
+
   return (
     <>
       <Header />
@@ -87,7 +96,7 @@ function SanDetail() {
             <label>수량:</label>
             <input type="number" defaultValue="1" min="1" />
           </div>
-          <button className="add-to-cart-button">장바구니 담기</button>
+          <button className="add-to-cart-button" onClick={handleAddToCart}>장바구니 담기</button>
           <div className="product-detail-shipping">
             <p>배송안내: 제작 1~2일 및 택배배송 1~2일 소요</p>
             <p>배송료: 3,000원 (5만원 이상 주문 시 무료)</p>
