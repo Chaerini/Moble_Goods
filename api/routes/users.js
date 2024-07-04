@@ -24,7 +24,7 @@ router.put('/changedPw/:userId', updatePassword);
 router.delete("/:userId", deleteUser);
 
 // GET ID
-router.get("/:userId", verifyUser, getIdUser);
+router.get("/:userId", getIdUser);
 
 // GET ALL
 router.get("/", getAllUsers);

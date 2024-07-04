@@ -21,6 +21,7 @@ import couponRoutes from './routes/coupons.js';
 import usercouponRoutes from './routes/usercoupons.js'
 import noticeRoutes from "./routes/notices.js";
 import cartRoutes from "./routes/carts.js";
+import searchRoutes from "./routes/searches.js";
 
 // __filename과 __dirname을 생성
 const __filename = fileURLToPath(import.meta.url);
@@ -84,7 +85,7 @@ app.use('/api/coupons', couponRoutes);
 app.use('/api/usercoupons', usercouponRoutes);
 app.use('/api/notice',noticeRoutes);
 app.use('/api/cart', cartRoutes);
-
+app.use("/api/search",searchRoutes);
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
 });
