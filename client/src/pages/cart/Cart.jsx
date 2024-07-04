@@ -53,7 +53,7 @@ export function CartProvider({ children }) {
         body: JSON.stringify({
           product_id: item.id,
           quantity: item.quantity,
-          check: item.check
+          checking: item.checking
         })
       });
       if (response.ok) {
@@ -70,7 +70,7 @@ export function CartProvider({ children }) {
   };
 
   // 장바구니 항목을 수정하는 함수
-  const updateCartItem = async (id, quantity, check) => {
+  const updateCartItem = async (id, quantity, checking) => {
     try {
       const response = await fetch(`${apiUrl}/cart/${id}`, {
         method: 'PUT',
@@ -78,11 +78,11 @@ export function CartProvider({ children }) {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
-        body: JSON.stringify({ quantity, check })
+        body: JSON.stringify({ quantity, checking })
       });
       if (response.ok) {
         const result = await response.json();
-        setCartItems(cartItems.map(item => item.id === id ? { ...item, quantity, check } : item));
+        setCartItems(cartItems.map(item => item.id === id ? { ...item, quantity, checking } : item));
       } else {
         console.error('Failed to update cart item:', response.status, response.statusText);
         setError(`Failed to update cart item: ${response.status} ${response.statusText}`);
@@ -139,7 +139,7 @@ export default function Cart() {
   const handleQuantityChange = (id, amount) => {
     const item = cartItems.find(item => item.id === id);
     if (item) {
-      updateCartItem(id, item.quantity + amount, item.check);
+      updateCartItem(id, item.quantity + amount, item.checking);
     }
   };
 

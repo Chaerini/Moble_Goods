@@ -61,7 +61,7 @@ export const getCartByUser = async (req, res) => {
       FROM cart 
       JOIN product ON product.id = cart.product_id
       JOIN product_image ON product.id = product_image.product_id
-      WHERE user_id = ?`,
+      WHERE cart.user_id = ?`,
       [user_id]
     );
     res.status(200).json({ result });
