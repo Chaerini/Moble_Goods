@@ -1,9 +1,9 @@
-import { React, useContext } from 'react';
+import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from '../../../../component/navbar/navbar';
 import Header from '../../../../component/header/header';
 import Footer from '../../../../component/footer/footer';
-import { CartContext } from '../../../cart/CartItems';
+import { CartContext } from '../../../cart/Cart';
 import './sandetail.css';
 
 const productsData = {

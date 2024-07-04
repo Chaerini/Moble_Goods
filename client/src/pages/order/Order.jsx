@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CartContext } from '../cart/CartItems';
+import { CartContext } from '../cart/Cart'; // CartContext를 가져옵니다.
 import './Order.css';
 
 function Order() {
