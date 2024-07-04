@@ -54,19 +54,19 @@ const AdminSidebar = ({ setActiveComponent }) => {
               <p className="sidebar-menu-text">주문</p>
             </div>
           </li>
-          <li onClick={() => handleMenuClick("Dashboard")}>
+          <li onClick={() => handleMenuClick("ProductManage")}>
             <div className="sidebar-menu-item">
               <FontAwesomeIcon icon={faBoxOpen} className="sidebar-menu-icon" />
               <p className="sidebar-menu-text">상품</p>
             </div>
           </li>
-          <li onClick={() => handleMenuClick("OrderManage")}>
+          <li onClick={() => handleMenuClick("UserManage")}>
             <div className="sidebar-menu-item">
               <FontAwesomeIcon icon={faUser} className="sidebar-menu-icon" />
               <p className="sidebar-menu-text">고객</p>
             </div>
           </li>
-          <li onClick={() => handleMenuClick("Dashboard")}>
+          <li onClick={() => handleMenuClick("getNotice")}>
             <div className="sidebar-menu-item">
               <FontAwesomeIcon
                 icon={faClipboardList}
