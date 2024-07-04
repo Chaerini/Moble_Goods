@@ -2,10 +2,9 @@ import logo from "./logo.svg";
 import "./App.css";
 import { useCallback, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Cart from "./pages/cart/Cart";
+import Cart, { CartProvider } from "./pages/cart/Cart";
 import Order from "./pages/order/Order";
 import OrderComplete from "./pages/order/OrderComplete";
-import CartItemsProvider from "./pages/cart/CartItems";
 import ReviewWrite from "./pages/review/ReviewWrite";
 import AddNotice from "./pages/notice/AddNotice";
 import GetProduct from "./pages/productManage/getProduct";
@@ -36,8 +35,8 @@ function App() {
   return (
     <BrowserRouter>
         <Routes>
-          <Route path="/Cart" element={<CartItemsProvider><Cart /></CartItemsProvider>}/>
-          <Route path="/Order" element={<CartItemsProvider><Order /></CartItemsProvider>}/>
+          <Route path="/Cart" element={<CartProvider><Cart /></CartProvider>}/>
+          <Route path="/Order" element={<CartProvider><Order /></CartProvider>}/>
           <Route path="/Order-Complete" element={<OrderComplete />} />
           <Route path="/ReviewWrite" element={<ReviewWrite />} />
           <Route path="/addnotice" element={<AddNotice />} />
@@ -63,7 +62,7 @@ function App() {
           <Route path="/updateuser/:id" element={<UpdateUser />} />
           <Route path="/updateusermember/:id" element={<UpdateUserMember />} />
           <Route path="/myqna" element={<Myqna/>} />
-          <Route path="/sanrio/:category/:id" element={<CartItemsProvider><SanDetail /></CartItemsProvider>}/>
+          <Route path="/sanrio/:category/:id" element={<CartProvider><SanDetail /></CartProvider>}/>
       </Routes>
     </BrowserRouter>
   );
