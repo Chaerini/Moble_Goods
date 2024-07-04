@@ -31,8 +31,15 @@
     font-weight: bold;
   }
   
+  /* 입력 그룹 행 스타일 */
+  .input-group-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
   /* 입력 그룹 스타일 */
-  .input-group {
+.input-group {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
@@ -42,6 +49,12 @@
   .input-group h2 {
     margin-right: 10px;
     font-size: 16px;
+  }
+
+  /* 필수 항목 스타일 */
+.required {
+    color: red;
+    margin-left: 5px;
   }
   
   /* 입력 필드, 체크박스, 토글 섹션 스타일 */
@@ -57,13 +70,21 @@
   }
   
   /* 토글 버튼 스타일 */
-  .toggle-section button {
+  .toggle-button {
     padding: 10px;
-    background-color: #f0f0f0;
+    background-color: #fff;
     border: 1px solid #ccc;
     cursor: pointer;
-    width: 200px;
+    width: 300px;
     text-align: left;
+    position: relative;
+  }
+
+  .arrow {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
   }
   
   /* 드롭다운 메뉴 스타일 */
@@ -72,7 +93,7 @@
     border: 1px solid #ccc;
     background-color: #fff;
     position: absolute;
-    width: 200px;
+    width: 100px;
     z-index: 1000;
   }
   
@@ -83,7 +104,7 @@
   }
   
   /* 드롭다운 항목 호버 스타일 */
-  .toggle-section .dropdown div:hover {
+  .dropdown div:hover {
     background-color: #f0f0f0;
   }
   
@@ -109,5 +130,12 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+  }
+
+  /* 사용자 필드 클릭시, 문구 사라지고 텍스트 입력 가능 */
+  .contact-form input::placeholder, .contact-form textarea::placeholder {
+    color: #999;
   }
   

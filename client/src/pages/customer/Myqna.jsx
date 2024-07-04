@@ -35,26 +35,44 @@ const ToggleSection = ({ label, options, onSelect }) => {
 };
 
 // ContactInput 컴포넌트: 연락처 입력 필드
-const ContactInput = ({ onChange }) => (
+const ContactInput = ({ onChange, value, placeholder }) => (
   <div className="input-field">
-    <label>연락처를 입력해 주세요.</label>
-    <input type="text" name="contact" onChange={onChange} />
+    <h3>연락처</h3>
+    <input 
+      type="text" 
+      name="contact" 
+      value={value} 
+      onChange={onChange} 
+      placeholder={placeholder} 
+    /> 
   </div>
 );
 
 // TitleInput 컴포넌트: 제목 입력 필드
-const TitleInput = ({ onChange }) => (
+const TitleInput = ({ onChange, value, placeholder }) => (
   <div className="input-field">
-    <label>제목을 입력해 주세요. (최대 25자)</label>
-    <input type="text" name="title" onChange={onChange} maxLength={25} />
+    <h3>문의 제목*</h3>
+    <input 
+      type="text" 
+      name="title" 
+      value={value} 
+      onChange={onChange} 
+      maxLength={25} 
+      placeholder={placeholder} 
+    />
   </div>
 );
 
 // ContentInput 컴포넌트: 문의 내용 입력 필드
-const ContentInput = ({ onChange }) => (
+const ContentInput = ({ onChange, value, placeholder }) => (
   <div className="input-field">
-    <label>문의하실 내용을 입력해 주세요.</label>
-    <textarea name="content" onChange={onChange} maxLength={2000}></textarea>
+    <textarea 
+      name="content" 
+      value={value} 
+      onChange={onChange} 
+      maxLength={2000} 
+      placeholder={placeholder}
+    ></textarea>
   </div>
 );
 
@@ -100,26 +118,39 @@ const ContactForm = () => {
 
   return (
     <form className="contact-form">
-      <div className="input-group">
-        <h2>문의유형*</h2>
-        <ToggleSection
-          label="문의 유형을 선택해주세요."
-          options={['유형1', '유형2', '유형3']}
-          onSelect={(option) => setFormData({ ...formData, type: option })}
-        />
-      </div>
-      <div className="input-group">
-        <h2>세부선택</h2>
-        <ToggleSection
-          label="세부선택"
-          options={['세부1', '세부2', '세부3']}
-          onSelect={(option) => setFormData({ ...formData, subType: option })}
-        />
-      </div>
-      <ContactInput onChange={handleChange} />
+      <div className="input-group-row">
+        <div className="input-group">
+          <h2>문의유형<span className="required">*</span></h2>
+          <ToggleSection
+            label="문의 유형을 선택해주세요."
+            options={['유형1', '유형2', '유형3']}
+            onSelect={(option) => setFormData({ ...formData, type: option })}
+          />
+        </div>
+        <div className="input-group">
+          <ToggleSection
+            label="세부선택"
+            options={['세부1', '세부2', '세부3']}
+            onSelect={(option) => setFormData({ ...formData, subType: option })}
+          />
+        </div>
+      </div>  
+      <ContactInput 
+        value={formData.contact} 
+        onChange={handleChange} 
+        placeholder="연락처를 입력해 주세요." 
+      />
       <MessageAlertCheckbox onChange={handleChange} />
-      <TitleInput onChange={handleChange} />
-      <ContentInput onChange={handleChange} />
+      <TitleInput 
+        value={formData.title} 
+        onChange={handleChange} 
+        placeholder="제목을 입력해 주세요. (최대 25자)" 
+      />
+      <ContentInput 
+        value={formData.content} 
+        onChange={handleChange} 
+        placeholder="문의하실 내용을 입력해 주세요." 
+      />
       <SubmitButton onSubmit={handleSubmit} />
     </form>
   );
