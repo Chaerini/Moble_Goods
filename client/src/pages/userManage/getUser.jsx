@@ -8,7 +8,6 @@ import Search from "../../component/search/search";
 import { useNavigate,Link,useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
-import UpdateUser from './updateUser';
 import { useRef } from 'react';
 const GetUser = () => {
     const [mpData,setMpData] = useState({
@@ -105,8 +104,7 @@ const GetUser = () => {
     </div>
           </div>
         }
-                            </td>
-                            
+                            </td>     
                         </tr>
                     ))}
                 </tbody>
