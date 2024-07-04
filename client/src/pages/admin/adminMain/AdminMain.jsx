@@ -20,11 +20,6 @@ const AdminMain = () => {
     }
   }, [activeComponent]);
 
-  // activeComponent가 변경될 때마다 AdminSidebar를 다시 렌더링
-  useEffect(() => {
-    setSidebarKey((prevKey) => prevKey + 1);
-  }, [activeComponent]);
-
   return (
     <div style={{ margin: 0, padding: 0 }}>
       <AdminSidebar setActiveComponent={setActiveComponent} />

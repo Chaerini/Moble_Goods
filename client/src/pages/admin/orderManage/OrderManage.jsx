@@ -6,8 +6,6 @@ import "./orderManage.css";
 const OrderManage = () => {
   return (
     <div className="orderManage-wrapper">
-      <AdminSidebar />
-      <AdminHeader />
       <div className="orderManage-content-wrapper">
         <div className="orderManage-header">
           <div className="orderManage-title">주문 관리</div>
