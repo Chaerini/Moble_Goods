@@ -68,8 +68,13 @@ function SanDetail() {
 
   const handleAddToCart = () => {
     addToCart({
-      id: product.id, name: product.name, option: '기본 옵션', price: parseInt(product.price.replace('₩', '').replace(',', '')),
-      quantity: 1, check: true, image: product.image
+      id: product.id,
+      name: product.name,
+      option: '기본 옵션',
+      price: parseInt(product.price.replace('₩', '').replace(',', '')),
+      quantity: 1,
+      check: true,
+      image: product.image,
     });
   };
 
