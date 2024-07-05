@@ -1,7 +1,6 @@
 import pool from '../db.js';
 
-
-//상품등록
+// 상품등록
 export const createProduct = async ( req, res ) => {
     const { name, quantity, subCategory_id, discount_rate, price } = req.body;
     console.log(req.body);
@@ -24,8 +23,7 @@ export const createProduct = async ( req, res ) => {
     }
 };
 
-
-//상품수정
+// 상품수정
 export const updateProduct = async (req, res) => {
     const { id } = req.params;
     const { name, quantity, subCategory_id, discount_rate, price } = req.body;
@@ -81,8 +79,7 @@ export const updateProduct = async (req, res) => {
     }
 };
 
-
-//상품삭제
+// 상품삭제
 export const deleteProduct = async (req, res) => {
     const { id } = req.params;
     try {
@@ -97,28 +94,43 @@ export const deleteProduct = async (req, res) => {
     }
 };
 
-
-//상품 전체 조회(최신등록일순으로 정렬)
+// 상품 전체 조회 또는 카테고리별 조회(서브카테고리 아이디 순으로 정렬)
 export const getAllProducts = async (req, res) => {
+    const { category, subcategory } = req.query;
+
+    let query = `
+        SELECT 
+            p.id AS id,
+            p.name AS name, 
+            p.quantity AS quantity, 
+            p.discount_rate AS discount_rate, 
+            p.price AS price, 
+            p.discounted_price AS discounted_price, 
+            p.date AS date,
+            sc.name AS subCategoryName, 
+            sc.id AS subCategoryId,
+            mc.name AS mainCategoryName,
+            mc.id AS mainCategoryId,
+            COALESCE(pi.url, '') AS productImageUrl
+        FROM product p
+        LEFT JOIN subcategory sc ON p.subcategory_id = sc.id
+        LEFT JOIN maincategory mc ON sc.maincategory_id = mc.id
+        LEFT JOIN product_image pi ON p.id = pi.product_id
+    `;
+
+    const params = [];
+    if (subcategory) {
+        query += ` WHERE sc.id = ?`;
+        params.push(subcategory);
+    } else if (category) {
+        query += ` WHERE mc.id = ?`;
+        params.push(category);
+    }
+    
+    query += ` ORDER BY sc.id, p.id`;  // 서브카테고리 아이디 순으로 정렬
+
     try {
-        const[rows] = await pool.query (
-            `SELECT 
-                p.id AS id,
-                p.name AS name, 
-                p.quantity AS quantity, 
-                p.discount_rate AS discount_rate, 
-                p.price AS price, 
-                p.discounted_price AS discounted_price, 
-                p.date AS date,
-                sc.name AS subCategoryName, 
-                mc.name AS mainCategoryName, 
-                pi.url AS productImageUrl
-            FROM product p
-            LEFT JOIN subcategory sc ON p.subcategory_id = sc.id
-            LEFT JOIN maincategory mc ON sc.maincategory_id = mc.id
-            LEFT JOIN product_image pi ON p.id = pi.product_id
-            ORDER BY p.date DESC;`
-        );
+        const [rows] = await pool.query(query, params);
         if (rows.length === 0) {
             return res.status(404).json({ message: 'No products found' });
         }
@@ -129,7 +141,8 @@ export const getAllProducts = async (req, res) => {
     }
 };
 
-//특정 id 상품 조회
+
+// 특정 id 상품 조회
 export const getProductById = async (req, res) => {
     const { id } = req.params;
     try {
@@ -162,7 +175,7 @@ export const getProductById = async (req, res) => {
     }
 };
 
-//상품 특정 메인 카테고리 조회
+// 상품 특정 메인 카테고리 조회
 export const getProductsByMainCategory = async (req, res) => {
     const { mainCategoryId } = req.params;
     try {
@@ -181,7 +194,7 @@ export const getProductsByMainCategory = async (req, res) => {
             JOIN subcategory sc ON p.subcategory_id = sc.id
             JOIN maincategory mc ON sc.maincategory_id = mc.id
             WHERE mc.id = ?
-            ORDER BY date DESC;
+            ORDER BY sc.id, p.id;
         `, [mainCategoryId]);
 
         if (rows.length === 0) {
@@ -194,7 +207,7 @@ export const getProductsByMainCategory = async (req, res) => {
     }
 };
 
-//상품 특정 서브 카테고리 조회
+// 상품 특정 서브 카테고리 조회
 export const getProductsBySubCategory = async (req, res) => {
     const { subCategoryId } = req.params;
     try {
@@ -213,7 +226,7 @@ export const getProductsBySubCategory = async (req, res) => {
             JOIN subcategory sc ON p.subcategory_id = sc.id
             JOIN maincategory mc ON sc.maincategory_id = mc.id
             WHERE sc.id = ?
-            ORDER BY date DESC;
+            ORDER BY sc.id, p.id;
         `, [subCategoryId]);
 
         if (rows.length === 0) {
@@ -263,7 +276,7 @@ export const getProductsByPrice = async (req, res) => {
     }
 };
 
-//상품 인기순 조회(많이 팔린 제품: product와 order_item 테이블을 조인)
+// 상품 인기순 조회(많이 팔린 제품: product와 order_item 테이블을 조인)
 export const getPopularProducts = async (req, res) => {
     try {
         const [rows] = await pool.query(
@@ -293,9 +306,7 @@ export const getPopularProducts = async (req, res) => {
     }
 };
 
-
-
-//특정상품 이미지 등록
+// 특정상품 이미지 등록
 export const createProductImage = async (req, res) => {
     // URL 파라미터로 상품 ID를 지정
     const { id } = req.params; 
@@ -312,7 +323,7 @@ export const createProductImage = async (req, res) => {
     }
 };
 
-//특정상품 이미지 수정
+// 특정상품 이미지 수정
 export const updateProductImage = async(req, res) => {
     // URL 파라미터로 상품 ID와 이미지 ID를 지정
     const { id, imageId } = req.params; 
@@ -331,7 +342,8 @@ export const updateProductImage = async(req, res) => {
         res.status(400).json({ error: error.message });
     } 
 };
-//특정상품 이미지 삭제
+
+// 특정상품 이미지 삭제
 export const deleteProductImage = async(req, res) => {
     // URL 파라미터로 상품 ID와 이미지 ID를 지정
     const { id, imageId } = req.params;
@@ -347,7 +359,7 @@ export const deleteProductImage = async(req, res) => {
     }
 };
 
-//특정상품 이미지 조회
+// 특정상품 이미지 조회
 export const getProductImagesById = async (req, res) => {
     const { id } = req.params;
     try {
@@ -368,13 +380,3 @@ export const getProductImagesById = async (req, res) => {
         res.status(500).json({ message: 'Error retrieving product images', error: error.message });
     }
 };
-
-        
-
-
-
-
-
-
-
-

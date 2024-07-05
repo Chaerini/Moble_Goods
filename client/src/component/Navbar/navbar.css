@@ -1,112 +1,91 @@
-.navbar {
-    background-color: #fff;
-    padding: 10px 20px;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .navbar-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .navbar-logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    text-decoration: none;
-  }
-  
-  .navbar-links {
-    display: flex;
-    align-items: center;
-  }
-  
-  .navbar-item {
-    position: relative;
-    margin-right: 20px;
-  }
-  
-  .navbar-links a {
-    margin-left: 15px;
-    color: #333;
-    text-decoration: none;
-    position: relative;
-  }
-  
-  .search-form {
-    display: flex;
-    align-items: center;
-    margin-left: 15px;
-  }
-  
-  .search-input {
-    padding: 5px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-  }
-  
-  .search-button {
-    padding: 5px 10px;
-    margin-left: 5px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: #333;
-    color: #fff;
-    cursor: pointer;
-  }
-  
-  .right-section {
-    display: flex;
-    align-items: center;
-  }
-  
-  .navbar-cart a {
-    font-size: 18px;
-    color: #333;
-    text-decoration: none;
-    margin-left: 15px;
-  }
-  
-  .dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    z-index: 1000;
-    display: flex;
-    width: 400px;
-  }
-  
-  .dropdown-content {
-    display: flex;
-    flex-direction: row;
-  }
-  
-  .dropdown-row {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-  }
-  
-  .dropdown-column {
-    padding: 20px;
-    flex: 1;
-  }
-  
-  .dropdown-column h3 {
-    margin-top: 0;
-    font-size: 18px;
-    color: #333;
-  }
-  
-  .dropdown-column a {
-    display: block;
-    margin-top: 10px;
-    color: #333;
-    text-decoration: none;
-  }
-  
+/* 전체 네비게이션 바 스타일 */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 로고 스타일 */
+nav .logo {
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #000000;
+  text-decoration: none;
+}
+
+/* 메뉴 항목 스타일 */
+nav ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  margin: 0 15px;
+  position: relative;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #000000;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px;
+}
+
+nav ul li a:hover {
+  color: #e40046;
+}
+
+/* 중분류 메뉴 스타일 */
+nav ul li ul {
+  display: none;
+  position: absolute;
+  top: 30px; /* 상위 메뉴와 겹치지 않도록 위치 조정 */
+  left: 0;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+  list-style: none;
+  min-width: 150px;
+}
+
+nav ul li ul li {
+  margin: 0;
+}
+
+nav ul li ul li a {
+  padding: 10px 15px;
+  display: block;
+  color: #000000;
+}
+
+nav ul li ul li a:hover {
+  background-color: #f7f7f7;
+  color: #e40046;
+}
+
+/* 중분류 메뉴 호버 시 표시 */
+nav ul li:hover ul {
+  display: block;
+  top: 30px; /* 부모 li의 하단 바로 아래에 표시되도록 */
+}
+
+/* 장바구니 스타일 */
+nav .cart {
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+nav .cart img {
+  margin-right: 5px;
+}
