@@ -1,14 +1,34 @@
-import React, { useEffect, useState, useContext, useRef } from "react";
-import axios from "axios";
+import React from "react";
+// import { useNavigate } from "react-router-dom";
+// import axios from "axios";
+// import { AuthContext } from '../../../Context/AuthContext';
 import useFetch from "../../../hooks/useFetch";
 import "./orderManage.css";
 
 const OrderManage = () => {
   // 주문 내역 전체 조회
-  // const apiUrl = process.env.REACT_APP_API_URL;
-  const apiUrl = 'http://localhost:8080/api'
+  const apiUrl = process.env.REACT_APP_API_URL;
   const { data, loading, error } = useFetch(`${apiUrl}/order`);
   console.log("data : ", data);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error fetching data: {error.message}</div>;
+  }
+
+  const orderList = Array.isArray(data) ? data : data?.rows || [];
+
+  if (!Array.isArray(orderList)) {
+    return <div>Unexpected data format</div>;
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // 검색 기능 처리
+  };
 
   return (
     <div className="orderManage-wrapper">
@@ -197,7 +217,7 @@ const OrderManage = () => {
             <div className="orderManage-table-con">
               <div className="orderManage-top">
                 <div className="orderManage-table-summary">
-                  검색 결과 : 0 건
+                  검색 결과 : {orderList.length} 건
                 </div>
                 <div>
                   <button className="orderManage-status-change-btn">
@@ -219,37 +239,29 @@ const OrderManage = () => {
                       <th>취소</th>
                     </tr>
                   </thead>
+
                   <tbody className="orderManage-table-body">
-                    <tr>
-                      <th>
-                        <a href="#" className="orderManage-table-item-orderNum">
-                          주문번호
-                        </a>
-                      </th>
-                      <th>주문일시</th>
-                      <th>상품명</th>
-                      <th>주문자명</th>
-                      <th>결제금액</th>
-                      <th>주문수량</th>
-                      <th>배송상태</th>
-                      <th>취소</th>
-                    </tr>
-                  </tbody>
-                  <tbody className="orderManage-table-body">
-                    <tr>
-                      <th>
-                        <a href="#" className="orderManage-table-item-orderNum">
-                          주문번호
-                        </a>
-                      </th>
-                      <th>주문일시</th>
-                      <th>상품명</th>
-                      <th>주문자명</th>
-                      <th>결제금액</th>
-                      <th>주문수량</th>
-                      <th>배송상태</th>
-                      <th>취소</th>
-                    </tr>
+                    {orderList.map((item, index) => (
+                      <tr key={index}>
+                        <td>
+                          <a
+                            href="#"
+                            className="orderManage-table-item-orderNum"
+                          >
+                            {item.id}
+                          </a>
+                        </td>
+                        <td>{item.orderDate}</td>
+                        <td>{item.productName}</td>
+                        <td>{item.customerName}</td>
+                        <td>{item.paymentAmount}</td>
+                        <td>{item.orderQuantity}</td>
+                        <td>{item.deliveryStatus}</td>
+                        <td>
+                          <button>취소</button>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>

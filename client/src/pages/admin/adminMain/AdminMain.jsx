@@ -1,7 +1,4 @@
 import React, { useState, useEffect, useCallback } from "react";
-// import { useNavigate } from "react-router-dom";
-// import { AuthContext } from '../../Context/AuthContext';
-import axios from 'axios';
 
 import AdminSidebar from "../adminSidebar/AdminSidebar";
 import AdminHeader from "../adminHeader/AdminHeader";
@@ -17,12 +14,6 @@ const AdminMain = () => {
 
   const renderComponent = useCallback(() => {
     console.log("어드민 메인:", activeComponent);
-
-    //유저가 어드민인지 조회
-    // const apiUrl = process.env.REACT_APP_API_URL;
-    // const navigate = useNavigate();
-    // const { user } = useContext(AuthContext);
-
 
     switch (activeComponent) {
       case "OrderManage":
