@@ -18,6 +18,7 @@ import Register from "./component/register/Register";
 import Sanlist from "./pages/product/sanrio/sanlist/sanlist";
 import MyCoupon from "./pages/mycoupon/MyCoupon";
 import MyReview from "./pages/myreview/MyReview";
+import MyOrder from "./pages/myorder/MyOrder";
 import AdminMain from "./pages/admin/adminMain/AdminMain";
 import GetCoupon from "./pages/couponManage/getCoupon";
 // import GetNotice from "./pages/notice/getNotice";
@@ -30,6 +31,8 @@ import Myqna from "./pages/customer/Myqna";
 import UpdateCoupon from "./pages/couponManage/updateCoupon";
 import SanDetail from "./pages/product/sanrio/sandetail/sandetail";
 import Modal from "./pages/userManage/Modal";
+
+
 function App() {
   return (
     <BrowserRouter>
@@ -67,6 +70,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/myreview" element={<MyReview />} />
         <Route path="/mycoupon" element={<MyCoupon />} />
+        <Route path="/myorder" element={<MyOrder />} />
         <Route path="/getcoupon" element={<GetCoupon />} />
         {/* <Route path="/getnotice" element={<GetNotice />} /> */}
         <Route path="/admin" element={<AdminMain />} />
@@ -74,7 +78,7 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/updateusermember/:id" element={<UpdateUserMember />} />
         <Route path="/myqna" element={<Myqna />} />
-        <Route 
+        <Route
           path="/sanrio/:category/:id"
           element={
             <CartProvider>
@@ -82,7 +86,7 @@ function App() {
             </CartProvider>
           }
         />
-        <Route path="/modal" element={<Modal/>}/>
+        <Route path="/modal" element={<Modal />} />
       </Routes>
     </BrowserRouter>
   );

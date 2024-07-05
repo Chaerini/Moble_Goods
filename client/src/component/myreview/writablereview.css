@@ -44,6 +44,7 @@
 
 .writablereview-td {
     text-align: center;
+    font-size: 13px;
 }
 
 .writablereview-button {
@@ -51,4 +52,12 @@
     background-color: #fff;
     color: #191919;
     padding: 5px 10px;
+}
+
+.writablereview-not {
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    height: 300px;
+    text-align: center;
+    font-size: 12px;
 }

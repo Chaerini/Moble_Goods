@@ -81,3 +81,19 @@
     padding-left: 3px;
     padding-bottom: 20px;
 }
+
+.writtenreview-icon-select {
+    color: rgb(244, 244, 85);
+}
+
+.writtenreview-icon-not {
+    color: #ccc;
+}
+
+.writtenreview-not {
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    height: 300px;
+    text-align: center;
+    font-size: 12px;
+}

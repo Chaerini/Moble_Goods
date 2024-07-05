@@ -66,12 +66,25 @@ export const getReviewByUserID = async (req, res) => {
     const { userId } = req.params;
     console.log(req.params);
     try {
-        const [result] = await pool.query("SELECT * FROM reviews WHERE user_id=?", [userId])
-        if (result.length > 0) {
-            res.status(201).json({ result });
-        } else {
-            res.status(404).json({ error: "User not found" });
-        }
+        const [result] = await pool.query(
+            `SELECT reviews.*, product.id AS product_id, product.name AS product_name, MIN(product_image.url) AS product_image, review_image.image_url AS review_image, users.name AS user_name
+            FROM reviews JOIN product ON product.id = reviews.product_id
+            LEFT JOIN review_image ON review_image.review_id = reviews.id
+            JOIN product_image ON product_image.product_id = product.id
+            JOIN users ON reviews.user_id = users.id
+            WHERE reviews.user_id = ?
+            GROUP BY
+            reviews.id, 
+            reviews.user_id,
+            reviews.order_id,
+            reviews.rating,
+            reviews.detail,
+            reviews.create_date,
+            review_image.image_url,
+            product.id, 
+            product.name;`,
+            [userId])
+        res.status(201).json({ result });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
