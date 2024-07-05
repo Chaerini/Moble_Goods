@@ -1,0 +1,173 @@
+/* 전체 컨테이너 스타일 */
+.products-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* 타이틀 스타일 */
+.products-container h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.products-container .breadcrumb {
+    font-size: 1em;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+/* 상품 리스트 스타일 */
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* 개별 상품 카드 스타일 */
+.product-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    transition: transform 0.3s ease;
+    width: calc(25% - 20px); /* 4개씩 나오게 하기 위해 25% 너비 지정 */
+    box-sizing: border-box;
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+}
+
+.product-card img {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.product-card h2 {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.product-card p {
+    font-size: 1em;
+    color: #777;
+    margin: 0;
+    text-align: center;
+}
+
+.product-card .price {
+    font-size: 1.2em;
+    color: #000;
+    margin-top: 10px;
+}
+
+/* 상품 상세 페이지 CSS */
+.product-detail-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  .product-detail-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .product-detail-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .product-detail-info {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-left: 20px;
+  }
+  
+  .product-detail-info h2 {
+    margin-top: 0;
+  }
+  
+  .product-detail-options,
+  .product-detail-quantity {
+    margin: 20px 0;
+  }
+  
+  .product-detail-price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .add-to-cart-button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .add-to-cart-button:hover {
+    background-color: #555;
+  }
+  
+  .product-detail-shipping p {
+    margin: 5px 0;
+  }
+  
+  /* 상품 목록 페이지 CSS */
+  .products-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+  }
+  
+  .product-card {
+    width: 23%;
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  .product-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .product-card h2 {
+    margin: 10px 0;
+  }
+  
+  .product-card p {
+    margin: 5px 0;
+    color: #555;
+  }
+  
+  .product-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
