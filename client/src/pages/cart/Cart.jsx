@@ -4,10 +4,10 @@ import Navbar from '../../component/navbar/navbar';
 import Header from '../../component/header/header';
 import Footer from '../../component/footer/footer';
 import './Cart.css';
-import { CartContext } from '../../Context/CartContext';
+import { CartContext } from '../../Context/CartContext'; // CartContext 파일 위치를 기준으로 import
 
 export default function Cart() {
-  const { cartItems, setCartItems, addToCart, updateCartItem, deleteCartItem, loading, error } = useContext(CartContext);
+  const { cartItems, setCartItems, updateCartItem, deleteCartItem, loading, error } = useContext(CartContext);
   const [selectAll, setSelectAll] = useState(false);
   const navigate = useNavigate();
 
@@ -34,6 +34,10 @@ export default function Cart() {
       return;
     }
     navigate('/order');
+  };
+
+  const formatNumber = (num) => {
+    return num.toLocaleString('ko-KR');
   };
 
   return (
@@ -96,10 +100,9 @@ export default function Cart() {
                     <img src={item.url} alt={item.name} />
                     <div className="cart-item-details">
                       <span className="cart-item-name">{item.name}</span>
-                      <span className="cart-item-option">옵션: {item.option}</span>
                     </div>
                   </td>
-                  <td className="cart-item-price">{item.price}원</td>
+                  <td className="cart-item-price">{formatNumber(item.price)}원</td>
                   <td className="cart-item-quantity">
                     <div className="quantity-controls">
                       <button onClick={() => handleQuantityChange(item.id, -1)}>-</button>
@@ -107,7 +110,7 @@ export default function Cart() {
                       <button onClick={() => handleQuantityChange(item.id, 1)}>+</button>
                     </div>
                   </td>
-                  <td className="cart-item-total">{item.price * item.quantity}원</td>
+                  <td className="cart-item-total">{formatNumber(item.price * item.quantity)}원</td>
                   <td>
                     <button onClick={() => deleteCartItem(item.id)}>삭제</button>
                   </td>
@@ -119,7 +122,7 @@ export default function Cart() {
         <div className="cart-summary">
           <div className="cart-summary-info">
             <span>결제 예정 금액({cartItems.length}): </span>
-            <span><h1>{cartItems.reduce((total, item) => total + item.price * item.quantity, 0)}원</h1></span>
+            <span><h1>{formatNumber(cartItems.reduce((total, item) => total + item.price * item.quantity, 0))}원</h1></span>
           </div>
           <button onClick={handleOrderClick}>선택상품 주문하기</button>
         </div>

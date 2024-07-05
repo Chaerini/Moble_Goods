@@ -84,7 +84,7 @@ app.use('/api/asks', askRoutes);
 app.use('/api/coupons', couponRoutes);
 app.use('/api/usercoupons', usercouponRoutes);
 app.use('/api/notice',noticeRoutes);
-app.use('/api/cart', cartRoutes);
+app.use('/api/carts', cartRoutes);
 app.use("/api/search",searchRoutes);
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);

@@ -27,8 +27,9 @@ export function CartProvider({ children }) {
         },
       });
 
+      console.log('프로바이더카트아디',user.id,user.token)
       if (!response.ok) {
-        throw new Error(`Failed to fetch cart items: ${response.status} ${response.statusText}`);
+        throw new Error(`Failed to fetch cart items1: ${response.status} ${response.statusText}`);
       }
 
       const data = await response.json();
