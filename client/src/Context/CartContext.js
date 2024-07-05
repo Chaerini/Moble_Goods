@@ -20,7 +20,6 @@ export function CartProvider({ children }) {
   const fetchCartItems = async () => {
     setLoading(true);
     try {
-      console.log(`Fetching cart items for user ${user.id} from ${apiUrl}/carts/${user.id}`);
       const response = await fetch(`${apiUrl}/carts/${user.id}`, {
         headers: {
           'auth-token': user.token,
@@ -33,10 +32,8 @@ export function CartProvider({ children }) {
       }
 
       const data = await response.json();
-      console.log("장바구니 : ", data.result);
       setCartItems(data.result);
     } catch (error) {
-      console.error(`Error fetching cart items: ${error.message}`);
       setError(`Error fetching cart items: ${error.message}`);
     } finally {
       setLoading(false);

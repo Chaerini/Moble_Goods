@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import Navbar from '../../../../component/navbar/navbar';
 import Header from '../../../../component/header/header';
 import Footer from '../../../../component/footer/footer';
-import { CartContext } from '../../../cart/Cart';
+import { CartContext } from '../../../../Context/CartContext';
 import './sandetail.css';
 
 const productsData = {
