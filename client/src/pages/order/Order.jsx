@@ -1,6 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CartContext } from '../../Context/CartContext'; // CartContext 경로 수정
+import Navbar from '../../component/navbar/navbar';
+import Header from '../../component/header/header';
+import Footer from '../../component/footer/footer';
+import OrderComplete from './OrderComplete'; // OrderComplete 모달을 가져옵니다.
 import './Order.css';
 
 function Order() {
@@ -22,6 +26,7 @@ function Order() {
   const [activeSection, setActiveSection] = useState('shippingInfo');
   const [shippingFee, setShippingFee] = useState(3000); // 배송비 상태 추가
   const [paymentMethod, setPaymentMethod] = useState('신용카드');
+  const [showOrderComplete, setShowOrderComplete] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -58,7 +63,12 @@ function Order() {
   };
 
   const handleSubmit = () => {
-    navigate('/order-complete');
+    setShowOrderComplete(true); // 주문 완료 모달을 표시
+  };
+
+  const closeOrderCompleteModal = () => {
+    setShowOrderComplete(false); // 주문 완료 모달을 닫기
+    navigate('/myorder'); // 홈으로 이동
   };
 
   const formatNumber = (num) => {
@@ -66,234 +76,230 @@ function Order() {
   };
 
   return (
-    <div className="order-container">
-      <h1>주문·결제</h1>
-      <div className="order-header">
-        <div className="step">01. 장바구니</div>
-        <div className="step current-step">02. 주문 결제</div>
-        <div className="step">03. 주문 완료</div>
-      </div>
-      <table className="order-items">
-        <thead>
-          <tr className='order-items-menu'>
-            <th className='order-items-menu-info'>주문 상품 정보</th>
-            <th>수량</th>
-            <th>상품 금액</th>
-            <th>할인 금액</th>
-            <th>구매예정가</th>
-          </tr>
-        </thead>
-        <tbody>
-          {selectedItems.map((item) => (
-            <tr className="order-item" key={item.id}>
-              <td className="order-item-info">
-                <img src={item.url} alt={item.name} />
-                <div className="order-item-details">
-                  <span className="order-item-name">상품: {item.name}</span>
-                </div>
-              </td>
-              <td className="order-item-quantity">
-                <div className="quantity-controls">
-                  <span>{item.quantity}</span>
-                </div>
-              </td>
-              <td className="order-item-price">{formatNumber(item.price)}원</td>
-              <td className="order-item-discount">0원</td>
-              <td className="order-item-total">{formatNumber(item.price * item.quantity)}원</td>
+    <>
+      <Navbar />
+      <Header />
+      <div className="order-container">
+        <h1>주문·결제</h1>
+        <div className="order-header">
+          <div className="step">01. 장바구니</div>
+          <div className="step current-step">02. 주문 결제</div>
+          <div className="step">03. 주문 완료</div>
+        </div>
+        <table className="order-items">
+          <thead>
+            <tr className='order-items-menu'>
+              <th className='order-items-menu-info'>주문 상품 정보</th>
+              <th>수량</th>
+              <th>상품 금액</th>
+              <th>할인 금액</th>
+              <th>구매예정가</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="order-content">
-        <div className="order-form-summary">
-          <div className="order-form">
-            <div className="form-section">
-              <div className="form-section-toggle" onClick={() => handleToggle('shippingInfo')}>
-                배송 정보
-                <span>{activeSection === 'shippingInfo' ? '▲' : '▼'}</span>
-              </div>
-              <br />
-              {activeSection === 'shippingInfo' && (
-                <div className="form-section-content">
-                  <div className="form-group">
-                    <label>주문자</label>
-                    <input
-                      type="text"
-                      name="name"
-                      placeholder="이름"
-                      value={orderer.name}
-                      onChange={handleOrdererChange}
-                    />
+          </thead>
+          <tbody>
+            {selectedItems.map((item) => (
+              <tr className="order-item" key={item.id}>
+                <td className="order-item-info">
+                  <img src={item.url} alt={item.name} />
+                  <div className="order-item-details">
+                    <span className="order-item-name">상품: {item.name}</span>
                   </div>
-                  <div className="form-group">
-                    <label>연락처</label>
-                    <input
-                      type="text"
-                      name="phone"
-                      placeholder="연락처"
-                      value={orderer.phone}
-                      onChange={handleOrdererChange}
-                    />
+                </td>
+                <td className="order-item-quantity">
+                  <div className="quantity-controls">
+                    <span>{item.quantity}</span>
                   </div>
-                  {/* <div className="form-group">
-                    <label>이메일</label>
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="이메일"
-                      value={orderer.email}
-                      onChange={handleOrdererChange}
-                    />
-                  </div> */}
-                  <br />
-                  <div className="form-group">
-                    <label>받으시는 분</label>
-                    <input
-                      type="text"
-                      name="name"
-                      placeholder="받으시는 분"
-                      value={recipient.name}
-                      onChange={handleRecipientChange}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>연락처</label>
-                    <input
-                      type="text"
-                      name="phone"
-                      placeholder="연락처"
-                      value={recipient.phone}
-                      onChange={handleRecipientChange}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>주소</label>
-                    <input
-                      type="text"
-                      name="address"
-                      placeholder="주소"
-                      value={recipient.address}
-                      onChange={handleRecipientChange}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>배송 메시지</label>
-                    <input
-                      type="text"
-                      name="message"
-                      placeholder="배송 메시지"
-                      value={recipient.message}
-                      onChange={handleRecipientChange}
-                    />
-                  </div>
-                  <button className="next-button" onClick={handleNextClick}>다음</button>
+                </td>
+                <td className="order-item-price">{formatNumber(item.price)}원</td>
+                <td className="order-item-discount">0원</td>
+                <td className="order-item-total">{formatNumber(item.price * item.quantity)}원</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className="order-content">
+          <div className="order-form-summary">
+            <div className="order-form">
+              <div className="form-section">
+                <div className="form-section-toggle" onClick={() => handleToggle('shippingInfo')}>
+                  배송 정보
+                  <span>{activeSection === 'shippingInfo' ? '▲' : '▼'}</span>
                 </div>
-              )}
-            </div>
-            <div className="form-section">
-              <div className="form-section-toggle" onClick={() => handleToggle('discountShipping')}>
-                할인 · 배송비
-                <span>{activeSection === 'discountShipping' ? '▲' : '▼'}</span>
+                <br />
+                {activeSection === 'shippingInfo' && (
+                  <div className="form-section-content">
+                    <div className="form-group">
+                      <label>주문자</label>
+                      <input
+                        type="text"
+                        name="name"
+                        placeholder="이름"
+                        value={orderer.name}
+                        onChange={handleOrdererChange}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>연락처</label>
+                      <input
+                        type="text"
+                        name="phone"
+                        placeholder="연락처"
+                        value={orderer.phone}
+                        onChange={handleOrdererChange}
+                      />
+                    </div>
+                    <br />
+                    <div className="form-group">
+                      <label>받으시는 분</label>
+                      <input
+                        type="text"
+                        name="name"
+                        placeholder="받으시는 분"
+                        value={recipient.name}
+                        onChange={handleRecipientChange}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>연락처</label>
+                      <input
+                        type="text"
+                        name="phone"
+                        placeholder="연락처"
+                        value={recipient.phone}
+                        onChange={handleRecipientChange}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>주소</label>
+                      <input
+                        type="text"
+                        name="address"
+                        placeholder="주소"
+                        value={recipient.address}
+                        onChange={handleRecipientChange}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>배송 메시지</label>
+                      <input
+                        type="text"
+                        name="message"
+                        placeholder="배송 메시지"
+                        value={recipient.message}
+                        onChange={handleRecipientChange}
+                      />
+                    </div>
+                    <button className="next-button" onClick={handleNextClick}>다음</button>
+                  </div>
+                )}
               </div>
-              <br />
-              {activeSection === 'discountShipping' && (
-                <div className="form-section-content">
-                  <div className="form-group">
-                    <label>할인 금액</label>
-                    <div className="input-group">
-                      <input type="text" value="0원" readOnly />
-                      <button className="apply-coupon-button">쿠폰 변경</button>
+              <div className="form-section">
+                <div className="form-section-toggle" onClick={() => handleToggle('discountShipping')}>
+                  할인 · 배송비
+                  <span>{activeSection === 'discountShipping' ? '▲' : '▼'}</span>
+                </div>
+                <br />
+                {activeSection === 'discountShipping' && (
+                  <div className="form-section-content">
+                    <div className="form-group">
+                      <label>할인 금액</label>
+                      <div className="input-group">
+                        <input type="text" value="0원" readOnly />
+                        <button className="apply-coupon-button">쿠폰 변경</button>
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label>배송비</label>
+                      <div className="input-group">
+                        <input type="text" value={formatNumber(shippingFee) + '원'} readOnly />
+                        <button className="apply-coupon-button">쿠폰 사용</button>
+                      </div>
+                    </div>
+                    <button className="next-button" onClick={handleNextClick}>다음</button>
+                  </div>
+                )}
+              </div>
+              <div className="form-section">
+                <div className="form-section-toggle" onClick={() => handleToggle('paymentMethod')}>
+                  결제 수단
+                  <span>{activeSection === 'paymentMethod' ? '▲' : '▼'}</span>
+                </div>
+                <br />
+                {activeSection === 'paymentMethod' && (
+                  <div className="form-section-content">
+                    <div className="form-group">
+                      <label>
+                        <input
+                          type="radio"
+                          value="신용카드"
+                          checked={paymentMethod === '신용카드'}
+                          onChange={handlePaymentMethodChange}
+                        />
+                        신용카드
+                      </label>
+                    </div>
+                    <div className="form-group">
+                      <label>
+                        <input
+                          type="radio"
+                          value="실시간 계좌이체"
+                          checked={paymentMethod === '실시간 계좌이체'}
+                          onChange={handlePaymentMethodChange}
+                        />
+                        실시간 계좌이체
+                      </label>
+                    </div>
+                    <div className="form-group">
+                      <label>
+                        <input
+                          type="radio"
+                          value="핸드폰결제"
+                          checked={paymentMethod === '핸드폰결제'}
+                          onChange={handlePaymentMethodChange}
+                        />
+                        핸드폰결제
+                      </label>
                     </div>
                   </div>
-                  <div className="form-group">
-                    <label>배송비</label>
-                    <div className="input-group">
-                      <input type="text" value={formatNumber(shippingFee) + '원'} readOnly />
-                      <button className="apply-coupon-button">쿠폰 사용</button>
-                    </div>
-                  </div>
-                  <button className="next-button" onClick={handleNextClick}>다음</button>
-                </div>
-              )}
+                )}
+              </div>
             </div>
-            <div className="form-section">
-              <div className="form-section-toggle" onClick={() => handleToggle('paymentMethod')}>
-                결제 수단
-                <span>{activeSection === 'paymentMethod' ? '▲' : '▼'}</span>
-              </div>
-              <br />
-              {activeSection === 'paymentMethod' && (
-                <div className="form-section-content">
-                  <div className="form-group">
-                    <label>
-                      <input
-                        type="radio"
-                        value="신용카드"
-                        checked={paymentMethod === '신용카드'}
-                        onChange={handlePaymentMethodChange}
-                      />
-                      신용카드
-                    </label>
-                  </div>
-                  <div className="form-group">
-                    <label>
-                      <input
-                        type="radio"
-                        value="실시간 계좌이체"
-                        checked={paymentMethod === '실시간 계좌이체'}
-                        onChange={handlePaymentMethodChange}
-                      />
-                      실시간 계좌이체
-                    </label>
-                  </div>
-                  <div className="form-group">
-                    <label>
-                      <input
-                        type="radio"
-                        value="핸드폰결제"
-                        checked={paymentMethod === '핸드폰결제'}
-                        onChange={handlePaymentMethodChange}
-                      />
-                      핸드폰결제
-                    </label>
-                  </div>
+            <div className="order-summary">
+              <h3>최종 결제 금액 확인</h3>
+              <div className="summary-content">
+                <p className="summary-total">합계: {formatNumber(selectedItems.reduce((total, item) => total + item.price * item.quantity, 0) + shippingFee)}원</p>
+                <br />
+                <div className="summary-details">
+                  <p>상품 금액:</p>
+                  <p>{formatNumber(selectedItems.reduce((total, item) => total + item.price * item.quantity, 0))}원</p>
                 </div>
-              )}
-            </div>
-          </div>
-          <div className="order-summary">
-            <h3>최종 결제 금액 확인</h3>
-            <div className="summary-content">
-              <p className="summary-total">합계: {formatNumber(selectedItems.reduce((total, item) => total + item.price * item.quantity, 0) + shippingFee)}원</p>
-              <br />
-              <div className="summary-details">
-                <p>상품 금액:</p>
-                <p>{formatNumber(selectedItems.reduce((total, item) => total + item.price * item.quantity, 0))}원</p>
+                <div className="summary-details">
+                  <p>할인 금액:</p>
+                  <p>0원</p>
+                </div>
+                <div className="summary-details">
+                  <p>쿠폰 할인 금액:</p>
+                  <p>0원</p>
+                </div>
+                <div className="summary-details">
+                  <p>배송비:</p>
+                  <p>{formatNumber(shippingFee)}원</p>
+                </div>
+                <hr />
+                <div className="terms">
+                  <label><input type="checkbox" /> 전체 선택</label>
+                  <label><input type="checkbox" /> 개인정보 수집·이용 동의 (필수) <a href="#">약관보기</a></label>
+                  <label><input type="checkbox" /> 이벤트, 할인쿠폰 등 혜택 제공을 위한 수신 동의 (선택)</label>
+                </div>
+                <button className="order-submit-button" onClick={handleSubmit}>결제하기</button>
               </div>
-              <div className="summary-details">
-                <p>할인 금액:</p>
-                <p>0원</p>
-              </div>
-              <div className="summary-details">
-                <p>쿠폰 할인 금액:</p>
-                <p>0원</p>
-              </div>
-              <div className="summary-details">
-                <p>배송비:</p>
-                <p>{formatNumber(shippingFee)}원</p>
-              </div>
-              <hr />
-              <div className="terms">
-                <label><input type="checkbox" /> 전체 선택</label>
-                <label><input type="checkbox" /> 개인정보 수집·이용 동의 (필수) <a href="#">약관보기</a></label>
-                <label><input type="checkbox" /> 이벤트, 할인쿠폰 등 혜택 제공을 위한 수신 동의 (선택)</label>
-              </div>
-              <button className="order-submit-button" onClick={handleSubmit}>결제하기</button>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <Footer />
+      {showOrderComplete && <OrderComplete onClose={closeOrderCompleteModal} />}
+    </>
   );
 }
 
