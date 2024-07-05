@@ -13,28 +13,44 @@ export const getAllOrders = async (req, res) => {
 
 //주문 아이디로 조회 - 특정 주문 아이디에 해당하는 주문을 조회함
 export const getOrderById = async (req, res) => {
-    const { id } = req.params;
-    try {
-      const [rows] = await pool.query(`
+  const { id } = req.params;
+  try {
+    const [rows] = await pool.query(`
         SELECT o.id AS order_id, o.user_id, o.total, s.delivery_status, s.waybill_number
         FROM \`order\` o
         JOIN status s ON o.status_id = s.id
         WHERE o.id = ?`, [id]);
-      res.json(rows);
-    } catch (err) {
-      res.status(500).json({ message: err.message });
-    }
-  };
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
 
 // 유저 아이디로 조회 - 특정 유저 아이디에 해당하는 모든 주문을 조회함
 export const getOrdersByUserId = async (req, res) => {
   const { user_id } = req.params;
   try {
     const [rows] = await pool.query(`
-      SELECT o.id AS order_id, o.user_id, o.total, o.order_date, s.delivery_status, s.waybill_number
-      FROM \`order\` o
-      JOIN status s ON o.status_id = s.id
-      WHERE o.user_id = ?
+      SELECT 
+      \`order\`.id,
+      MAX(\`order\`.user_id) AS user_id,
+      MAX(\`order\`.total) AS total,
+      MAX(\`order\`.status_id) AS status_id,
+      MAX(\`order\`.order_date) AS order_date,
+      MAX(order_item.id) AS orderitem_id,
+      MAX(order_item.quantity) AS quantity,
+      MAX(status.delivery_status) AS delivery_status, 
+      MAX(status.waybill_number) AS waybill_number, 
+      MAX(product.id) AS product_id, 
+      MAX(product.name) AS name, 
+      MAX(product_image.url) AS product_image_url
+      FROM \`order\`
+      JOIN order_item ON order_item.order_id = \`order\`.id
+      JOIN status ON status.id = \`order\`.status_id
+      JOIN product ON product.id = order_item.product_id
+      JOIN product_image ON product_image.product_id = product.id
+      WHERE \`order\`.user_id = ?
+      GROUP BY \`order\`.id;
     `, [user_id]);
     res.json(rows);
   } catch (err) {
