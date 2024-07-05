@@ -1,9 +1,15 @@
-import React from "react";
-import AdminHeader from "../adminHeader/AdminHeader";
-import AdminSidebar from "../adminSidebar/AdminSidebar";
+import React, { useEffect, useState, useContext, useRef } from "react";
+import axios from "axios";
+import useFetch from "../../../hooks/useFetch";
 import "./orderManage.css";
 
 const OrderManage = () => {
+  // 주문 내역 전체 조회
+  // const apiUrl = process.env.REACT_APP_API_URL;
+  const apiUrl = 'http://localhost:8080/api'
+  const { data, loading, error } = useFetch(`${apiUrl}/order`);
+  console.log("data : ", data);
+
   return (
     <div className="orderManage-wrapper">
       <div className="orderManage-content-wrapper">
