@@ -2,7 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { useCallback, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Cart, { CartProvider } from "./pages/cart/Cart";
+import Cart from "./pages/cart/Cart";
 import Order from "./pages/order/Order";
 import OrderComplete from "./pages/order/OrderComplete";
 import ReviewWrite from "./pages/review/ReviewWrite";
@@ -37,22 +37,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/Cart"
-          element={
-            <CartProvider>
-              <Cart />
-            </CartProvider>
-          }
-        />
-        <Route
-          path="/Order"
-          element={
-            <CartProvider>
-              <Order />
-            </CartProvider>
-          }
-        />
+        <Route path="/Cart" element={<Cart />} />
+        <Route path="/Order" element={<Order />} />
         <Route path="/Order-Complete" element={<OrderComplete />} />
         <Route path="/ReviewWrite" element={<ReviewWrite />} />
         <Route path="/addnotice" element={<AddNotice />} />
@@ -78,14 +64,7 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/updateusermember/:id" element={<UpdateUserMember />} />
         <Route path="/myqna" element={<Myqna />} />
-        <Route
-          path="/sanrio/:category/:id"
-          element={
-            <CartProvider>
-              <SanDetail />
-            </CartProvider>
-          }
-        />
+        <Route path="/sanrio/:category/:id" element={<SanDetail />} />
         <Route path="/modal" element={<Modal />} />
       </Routes>
     </BrowserRouter>

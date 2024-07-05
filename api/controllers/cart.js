@@ -32,6 +32,7 @@ export const updateCart = async (req, res) => {
     );
     res.status(200).json({ result });
   } catch (error) {
+    console.error("Error updating cart:", error);
     res.status(400).json({ error: error.message });
   }
 };
@@ -47,13 +48,15 @@ export const deleteCart = async (req, res) => {
     );
     res.status(200).json({ result });
   } catch (error) {
+    console.error("Error deleting from cart:", error);
     res.status(400).json({ error: error.message });
   }
 };
 
 // 장바구니 조회
 export const getCartByUser = async (req, res) => {
-  const user_id = req.user.userId; // 현재 로그인된 사용자 ID
+  const userId = req.params.userId; // 현재 로그인된 사용자 ID
+  console.log(`Fetching cart items for user: ${userId}`);
 
   try {
     const [result] = await pool.query(
@@ -62,10 +65,11 @@ export const getCartByUser = async (req, res) => {
       JOIN product ON product.id = cart.product_id
       JOIN product_image ON product.id = product_image.product_id
       WHERE cart.user_id = ?`,
-      [user_id]
+      [userId]
     );
     res.status(200).json({ result });
   } catch (error) {
+    console.error(`Error fetching cart items for user: ${userId}`, error);
     res.status(400).json({ error: error.message });
   }
 };

@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { AuthContextProvider } from './Context/AuthContext';
+import { CartProvider } from './Context/CartContext';
 import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <AuthContextProvider>
-      <App />
+      <CartProvider>
+        <App />
+      </CartProvider>
     </AuthContextProvider>
   </React.StrictMode>
 );
