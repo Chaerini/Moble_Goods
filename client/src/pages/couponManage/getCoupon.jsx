@@ -8,8 +8,6 @@ import {
     faPen,
     faPlus
   } from "@fortawesome/free-solid-svg-icons";
-import AdminHeader from '../admin/adminHeader/AdminHeader';
-import AdminSidebar from '../admin/adminSidebar/AdminSidebar';
 import Search from '../../component/search/search';
 const GetCoupon = () => {
     const navigate=useNavigate();
@@ -40,8 +38,6 @@ const GetCoupon = () => {
     }
     return (
         <div>
-        <AdminHeader/>
-        <AdminSidebar/>
         <div className="product-container">
             <Search />
             <FontAwesomeIcon icon={faPlus} onClick={() => navigate("/addcoupon")} />
