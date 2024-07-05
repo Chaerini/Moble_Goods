@@ -4,9 +4,9 @@ import { verifyTokenNext } from '../utils/verifyToken.js';
 
 const router = express.Router();
 
-router.post('/', verifyTokenNext, createCart);
-router.put('/:id', verifyTokenNext, updateCart);
-router.delete('/:id', verifyTokenNext, deleteCart);   
-router.get('/', verifyTokenNext, getCartByUser);
+router.post('/:userId', verifyTokenNext, createCart);
+router.put('/:userId/:id', verifyTokenNext, updateCart);
+router.delete('/:userId/:id', verifyTokenNext, deleteCart);   
+router.get('/:userId', verifyTokenNext, getCartByUser);
 
 export default router;

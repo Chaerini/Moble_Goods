@@ -3,115 +3,121 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../../component/navbar/navbar';
 import Header from '../../component/header/header';
 import Footer from '../../component/footer/footer';
+import axios from 'axios';
 import './Cart.css';
+import { AuthContext } from '../../Context/AuthContext';
 
-// CartContext 생성
 export const CartContext = createContext();
 
 export function CartProvider({ children }) {
+  const { user } = useContext(AuthContext);
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const apiUrl = process.env.REACT_APP_API_URL;
 
-  // 서버로부터 장바구니 항목을 가져오는 함수
+  useEffect(() => {
+    if (user) {
+      fetchCartItems();
+    }
+  }, [user]);
+
   const fetchCartItems = async () => {
+    setLoading(true);
     try {
-      const response = await fetch(`${apiUrl}/cart`, {
+      console.log(user.id)
+      const response = await fetch(`${apiUrl}/carts/${user.id}`, {
+
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
+          'auth-token': user.token,
+          'Content-Type': 'application/json',
+        },
       });
-      if (response.ok) {
-        const data = await response.json();
-        setCartItems(data.result);
-      } else {
-        console.error('Failed to fetch cart items:', response.status, response.statusText);
-        setError(`Failed to fetch cart items: ${response.status} ${response.statusText}`);
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch cart items1: ${response.status} ${response.statusText}`);
       }
+
+      const data = await response.json();
+      console.log("장바구니 : ", data.items);
+      setCartItems(data.items);
     } catch (error) {
-      console.error('Error fetching cart items:', error);
       setError(`Error fetching cart items: ${error.message}`);
     } finally {
       setLoading(false);
     }
   };
 
-  useEffect(() => {
-    fetchCartItems();
-  }, []);
-
-  // 장바구니에 항목을 추가하는 함수
   const addToCart = async (item) => {
     try {
-      const response = await fetch(`${apiUrl}/cart`, {
-        method: 'POST',
+      const response = await axios.post(`${apiUrl}/carts/${user.id}`, {
+        product_id: item.id,
+        quantity: item.quantity,
+        checking: item.checking
+      }, {
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${user.token}`,
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          product_id: item.id,
-          quantity: item.quantity,
-          checking: item.checking
-        })
+        withCredentials: true
       });
-      if (response.ok) {
-        const result = await response.json();
-        setCartItems([...cartItems, { ...item, id: result.insertId }]);
+
+      if (response.status === 201) {
+        setCartItems([...cartItems, { ...item, id: response.data.insertId }]);
       } else {
-        console.error('Failed to add item to cart:', response.status, response.statusText);
         setError(`Failed to add item to cart: ${response.status} ${response.statusText}`);
       }
     } catch (error) {
-      console.error('Error adding item to cart:', error);
-      setError(`Error adding item to cart: ${error.message}`);
+      setError(error.response ?
+        `Error adding item to cart: ${error.response.status} ${error.response.statusText}` :
+        `Error adding item to cart: ${error.message}`
+      );
     }
   };
 
-  // 장바구니 항목을 수정하는 함수
   const updateCartItem = async (id, quantity, checking) => {
     try {
-      const response = await fetch(`${apiUrl}/cart/${id}`, {
-        method: 'PUT',
+      const response = await axios.put(`${apiUrl}/carts/${user.id}/${id}`, { quantity, checking }, {
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${user.token}`,
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ quantity, checking })
+        withCredentials: true
       });
-      if (response.ok) {
-        const result = await response.json();
+
+      if (response.status === 200) {
         setCartItems(cartItems.map(item => item.id === id ? { ...item, quantity, checking } : item));
       } else {
-        console.error('Failed to update cart item:', response.status, response.statusText);
         setError(`Failed to update cart item: ${response.status} ${response.statusText}`);
       }
     } catch (error) {
-      console.error('Error updating cart item:', error);
-      setError(`Error updating cart item: ${error.message}`);
+      setError(error.response ?
+        `Error updating cart item: ${error.response.status} ${error.response.statusText}` :
+        `Error updating cart item: ${error.message}`
+      );
     }
   };
 
-  // 장바구니 항목을 삭제하는 함수
   const deleteCartItem = async (id) => {
     try {
-      const response = await fetch(`${apiUrl}/cart/${id}`, {
-        method: 'DELETE',
+      const response = await axios.delete(`${apiUrl}/carts/${user.id}/${id}`, {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
+          'Authorization': `Bearer ${user.token}`,
+          'Content-Type': 'application/json'
+        },
+        withCredentials: true
       });
-      if (response.ok) {
-        const result = await response.json();
+
+      if (response.status === 200) {
         setCartItems(cartItems.filter(item => item.id !== id));
       } else {
-        console.error('Failed to delete cart item:', response.status, response.statusText);
         setError(`Failed to delete cart item: ${response.status} ${response.statusText}`);
       }
     } catch (error) {
-      console.error('Error deleting cart item:', error);
-      setError(`Error deleting cart item: ${error.message}`);
+      setError(error.response ?
+        `Error deleting cart item: ${error.response.status} ${error.response.statusText}` :
+        `Error deleting cart item: ${error.message}`
+      );
     }
   };
 
