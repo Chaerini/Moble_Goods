@@ -83,12 +83,14 @@
 }
 .cart-item {
   border-bottom: 1.5px solid #ddd;
+  padding-bottom: -100px;
 }
 
 .cart-item-info {
   display: flex;
   align-items: center;
   height: 200px;
+  padding-top: 50px;
 }
 
 .cart-item-info img {
@@ -149,9 +151,6 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin-top: 20px;
-  padding-top: 10px;
-  border-top: 2px solid #ddd;
   width: 100%;
   font-size: 18px;
 }
@@ -192,4 +191,5 @@
 }
 .cart-guide p {
   color: red;
+  margin-bottom: 10px;
 }
