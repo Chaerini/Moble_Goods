@@ -65,6 +65,7 @@
   border-collapse: collapse;
 }
 
+
 .cart-items th, .cart-items td {
   padding: 20px;
   text-align: center;
@@ -80,6 +81,9 @@
   flex: 0 0 50px;
   text-align: center;
 }
+.cart-item {
+  border-bottom: 1.5px solid #ddd;
+}
 
 .cart-item-info {
   display: flex;
@@ -88,13 +92,14 @@
 }
 
 .cart-item-info img {
-  width: 80px;
+  width: 130px;
   margin-right: 20px;
 }
 
 .cart-item-details {
   display: flex;
   flex-direction: column;
+  font-size: 20px;
 }
 
 .cart-item-name {

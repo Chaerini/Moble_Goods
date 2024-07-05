@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../../component/navbar/navbar';
 import Header from '../../component/header/header';
@@ -10,6 +10,10 @@ export default function Cart() {
   const { cartItems, setCartItems, updateCartItem, deleteCartItem, loading, error } = useContext(CartContext);
   const [selectAll, setSelectAll] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log('cartItems:', cartItems); // cartItems를 로그로 출력하여 확인
+  }, [cartItems]);
 
   const handleSelectAll = () => {
     setSelectAll(!selectAll);
@@ -33,12 +37,16 @@ export default function Cart() {
       alert('주문할 상품을 선택해주세요.');
       return;
     }
-    navigate('/order');
+    navigate('/order', { state: { selectedItems } });
   };
 
   const formatNumber = (num) => {
     return num.toLocaleString('ko-KR');
   };
+
+  const selectedTotalAmount = cartItems
+    .filter(item => item.selected)
+    .reduce((total, item) => total + item.price * item.quantity, 0);
 
   return (
     <>
@@ -99,7 +107,7 @@ export default function Cart() {
                   <td className="cart-item-info">
                     <img src={item.url} alt={item.name} />
                     <div className="cart-item-details">
-                      <span className="cart-item-name">{item.name}</span>
+                      <span className="cart-item-name">{item.name}상품: </span>
                     </div>
                   </td>
                   <td className="cart-item-price">{formatNumber(item.price)}원</td>
@@ -121,8 +129,8 @@ export default function Cart() {
         )}
         <div className="cart-summary">
           <div className="cart-summary-info">
-            <span>결제 예정 금액({cartItems.length}): </span>
-            <span><h1>{formatNumber(cartItems.reduce((total, item) => total + item.price * item.quantity, 0))}원</h1></span>
+            <span>결제 예정 금액({cartItems.filter(item => item.selected).length}): </span>
+            <span><h1>{formatNumber(selectedTotalAmount)}원</h1></span>
           </div>
           <button onClick={handleOrderClick}>선택상품 주문하기</button>
         </div>
@@ -130,7 +138,9 @@ export default function Cart() {
           <h3>이용안내</h3>
           <br />
           <p>·최종 편집일로부터 1년이 지난 상품은 장바구니에서 삭제됩니다.</p>
-          <p>·총 결제금액이 5만원 이상인 경우 무료 배송 혜택을 받으실 수 있습니다.</p>
+          ·총 결제금액이 10만원 이상인 경우 무료 배송 혜택을 받으실 수 있습니다.
+          <br />
+          <br />
           <br />
         </div>
       </div>

@@ -1,9 +1,12 @@
-import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { CartContext } from '../../Context/CartContext'; // CartContext 경로 수정
 import './Order.css';
 
 function Order() {
+  const location = useLocation();
+  const { selectedItems } = location.state || { selectedItems: [] };
+
   const { cartItems } = useContext(CartContext);
   const [orderer, setOrderer] = useState({
     name: '',
@@ -17,8 +20,18 @@ function Order() {
     message: '',
   });
   const [activeSection, setActiveSection] = useState('shippingInfo');
+  const [shippingFee, setShippingFee] = useState(3000); // 배송비 상태 추가
   const [paymentMethod, setPaymentMethod] = useState('신용카드');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const totalAmount = selectedItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    if (totalAmount >= 100000) {
+      setShippingFee(0);
+    } else {
+      setShippingFee(3000);
+    }
+  }, [selectedItems]);
 
   const handleToggle = (section) => {
     setActiveSection(section);
@@ -48,6 +61,10 @@ function Order() {
     navigate('/order-complete');
   };
 
+  const formatNumber = (num) => {
+    return num.toLocaleString('ko-KR');
+  };
+
   return (
     <div className="order-container">
       <h1>주문·결제</h1>
@@ -59,7 +76,7 @@ function Order() {
       <table className="order-items">
         <thead>
           <tr className='order-items-menu'>
-            <th>주문 상품 정보</th>
+            <th className='order-items-menu-info'>주문 상품 정보</th>
             <th>수량</th>
             <th>상품 금액</th>
             <th>할인 금액</th>
@@ -67,25 +84,22 @@ function Order() {
           </tr>
         </thead>
         <tbody>
-          {cartItems.map((item) => (
+          {selectedItems.map((item) => (
             <tr className="order-item" key={item.id}>
               <td className="order-item-info">
-                <img src={item.image} alt={item.name} />
+                <img src={item.url} alt={item.name} />
                 <div className="order-item-details">
-                  <span className="order-item-name">{item.name}</span>
-                  <span className="order-item-option">옵션: {item.option}</span>
+                  <span className="order-item-name">상품: {item.name}</span>
                 </div>
               </td>
               <td className="order-item-quantity">
                 <div className="quantity-controls">
-                  <button>-</button>
                   <span>{item.quantity}</span>
-                  <button>+</button>
                 </div>
               </td>
-              <td className="order-item-price">{item.price}원</td>
+              <td className="order-item-price">{formatNumber(item.price)}원</td>
               <td className="order-item-discount">0원</td>
-              <td className="order-item-total">{item.price * item.quantity}원</td>
+              <td className="order-item-total">{formatNumber(item.price * item.quantity)}원</td>
             </tr>
           ))}
         </tbody>
@@ -121,7 +135,7 @@ function Order() {
                       onChange={handleOrdererChange}
                     />
                   </div>
-                  <div className="form-group">
+                  {/* <div className="form-group">
                     <label>이메일</label>
                     <input
                       type="email"
@@ -130,7 +144,7 @@ function Order() {
                       value={orderer.email}
                       onChange={handleOrdererChange}
                     />
-                  </div>
+                  </div> */}
                   <br />
                   <div className="form-group">
                     <label>받으시는 분</label>
@@ -194,7 +208,7 @@ function Order() {
                   <div className="form-group">
                     <label>배송비</label>
                     <div className="input-group">
-                      <input type="text" value="3,000원" readOnly />
+                      <input type="text" value={formatNumber(shippingFee) + '원'} readOnly />
                       <button className="apply-coupon-button">쿠폰 사용</button>
                     </div>
                   </div>
@@ -250,11 +264,11 @@ function Order() {
           <div className="order-summary">
             <h3>최종 결제 금액 확인</h3>
             <div className="summary-content">
-              <p className="summary-total">합계: {cartItems.reduce((total, item) => total + item.price * item.quantity, 0) + 3000}원</p>
+              <p className="summary-total">합계: {formatNumber(selectedItems.reduce((total, item) => total + item.price * item.quantity, 0) + shippingFee)}원</p>
               <br />
               <div className="summary-details">
                 <p>상품 금액:</p>
-                <p>{cartItems.reduce((total, item) => total + item.price * item.quantity, 0)}원</p>
+                <p>{formatNumber(selectedItems.reduce((total, item) => total + item.price * item.quantity, 0))}원</p>
               </div>
               <div className="summary-details">
                 <p>할인 금액:</p>
@@ -266,7 +280,7 @@ function Order() {
               </div>
               <div className="summary-details">
                 <p>배송비:</p>
-                <p>3,000원</p>
+                <p>{formatNumber(shippingFee)}원</p>
               </div>
               <hr />
               <div className="terms">
@@ -274,7 +288,7 @@ function Order() {
                 <label><input type="checkbox" /> 개인정보 수집·이용 동의 (필수) <a href="#">약관보기</a></label>
                 <label><input type="checkbox" /> 이벤트, 할인쿠폰 등 혜택 제공을 위한 수신 동의 (선택)</label>
               </div>
-              <button className="submit-button" onClick={handleSubmit}>결제하기</button>
+              <button className="order-submit-button" onClick={handleSubmit}>결제하기</button>
             </div>
           </div>
         </div>

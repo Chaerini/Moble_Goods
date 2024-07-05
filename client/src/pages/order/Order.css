@@ -53,19 +53,27 @@
   border-bottom: 1px solid #ddd;
   background-color: #fafafa;
 }
+
 .order-item {
   font-size: 18px;
 }
 
-.order-item img {
-  width: 80px;
-  margin-right: 20px;
+.order-item-info {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
+.order-item img {
+  width: 80px;
+  margin-right: 40px; /* 이미지와 상품 이름 사이 간격 조절 */
+}
+s
 .order-item-details {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  color: #888;
 }
 
 .order-item-name {
@@ -166,7 +174,6 @@
 
 .order-summary h3 {
   margin-bottom: 20px;
-
 }
 
 .summary-content {
@@ -179,12 +186,11 @@
 .summary-total {
   color: red;
   font-size: 1.5em;
-
 }
 
 .terms {
   margin: 20px 0;
-  background-color:#e7e3e37e;
+  background-color: #e7e3e37e;
 }
 
 .terms label {
@@ -192,7 +198,7 @@
   margin-bottom: 10px;
 }
 
-.submit-button {
+.order-submit-button {
   width: 100%;
   padding: 10px 0;
   background-color: #ff5722;
@@ -202,6 +208,12 @@
   font-size: 1.1em;
 }
 
-.submit-button:hover {
+.order-submit-button:hover {
   background-color: #e64a19;
+}
+
+/* 수량 텍스트 오른쪽 정렬 */
+.order-items th:nth-child(3) {
+  text-align: right;
+  padding-right: 50px; /* 원하는 만큼 이동 */
 }
