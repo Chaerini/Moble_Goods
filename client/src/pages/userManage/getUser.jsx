@@ -10,16 +10,14 @@ import { faTrash, faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useRef } from 'react';
 const GetUser = () => {
     const [mpData,setMpData] = useState({
+        userId:"",
         name:"",
         address:"",
         phone:"",
-        membership_name:""
 
     });
     const [modalOpen, setModalOpen] = useState(false);
     const modalBackground = useRef();
-    const {user,dispatch} = useContext(AuthContext);
-    const navigate=useNavigate();
     const [data, setData] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
@@ -31,6 +29,7 @@ const GetUser = () => {
                 console.error('Error fetching data', error);
             }
         };
+        
         fetchData();
     }, []);
     const handleDelete  = async(id) =>{
@@ -47,10 +46,25 @@ const GetUser = () => {
         const{name,value}=e.target;
         setMpData((prev) => ({...prev,[name]:value}));
     };
-    const handleClick = async (e) =>{
+
+
+    const handleEditClick = async(user) =>{
+
+        console.log("user:",user);
+        setMpData({
+            name: user.name,
+            address: user.address,
+            phone: user.phone,
+          });
+        setModalOpen(true);
+        console.log(mpData)
+    }
+
+    const handleEditAction = async () =>{
         setModalOpen(false);
+        console.log("=======data=====",)
         try {
-            const res = await axios.put(`http://localhost:8080/api/users/`+user.id, mpData, { withCredentials: true });
+            await axios.put(`http://localhost:8080/api/users/`,mpData, { withCredentials: true });
             alert('회원 정보가 수정되었습니다.');
         } catch (err) {
             alert('회원정보 수정을 실패했습니다. 다시 시도해주세요.')
@@ -82,23 +96,28 @@ const GetUser = () => {
                             <td className='td'>{user.membership_name}</td>
                             <td className='td'>
                                 <FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(user.id)} />
-                                <FontAwesomeIcon icon={faPen} onClick={() => {setModalOpen(true)}}/>
+                                <FontAwesomeIcon icon={faPen} onClick={() => handleEditClick(user)}/>
                                 {
           modalOpen &&
-          <div className={'modal-container'} ref={modalBackground}>
+    <div className={'modal-container'} ref={modalBackground} onClick={e => {
+        if(e.target===modalBackground.currnet){
+            setModalOpen(false);
+        }
+    }}>
+        
         <div className={'modal-content'}>
             <div className="Product">
                 <div className="product">
                 <label>고객정보 수정하기</label>
-                <input type="text" onChange={handleChange} name="name" placeholder="이름" className="product-input"  />
-                <input type="text" onChange={handleChange} name="address" placeholder="주소" className="product-input"/>
-                <input type="number" onChange={handleChange} name="phone" placeholder="핸드폰" className="product-input"/>
-                <input type="number" onChange={handleChange} name="membership_id" placeholder="멤버십" className="product-input" />
-                <button onClick={handleClick} className="btn">수정</button>
+                <input type="hidden"  name="id"  className="product-input" value={mpData.userId}/>
+                <input type="text" onChange={handleChange} name="name" placeholder="이름" className="product-input" value={mpData.name}/>
+                <input type="text" onChange={handleChange} name="address" placeholder="주소" className="product-input" value={mpData.address}/>
+                <input type="text" onChange={handleChange} name="phone" placeholder="핸드폰" className="product-input" value={mpData.phone}/>
+                <button onClick={handleEditAction} className="btn">수정</button>
+                </div>
             </div>
         </div>
     </div>
-          </div>
         }
                             </td>     
                         </tr>

@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
 import './product.css';
 const UpdateProduct = () => {
+    const apiUrl=process.env.REACT_APP_API_URL
     const [product,setProduct] = useState({
         name:"",
         price:"",

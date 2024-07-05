@@ -6,8 +6,6 @@ import Search from '../../component/search/search';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
 import "./Notice.css";
-import AdminSidebar from '../admin/adminSidebar/AdminSidebar';
-import AdminHeader from '../admin/adminHeader/AdminHeader';
 const GetProduct = () => {
     const navigate = useNavigate();
     const [data, setData] = useState([]);
@@ -45,9 +43,10 @@ const GetProduct = () => {
 
     return (
         <div>
-==        <div className="product-container">
+ 
+        <div className="product-container">
             <Search />
-            {/* <FontAwesomeIcon icon={faPlus} onClick={() => navigate("/addproduct")} />
+            <FontAwesomeIcon icon={faPlus} onClick={() => navigate("/addproduct")} />
             <h2 className='notice'>상품</h2>
             <table className='notice-table'>
                 <thead>
@@ -87,7 +86,7 @@ const GetProduct = () => {
                     const sortedData = [...data].sort((a, b) => b.name.localeCompare(a.name));
                     setData(sortedData);
                 }} className='btn'>이름순 정렬</button>
-            </div> */}
+            </div>
         </div>
     </div>
     );
