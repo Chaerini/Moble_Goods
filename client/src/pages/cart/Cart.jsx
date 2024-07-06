@@ -8,11 +8,18 @@ import { CartContext } from '../../Context/CartContext'; // CartContext 파일 �
 
 export default function Cart() {
   const { cartItems, setCartItems, updateCartItem, deleteCartItem, loading, error } = useContext(CartContext);
+  const [allChecked, setAllChecked] = useState(false);
   const [selectAll, setSelectAll] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     console.log('cartItems:', cartItems); // cartItems를 로그로 출력하여 확인
+  }, [cartItems]);
+
+  // 전체 선택 상태 업데이트
+  useEffect(() => {
+    const allSelected = cartItems.every(item => item.selected);
+    setAllChecked(allSelected);
   }, [cartItems]);
 
   const handleSelectAll = () => {
@@ -22,6 +29,13 @@ export default function Cart() {
 
   const handleSelectItem = (id) => {
     setCartItems(cartItems.map(item => item.id === id ? { ...item, selected: !item.selected } : item));
+  };
+
+  // 전체 선택 체크박스 핸들러
+  const handleAllCheckedChange = (e) => {
+    const checked = e.target.checked;
+    setAllChecked(checked);
+    setCartItems(cartItems.map(item => ({ ...item, selected: checked })));
   };
 
   const handleQuantityChange = (id, amount) => {
@@ -74,13 +88,13 @@ export default function Cart() {
               <tr className='cart-items-menu'>
                 <th>
                   <div className="checkbox">
-                    <input
-                      type="checkbox"
-                      name="webCartList-select-all"
-                      value="true"
-                      checked={selectAll}
-                      onChange={handleSelectAll}
-                    />
+                    <div className="checkbox">
+                      <input
+                        type="checkbox"
+                        checked={allChecked}
+                        onChange={handleAllCheckedChange}
+                      />
+                    </div>
                     <label htmlFor="webCartList-select-all" style={{ zIndex: 4 }}></label>
                   </div>
                 </th>
@@ -143,7 +157,7 @@ export default function Cart() {
           <br />
           <br />
         </div>
-      </div>
+      </div >
       <Footer />
     </>
   );

@@ -221,6 +221,14 @@ s
   margin-bottom: 10px;
 }
 
+.order-submit-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+.order-submit-button:disabled:hover {
+  background-color: #ccc;
+}
+
 .order-submit-button {
   width: 100%;
   padding: 10px 0;

@@ -28,9 +28,15 @@ function Order() {
     address: '',
     message: '',
   });
+
+
+
   const [activeSection, setActiveSection] = useState('shippingInfo');
   const [shippingFee, setShippingFee] = useState(3000); // 배송비 상태 추가
   const [paymentMethod, setPaymentMethod] = useState('신용카드');
+  const [allChecked, setAllChecked] = useState(false);
+  const [privacyChecked, setPrivacyChecked] = useState(false);
+  const [promoChecked, setPromoChecked] = useState(false);
   const [showOrderComplete, setShowOrderComplete] = useState(false);
   const [orderId, setOrderId] = useState(null);
   const navigate = useNavigate();
@@ -77,6 +83,37 @@ function Order() {
   const handlePaymentMethodChange = (e) => {
     setPaymentMethod(e.target.value);
   };
+
+  // 전체 선택 체크박스 핸들러
+  const handleAllCheckedChange = (e) => {
+    const checked = e.target.checked;
+    setAllChecked(checked);
+    setPrivacyChecked(checked);
+    setPromoChecked(checked);
+  };
+
+  // 개별 체크박스 핸들러
+  const handlePrivacyCheckedChange = (e) => {
+    const checked = e.target.checked;
+    setPrivacyChecked(checked);
+    if (!checked) {
+      setAllChecked(false);
+    } else if (promoChecked) {
+      setAllChecked(true);
+    }
+  };
+
+  const handlePromoCheckedChange = (e) => {
+    const checked = e.target.checked;
+    setPromoChecked(checked);
+    if (!checked) {
+      setAllChecked(false);
+    } else if (privacyChecked) {
+      setAllChecked(true);
+    }
+  };
+
+  const isSubmitEnabled = privacyChecked;
 
   const handleCopyOrdererInfo = () => {
     setRecipient((prevRecipient) => ({
@@ -344,11 +381,11 @@ function Order() {
                 </div>
                 <hr />
                 <div className="terms">
-                  <label><input type="checkbox" /> 전체 선택</label>
-                  <label><input type="checkbox" /> 개인정보 수집·이용 동의 (필수) <a href="#">약관보기</a></label>
-                  <label><input type="checkbox" /> 이벤트, 할인쿠폰 등 혜택 제공을 위한 수신 동의 (선택)</label>
+                  <label><input type="checkbox" checked={allChecked} onChange={handleAllCheckedChange} /> 전체 선택</label>
+                  <label><input type="checkbox" checked={privacyChecked} onChange={handlePrivacyCheckedChange} /> 개인정보 수집·이용 동의 (필수) <a href="#">약관보기</a></label>
+                  <label><input type="checkbox" checked={promoChecked} onChange={handlePromoCheckedChange} /> 이벤트, 할인쿠폰 등 혜택 제공을 위한 수신 동의 (선택)</label>
                 </div>
-                <button className="order-submit-button" onClick={handleSubmit}>결제하기</button>
+                <button className="order-submit-button" onClick={handleSubmit} disabled={!isSubmitEnabled}>결제하기</button>
               </div>
             </div>
           </div>
