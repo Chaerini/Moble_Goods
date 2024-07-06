@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CartContext } from '../../Context/CartContext'; // CartContext 경로 수정
+import { AuthContext } from '../../Context/AuthContext';
 import Navbar from '../../component/navbar/navbar';
 import Header from '../../component/header/header';
 import Footer from '../../component/footer/footer';
@@ -11,6 +12,7 @@ import './Order.css';
 function Order() {
   const location = useLocation();
   const { selectedItems } = location.state || { selectedItems: [] };
+  const { user } = useContext(AuthContext); // UserContext에서 로그인된 유저 정보를 가져옵니다.
 
   const { cartItems } = useContext(CartContext);
   const [orderer, setOrderer] = useState({
@@ -63,12 +65,12 @@ function Order() {
     setPaymentMethod(e.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     try {
       const orderData = {
-        user_id: 1, // 로그인된 유저의 ID를 여기에 추가
+        user_id: user.id,
         total: selectedItems.reduce((total, item) => total + item.price * item.quantity, 0) + shippingFee,
-        status_id: 1, // 기본 상태 ID를 설정 (예: '주문 접수' 상태)
+        delivery_status: "배송완료", // 배송 상태를 "배송완료"로 설정
         items: selectedItems.map(item => ({
           product_id: item.id,
           quantity: item.quantity,
@@ -77,9 +79,10 @@ function Order() {
       };
       // 서버에 주문 데이터 전송
       await axios.post('/api/orders', orderData);
+
       setShowOrderComplete(true); // 주문 완료 모달을 표시
     } catch (error) {
-      console.log('주문을 완료하는 중 오류가 발생했습니다:', error);
+      console.error('주문을 완료하는 중 오류가 발생했습니다:', error);
     }
   };
 
