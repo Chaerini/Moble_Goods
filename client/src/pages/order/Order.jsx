@@ -20,7 +20,7 @@ function Order() {
   const [orderer, setOrderer] = useState({
     name: '',
     phone: '',
-    // email: '',
+    address: '',
   });
   const [recipient, setRecipient] = useState({
     name: '',
@@ -34,6 +34,16 @@ function Order() {
   const [showOrderComplete, setShowOrderComplete] = useState(false);
   const [orderId, setOrderId] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      setOrderer({
+        name: user.name,
+        phone: user.phone,
+        address: user.address,
+      });
+    }
+  }, [user]);
 
   useEffect(() => {
     const totalAmount = selectedItems.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -66,6 +76,15 @@ function Order() {
 
   const handlePaymentMethodChange = (e) => {
     setPaymentMethod(e.target.value);
+  };
+
+  const handleCopyOrdererInfo = () => {
+    setRecipient((prevRecipient) => ({
+      ...prevRecipient,
+      name: orderer.name,
+      phone: orderer.phone,
+      address: orderer.address, // 주소 복사
+    }));
   };
 
   const handleSubmit = async () => {
@@ -184,6 +203,9 @@ function Order() {
                       />
                     </div>
                     <br />
+                    <div className="orderer-info-button">
+                      <button onClick={handleCopyOrdererInfo}> 주문자 정보와 동일 </button>
+                    </div>
                     <div className="form-group">
                       <label>받으시는 분</label>
                       <input
