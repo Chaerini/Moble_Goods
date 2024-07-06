@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './ReviewWrite.css';
 import { AuthContext } from '../../Context/AuthContext';
@@ -8,17 +8,18 @@ function ReviewWrite({ onClose }) {
     const [rating, setRating] = useState(0);
     const [hoverRating, setHoverRating] = useState(0);
     const [review, setReview] = useState('');
-    const [image, setImage] = useState(null);
+    const [images, setImages] = useState([]);
+    const fileInputRef = useRef(null);
     const location = useLocation();
     const navigate = useNavigate();
-    const { user } = useContext(AuthContext);  // AuthContext에서 user를 가져옵니다.
+    const { user } = useContext(AuthContext);
     const { product_id, order_id, user_id } = location.state || {};
     const apiUrl = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
         if (!product_id || !order_id || !user_id) {
             alert('잘못된 접근입니다. 다시 시도해주세요.');
-            navigate(-1);  // 이전 페이지로 이동
+            navigate(-1);
         }
     }, [product_id, order_id, user_id, navigate]);
 
@@ -39,7 +40,16 @@ function ReviewWrite({ onClose }) {
     };
 
     const handleImageChange = (e) => {
-        setImage(e.target.files[0]);
+        const selectedImages = Array.from(e.target.files);
+        if (selectedImages.length + images.length > 3) {
+            alert('최대 3개의 이미지만 업로드할 수 있습니다.');
+            return;
+        }
+        setImages(prevImages => [...prevImages, ...selectedImages]);
+    };
+
+    const handleRemoveImage = (index) => {
+        setImages(prevImages => prevImages.filter((_, i) => i !== index));
     };
 
     const handleSubmit = async () => {
@@ -48,26 +58,41 @@ function ReviewWrite({ onClose }) {
             return;
         }
 
-        const formData = new FormData();
-        formData.append('rating', rating);
-        formData.append('detail', review);
-        formData.append('image', image);
-        formData.append('user_id', user_id);
-        formData.append('product_id', product_id);
-        formData.append('order_id', order_id);
+        const reviewData = {
+            rating,
+            detail: review,
+            user_id,
+            product_id,
+            order_id
+        };
 
         try {
-            await axios.post(`${apiUrl}/reviews`, formData, {
+            const reviewResponse = await axios.post(`${apiUrl}/reviews`, reviewData, {
+                headers: {
+                    'auth-token': user.token
+                },
+                withCredentials: true
+            });
+
+            const reviewId = reviewResponse.data.id;
+
+            const formData = new FormData();
+            images.forEach((image, index) => {
+                formData.append(`image_${index + 1}`, image);
+            });
+
+            await axios.post(`${apiUrl}/review_images/${reviewId}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'auth-token': user.token
                 },
                 withCredentials: true
             });
+
             alert('리뷰가 작성되었습니다.');
             setRating(0);
             setReview('');
-            setImage(null);
+            setImages([]);
             if (onClose) {
                 onClose();
             }
@@ -75,6 +100,10 @@ function ReviewWrite({ onClose }) {
             console.error(err);
             alert('리뷰 작성에 실패했습니다.');
         }
+    };
+
+    const handleImageUploadClick = () => {
+        fileInputRef.current.click();
     };
 
     return (
@@ -113,8 +142,17 @@ function ReviewWrite({ onClose }) {
                     <p className="char-count">{review.length} / 5,000</p>
                 </div>
                 <div className="review-modal-attachment">
-                    <input type="file" onChange={handleImageChange} />
-                    <p className="review-modal-attachment-note">상품과 무관한 사진을 첨부한 리뷰는 통보없이 삭제됩니다.</p>
+                    <button className="review-modal-attachment-button" onClick={handleImageUploadClick}>사진 첨부하기</button>
+                    <input type="file" multiple ref={fileInputRef} onChange={handleImageChange} style={{ display: 'none' }} />
+                    <p className="review-modal-attachment-note">상품과 무관한 사진을 첨부한 리뷰는 통보없이 삭제됩니다. (최대 3개)</p>
+                    <div className="review-modal-images">
+                        {images.map((image, index) => (
+                            <div key={index} className="review-image-preview">
+                                <img src={URL.createObjectURL(image)} alt={`Review Image ${index + 1}`} />
+                                <button onClick={() => handleRemoveImage(index)}>X</button>
+                            </div>
+                        ))}
+                    </div>
                 </div>
                 <div className="review-modal-actions">
                     <button className="review-modal-cancel-button" onClick={onClose}>취소</button>

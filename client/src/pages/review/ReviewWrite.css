@@ -57,13 +57,12 @@
 }
 
 .review-modal-rating {
- 
   margin-bottom: 20px;
   font-size: 20px;
   font-weight: bold;
   display: flex;
   flex-direction: column;
- align-items: center;
+  align-items: center;
 }
 
 .modal-rating-stars {
@@ -122,6 +121,10 @@
   text-align: center;
 }
 
+.review-modal-attachment input[type="file"] {
+  display: none;
+}
+
 .review-modal-attachment-button {
   display: inline-block;
   margin-bottom: 10px;
@@ -131,6 +134,41 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 20px;
+}
+
+.review-modal-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.review-image-preview {
+  position: relative;
+  width: 80px; /* 이미지 크기 설정 */
+  height: 80px; /* 이미지 크기 설정 */
+}
+
+.review-image-preview img {
+  width: 100%; /* 컨테이너에 맞게 조정 */
+  height: 100%; /* 컨테이너에 맞게 조정 */
+  object-fit: cover; /* 이미지 비율 유지 */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.review-image-preview button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: white(255, 0, 0, 0.7);
+  color: black;
+  cursor: pointer;
+  font-size: 13px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  font-weight: bold;
 }
 
 .review-modal-attachment-note {
@@ -143,6 +181,8 @@
   display: flex;
   justify-content: space-between;
 }
+
+
 
 .review-modal-cancel-button {
   background: #f0f0f0;
