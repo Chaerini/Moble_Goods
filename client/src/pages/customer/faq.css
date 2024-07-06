@@ -1,0 +1,66 @@
+/* FAQ 전체 컨테이너 중앙 정렬 */
+.faq-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 20px;
+}
+
+  /* FAQ 헤더 스타일 */
+.faq-header {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+  /* 검색 입력란 스타일 */
+.faq-search {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    margin-bottom: 20px;
+}
+
+  /* 카테고리 컨테이너 스타일 */
+.faq-categories {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+  /* 카테고리 항목 스타일 */
+.faq-category {
+    margin: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+  /* 질문 목록 스타일 */
+.faq-list {
+    width: 100%;
+}
+
+  /* 질문 항목 스타일 */
+.faq-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+  /* 질문 텍스트 스타일 */
+.faq-question {
+    cursor: pointer;
+}
+
+  /* 답변 텍스트 스타일 */
+.faq-answer {
+    padding: 10px 0;
+    color: red; /* 답변을 빨간색으로 표시 */
+}
+
+  /* 활성화된 카테고리 텍스트 빨간색 */
+.faq-category.active {
+    color: red;
+}
