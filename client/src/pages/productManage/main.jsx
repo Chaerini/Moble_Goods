@@ -29,7 +29,7 @@ function MainPage() {
             <div className="main-container">
                 <div className="hero-section">
                     <div className="hero-image">
-                            <img src="/images/1.png" alt="Hero" />
+                            <img src="/images/banner11.png" alt="Hero" />
                     </div>
                 </div>
                 <div className="multi-image-banner">
