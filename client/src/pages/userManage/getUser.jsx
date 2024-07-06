@@ -1,21 +1,20 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import "../productManage/product.css";
+import "../productManage/productmanage.css";
 import "../../Context/ProductContext"
-import { AuthContext } from '../../Context/AuthContext';
-import Search from "../../component/search/search";
-import { useNavigate,Link,useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPen,faUser } from "@fortawesome/free-solid-svg-icons";
 import { useRef } from 'react';
 import "./Modal.css";
+import SearchUser from '../../component/search/searchUser';
 const GetUser = () => {
-    const { user } = useContext(AuthContext);
     const [mpData,setMpData] = useState({
         userId:"",
         name:"",
         address:"",
         phone:"",
+        membership_name:""
 
     });
     const [modalOpen, setModalOpen] = useState(false);
@@ -58,6 +57,7 @@ const GetUser = () => {
             name: user.name,
             address: user.address,
             phone: user.phone,
+            membership_name:user.membership_name
           });
         setModalOpen(true);
         console.log(mpData)
@@ -67,7 +67,7 @@ const GetUser = () => {
         setModalOpen(false);
         console.log("=======data=====",userId)
         try {
-            const res=await axios.put(`http://localhost:8080/api/users/`+userId,mpData, { withCredentials: true });
+            await axios.put(`http://localhost:8080/api/users/`+userId,mpData, { withCredentials: true });
             alert('회원 정보가 수정되었습니다.');
         } catch (err) {
             alert('회원정보 수정을 실패했습니다. 다시 시도해주세요.')
@@ -76,8 +76,9 @@ const GetUser = () => {
     }
     return (
         <div>
-=        <div className="product-container">
-            <h2 className='notice'>회원</h2>
+            <SearchUser/>
+        {/* <div className="product-container">
+            <a><FontAwesomeIcon icon={faUser}/>회원</a>
             <table className='notice-table'>
                 <thead>
                     <tr>
@@ -127,7 +128,7 @@ const GetUser = () => {
                     ))}
                 </tbody>
             </table>
-        </div>
+        </div> */}
     </div>
     );
 };

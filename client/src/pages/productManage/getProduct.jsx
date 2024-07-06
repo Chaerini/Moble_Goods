@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import "../productManage/product.css";
+import "../productManage/productmanage.css";
 import "../../Context/ProductContext"
 import { AuthContext } from '../../Context/AuthContext';
 import { useNavigate,Link,useLocation } from "react-router-dom";
@@ -8,7 +8,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useRef } from 'react';
 import "../userManage/Modal.css";
+import Search from '../../component/search/searchProduct';
 const GetProduct= () => {
+    const navigate=useNavigate();
     const { user } = useContext(AuthContext);
     const [mpData,setMpData] = useState({
         userId:"",
@@ -49,9 +51,6 @@ const GetProduct= () => {
     const handleChange = (e) =>{
         const{name,value}=e.target;
         setMpData((prev) => ({...prev,[name]:value}));
-    };
-    const handleChange2 = (e) =>{
-        setMpData((prev) => ({...prev,[e.target.name]:e.target.value}));
     };
     const handleEditClick = async(user) =>{
 
@@ -107,7 +106,8 @@ const handleAddClick = async(user) =>{
     return (
         <div>
         <div className="product-container">
-            <h2 className='notice'>회원</h2>
+            <h2 className='notice'>상품</h2>
+            <FontAwesomeIcon icon={faPlus} onClick={()=>navigate("/addproduct")}/>
             <table className='notice-table'>
                 <thead>
                     <tr>
@@ -132,30 +132,26 @@ const handleAddClick = async(user) =>{
                             <td className='td'>
                                 <FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(user.id)} />
                                 <FontAwesomeIcon icon={faPen} onClick={() => handleEditClick(user)}/>
-                                <FontAwesomeIcon icon={faPlus} onClick={()=> handleAddClick(mpData)}/>
-                                {
+        {
           modalOpen &&
-    <div className={'modal-container'} ref={modalBackground} onClick={e => {
+    <div className='modal-container' ref={modalBackground} onClick={e => {
         if(e.target===modalBackground.currnet){
             setModalOpen(false);
         }
     }}>
-        
-        <div className={'modal-content'}>
-            <div className="Product">
-                <div className="product">
+            <div className="login">
+                <div className="login-container">
                 <label>상품정보 수정하기</label>
                 <input type="hidden"  name="id"  className="product-input" value={mpData.userId}/>
-                <input type="text" onChange={handleChange} name="name" placeholder="이름" className="product-input" value={mpData.name}/>
-                <input type="text" onChange={handleChange} name="quantity" placeholder="수량" className="product-input" value={mpData.quantity}/>
+                <input type="text" onChange={handleChange} name="name" className="product-input"  value={mpData.name}/>
+                <input type="text" onChange={handleChange} name="quantity"className="product-input" value={mpData.quantity}/>
                 <input type="text" onChange={handleChange} name="price" placeholder="가격" className="product-input" value={mpData.price}/>
                 <input type="text" onChange={handleChange} name="discount_rate" placeholder="할인율" className="product-input" value={mpData.discount_rate}/>
                 <input type="text" onChange={handleChange} name="discounted_price" placeholder="할인된 가격" className="product-input" value={mpData.discounted_price}/>
-                <input type="text" onChange={handleChange} name="date" placeholder="날찌" className="product-input" value={mpData.date}/>
+                <input type="text" onChange={handleChange} name="date" placeholder="날짜" className="product-input" value={mpData.date}/>
                 <button onClick={()=>handleEditAction(mpData.userId)} className="btn">수정</button>
                 </div>
             </div>
-        </div>
     </div>
         }
                             </td>     

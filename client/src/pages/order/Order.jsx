@@ -1,21 +1,26 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CartContext } from '../../Context/CartContext'; // CartContext 경로 수정
+import { AuthContext } from '../../Context/AuthContext';
 import Navbar from '../../component/navbar/navbar';
 import Header from '../../component/header/header';
 import Footer from '../../component/footer/footer';
+import axios from 'axios';
 import OrderComplete from './OrderComplete'; // OrderComplete 모달을 가져옵니다.
 import './Order.css';
+
+const apiUrl = process.env.REACT_APP_API_URL;
 
 function Order() {
   const location = useLocation();
   const { selectedItems } = location.state || { selectedItems: [] };
+  const { user } = useContext(AuthContext); // UserContext에서 로그인된 유저 정보를 가져옵니다.
 
   const { cartItems } = useContext(CartContext);
   const [orderer, setOrderer] = useState({
     name: '',
     phone: '',
-    email: '',
+    // email: '',
   });
   const [recipient, setRecipient] = useState({
     name: '',
@@ -27,6 +32,7 @@ function Order() {
   const [shippingFee, setShippingFee] = useState(3000); // 배송비 상태 추가
   const [paymentMethod, setPaymentMethod] = useState('신용카드');
   const [showOrderComplete, setShowOrderComplete] = useState(false);
+  const [orderId, setOrderId] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -62,13 +68,42 @@ function Order() {
     setPaymentMethod(e.target.value);
   };
 
-  const handleSubmit = () => {
-    setShowOrderComplete(true); // 주문 완료 모달을 표시
+  const handleSubmit = async () => {
+    try {
+      // 새로운 상태를 생성하고 그 ID를 받아옴
+      const statusResponse = await axios.post(`${apiUrl}/statuses`, { delivery_status: "배송완료" });
+      const status_id = statusResponse.data.id;
+
+      const orderData = {
+        user_id: user.id,
+        total: selectedItems.reduce((total, item) => total + item.price * item.quantity, 0) + shippingFee,
+        status_id: status_id, // status_id를 설정
+        items: selectedItems.map(item => ({
+          product_id: item.id,
+          quantity: item.quantity,
+          price: item.price
+        }))
+      };
+
+      console.log('Order data prepared:', orderData);
+
+      // 서버에 주문 데이터 전송
+      console.log('Sending order data...');
+      const response = await axios.post(`${apiUrl}/orders`, orderData);
+
+      console.log('Order created with ID:', response.data.id);
+
+      setOrderId(response.data.id); // 주문 ID 설정
+      setShowOrderComplete(true); // 주문 완료 모달을 표시
+    } catch (error) {
+      console.error('주문을 완료하는 중 오류가 발생했습니다:', error);
+      console.error('오류 응답:', error.response ? error.response.data : '응답 없음');
+    }
   };
 
   const closeOrderCompleteModal = () => {
     setShowOrderComplete(false); // 주문 완료 모달을 닫기
-    navigate('/myorder'); // 홈으로 이동
+    navigate('/myorder'); // 주문내역 페이지로 이동
   };
 
   const formatNumber = (num) => {

@@ -2,14 +2,13 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../Context/AuthContext";
 import { Link } from "react-router-dom";
-import "../productManage/product.css";
+import "../productManage/productmanage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import "../productManage/Notice.css";
 import AdminHeader from "../admin/adminHeader/AdminHeader";
 import AdminSidebar from "../admin/adminSidebar/AdminSidebar";
-import Search from "../../component/search/search";
+import Search from "../../component/search/searchProduct";
 
 const GetNotice = () => {
   const navigate = useNavigate();
@@ -41,10 +40,7 @@ const GetNotice = () => {
   };
   return (
     <div>
-      <AdminHeader />
-      <AdminSidebar />
       <div className="product-container">
-        <Search />
         <FontAwesomeIcon icon={faPlus} onClick={() => navigate("/addnotice")} />
         <h2 className="notice">공지사항</h2>
         <table className="notice-table">

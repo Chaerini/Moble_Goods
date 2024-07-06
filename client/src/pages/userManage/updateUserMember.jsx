@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
-import "../productManage/product.css"
+import "../productManage/productmanage.css"
 const UpdateUserMember = () => {
     const [user,setUser] = useState({
         membership_id:""

@@ -22,12 +22,11 @@ import GetCoupon from "./pages/couponManage/getCoupon";
 // import GetNotice from "./pages/notice/getNotice";
 import UpdateNotice from "./pages/notice/updateNotice";
 import Withdraw from "./pages/withdraw/Withdraw";
-import Search from "./component/search/search";
+import Search from "./component/search/searchProduct";
 import UpdateUserMember from "./pages/userManage/updateUserMember";
 import Profile from './pages/profile/Profile';
 import Myqna from './pages/customer/Myqna';
 import UpdateCoupon from "./pages/couponManage/updateCoupon";
-import Modal from "./pages/userManage/Modal";
 import SubPage from "./pages/product/subpage";
 import SearchUser from "./component/search/searchUser";
 
@@ -61,7 +60,6 @@ function App() {
           {/* <Route path="/updateuser/:id" element={<UpdateUser />} /> */}
           <Route path="/updateusermember/:id" element={<UpdateUserMember />} />
           <Route path="/myqna" element={<Myqna/>} />
-          <Route path="/modal" element={<Modal />} />
           <Route path="/category/:categoryId" element={<SubPage />} />
           <Route path="/product/:productId" element={<SubPage />} />
           <Route path="/category/:categoryId/subcategory/:subCategoryId" element={<SubPage />} />

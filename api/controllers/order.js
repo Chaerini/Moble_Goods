@@ -1,6 +1,5 @@
 import pool from '../db.js';
 
-
 // 모든 주문 조회함
 export const getAllOrders = async (req, res) => {
   try {
@@ -11,15 +10,16 @@ export const getAllOrders = async (req, res) => {
   }
 };
 
-//주문 아이디로 조회 - 특정 주문 아이디에 해당하는 주문을 조회함
+// 주문 아이디로 조회 - 특정 주문 아이디에 해당하는 주문을 조회함
 export const getOrderById = async (req, res) => {
   const { id } = req.params;
   try {
     const [rows] = await pool.query(`
-        SELECT o.id AS order_id, o.user_id, o.total, s.delivery_status, s.waybill_number
-        FROM \`order\` o
-        JOIN status s ON o.status_id = s.id
-        WHERE o.id = ?`, [id]);
+      SELECT o.id AS order_id, o.user_id, o.total, s.delivery_status, s.waybill_number
+      FROM \`order\` o
+      JOIN status s ON o.status_id = s.id
+      WHERE o.id = ?
+    `, [id]);
     res.json(rows);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -32,18 +32,18 @@ export const getOrdersByUserId = async (req, res) => {
   try {
     const [rows] = await pool.query(`
       SELECT 
-      \`order\`.id,
-      MAX(\`order\`.user_id) AS user_id,
-      MAX(\`order\`.total) AS total,
-      MAX(\`order\`.status_id) AS status_id,
-      MAX(\`order\`.order_date) AS order_date,
-      MAX(order_item.id) AS orderitem_id,
-      MAX(order_item.quantity) AS quantity,
-      MAX(status.delivery_status) AS delivery_status, 
-      MAX(status.waybill_number) AS waybill_number, 
-      MAX(product.id) AS product_id, 
-      MAX(product.name) AS name, 
-      MAX(product_image.url) AS product_image_url
+        \`order\`.id,
+        MAX(\`order\`.user_id) AS user_id,
+        MAX(\`order\`.total) AS total,
+        MAX(\`order\`.status_id) AS status_id,
+        MAX(\`order\`.order_date) AS order_date,
+        MAX(order_item.id) AS orderitem_id,
+        MAX(order_item.quantity) AS quantity,
+        MAX(status.delivery_status) AS delivery_status, 
+        MAX(status.waybill_number) AS waybill_number, 
+        MAX(product.id) AS product_id, 
+        MAX(product.name) AS name, 
+        MAX(product_image.url) AS product_image_url
       FROM \`order\`
       JOIN order_item ON order_item.order_id = \`order\`.id
       JOIN status ON status.id = \`order\`.status_id
@@ -66,14 +66,15 @@ export const getOrdersByStatusId = async (req, res) => {
       SELECT o.id AS order_id, o.user_id, o.total, o.order_date, s.delivery_status, s.waybill_number
       FROM \`order\` o
       JOIN status s ON o.status_id = s.id
-      WHERE o.status_id = ? `, [status_id]);
+      WHERE o.status_id = ?
+    `, [status_id]);
     res.json(rows);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
 
-// 배송 상태 ID로 조회 - 특정 배송 상태 ID에 해당하는 모든 주문을 조회합니다.
+// 배송 상태 ID로 조회 - 특정 배송 상태 ID에 해당하는 모든 주문을 조회함
 export const getOrdersByDeliveryStatusId = async (req, res) => {
   const { delivery_status_id } = req.params;
   try {
@@ -102,14 +103,25 @@ export const getOrdersByDate = async (req, res) => {
 
 // 주문 추가하기 - 새로운 주문을 추가함
 export const createOrder = async (req, res) => {
-  const { user_id, total, status_id, order_date } = req.body;
+  const { user_id, total, status_id, items } = req.body;
+
   try {
-    const [result] = await pool.query('INSERT INTO `order` (user_id, total, status_id, order_date) VALUES (?, ?, ?, ?)', [user_id, total, status_id, order_date]);
-    res.status(201).json({ id: result.insertId, user_id, total, status_id, order_date });
+    // order 테이블에 주문 데이터 삽입
+    const [orderResult] = await pool.query('INSERT INTO `order` (user_id, total, status_id, order_date) VALUES (?, ?, ?, NOW())', [user_id, total, status_id]);
+    const order_id = orderResult.insertId;
+
+    // order_item 테이블에 주문 항목 데이터 삽입
+    for (const item of items) {
+      await pool.query('INSERT INTO order_item (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)', [order_id, item.product_id, item.quantity, item.price]);
+    }
+
+    res.status(201).json({ id: order_id, user_id, total, status_id });
   } catch (err) {
+    console.error('Error placing order:', err);
     res.status(500).json({ message: err.message });
   }
 };
+
 
 // 주문 업데이트 - 특정 주문 아이디에 해당하는 주문을 업데이트함
 export const updateOrder = async (req, res) => {
@@ -133,4 +145,3 @@ export const deleteOrder = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
-
