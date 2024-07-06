@@ -5,6 +5,8 @@ import {
   faPen,
   faTrash,
   faMagnifyingGlass,
+  faUser,
+  faPlus
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
@@ -34,8 +36,10 @@ const SearchUser = () => {
       const res = await axios.get(`${apiUrl}/searchuser?name=${searchWord}`);
       setUserData(res.data.result);
       console.log(res.data.result);
+      alert("조회되었습니다.")
     } catch (err) {
       console.log(err);
+      alert("일치하는 고객이 없습니다.")
     }
   };
 
@@ -80,23 +84,25 @@ const SearchUser = () => {
   };
 
   return (
-    <div className="admin">
-      <div className="admin-center">
-        <div className="admin-search-bg">
+    <div>
+        <div>
           <div className="search-input-wrap">
-            <input
-              type="text"
-              placeholder="검색할 사용자 이름을 적어주세요"
-              className="search-input"
-              onChange={(e) => setSearchWord(e.target.value)}
-              onKeyDown={handleKeyPress}
-            />
-            <FontAwesomeIcon icon={faMagnifyingGlass} onClick={handleSearch} />
+          <h2><FontAwesomeIcon icon={faUser}/>고객</h2>
+          <div className="search-box">
+                <input
+                type="text"
+                placeholder="검색할 사용자 이름을 적어주세요"
+                className="search-input"
+                onChange={(e) => setSearchWord(e.target.value)}
+                onKeyDown={handleKeyPress}
+                />
+                  <button type="submit" className="search-btn" onClick={handleSearch}>
+                    검색
+                  </button>
           </div>
-        </div>
-
         {userData.length > 0 && (
           <div className="product-container">
+            <FontAwesomeIcon icon={faPlus} />
             <table className="notice-table">
               <thead>
                 <tr>
@@ -127,7 +133,6 @@ const SearchUser = () => {
           </div>
         )}
       </div>
-
       {modalOpen && (
         <div className={'modal-container'} ref={modalBackground} onClick={e => {
           if (e.target === modalBackground.current) {
@@ -149,6 +154,7 @@ const SearchUser = () => {
         </div>
       )}
     </div>
+</div>
   );
 };
 
