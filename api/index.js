@@ -78,7 +78,7 @@ app.use("/api/review_image", reviewImageRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', ordersRoutes);
-app.use('/api/order_item', orderitemRoutes);
+app.use('/api/order_items', orderitemRoutes); 
 app.use('/api/statuses', statusesRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/comments', commentRoutes);

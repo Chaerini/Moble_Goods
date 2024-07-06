@@ -77,14 +77,21 @@ function Order() {
           price: item.price
         }))
       };
+
+      console.log('주문 데이터 전송:', orderData); // 주문 데이터를 콘솔에 출력
+
       // 서버에 주문 데이터 전송
-      await axios.post('/api/orders', orderData);
+      const response = await axios.post('/api/orders', orderData);
+
+      console.log('서버 응답:', response.data); // 서버 응답을 콘솔에 출력
 
       setShowOrderComplete(true); // 주문 완료 모달을 표시
     } catch (error) {
       console.error('주문을 완료하는 중 오류가 발생했습니다:', error);
+      console.error('오류 응답:', error.response ? error.response.data : '응답 없음');
     }
   };
+
 
   const closeOrderCompleteModal = () => {
     setShowOrderComplete(false); // 주문 완료 모달을 닫기

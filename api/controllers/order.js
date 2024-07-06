@@ -105,10 +105,7 @@ export const createOrder = async (req, res) => {
   const { user_id, total, delivery_status, order_date, items } = req.body;
 
   try {
-    // status 테이블에서 delivery_status로 status_id 가져오기
     const [statusResult] = await pool.query('SELECT id FROM status WHERE delivery_status = ?', [delivery_status]);
-
-    // 상태가 없으면 추가하고 ID 가져오기
     let status_id;
     if (statusResult.length === 0) {
       const [insertStatusResult] = await pool.query('INSERT INTO status (delivery_status) VALUES (?)', [delivery_status]);
@@ -117,11 +114,9 @@ export const createOrder = async (req, res) => {
       status_id = statusResult[0].id;
     }
 
-    // order 테이블에 주문 데이터 삽입
-    const [orderResult] = await pool.query('INSERT INTO `order` (user_id, total, status_id, order_date) VALUES (?, ?, ?, ?)', [user_id, total, status_id, order_date]);
+    const [orderResult] = await pool.query('INSERT INTO `order` (user_id, total, status_id, order_date) VALUES (?, ?, ?, ?)', [user_id, total, status_id, new Date()]);
     const order_id = orderResult.insertId;
 
-    // order_item 테이블에 주문 항목 데이터 삽입
     for (const item of items) {
       await pool.query('INSERT INTO order_item (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)', [order_id, item.product_id, item.quantity, item.price]);
     }
