@@ -22,7 +22,7 @@ import GetCoupon from "./pages/couponManage/getCoupon";
 // import GetNotice from "./pages/notice/getNotice";
 import UpdateNotice from "./pages/notice/updateNotice";
 import Withdraw from "./pages/withdraw/Withdraw";
-import Search from "./component/search/search";
+import Search from "./component/search/searchProduct";
 import UpdateUserMember from "./pages/userManage/updateUserMember";
 import Profile from './pages/profile/Profile';
 import Myqna from './pages/customer/Myqna';
