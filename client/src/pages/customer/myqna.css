@@ -11,165 +11,196 @@
   /* 헤더 스타일 */
   .myqna-header {
     margin-bottom: 20px;
+    text-align: center; /* 헤더 중앙 정렬 */
   }
   
   /* 폼 제목 스타일 */
   .myqna-header h1 {
-    font-size: 20px; /* 글자 크기 줄임 */
+    font-size: 16px; /* 글자 크기 줄임 */
+    font-weight: normal;
   }
   
   /* 폼 스타일 */
-  .contact-form {
+  .myqna-contact-form {
     display: flex;
     flex-direction: column;
-    width: 600px;
+    width: 650px; /* 폼 너비를 키움 */
     padding: 20px;
     border: 1px solid #ddd; /* 연한 그레이 색으로 변경 */
     border-radius: 5px;
     background-color: #fff;
+    text-align: left; /* 폼 내부 왼쪽 정렬 */
+    margin: 0 auto; /* 폼 중앙 정렬 */
   }
   
   /* 입력 그룹 행 스타일 */
-  .input-group-row {
+  .myqna-input-group-row {
     display: flex;
-    justify-content: space-between;
     margin-bottom: 20px;
     align-items: center;
   }
   
-  /* 입력 그룹 스타일 */
-  .input-group {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    flex-grow: 1;
-  }
   
-  .input-group h2 {
-    flex-basis: 30%; /* 제목의 폭을 30%로 설정 */
-    text-align: left;
-  }
-  
-  .input-group .toggle-section {
-    flex-basis: 70%; /* 선택 박스의 폭을 70%로 설정 */
-  }
-  
-  .input-group label {
-    flex-basis: 30%; /* 라벨의 폭을 30%로 설정 */
-    text-align: left;
-  }
-  
-  .input-field input,
-  .input-field textarea {
-    flex-basis: 70%; /* 입력 필드의 폭을 70%로 설정 */
-  }
-  
-  /* 토글 버튼 스타일 */
-  .toggle-button {
-    padding: 10px;
-    background-color: #fff;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    text-align: right; /* 오른쪽 정렬 */
-    position: relative;
-  }
-  
-  /* 삼각형 모양 스타일 */
-  .arrow {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  
-  /* 드롭다운 메뉴 스타일 */
-  .dropdown {
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    position: absolute;
-    width: 100px;
-    z-index: 1000;
-  }
-  
-  /* 드롭다운 항목 스타일 */
-  .toggle-section .dropdown div {
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  /* 드롭다운 항목 호버 스타일 */
-  .dropdown div:hover {
-    background-color: #f0f0f0;
-  }
-  
-  /* 제출 버튼 스타일 */
-  .submit-button {
-    padding: 10px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    text-align: center;
-  }
-  
-  /* 제출 버튼 호버 스타일 */
-  .submit-button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* 입력 필드 스타일 */
-  .contact-form input[type="text"],
-  .contact-form textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd; /* 연한 그레이 색으로 변경 */
-    border-radius: 5px;
-    font-size: 14px;
-    color: #333;
-  }
+/* 입력 그룹 스타일 */
+.myqna-input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.myqna-input-group-row label {
+  flex: 1;
+  text-align: left;
+  margin-right: 10px;
+  color: #999; /* 색상 변경 */
+  font-size: 14px; /* 글씨 크기 변경 */
+}
+
+.myqna-dropdown-container {
+  position: relative;
+  flex: 2;
+  display: flex;
+  align-items: center;
+}
+
+.myqna-dropdown {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd; /* 연한 그레이 색으로 변경 */
+  border-radius: 5px;
+  font-size: 14px;
+  color: #999;
+  appearance: none;
+}
+
+.myqna-arrow {
+  position: absolute;
+  right: 10px;
+  pointer-events: none;
+  color: #999; /* 그레이 색으로 변경 */
+}
+
+.myqna-dropdown:focus {
+  outline: none;
+  border-color: #007BFF;
+}
+
+.myqna-input-field {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.myqna-input-label {
+  flex: 1;
+  text-align: left;
+  margin-right: 10px;
+  color: #333; /* 색상 변경 */
+  font-size: 14px; /* 글씨 크기 변경 */
+}
+
+.myqna-input-box {
+  flex: 2;
+  text-align: right;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd; /* 연한 그레이 색으로 변경 */
+  border-radius: 5px;
+  font-size: 14px;
+  color: #333;
+}
+
+.myqna-textarea-box {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd; /* 연한 그레이 색으로 변경 */
+  border-radius: 5px;
+  font-size: 14px;
+  color: #333;
+  height: 150px; /* 필드 높이를 3배로 늘림 */
+  text-align: left; /* 왼쪽 정렬 */
+}
+
   
   /* 입력 필드 플레이스홀더 스타일 */
-  .contact-form input::placeholder,
-  .contact-form textarea::placeholder {
+  .myqna-contact-form input::placeholder,
+  .myqna-contact-form textarea::placeholder {
     color: #999;
+    text-align: right;
   }
   
   /* 체크박스 필드 스타일 */
-  .checkbox-field {
+  .myqna-checkbox-field {
     display: flex;
     align-items: center;
+    margin-top: 10px; /* 연락처 아래로 이동 */
     margin-bottom: 20px;
   }
   
+  .myqna-checkbox-field label {
+    margin-left: 5px;
+    font-size: 14px; /* 연락처와 같은 크기 */
+    color: #333; /* 연락처와 같은 색상 */
+    font-weight: normal; /* 연락처와 같은 두께 */
+  }
+  
   /* 글자 수 제한 표시 스타일 */
-  .char-count {
+  .myqna-char-count {
     text-align: right;
     font-size: 12px;
     color: #999;
   }
   
-  /* 입력 필드 오른쪽 정렬 */
-  .input-field input,
-  .input-field textarea {
-    text-align: right;
+  /* 제출 버튼 스타일 */
+  .myqna-button-row {
+    display: flex;
+    justify-content: flex-end;
   }
-  
-  /* 필드 제목 빨간색 스타일 */
-  .required {
-    color: red;
-  }
-  
-  /* 체크박스 줄 */
-  .checkbox-row {
+
+  .myqna-submit-button {
+    padding: 10px;
+    background-color: black;
+    color: white;
+    border: none; 
+    cursor: pointer;
+    width: 11%;
+    text-align: center;
+    margin: 10px;
+    height: 36px; /* 동일한 높이 설정 */
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    justify-content: center; 
   }
   
-  .checkbox-row label {
-    margin-left: 5px;
+  .myqna-view-button {
+    padding: 10px;
+    background-color: #fff;
+    color: black;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    width: 22%;
+    text-align: center;
+    height: 36px;   /*동일한 높이 설정  */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  } 
+
+  /* 제출 버튼 호버 스타일 */
+  .myqna-submit-button:hover,
+  .myqna-view-button:hover {
+  opacity: 0.9;
+}
+  /* 필드 제목 빨간색 스타일 */
+  .myqna-required {
+    color: red;
   }
-  
+
+  /* 중앙 정렬 텍스트 스타일 */
+.myqna-center-text {
+  text-align: center;
+  margin-top: 20px;
+  color: #333;
+  font-size: 14px;
+}

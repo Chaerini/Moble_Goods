@@ -9,7 +9,6 @@ import ReviewWrite from "./pages/review/ReviewWrite";
 import AddNotice from "./pages/notice/AddNotice";
 import GetProduct from "./pages/productManage/getProduct";
 import Product from './pages/productManage/addProduct';
-import UpdateProduct from './pages/productManage/updateProduct';
 import Main from './pages/productManage/main';
 import GetUser from './pages/userManage/getUser';
 import Coupon from './pages/couponManage/addCoupon';
@@ -30,6 +29,7 @@ import Myqna from './pages/customer/Myqna';
 import UpdateCoupon from "./pages/couponManage/updateCoupon";
 import Modal from "./pages/userManage/Modal";
 import SubPage from "./pages/product/subpage";
+import SearchUser from "./component/search/searchUser";
 
 function App() {
   return (
@@ -42,7 +42,6 @@ function App() {
           <Route path="/addnotice" element={<AddNotice />} />
           <Route path="/getproduct" element={<GetProduct />} />
           <Route path="/addproduct" element={<Product />} />
-          <Route path="/updateproduct/:id" element={<UpdateProduct />} />
           <Route path="/updatenotice/:id" element={<UpdateNotice />} />
           <Route path="/" element={<Main />} />
           <Route path="/getuser" element={<GetUser />} />
@@ -68,6 +67,7 @@ function App() {
           <Route path="/category/:categoryId/subcategory/:subCategoryId" element={<SubPage />} />
           <Route path="/category/:categoryId/subcategory/:subCategoryId/product/:productId" element={<SubPage />} />
           <Route path="/category/:categoryId/product/:productId" element={<SubPage />} />
+          <Route path="/searchUser" element={<SearchUser/>}/>
           
       </Routes>
     </BrowserRouter>

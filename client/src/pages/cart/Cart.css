@@ -113,12 +113,7 @@
 }
 
 .cart-item-quantity {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* transform: translateY(30px); */
-  font-size: 20px;
-  height: 200px;
+  font-size: 20px; /* 추가 */
 }
 
 .cart-item-price {

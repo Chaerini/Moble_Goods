@@ -1,31 +1,38 @@
-import React, { useEffect, useState,useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import "../productManage/product.css";
+import "../../Context/ProductContext"
 import { AuthContext } from '../../Context/AuthContext';
-import { Link,useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-    faTrash,
-    faPen,
-    faPlus
-  } from "@fortawesome/free-solid-svg-icons";
-import Search from '../../component/search/search';
-const GetCoupon = () => {
-    const navigate=useNavigate();
-    let [data, setData] = useState([]);
-    let [coupon,setCoupon]=useState([])
-    const {user}=useContext(AuthContext)
+import { useNavigate,Link,useLocation } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { useRef } from 'react';
+import "../userManage/Modal.css";
+const GetCoupon= () => {
+    const { user } = useContext(AuthContext);
+    const [mpData,setMpData] = useState({
+        userId:"",
+        name:"",
+        discount:"",
+        start_date:"",
+        end_date:"",
+        conditions:""
+
+    });
+    const [modalOpen, setModalOpen] = useState(false);
+    const modalBackground = useRef();
+    const [data, setData] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/api/coupons`,                );
-                setCoupon(response.data.result);
-                console.log("data",data);
-                console.log("token",user.token);
-                console.log("response.data.rows : ",response.data.result)
-            } catch (error) {
+                const response = await axios.get(`http://localhost:8080/api/coupons`,);
+                console.log("data",response.data.result);
+                setData(response.data.result);
+            }catch (error) {
                 console.error('Error fetching data', error);
             }
         };
+        
         fetchData();
     }, []);
     const handleDelete  = async(id) =>{
@@ -36,35 +43,90 @@ const GetCoupon = () => {
             console.log(err)
         }
     }
+    const location = useLocation();
+    const  userId = location.pathname.split("/")[2]
+    const handleChange = (e) =>{
+        const{name,value}=e.target;
+        setMpData((prev) => ({...prev,[name]:value}));
+    };
+    const handleEditClick = async(user) =>{
+        console.log("product",user);
+        setMpData({
+            userId:user.id,
+            name: user.name,
+            discount:user.discount,
+            start_date:user.start_date,
+            end_date:user.end_date,
+            conditions:user.conditions,
+          });
+        setModalOpen(true);
+        console.log(mpData)
+    }
+
+    const handleEditAction = async (userId) =>{
+        setModalOpen(false);
+        console.log(mpData)
+        console.log("=======data=====",userId)
+        try {
+            const res=await axios.put(`http://localhost:8080/api/coupons/`+userId,mpData);
+            alert('쿠폰 정보가 수정되었습니다.');
+        } catch (err) {
+            alert('쿠폰정보 수정을 실패했습니다. 다시 시도해주세요.')
+            console.log(err);
+        }
+    }
+    console.log(mpData)
     return (
         <div>
         <div className="product-container">
-            <Search />
-            <FontAwesomeIcon icon={faPlus} onClick={() => navigate("/addcoupon")} />
             <h2 className='notice'>쿠폰</h2>
             <table className='notice-table'>
                 <thead>
-                <tr>
-                    <th className='th'>이름</th>
-                    <th className='th'>할인가격</th>
-                    <th className='th'>시작일</th>
-                    <th className='th'>만료일</th>
-                    <th className='th'>조건</th>
-                    <th className='th'>삭제/수정</th>
-                </tr>
+                    <tr>
+                        <th className='th'>이름</th>
+                        <th className='th'>할인</th>
+                        <th className='th'>시작일</th>
+                        <th className='th'>만료일</th>
+                        <th className='th'>조건</th>
+                        <th className='th'>삭제/수정</th>
+                    </tr>
                 </thead>
                 <tbody>
-                {coupon.map((coupon) => (
-                    <tr key={coupon.id} className='tr'>
-                        <th className='th'>{coupon.name}</th>
-                        <th className='th'>{coupon.discount}</th>
-                        <th className='th'>{coupon.start_date}</th>
-                        <th className='th'>{coupon.end_date}</th>
-                        <th className='th'>{coupon.conditions}</th>
+                    {data.map((user) => (
+                        <tr key={user.id} className='tr'>
+                            <td className='td'>{user.name}</td>
+                            <td className='td'>{user.discount}</td>
+                            <td className='td'>{user.start_date}</td>
+                            <td className='td'>{user.end_date}</td>
+                            <td className='td'>{user.conditions}</td>
                             <td className='td'>
-                                <FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(coupon.id)} />
-                                <FontAwesomeIcon icon={faPen} onClick={() => navigate(`/updatecoupon/${coupon.id}`)} />
-                            </td>
+                                <FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(user.id)} />
+                                <FontAwesomeIcon icon={faPen} onClick={() => handleEditClick(user)}/>
+                                {
+          modalOpen &&
+    <div className={'modal-container'} ref={modalBackground} onClick={e => {
+        if(e.target===modalBackground.currnet){
+            setModalOpen(false);
+        }
+    }}>
+        
+        <div className={'modal-content'}>
+            <div className="Product">
+                <div className="product">
+                <label>쿠폰정보 수정하기</label>
+                <input type="hidden"  name="id"  className="product-input" value={mpData.userId}/>
+                <input type="text" onChange={handleChange} name="name" placeholder="이름" className="product-input" value={mpData.name}/>
+                <input type="text" onChange={handleChange} name="discount" placeholder="할인" className="product-input" value={mpData.discount}/>
+                <input type="text" onChange={handleChange} name="start_date" placeholder="시작일" className="product-input" value={mpData.start_date}/>
+                <input type="text" onChange={handleChange} name="end_date" placeholder="만료일" className="product-input" value={mpData.end_date}/>
+                <input type="text" onChange={handleChange} name="conditions" placeholder="조건" className="product-input" value={mpData.conditions}/>
+                <button onClick={()=>handleEditAction(mpData.userId)} className="btn">수정</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        }
+                            </td>     
                         </tr>
                     ))}
                 </tbody>

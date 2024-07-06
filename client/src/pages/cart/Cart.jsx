@@ -107,7 +107,7 @@ export default function Cart() {
                   <td className="cart-item-info">
                     <img src={item.url} alt={item.name} />
                     <div className="cart-item-details">
-                      <span className="cart-item-name">{item.name}상품: </span>
+                      <span className="cart-item-name">상품: {item.name}</span>
                     </div>
                   </td>
                   <td className="cart-item-price">{formatNumber(item.price)}원</td>
