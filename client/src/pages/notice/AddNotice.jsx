@@ -3,7 +3,7 @@ import Axios from "axios";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-import "../productManage/product.css";
+import "../productManage/productmanage.css";
 const Product = () => {
   const apiUrl = process.env.REACT_APP_API_URL;
   const [notice, setNotice] = useState({

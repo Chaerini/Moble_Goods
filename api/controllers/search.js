@@ -9,6 +9,7 @@ export const searchName = async (req, res) => {
         );
         if (result.length > 0) {
             res.status(200).json({ result });
+            console.log(result);
         } else {
             res.status(404).json({ error: 'Product not found' });
         }

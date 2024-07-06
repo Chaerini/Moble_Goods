@@ -38,7 +38,7 @@ const Profile = () => {
 
     const handleClick = async () => {
         try {
-            const res = await axios.put(`${apiUrl}/users/${user.id}`, userData, { withCredentials: true });
+            const res = await axios.put(`http://localhost:8080/api/users/${user.id}`, userData, { withCredentials: true });
             alert('회원 정보가 수정되었습니다.');
             navigate('/profile');
         } catch (err) {

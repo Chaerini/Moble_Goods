@@ -41,3 +41,14 @@
   width: 35px;
   color: var(--c-darkgray);
 }
+.search-input{
+  width: 200px;
+  border: 1px solid black;
+  font-size: 11px;
+  padding: 3px 6px;
+}
+.search-input-wrap{
+  text-align: center;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}

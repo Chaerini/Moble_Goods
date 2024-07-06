@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import "../productManage/product.css";
+import "../productManage/productmanage.css";
 import "../../Context/ProductContext"
 import { AuthContext } from '../../Context/AuthContext';
 import { useNavigate,Link,useLocation } from "react-router-dom";
@@ -9,6 +9,7 @@ import { faTrash, faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useRef } from 'react';
 import "../userManage/Modal.css";
 const GetCoupon= () => {
+    const navigate=useNavigate();
     const { user } = useContext(AuthContext);
     const [mpData,setMpData] = useState({
         userId:"",
@@ -80,6 +81,7 @@ const GetCoupon= () => {
         <div>
         <div className="product-container">
             <h2 className='notice'>쿠폰</h2>
+            <FontAwesomeIcon icon={faPlus} onClick={()=>navigate("/addcoupon")}/>
             <table className='notice-table'>
                 <thead>
                     <tr>
@@ -110,9 +112,8 @@ const GetCoupon= () => {
         }
     }}>
         
-        <div className={'modal-content'}>
-            <div className="Product">
-                <div className="product">
+            <div className="login">
+                <div className="login-container">
                 <label>쿠폰정보 수정하기</label>
                 <input type="hidden"  name="id"  className="product-input" value={mpData.userId}/>
                 <input type="text" onChange={handleChange} name="name" placeholder="이름" className="product-input" value={mpData.name}/>
@@ -123,7 +124,6 @@ const GetCoupon= () => {
                 <button onClick={()=>handleEditAction(mpData.userId)} className="btn">수정</button>
                 </div>
             </div>
-        </div>
     </div>
         }
                             </td>     
