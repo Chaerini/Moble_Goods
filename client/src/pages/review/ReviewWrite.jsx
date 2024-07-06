@@ -9,6 +9,7 @@ function ReviewWrite({ onClose }) {
     const [hoverRating, setHoverRating] = useState(0);
     const [review, setReview] = useState('');
     const [images, setImages] = useState([]);
+    const [product, setProduct] = useState(null);
     const fileInputRef = useRef(null);
     const location = useLocation();
     const navigate = useNavigate();
@@ -20,8 +21,19 @@ function ReviewWrite({ onClose }) {
         if (!product_id || !order_id || !user_id) {
             alert('잘못된 접근입니다. 다시 시도해주세요.');
             navigate(-1);
+            return;
         }
-    }, [product_id, order_id, user_id, navigate]);
+        const fetchProduct = async () => {
+            try {
+                const response = await axios.get(`${apiUrl}/products/${product_id}`);
+                setProduct(response.data);
+            } catch (error) {
+                console.error('상품 정보를 가져오는 데 실패했습니다.', error);
+                alert('상품 정보를 가져오는 데 실패했습니다.');
+            }
+        };
+        fetchProduct();
+    }, [product_id, order_id, user_id, navigate, apiUrl]);
 
     const handleRatingClick = (index) => {
         setRating(index);
@@ -111,12 +123,14 @@ function ReviewWrite({ onClose }) {
             <div className="review-modal-content">
                 {onClose && <button className="review-modal-close-button" onClick={onClose}>X</button>}
                 <h1>리뷰 작성</h1>
-                <div className="review-modal-product">
-                    <img src="photo.jpg" alt="상품 이미지" />
-                    <div className="review-product-info">
-                        <p>포토북</p>
+                {product && (
+                    <div className="review-modal-product">
+                        <img src={product.image_url} alt="상품 이미지" />
+                        <div className="review-product-info">
+                            <p>{product.name}</p>
+                        </div>
                     </div>
-                </div>
+                )}
                 <div className="review-modal-rating">
                     상품은 만족하셨나요?
                     <div className="modal-rating-stars">
