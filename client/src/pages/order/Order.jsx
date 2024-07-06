@@ -9,6 +9,8 @@ import axios from 'axios';
 import OrderComplete from './OrderComplete'; // OrderComplete 모달을 가져옵니다.
 import './Order.css';
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 function Order() {
   const location = useLocation();
   const { selectedItems } = location.state || { selectedItems: [] };
@@ -30,6 +32,7 @@ function Order() {
   const [shippingFee, setShippingFee] = useState(3000); // 배송비 상태 추가
   const [paymentMethod, setPaymentMethod] = useState('신용카드');
   const [showOrderComplete, setShowOrderComplete] = useState(false);
+  const [orderId, setOrderId] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -67,10 +70,14 @@ function Order() {
 
   const handleSubmit = async () => {
     try {
+      // 새로운 상태를 생성하고 그 ID를 받아옴
+      const statusResponse = await axios.post(`${apiUrl}/statuses`, { delivery_status: "배송완료" });
+      const status_id = statusResponse.data.id;
+
       const orderData = {
         user_id: user.id,
         total: selectedItems.reduce((total, item) => total + item.price * item.quantity, 0) + shippingFee,
-        delivery_status: "배송완료", // 배송 상태를 "배송완료"로 설정
+        status_id: status_id, // status_id를 설정
         items: selectedItems.map(item => ({
           product_id: item.id,
           quantity: item.quantity,
@@ -78,20 +85,21 @@ function Order() {
         }))
       };
 
-      console.log('주문 데이터 전송:', orderData); // 주문 데이터를 콘솔에 출력
+      console.log('Order data prepared:', orderData);
 
       // 서버에 주문 데이터 전송
-      const response = await axios.post('/api/orders', orderData);
+      console.log('Sending order data...');
+      const response = await axios.post(`${apiUrl}/orders`, orderData);
 
-      console.log('서버 응답:', response.data); // 서버 응답을 콘솔에 출력
+      console.log('Order created with ID:', response.data.id);
 
+      setOrderId(response.data.id); // 주문 ID 설정
       setShowOrderComplete(true); // 주문 완료 모달을 표시
     } catch (error) {
       console.error('주문을 완료하는 중 오류가 발생했습니다:', error);
       console.error('오류 응답:', error.response ? error.response.data : '응답 없음');
     }
   };
-
 
   const closeOrderCompleteModal = () => {
     setShowOrderComplete(false); // 주문 완료 모달을 닫기
