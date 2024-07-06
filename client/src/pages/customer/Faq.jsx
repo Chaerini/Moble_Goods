@@ -49,7 +49,7 @@
 // export default Customer;
 
 import React, { useState } from 'react';
-import './Faq.css'; // CSS 파일을 가져옵니다.
+import './faq.css'; // CSS 파일을 가져옵니다.
 
 const Faq = () => {
   // 상태 정의: 검색어와 활성화된 질문 인덱스
