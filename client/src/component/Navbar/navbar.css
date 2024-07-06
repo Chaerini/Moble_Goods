@@ -86,6 +86,11 @@ nav .cart {
   align-items: center;
 }
 
-nav .cart img {
+/* nav .cart img {
   margin-right: 5px;
+} */
+.cart img {
+  width: 30px; /* 원하는 너비로 조절 */
+  height: auto; /* 비율에 맞춰 자동으로 높이를 설정 */
+  max-height: 30px; /* 원하는 최대 높이 설정 */
 }
