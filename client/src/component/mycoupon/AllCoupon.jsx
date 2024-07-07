@@ -6,22 +6,21 @@ import axios from 'axios';
 
 const AllCoupon = () => {
     const apiUrl = process.env.REACT_APP_API_URL;
-    const navigate = useNavigate();
     const { user } = useContext(AuthContext);
     const [couponData, setCouponData] = useState();
-    const [todayDate, setTodayDate] = useState();
+
+    const fetchData = async () => {
+        try {
+            const res = await axios.get(`${apiUrl}/coupons/not/${user.id}`, {}, { headers: { 'auth-token': user.token }, withCredentials: true });
+            setCouponData(res.data.result);
+            console.log(res.data.result);
+        } catch (err) {
+            alert('쿠폰 정보를 불러오는 데 실패했습니다. 다시 시도해주세요.');
+            console.log(err);
+        }
+    }
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await axios.get(`${apiUrl}/coupons/no/${user.id}`, {}, { headers: { 'auth-token': user.token }, withCredentials: true });
-                setCouponData(res.data.result);
-                console.log(res.data.result);
-            } catch (err) {
-                alert('쿠폰 정보를 불러오는 데 실패했습니다. 다시 시도해주세요.');
-                console.log(err);
-            }
-        }
         fetchData();
         formattodayDate();
     }, [])
@@ -39,7 +38,6 @@ const AllCoupon = () => {
         const year = result.getFullYear();
         const month = String(result.getMonth() + 1).padStart(2, '0');
         const day = String(result.getDate()).padStart(2, '0');
-        setTodayDate(`${year}-${month}-${day}`);
         return (`${year}-${month}-${day}`);
     }
 
@@ -61,6 +59,7 @@ const AllCoupon = () => {
                 headers: { 'auth-token': user.token },
                 withCredentials: true
             })
+            fetchData();
             console.log(res.data);
         } catch (err) {
             console.log(err);
@@ -85,7 +84,7 @@ const AllCoupon = () => {
                     <th className='allcoupon-th'>발급</th>
                 </tr>
                 {!couponData || couponData.length <= 0 ? (
-                    <tr className="allcoupon-not"><td colSpan="4">받을 수 있는 쿠폰이 없습니다.</td></tr>
+                    <tr className="allcoupon-not"><td colSpan="5">받을 수 있는 쿠폰이 없습니다.</td></tr>
                 ) : (
                     couponData.map((coupon, index) => (
                         <tr className='allcoupon-tr' key={index}>
@@ -94,9 +93,7 @@ const AllCoupon = () => {
                             <td className='allcoupon-td'>{coupon.conditions}원 이상 구매시</td>
                             <td className='allcoupon-td'>{formatDate(coupon.end_date)}까지</td>
                             <td className='allcoupon-td'>
-                                {/* {disappear(todayDate, formatDate(coupon.end_date)) ? (
-                                    <button className='allcoupon-button'>소멸 예정</button>
-                                ) : <></>} */}
+
                                 <button className='allcoupon-button' onClick={() => issueClick(coupon.id)}>발급</button>
                             </td>
                         </tr>

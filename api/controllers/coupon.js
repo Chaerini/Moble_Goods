@@ -101,11 +101,34 @@ export const getNotUserCoupons = async (req, res) => {
 
     try {
         const [result] = await pool.query(
-            `SELECT *
-            FROM coupon JOIN usercoupon ON coupon.id = usercoupon.coupon_id
-            WHERE user_id = ? AND DATE(end_date) >= CURDATE()
+            `SELECT coupon.*
+            FROM coupon LEFT JOIN usercoupon ON coupon.id = usercoupon.coupon_id
+            WHERE DATE(end_date) >= CURDATE()
             AND coupon.id NOT IN(
-            SELECT coupon.id FROM coupon JOIN usercoupon ON usercoupon.coupon_id = coupon.id WHERE usercoupon.user_id = ?);`,
+            SELECT coupon.id
+            FROM coupon JOIN usercoupon ON usercoupon.coupon_id = coupon.id 
+            WHERE usercoupon.user_id = ?);`,
+            [id]
+        );
+        res.status(200).json({ result });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+// 유저가 발급 받지 않은 쿠폰 개수 조회
+export const getNotUserCouponCount = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const [result] = await pool.query(
+            `SELECT COUNT(*)
+            FROM coupon LEFT JOIN usercoupon ON coupon.id = usercoupon.coupon_id
+            WHERE DATE(end_date) >= CURDATE()
+            AND coupon.id NOT IN(
+            SELECT coupon.id
+            FROM coupon JOIN usercoupon ON usercoupon.coupon_id = coupon.id 
+            WHERE usercoupon.user_id = ?);`,
             [id]
         );
         res.status(200).json({ result });

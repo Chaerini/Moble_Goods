@@ -7,8 +7,9 @@ import Navbar from '../../component/navbar/navbar';
 import Header from '../../component/header/header';
 import Footer from '../../component/footer/footer';
 import { useNavigate } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
+import axios from 'axios';
 
 
 const MyCoupon = () => {
@@ -17,6 +18,29 @@ const MyCoupon = () => {
     const { user } = useContext(AuthContext);
 
     const [isMenu, setIsMenu] = useState("all");
+    const [useCount, setUseCount] = useState(0);
+    const [downloadCount, setDownloadCount] = useState(0);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await axios.get(`${apiUrl}/coupons/not/${user.id}`, {}, {
+                    headers: { 'auth-token': user.token },
+                    withCredentials: true
+                })
+                const result = await axios.get(`${apiUrl}/usercoupons/${user.id}`, {}, {
+                    headers: { 'auth-token': user.token },
+                    withCredentials: true
+                })
+                setDownloadCount(res.data.result.length);
+                setUseCount(res.result.result.length);
+                console.log(res.data.result.length);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        fetchData();
+    }, [])
 
     return (
         <>
@@ -41,12 +65,12 @@ const MyCoupon = () => {
                         <div className='mycoupon-use'>
                             <FontAwesomeIcon icon={faTicket} className='mycoupon-icon-ticket' />
                             <p className='mycoupon-use-p-top'>사용 가능 쿠폰</p>
-                            <p className='mycoupon-use-p-bottom'><em className='mycoupon-em'>0</em>장</p>
+                            <p className='mycoupon-use-p-bottom'><em className='mycoupon-em'>{useCount}</em>장</p>
                         </div>
                         <div className='mycoupon-download'>
                             <FontAwesomeIcon icon={faGift} className='mycoupon-icon-download' />
                             <p className='mycoupon-download-p-top'>받을 수 있는 쿠폰</p>
-                            <p className='mycoupon-download-p-bottom'><em className='mycoupon-em'>0</em>장</p>
+                            <p className='mycoupon-download-p-bottom'><em className='mycoupon-em'>{downloadCount}</em>장</p>
                         </div>
                     </div>
                     <div className='mycoupon-menu'>

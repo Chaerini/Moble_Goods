@@ -18,6 +18,9 @@ router.get('/', getCoupons);
 // 유저가 발급 받지 않은 쿠폰 전체 조회
 router.get('/not/:id', getNotUserCoupons);
 
+// 유저가 발급 받지 않은 쿠폰 개수 조회
+router.get('/not/count/:id', getNotUserCoupons);
+
 // 쿠폰 ID 조회
 router.get('/:id', verifyAdmin, getCoupon);
 
