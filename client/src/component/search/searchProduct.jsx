@@ -178,9 +178,8 @@ const Search = () => {
       return pageNumbers;
     };  
     return (
-        <div>
-            <div>
-                <div className="search-input-wrap">
+        <div className="orderMange-wrapper">
+            <div className="order-content-wrapper">
                 <h2><FontAwesomeIcon icon={faBoxOpen}/>상품</h2>
                 <select
                 onClick={handleUpDown} className="select-date">
@@ -191,32 +190,35 @@ const Search = () => {
                 </div>
                 <div>
                 </div>
-                    <div>
+                    <div className="orderManage-table-box">
                     <FontAwesomeIcon icon={faPlus} onClick={()=>navigate("/addproduct")}/>
-                        <table className="notice-table">
+                        <table className="orderManage-table">
+                            <thead className="search-table-head">
                             <tr>
-                            <th className='th'>이름</th>
-                            <th className='th'>수량</th>
-                            <th className='th'>할인율</th>
-                            <th className='th'>할인된 가격</th>
-                            <th className='th'>날짜</th>
-                            <th className="th">수정</th>
-                            <th className="th">삭제</th>
+                            <th className="orderManage-th">이름</th>
+                            <th className="orderManage-th">수량</th>
+                            <th className="orderManage-th">할인율</th>
+                            <th className="orderManage-th">할인된 가격</th>
+                            <th className="orderManage-th">날짜</th>
+                            <th className="orderManage-th">수정</th>
+                            <th className="orderManage-th">삭제</th>
                             </tr>
+                            </thead>
+                            <tbody className="orderManage-table-body">
                             {(!Data || Data.length < 0) ? (
                                 <tr className="table-content">사용자 정보가 없습니다.</tr>
                             ) : (
                                 Data.map((user, index) => (
                                     <tr className="product-content" key={index}>
-                                        <td className="td">{user.name}</td>
-                                        <td className="td">{user.quantity}</td>
-                                        <td className="td">{user.discount_rate}</td>
-                                        <td className="td">{user.discounted_price}</td>
-                                        <td className="td">{user.date}</td>
-                                        <td className="td">
+                                        <td className="orderMange-td">{user.name}</td>
+                                        <td className="orderMange-td">{user.quantity}</td>
+                                        <td className="orderMange-td">{user.discount_rate}</td>
+                                        <td className="orderMange-td">{user.discounted_price}</td>
+                                        <td className="orderMange-td">{user.date}</td>
+                                        <td className="orderMange-td">
                                         <FontAwesomeIcon icon={faPen} onClick={() => handleEditClick(user)}/>
                                         </td>
-                                        <td className="td">
+                                        <td className="orderMange-td">
                                         <FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(user.id)} />
                                         </td>
                                         </tr>
@@ -238,7 +240,8 @@ const Search = () => {
                 다음
               </button>
             </div>
-                        </table>
+            </tbody>
+        </table>
         {modalOpen &&
     <div className='modal-container' ref={modalBackground} onClick={e => {
         if(e.target===modalBackground.currnet){
@@ -262,7 +265,6 @@ const Search = () => {
         }
                     </div>
                 </div>                     
-            </div>
     );
 };
 export default Search;

@@ -24,8 +24,8 @@ const Product = () => {
     }
   };
   return (
-    <div className="Product">
-      <div className="product">
+    <div className="login">
+      <div className="login-container">
         <label>공지사항 추가하기</label>
         <input
           type="text"
@@ -41,12 +41,11 @@ const Product = () => {
           name="content"
           className="product-input"
         />
-        <button onClick={handleClick} className="btn">
+        <button onClick={handleClick} className="login-button" type="submit">
           <Link to="/getnotice">추가</Link>
         </button>
       </div>
     </div>
   );
 };
-
 export default Product;

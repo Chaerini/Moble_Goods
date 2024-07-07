@@ -8,10 +8,11 @@
 .container {
     width: 80%;
     margin: 20px auto;
-    background-color: #fff;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    background-color: var(--c-lightgray);
+
 }
 
 .notice{
@@ -38,15 +39,12 @@
 
 .notice-table th {
     font-weight: bold;
-    color: #555;
+    background-color: var(--c-darkgray);
+    color: var(--c-bg-white);
 }
 
 .notice-table td {
     color: #333;
-}
-
-.notice-table tr:nth-child(even) {
-    background-color: #f9f9f9;
 }
 
 .notice-table tr:hover {

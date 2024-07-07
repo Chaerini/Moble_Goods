@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import Search from "../../component/search/searchProduct";
-
+import "./Notice.css";
 const GetNotice = () => {
   const navigate = useNavigate();
   const [notice, setNotice] = useState([]);
@@ -68,30 +68,29 @@ const handleEditAction = async (userId) =>{
   }
 }
   return (
-    <div>
+    <div className="container">
       <div>
-      <div className="search-input-wrap">
-        <h2>공지사항</h2>
+    <h1>공지사항</h1>
         <FontAwesomeIcon icon={faPlus} onClick={() => navigate("/addnotice")} />
           </div>
-        <table className="orderManage-table">
+        <table className="notice-table">
           <thead className="search-table-head">
-            <tr>
-            <th className="orderManage-th">제목</th>
-            <th className="orderManage-th">내용</th>
-            <th className="orderManage-th">수정</th>
-            <th className="orderManage-th">삭제</th>
-            </tr>
+          <tr>
+            <th>제목</th>
+            <th>내용</th>
+            <th>수정</th>
+            <th>삭제</th>
+          </tr>
           </thead>
           <tbody>
             {notice.map((notice) => (
-              <tr key={notice.id} className="product-content">
-                <td className="orderMange-td">{notice.title}</td>
-                <td className="orderMange-td">{notice.content}</td>
-                <td className="orderMange-td">
+              <tr key={notice.id}>
+                <td>{notice.title}</td>
+                <td>{notice.content}</td>
+                <td>
                 <FontAwesomeIcon icon={faPen} onClick={() => handleEditClick(notice)}/>
                   </td>
-                  <td className="orderMange-td">
+                  <td>
                   <FontAwesomeIcon
                     icon={faTrash}
                     onClick={() => handleDelete(notice.id)}
@@ -122,7 +121,6 @@ const handleEditAction = async (userId) =>{
     </div>
         }
       </div>
-    </div>
   );
 };
 export default GetNotice;

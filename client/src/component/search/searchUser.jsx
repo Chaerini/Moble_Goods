@@ -127,8 +127,8 @@ const SearchUser = () =>{
     const groupedOrdersArray = Object.values(groupedItems);
     const totalPages = Math.ceil(groupedOrdersArray.length / itemsPerPage);
     return(
-        <div>
-            <div>
+        <div className="orderManage-wrapper">
+            <div className="orderManage-content-wrapper">
                 <div>
                     <div className="search-input-wrap">
                     <h2><FontAwesomeIcon icon={faUser}/>고객</h2>
@@ -142,6 +142,7 @@ const SearchUser = () =>{
                   <button type="submit" className="search-btn" onClick={handleSearch}>
                     검색
                   </button>
+                  </div>
                     </div>
                 </div>
             <div>
@@ -194,9 +195,9 @@ const SearchUser = () =>{
               >
                 다음
               </button>
-            </div>
+                </div>
                         </tbody>
-                </table>
+                    </table>
         {
           modalOpen &&
     <div className={'modal-container'} ref={modalBackground} onClick={e => {
@@ -220,7 +221,6 @@ const SearchUser = () =>{
         }
                 </div>
             </div>
-        </div>
     )
 }
 export default SearchUser;
