@@ -29,6 +29,7 @@ import Myqna from './pages/customer/Myqna';
 import UpdateCoupon from "./pages/couponManage/updateCoupon";
 import SubPage from "./pages/product/subpage";
 import SearchUser from "./component/search/searchUser";
+import Faq from "./pages/customer/Faq";
 
 function App() {
   return (
@@ -66,7 +67,8 @@ function App() {
           <Route path="/category/:categoryId/subcategory/:subCategoryId/product/:productId" element={<SubPage />} />
           <Route path="/category/:categoryId/product/:productId" element={<SubPage />} />
           <Route path="/searchUser" element={<SearchUser/>}/>
-          
+          <Route path="/faq" element={<Faq/>}/>
+
       </Routes>
     </BrowserRouter>
   );

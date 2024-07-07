@@ -9,6 +9,7 @@ import { faTrash, faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useRef } from 'react';
 import "../userManage/Modal.css";
 import Search from '../../component/search/searchProduct';
+import SearchUser from '../../component/search/searchUser';
 const GetProduct= () => {
     const navigate=useNavigate();
     const { user } = useContext(AuthContext);
@@ -105,9 +106,9 @@ const handleAddClick = async(user) =>{
 }
     return (
         <div>
+                <Search/>
         <div className="product-container">
-            <h2 className='notice'>상품</h2>
-            <FontAwesomeIcon icon={faPlus} onClick={()=>navigate("/addproduct")}/>
+            {/* <FontAwesomeIcon icon={faPlus} onClick={()=>navigate("/addproduct")}/>
             <table className='notice-table'>
                 <thead>
                     <tr>
@@ -158,7 +159,7 @@ const handleAddClick = async(user) =>{
                         </tr>
                     ))}
                 </tbody>
-            </table>
+            </table> */}
         </div>
     </div>
     );

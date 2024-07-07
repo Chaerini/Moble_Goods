@@ -67,7 +67,7 @@ const GetCoupon= () => {
     const handleEditAction = async (userId) =>{
         setModalOpen(false);
         console.log(mpData)
-        console.log("=======data=====",userId)
+        console.log("=======아이디=====",userId)
         try {
             const res=await axios.put(`http://localhost:8080/api/coupons/`+userId,mpData);
             alert('쿠폰 정보가 수정되었습니다.');

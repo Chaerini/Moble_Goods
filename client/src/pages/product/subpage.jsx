@@ -14,6 +14,7 @@ const SubPage = () => {
     const [productDetail, setProductDetail] = useState(null);
     const [images, setImages] = useState([]);
     const [cart, setCart] = useState([]);
+    const [sortOption, setSortOption] = useState('best');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -96,6 +97,27 @@ const SubPage = () => {
         });
     };
 
+    const sortProducts = (products, option) => {
+        switch (option) {
+            case 'best':
+                return products.sort((a, b) => b.rating - a.rating); // 예시: rating 기준 정렬
+            case 'newest':
+                return products.sort((a, b) => new Date(b.date) - new Date(a.date));
+            case 'priceLow':
+                return products.sort((a, b) => a.price - b.price);
+            case 'priceHigh':
+                return products.sort((a, b) => b.price - a.price);
+            default:
+                return products;
+        }
+    };
+
+    const handleSortChange = (e) => {
+        setSortOption(e.target.value);
+    };
+
+    const sortedProducts = sortProducts(products, sortOption);
+
     if (productId && productDetail) {
         return (
             <>
@@ -104,7 +126,7 @@ const SubPage = () => {
                 <div className="product-detail-container">
                     <div className="product-detail-image">
                         {images.map(image => (
-                            <img key={image.imageId} src={image.url} alt={productDetail.name} style={{ width: '200px', height: '200px' }} />
+                            <img key={image.imageId} src={image.url} alt={productDetail.name} />
                         ))}
                     </div>
                     <div className="product-detail-info">
@@ -142,9 +164,17 @@ const SubPage = () => {
             <Header />
             <Navbar />
             <div className="products-container">
+                <div className="sort-options">
+                    <select value={sortOption} onChange={handleSortChange}>
+                        <option value="best">베스트</option>
+                        <option value="newest">신제품</option>
+                        <option value="priceLow">낮은 가격순</option>
+                        <option value="priceHigh">높은 가격순</option>
+                    </select>
+                </div>
                 <h1>상품</h1>
                 <div className="product-list">
-                    {products.map(product => (
+                    {sortedProducts.map(product => (
                         <div key={product.id} className="product-card">
                             <Link to={`/category/${categoryId}${subCategoryId ? `/subcategory/${subCategoryId}` : ''}/product/${product.id}`}>
                                 {product.productImageUrl && (

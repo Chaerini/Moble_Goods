@@ -52,3 +52,28 @@
   margin-bottom: 10px;
   margin-right: 10px;
 }
+.search-box {
+  height: 25px;
+  width: 100%;
+  align-items: center;
+  border-bottom: 1px solid var(--c-lightgray);
+}
+.search-input {
+  width: 200px;
+  border: 1px solid black;   
+  padding: 3px 6px;
+  margin-right: 10px;
+  height: 30px;
+}
+.search-btn {
+  width: 40px;
+  cursor: pointer;
+  height: 30px;
+  border: 1px solid var(--c-darkgray);
+  box-shadow: 1px 1px 1px 1px var();
+  background-color: var(--c-lightgray);
+}
+.select-date{
+  border: 1px solid #000000;
+  height: 30px;
+}

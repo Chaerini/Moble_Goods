@@ -52,7 +52,7 @@ const Navbar = () => {
                 ))}
             </ul>
             <Link to="/cart" className="cart">
-                <img src="/path/to/cart-icon.png" alt="장바구니" />
+                <img src="/cart.png" alt="장바구니" />
             </Link>
         </nav>
     );

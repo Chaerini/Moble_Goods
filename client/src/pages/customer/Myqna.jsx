@@ -18,25 +18,47 @@ const Dropdown = ({ label, options, onSelect, selectedOption }) => {
           </option>
         ))}
       </select>
-      <span className="arrow">&#9662;</span>
     </div>
   );
 };
 
 // 연락처 입력 필드 컴포넌트
-const ContactInput = ({ onChange, value, placeholder }) => (
-  <div className="myqna-input-field">
-    <label className="myqna-input-label">연락처</label>
-    <input
-      type="text"
-      name="contact"
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
-      className="myqna-input-box"
-    />
-  </div>
-);
+const ContactInput = ({ onChange, value, placeholder }) => {
+  const handleInputChange = (event) => {
+    const input = event.target.value;
+    const formattedInput = formatPhoneNumber(input);
+    onChange({ target: { name: 'contact', value: formattedInput } });
+  };
+
+  const formatPhoneNumber = (input) => {
+    // 숫자만 남기기
+    input = input.replace(/\D/g, '');
+    // 000-0000-0000 형식으로 포맷팅
+    if (input.length <= 3) {
+      return input;
+    } else if (input.length <= 7) {
+      return `${input.slice(0, 3)}-${input.slice(3, 7)}`;
+    } else {
+      return `${input.slice(0, 3)}-${input.slice(3, 7)}-${input.slice(7, 11)}`;
+    }
+  };
+
+  return (
+    <div className="myqna-input-field">
+      <label className="myqna-input-label">연락처</label>
+      <input
+        type="text"
+        name="contact"
+        value={value}
+        onChange={handleInputChange}
+        placeholder={placeholder}
+        className="myqna-input-box"
+        maxLength={13} // 최대 길이 설정
+      />
+    </div>
+  );
+};
+
 
 // 문의 제목 입력 필드 컴포넌트
 const TitleInput = ({ onChange, value, placeholder }) => (
@@ -103,6 +125,11 @@ const ContactForm = () => {
     });
   };
 
+  /* 나의 문의 내역보기 하이퍼링크 삽입*/
+  const handleViewClick = () => {
+    window.location.href = "/";
+  };
+
   const handleSubmit = () => {
     console.log("Submitted Data:", formData);
     alert("제출이 완료되었습니다.");
@@ -113,13 +140,13 @@ const ContactForm = () => {
       <div className="myqna-input-group-row">
           <label className="myqna-input-label">문의 유형<span className="myqna-required">*</span></label>
           <Dropdown
-            label="문의 유형을 선택해 주세요.▾"
+            label="문의 유형을 선택해 주세요."
             options={["유형1", "유형2", "유형3"]}
             onSelect={(option) => setFormData({ ...formData, type: option })}
             selectedOption={formData.type}
           />
           <Dropdown
-            label="세부선택▾"
+            label="세부선택"
             options={["세부1", "세부2", "세부3"]}
             onSelect={(option) => setFormData({ ...formData, subType: option })}
             selectedOption={formData.subType}
@@ -142,11 +169,12 @@ const ContactForm = () => {
         placeholder="문의하실 내용을 입력해 주세요."
       />
       <div className="myqna-button-row">
-        <SubmitButton onSubmit={handleSubmit} text="나의 문의 내역보기" className="myqna-view-button" />
-        <SubmitButton onSubmit={handleSubmit} text="등록하기" className="myqna-submit-button" />
+      <SubmitButton onClick={handleViewClick} text="나의 문의 내역보기" className="myqna-view-button" />
+      <SubmitButton onSubmit={handleSubmit} text="등록하기" className="myqna-submit-button" />
       </div>
-      <p className="myqna-center-text">전화문의 1577-4701 | 운영시간 평일 09:30~17:30</p>
-      <br></br>
+      <p className="myqna-center-text">
+        전화문의 <span className="highlight">777-777</span> | 운영시간 <span className="highlight">평일 09:30~17:30</span>
+      </p>      
       <p className="myqna-left-text">고객센터 문의량 증가로 인해 전화상담이 지연되고 있습니다. 1:1문의를 남겨주시면 순차적으로 확인 후 빠르게 답변 드릴 수 있도록 노력하겠습니다.</p>
     </form>
   );

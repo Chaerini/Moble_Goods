@@ -101,7 +101,6 @@ const SearchUser = () =>{
                         <FontAwesomeIcon icon={faMagnifyingGlass} onClick={handleSearch}/>
                     </div>
                 </div>
-
             <div className="product-container">
                     <table className="notice-table">
                         <tr>
