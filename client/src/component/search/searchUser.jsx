@@ -72,10 +72,11 @@ const SearchUser = () =>{
         console.log("user:",user);
         setMpData({
             userId:user.id,
-            name: user.name,
-            address: user.address,
-            phone: user.phone,
+            name:user.name,
+            address:user.address,
+            phone:user.phone,
             membership_name:user.membership_name,
+
           });
         setModalOpen(true);
         console.log(mpData)
