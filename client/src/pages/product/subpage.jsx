@@ -104,7 +104,7 @@ const SubPage = () => {
                 <div className="product-detail-container">
                     <div className="product-detail-image">
                         {images.map(image => (
-                            <img key={image.imageId} src={image.url} alt={productDetail.name} style={{ width: '200px', height: '200px' }} />
+                            <img key={image.imageId} src={image.url} alt={productDetail.name} />
                         ))}
                     </div>
                     <div className="product-detail-info">
