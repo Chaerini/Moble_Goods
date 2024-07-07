@@ -140,7 +140,7 @@
 }
 
 .add-to-cart-button {
-  background-color: #007bff;
+  background-color: orangered;
   color: #fff;
   padding: 15px 30px;
   border: none;
@@ -152,11 +152,24 @@
 }
 
 .add-to-cart-button:hover {
-  background-color: #0056b3;
+  background-color: orangered;
 }
 
 .product-detail-shipping p {
   margin: 10px 0;
   font-size: 1em;
   color: #555;
+}
+
+/* 정렬 옵션 스타일 */
+.sort-options {
+  align-self: flex-end;
+  margin-bottom: 20px;
+}
+
+.sort-options select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
 }
