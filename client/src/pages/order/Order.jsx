@@ -299,14 +299,13 @@ function Order() {
                       <label>할인 금액</label>
                       <div className="input-group">
                         <input type="text" value="0원" readOnly />
-                        <button className="apply-coupon-button">쿠폰 변경</button>
+                        <button className="apply-coupon-button">쿠폰 사용</button>
                       </div>
                     </div>
                     <div className="form-group">
                       <label>배송비</label>
                       <div className="input-group">
                         <input type="text" value={formatNumber(shippingFee) + '원'} readOnly />
-                        <button className="apply-coupon-button">쿠폰 사용</button>
                       </div>
                     </div>
                     <button className="next-button" onClick={handleNextClick}>다음</button>
@@ -382,7 +381,7 @@ function Order() {
                 <hr />
                 <div className="terms">
                   <label><input type="checkbox" checked={allChecked} onChange={handleAllCheckedChange} /> 전체 선택</label>
-                  <label><input type="checkbox" checked={privacyChecked} onChange={handlePrivacyCheckedChange} /> 개인정보 수집·이용 동의 (필수) <a href="#">약관보기</a></label>
+                  <label><input type="checkbox" checked={privacyChecked} onChange={handlePrivacyCheckedChange} /> 개인정보 수집·이용 동의 (필수)</label>
                   <label><input type="checkbox" checked={promoChecked} onChange={handlePromoCheckedChange} /> 이벤트, 할인쿠폰 등 혜택 제공을 위한 수신 동의 (선택)</label>
                 </div>
                 <button className="order-submit-button" onClick={handleSubmit} disabled={!isSubmitEnabled}>결제하기</button>
@@ -392,7 +391,7 @@ function Order() {
         </div>
       </div>
       <Footer />
-      {showOrderComplete && <OrderComplete onClose={closeOrderCompleteModal} />}
+      {showOrderComplete && <OrderComplete onClose={closeOrderCompleteModal} selectedItems={selectedItems} />}
     </>
   );
 }
