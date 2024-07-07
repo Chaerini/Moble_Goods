@@ -196,6 +196,7 @@
 }
 
 .quantity-controls-del {
-  color:#191919;
+  color: #888;
   background-color: white;
+  font-size: 18px;
 }
