@@ -3,10 +3,9 @@ import pool from '../db.js';
 // 질문 작성
 export const createAsk = async (req, res) => {
     const { user_id, title, contents } = req.body;
-
     try {
         const [result] = await pool.query(
-            `INSERT INTO ask(user_id, title, contents, date) VALUES (?, ?, ?, NOW())`,
+            `INSERT INTO ask (user_id, title, contents, date) VALUES (?, ?, ?, NOW())`,
             [user_id, title, contents]
         );
         let id = result.insertId;

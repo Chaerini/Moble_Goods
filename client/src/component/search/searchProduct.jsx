@@ -13,6 +13,7 @@ import { useEffect, useState,useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
+import "./search.css";
 const Search = () => {
     const [Data, setData] = useState([]);
     const [searchWord, setSearchWord] = useState();
@@ -50,7 +51,7 @@ const Search = () => {
     }, []);
     // 검색 버튼 클릭 했을 때
     const handleSearch = async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         try {
             const res = await axios.get(`${apiUrl}/search?name=${searchWord}`);
             setData(res.data.result);
@@ -69,8 +70,7 @@ const Search = () => {
     }
     const handleDelete  = async(id) =>{
         try{
-            await axios.delete(`${apiUrl}/products/`+id)
-            window.location.reload();
+            const res= await axios.delete(`${apiUrl}/products/`+id)
         }catch(err){
             console.log(err)
         }
@@ -179,14 +179,24 @@ const Search = () => {
     };  
     return (
         <div className="orderMange-wrapper">
-            <div className="order-content-wrapper">
-                <h2><FontAwesomeIcon icon={faBoxOpen}/>상품</h2>
+            <div className="search-input-wrap">
+            <h2><FontAwesomeIcon icon={faBoxOpen}/>상품</h2>
                 <select
                 onClick={handleUpDown} className="select-date">
                     <option>최신순</option>
                     <option>등록순</option>
                     <option>가격순</option>
                 </select>
+                <input
+                type="text"
+                className="search-input"
+                placeholder="검색할 상품을 입력하세요"
+                onChange={(e) => setSearchWord(e.target.value)}
+                onKeyDown={handleKeyPress}
+                />
+  <button type="submit" className="search-btn" onClick={handleSearch}>검색</button> 
+            </div>
+            <div className="order-content-wrapper">
                 </div>
                 <div>
                 </div>

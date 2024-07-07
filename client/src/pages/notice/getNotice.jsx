@@ -30,12 +30,11 @@ useEffect(() => {
     };
     fetchData();
   }, []);
-  const handleDelete = async (id) => {
+  const handleDelete = async (id,e) => {
     try {
-      console.log("id", id);
       await axios.delete(`http://localhost:8080/api/notice/` + id);
-      window.location.reload();
       console.log(id);
+      alert("삭제되었습니다.")
     } catch (err) {
       console.log(id);
       console.log(err);

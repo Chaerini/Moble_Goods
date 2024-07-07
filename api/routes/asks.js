@@ -5,22 +5,22 @@ import { createAsk, deleteAsk, getAsk, getAsks, getUserAsk, updateAsk } from '..
 const router = express.Router();
 
 // 질문 등록
-router.post('/', verifyTokenNext, createAsk);
+router.post('/', createAsk);
 
 // 질문 수정
-router.put('/:id', verifyTokenNext, updateAsk);
+router.put('/:id', updateAsk);
 
 // 질문 삭제
-router.delete('/:id', verifyTokenNext, deleteAsk);
+router.delete('/:id', deleteAsk);
 
 // 질문 전체 조회
-router.get('/', verifyTokenNext, getAsks);
+router.get('/', getAsks);
 
 // 질문 유저 ID 별 조회
-router.get('/user/:userid', verifyTokenNext, getUserAsk);
+router.get('/user/:userid', getUserAsk);
 
 // 질문 ID 별 조회
-router.get('/:id', verifyTokenNext, getAsk);
+router.get('/:id', getAsk);
 
 
 

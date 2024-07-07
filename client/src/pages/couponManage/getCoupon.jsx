@@ -5,7 +5,7 @@ import "../../Context/ProductContext"
 import { AuthContext } from '../../Context/AuthContext';
 import { useNavigate,Link,useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPen, faPlus,faTicket } from "@fortawesome/free-solid-svg-icons";
 import { useRef } from 'react';
 import "../userManage/Modal.css";
 const GetCoupon= () => {
@@ -80,6 +80,7 @@ const GetCoupon= () => {
     return (
         <div>
         <div className="product-container">
+        <FontAwesomeIcon icon={faTicket} />
             <h2 className='notice'>쿠폰</h2>
             <FontAwesomeIcon icon={faPlus} onClick={()=>navigate("/addcoupon")}/>
             <table className='notice-table'>

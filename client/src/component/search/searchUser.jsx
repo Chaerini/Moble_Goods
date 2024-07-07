@@ -32,9 +32,11 @@ const SearchUser = () =>{
     const apiUrl = process.env.REACT_APP_API_URL;
     const [currentPage, setCurrentPage] = useState(1);
     const [filteredData, setFilteredData] = useState(null);
+    const [Data, setData] = useState([]);
     const itemsPerPage = 15;
-    const { data, loading, error } = useFetch(`${apiUrl}/orders/admin`);
+    const { data} = useFetch(`${apiUrl}/users`);
     const orderList = Array.isArray(data) ? data : data?.rows || [];
+    const [IsUpDown,setUpDown]= useState(Data)
     useEffect(() => {
     const fetchData = async () => {
             try {
@@ -85,6 +87,7 @@ const SearchUser = () =>{
         try{
             await axios.delete(`http://localhost:8080/api/users/`+id)
             window.location.reload();
+            alert("삭제되었습니다.")
         }catch(err){
             console.log(err)
         }
@@ -126,12 +129,32 @@ const SearchUser = () =>{
       }, {});
     const groupedOrdersArray = Object.values(groupedItems);
     const totalPages = Math.ceil(groupedOrdersArray.length / itemsPerPage);
+    const handleUpDown =(e) =>{
+        //옵션을 클릭했을때 옵션의 값을 가져온다.
+      const value = e.target.value
+    // 최신순 리스트로 정렬 함수(sort)
+      const newList = ()=> Data.sort(function(a,b) {
+        //기존 할일리스트의 생성일로 비교
+        //시간를 new Date()로 감싸줘야한다.
+        return new (b.name) - (a.name);
+      });
+      // 옵션의 값이 '최신순'이면 상태를 '최신순'으로 바꾸고 
+     // 각 맞는 정렬함수를 넣어준다.
+      if(value === '이름순'){
+        setUpDown('이름순')
+        return setData(newList())
+      }
+    }
     return(
         <div className="orderManage-wrapper">
             <div className="orderManage-content-wrapper">
                 <div>
                     <div className="search-input-wrap">
                     <h2><FontAwesomeIcon icon={faUser}/>고객</h2>
+                    <select
+                onClick={handleUpDown} className="select-date">
+                    <option>이름순</option>
+                </select>
                 <input
                 type="text"
                 placeholder="검색할 사용자 이름을 적어주세요"
@@ -149,7 +172,6 @@ const SearchUser = () =>{
                     <table className="orderManage-table">
                     <thead className="search-table-head">
                         <tr>
-                            <th className="orderManage-th">번호</th>
                             <th className='orderManage-th'>이름</th>
                             <th className='orderManage-th'>아이디</th>
                             <th className='orderManage-th'>주소</th>
@@ -165,7 +187,6 @@ const SearchUser = () =>{
                         ) : (
                             userData.map((user, index) => (
                                 <tr className="product-content" key={index}>
-                                    <td className="orderMange-td">{user.number}</td>
                                     <td className="orderManage-td">{user.name}</td>
                                     <td className="orderManage-td">{user.username}</td>
                                     <td className="orderManage-td">{user.address}</td>
