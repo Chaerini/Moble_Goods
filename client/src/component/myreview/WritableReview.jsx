@@ -70,7 +70,7 @@ const WritableReview = () => {
                     <th className='writablereview-th'>리뷰쓰기</th>
                 </tr>
 
-                {(!reviewData || reviewData.length < 0) ? (
+                {(!reviewData || reviewData.length <= 0) ? (
                     <tr className="writablereview-not"><td colSpan="4">작성 가능한 리뷰가 없습니다.</td></tr>
                 ) : (
                     reviewData.map((review, index) => (

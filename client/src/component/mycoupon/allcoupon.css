@@ -1,0 +1,36 @@
+.allcoupon-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.allcoupon-th {
+    height: 50px;
+    background-color: #fafafa;
+    font-size: 13px;
+}
+
+.allcoupon-tr {
+    height: 50px;
+    border-bottom: 1px solid #eee;
+}
+
+.allcoupon-td {
+    font-size: 12px;
+    text-align: center;
+}
+
+.allcoupon-button {
+    font-size: 12px;
+    padding: 4px;
+    border: 1px solid blue;
+    background-color: #fff;
+    color: blue;
+}
+
+.allcoupon-not {
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    height: 300px;
+    text-align: center;
+    font-size: 12px;
+}

@@ -2,12 +2,22 @@ import './mycoupon.css';
 import { faCrown, faTicket, faGift } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MineCoupon from '../../component/mycoupon/MineCoupon';
+import AllCoupon from '../../component/mycoupon/AllCoupon';
 import Navbar from '../../component/navbar/navbar';
 import Header from '../../component/header/header';
 import Footer from '../../component/footer/footer';
+import { useNavigate } from 'react-router-dom';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../../Context/AuthContext';
 
 
 const MyCoupon = () => {
+    const apiUrl = process.env.REACT_APP_API_URL;
+    const navigate = useNavigate();
+    const { user } = useContext(AuthContext);
+
+    const [isMenu, setIsMenu] = useState("all");
+
     return (
         <>
             <Header />
@@ -40,11 +50,12 @@ const MyCoupon = () => {
                         </div>
                     </div>
                     <div className='mycoupon-menu'>
-                        <button className='mycoupon-all-click'>전체 쿠폰</button>
-                        <button className='mycoupon-mine'>내 쿠폰</button>
+                        <button className={isMenu === 'all' ? ('mycoupon-all-click') : ('mycoupon-all')} onClick={() => setIsMenu('all')}>전체 쿠폰</button>
+                        <button className={isMenu === 'mine' ? ('mycoupon-mine-click') : ('mycoupon-mine')} onClick={() => setIsMenu('mine')}>내 쿠폰</button>
                     </div>
                     <div className='myreview-middle'>
-                        <MineCoupon />
+                        {isMenu === 'all' ? (<AllCoupon />) : (<MineCoupon />)}
+
                     </div>
                     <div className='mycoupon-notice'>
                         <p className='mycoupon-notice-top'>굿포유 쿠폰 이용 안내</p>

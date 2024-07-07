@@ -1,6 +1,6 @@
 import express from 'express';
 import { verifyAdmin, verifyToken, verifyUser } from '../utils/verifyToken.js';
-import { createCoupon, deleteCoupon, getCountCoupon, getCoupon, getCoupons, updateCoupon } from '../controllers/coupon.js';
+import { createCoupon, deleteCoupon, getCountCoupon, getCoupon, getCoupons, getNotUserCoupons, updateCoupon } from '../controllers/coupon.js';
 const router = express.Router();
 
 // 쿠폰 등록
@@ -13,7 +13,10 @@ router.put('/:id', updateCoupon);
 router.delete('/:id', deleteCoupon);
 
 // 쿠폰 전체 조회
-router.get('/',getCoupons);
+router.get('/', getCoupons);
+
+// 유저가 발급 받지 않은 쿠폰 전체 조회
+router.get('/not/:id', getNotUserCoupons);
 
 // 쿠폰 ID 조회
 router.get('/:id', verifyAdmin, getCoupon);

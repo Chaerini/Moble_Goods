@@ -3,10 +3,11 @@ import Header from '../../component/header/header';
 import Footer from '../../component/footer/footer';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+    faAlignLeft,
     faCircleExclamation
 } from "@fortawesome/free-solid-svg-icons";
 import './myorder.css';
-import { useNavigate } from 'react-router-dom';
+import { useAsyncError, useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
 import axios from 'axios';
@@ -18,25 +19,92 @@ const MyOrder = () => {
     console.log(user);
 
     const [orderData, setOrderData] = useState();
+    const [selectMonth, setSelectMonth] = useState(6);
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
+    const [render, setRender] = useState(0);
+
+    // 현재 날짜 포맷
+    const formatEndDate = () => {
+        const result = new Date();
+        const year = result.getFullYear();
+        const month = String(result.getMonth() + 1).padStart(2, '0');
+        const day = String(result.getDate()).padStart(2, '0');
+        setEndDate(`${year}-${month}-${day}`);
+        return (`${year}-${month}-${day}`);
+    }
+
+    // 시작일 계산
+    const formatStartDate = (endDate) => {
+        const result = new Date(endDate);
+        result.setMonth(result.getMonth() - selectMonth);
+        const year = result.getFullYear();
+        const month = String(result.getMonth() + 1).padStart(2, '0');
+        const day = String(result.getDate()).padStart(2, '0');
+        setStartDate(`${year}-${month}-${day}`);
+        return (`${year}-${month}-${day}`);
+    };
+
+    const fetchData = async () => {
+        try {
+            const res = await axios.get(`${apiUrl}/orders/user/date/${user.id}`,
+                {
+                    params: { startDate, endDate },
+                    headers: { 'auth-token': user.token },
+                    withCredentials: true
+                });
+            setOrderData(res.data);
+            setRender(1);
+            console.log(res.data);
+        } catch (err) {
+            alert("주문 내역을 가져오는 데 실패했습니다. 다시 시도해주세요.");
+            console.log(err);
+        }
+    }
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await axios.get(`${apiUrl}/order/user/${user.id}`, {}, { headers: { 'auth-token': user.token }, withCredentials: true });
-                setOrderData(res.data);
-                console.log(res.data);
-            } catch (err) {
-                alert("주문 내역을 가져오는 데 실패했습니다. 다시 시도해주세요.");
-                console.log(err);
-            }
-        }
+        formatStartDate(formatEndDate());
+        console.log(startDate);
         fetchData();
-    }, [])
+    }, [render])
 
     // 주문일자 날짜 포맷
     const formatDate = (orderDate) => {
         let result = new Date(orderDate);
         return result.toISOString().split('T')[0];
+    }
+
+    const monthClick = (month) => {
+        setSelectMonth(month);
+    }
+
+    // input 날짜 바뀌면
+    const startDateChange = (date, id) => {
+        if (id === 'start') {
+            setStartDate(date);
+        } else if (id === 'end') {
+            setEndDate(date);
+        }
+        setSelectMonth(0);
+    }
+
+    const handleClick = () => {
+        fetchData();
+    }
+
+    // 주문 취소 버튼 클릭
+    const deleteOrderClick = async (id) => {
+        if (window.confirm("정말로 이 주문을 취소하시겠습니까?")) {
+            try {
+                console.log(apiUrl);
+                const res = await axios.delete(`${apiUrl}/orders/${id}`, {}, { headers: { 'auth-token': user.token }, withCredentials: true });
+                alert('주문이 취소되었습니다.');
+                fetchData();
+            } catch (err) {
+                alert('주문을 취소하는 데에 실패했습니다. 다시 시도해주세요.');
+                console.log(err);
+            }
+        }
     }
 
     return (
@@ -50,17 +118,17 @@ const MyOrder = () => {
                         <div className='myorder-left'>
                             <span className='myorder-delivery-title'>기간별 조회</span>
                             <span className='myorder-left-button'>
-                                <button className='myorder-button-white-click'>6개월</button>
-                                <button className='myorder-button-white'>12개월</button>
-                                <button className='myorder-button-white'>24개월</button>
+                                <button className={selectMonth === 6 ? ('myorder-button-white-click') : ('myorder-button-white')} id='month-6' onClick={() => monthClick(6)}>6개월</button>
+                                <button className={selectMonth === 12 ? ('myorder-button-white-click') : ('myorder-button-white')} id='month-12' onClick={() => monthClick(12)}>12개월</button>
+                                <button className={selectMonth === 24 ? ('myorder-button-white-click') : ('myorder-button-white')} id='month-24' onClick={() => monthClick(24)}>24개월</button>
                             </span>
                         </div>
                         <div className='myorder-right'>
                             <span className='myorder-delivery-title'>직접 입력 조회</span>
-                            <input type='date' className='myorder-input'></input>
+                            <input type='date' className='myorder-input' id='start' value={startDate} onChange={(e) => startDateChange(e.target.value, e.target.id)}></input>
                             <span className='myorder--'>-</span>
-                            <input type='date' className='myorder-input'></input>
-                            <button className='myorder-button-black'>조회</button>
+                            <input type='date' className='myorder-input' id='end' value={endDate} onChange={(e) => startDateChange(e.target.value, e.target.id)}></input>
+                            <button className='myorder-button-black' onClick={() => handleClick()}>조회</button>
                         </div>
                     </div>
                     <div className='myorder-middle'>
@@ -84,11 +152,11 @@ const MyOrder = () => {
                                 <th className='myorder-th'>주문취소</th>
                             </tr>
                             {(!orderData || orderData.length <= 0) ? (
-                                <tr className="writablereview-not"><td colSpan="5">작성 가능한 리뷰가 없습니다.</td></tr>
+                                <tr className="writablereview-not"><td colSpan="5">해당 기간에 주문한 내역이 없습니다.</td></tr>
                             ) : (
                                 orderData.map((order, index) => (
                                     <>
-                                        <tr className='myorder-tr'>
+                                        <tr className='myorder-tr' key={index}>
                                             <td className='myorder-td'>
                                                 <div className='myorder-date'>
                                                     <span className='myorder-span'>{formatDate(order.order_date)}</span>
@@ -113,7 +181,7 @@ const MyOrder = () => {
                                                 <p className='myorder-status'>{order.delivery_status}</p>
                                             </td>
                                             <td className='myorder-td'>
-                                                <button className='myorder-button'>주문취소</button>
+                                                <button className='myorder-button' onClick={() => deleteOrderClick(order.id)}>주문취소</button>
                                             </td>
                                         </tr>
                                     </>
