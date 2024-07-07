@@ -3,7 +3,9 @@ import {
     faTrash,
     faMagnifyingGlass,
     faPlus,
-    faBoxOpen
+    faBoxOpen,
+    faSortUp,
+    faSortDown
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState, useRef } from "react";
@@ -26,7 +28,7 @@ const Search = () => {
     });
     const [modalOpen, setModalOpen] = useState(false);
     const modalBackground = useRef();
-
+    const [IsUpDown,setUpDown]= useState(Data)
     const handleSearch = async (e) => {
         e.preventDefault();
         try {
@@ -39,7 +41,6 @@ const Search = () => {
             alert("일치하는 상품이 없습니다.")
         }
     }
-
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
             handleSearch(e);
@@ -85,12 +86,39 @@ const Search = () => {
             console.log(err);
         }
     }
-
+    const handleUpDown =(e) =>{
+        //옵션을 클릭했을때 옵션의 값을 가져온다.
+      const value = e.target.value
+    // 최신순 리스트로 정렬 함수(sort)
+      const newList = ()=> Data.sort(function(a,b) {
+        //기존 할일리스트의 생성일로 비교
+        //시간를 new Date()로 감싸줘야한다.
+        return new Date (b.date) - new Date (a.date);
+      });
+    // 등록순 리스트로 정렬 함수
+      const oldList = () =>Data.sort(function(a,b) {
+        return new Date(a.date) - new Date(b.date)
+      });
+      // 옵션의 값이 '최신순'이면 상태를 '최신순'으로 바꾸고 
+     // 각 맞는 정렬함수를 넣어준다.
+      if(value === '최신순'){
+        setUpDown('최신순')
+        return setData(newList())
+      }else if(value === '등록순'){
+        setUpDown('등록순')
+        return setData(oldList())
+      }
+    }
     return (
         <div>
             <div>
                 <div className="search-input-wrap">
                 <h2><FontAwesomeIcon icon={faBoxOpen}/>상품</h2>
+                <select
+                onClick={handleUpDown} className="select-date">
+                    <option>최신순</option>
+                    <option>등록순</option>
+                </select>
                 <input
                 type="text"
                 placeholder="검색할 사용자 이름을 적어주세요"
@@ -98,7 +126,7 @@ const Search = () => {
                 onChange={(e) => setSearchWord(e.target.value)}
                 onKeyDown={handleKeyPress}
                 />
-  <button type="submit" className="search-btn" onClick={handleSearch}>검색</button>                
+  <button type="submit" className="search-btn" onClick={handleSearch}>검색</button>              
             </div>
                 <div>
                 </div>

@@ -73,3 +73,7 @@
   box-shadow: 1px 1px 1px 1px var();
   background-color: var(--c-lightgray);
 }
+.select-date{
+  border: 1px solid #000000;
+  height: 30px;
+}
