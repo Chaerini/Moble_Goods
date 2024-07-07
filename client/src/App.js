@@ -20,7 +20,6 @@ import MyOrder from "./pages/myorder/MyOrder";
 import AdminMain from "./pages/admin/adminMain/AdminMain";
 import GetCoupon from "./pages/couponManage/getCoupon";
 import GetNotice from "./pages/notice/GetNotice";
-import UpdateNotice from "./pages/notice/updateNotice";
 import Withdraw from "./pages/withdraw/Withdraw";
 import Search from "./component/search/searchProduct";
 import UpdateUserMember from "./pages/userManage/updateUserMember";
@@ -42,7 +41,6 @@ function App() {
           <Route path="/addnotice" element={<AddNotice />} />
           <Route path="/getproduct" element={<GetProduct />} />
           <Route path="/addproduct" element={<Product />} />
-          <Route path="/updatenotice/:id" element={<UpdateNotice />} />
           <Route path="/" element={<Main />} />
           <Route path="/getuser" element={<GetUser />} />
           <Route path="/addcoupon" element={<Coupon />} />
