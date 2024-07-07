@@ -1,4 +1,3 @@
-
 .search-container {
   width: 100vw;
   height: 70px;
@@ -6,9 +5,8 @@
   overflow: hidden;
   background: var(--c-bg-white);
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  /* border-bottom: 2px solid var(--c-lightgray); */
+     justify-content: space-between;
+  border-bottom: 2px solid var(--c-lightgray);
   z-index: 1;
 }
 
@@ -76,4 +74,5 @@
 .select-date{
   border: 1px solid #000000;
   height: 30px;
+  margin-right: 10px;
 }
