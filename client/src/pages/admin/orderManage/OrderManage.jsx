@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useFetch from "../../../hooks/useFetch";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-import OrderManageModal from "./orderManageModal";
+import OrderManageModal from "./OrderManageModal";
 import "./orderManage.css";
 
 const OrderManage = () => {

@@ -81,7 +81,7 @@ const AdminSidebar = ({ setActiveComponent }) => {
               <p className="sidebar-menu-text">고객</p>
             </div>
           </li>
-          <li onClick={() => handleMenuClick("getNotice")}>
+          <li onClick={() => handleMenuClick("GetNotice")}>
             <div className="sidebar-menu-item">
               <FontAwesomeIcon
                 icon={faClipboardList}

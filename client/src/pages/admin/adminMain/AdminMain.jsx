@@ -6,7 +6,7 @@ import Dashboard from "../dashboard/Dashboard";
 import OrderManage from "../orderManage/OrderManage";
 import ProductManage from "../../productManage/getProduct";
 import UserManage from "../../userManage/getUser";
-import getNotice from "../../notice/getNotice";
+import GetNotice from "../../notice/GetNotice";
 
 const AdminMain = () => {
   const [activeComponent, setActiveComponent] = useState("Dashboard");
@@ -21,8 +21,8 @@ const AdminMain = () => {
         return <ProductManage />;
       case "UserManage":
         return <UserManage />;
-      case "getNotice":
-        return <getNotice />;
+      case "GetNotice":
+        return <GetNotice />;
       default:
         return <Dashboard />;
     }

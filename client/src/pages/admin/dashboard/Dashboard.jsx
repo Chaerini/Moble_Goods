@@ -1,14 +1,10 @@
 import React from "react";
-// import AdminSidebar from "../adminSidebar/AdminSidebar";
-// import AdminHeader from "../adminHeader/AdminHeader";
 import "./dashboard.css";
 
 const Dashboard = () => {
   return (
     <div className="admin-dashboard-wrapper">
       <div className="dashboard-main-wrapper">
-        {/* <AdminSidebar />
-        <AdminHeader /> */}
         <div className="dashboard-main-content">
           {/* 카드 1 */}
           <div className="dashboard-card-wrapper">
