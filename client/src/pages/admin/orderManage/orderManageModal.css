@@ -1,0 +1,117 @@
+@import url("../../../root.css");
+
+.orderManage-modal-wrapper {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+}
+
+.orderManage-modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+  /* text-align: center; */
+  background: var(--c-lightgray);
+  padding: 30px;
+  border-radius: 5px;
+  width: 400px;
+  height: 500px;
+}
+
+.orderManage-modal-content h2 {
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.orderManage-modal-input-data-container {
+  border: 1px solid black;
+  height: 300px;
+  gap: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.orderManage-modal-input-data-box {
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3px;
+  /* gap: 5px; */
+  height: fit-content;
+}
+
+.orderManage-modal-input-data-box input {
+  border: 1px solid orangered;
+  margin: 0 10px;
+  padding: 3px;
+  width: 100px;
+}
+
+.orderManage-modal-label {
+  font-weight: 600;
+  color: rgb(74, 74, 74);
+  border: 1px solid violet;
+  width: 80px;
+  white-space: nowrap;
+}
+
+.orderManage-modal-input-radioCon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* flex-direction: row; */
+  flex-wrap: wrap;
+  width: 250px;
+  margin: 0;
+  padding: 0;
+}
+
+.orderManage-modal-input-radioBox {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 250px;
+  margin: 0;
+  padding: 0;
+}
+
+.radio {
+  width: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.orderManage-modal-btn-box {
+  border: 1px solid black;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.orderManage-modal-btn {
+  border: 1px solid black;
+  width: 50px;
+  height: 30px;
+}
+
+.del {
+  background-color: red;
+}

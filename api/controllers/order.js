@@ -1,5 +1,39 @@
 import pool from '../db.js';
 
+// 관리자-전체 주문내역 조회
+export const getAdminAllOrders = async (req, res) => {
+  try {
+    const [rows] = await pool.query(
+      `
+      SELECT
+          \`order\`.id AS order_id,
+          users.id AS users_id,
+          users.username AS username,
+          \`order\`.total AS total,
+          \`order\`.status_id AS status_id,
+          \`order\`.order_date AS order_date,
+          order_item.id AS orderitem_id,
+          order_item.quantity AS quantity,
+          status.delivery_status AS delivery_status, 
+          status.waybill_number AS waybill_number, 
+          product.id AS product_id, 
+          product.name AS product_name, 
+          product_image.url AS product_image_url
+      FROM \`order\`
+      JOIN users ON \`order\`.user_id = users.id
+      JOIN order_item ON order_item.order_id = \`order\`.id
+      JOIN status ON status.id = \`order\`.status_id
+      LEFT JOIN product ON product.id = order_item.product_id
+      LEFT JOIN product_image ON product_image.product_id = product.id
+      ORDER BY \`order\`.order_date DESC;
+      `
+    );
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 // 모든 주문 조회함
 export const getAllOrders = async (req, res) => {
   try {

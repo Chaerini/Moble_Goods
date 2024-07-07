@@ -30,10 +30,31 @@ const AdminMain = () => {
   }, [activeComponent]);
 
   return (
-    <div style={{ margin: 0, padding: 0 }}>
+    <div
+      style={{
+        margin: 0,
+        padding: 0,
+        width: "100vw",
+        height: "100vh",
+        position: "fixed",
+        backgroundColor: "var(--c-lightgray)",
+      }}
+    >
       <AdminSidebar setActiveComponent={setActiveComponent} />
       <AdminHeader />
-      <div style={{ margin: 0, padding: 0 }}>{renderComponent()}</div>
+      <div
+        style={{
+          display: "flex",
+          margin: "0 0 0 300px",
+          width: "calc(100vw - 300px)",
+          height: "calc(100vh - 70px)",
+          padding: "20px",
+          alignItems: "center",
+          justifyContent: "space-around",
+        }}
+      >
+        {renderComponent()}
+      </div>
     </div>
   );
 };

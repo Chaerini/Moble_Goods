@@ -1,12 +1,6 @@
 @import url("../../../root.css");
 
-.orderManage-wrapper form,
-.orderManage-wrapper fieldset,
-.orderManage-wrapper legend,
-/* .orderManage-wrapper input, */
-.orderManage-wrapper textarea
-/* .orderManage-wrapper select */
-/* .orderManage-wrapper button  */ {
+.orderManage-wrapper form {
   margin: 0;
   padding: 0;
   border: 0;
@@ -19,25 +13,24 @@
 }
 
 .orderManage-wrapper {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   background-color: var(--c-lightgray);
   flex-direction: column;
+  align-items: center;
 }
 
 .orderManage-content-wrapper {
   display: flex;
-  width: calc(100vw - 300px);
-  height: calc(100vh - 70px);
-  margin-left: 300px;
-  padding: 20px;
+  width: 100%;
+  height: 100%;
   flex-direction: column;
 }
 
 .orderManage-header {
   width: 100%;
-  height: 25px;
+  height: 20px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -113,7 +106,7 @@
 
 .orderManage-orderNumber-search-input {
   width: 200px;
-  border: 1px solid black;   
+  border: 1px solid black;
   font-size: 11px;
   padding: 3px 6px;
   margin-right: 10px;
@@ -133,6 +126,47 @@
   text-align: center;
 }
 
+.orderManage-datePicker-wrapper .react-datepicker {
+  /* position: relative; */
+  z-index: 9999;
+  position: absolute; /* z-index가 작동하도록 설정 */
+  z-index: 1000;
+}
+
+.react-datepicker__input-container input {
+  width: 200px;
+  padding: 3px 6px;
+  text-align: center;
+  letter-spacing: 1px;
+  border: 1px solid var(--c-darkgray);
+  font-size: 11px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.orderManage-datePicker-wrapper react-datepicker-ignore-onclickoutside {
+  width: 13px;
+  height: 13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.react-datepicker__close-icon::after {
+  background-color: #ff5733; /* 원하는 배경색으로 변경 */
+  color: #fff; /* 원하는 텍스트 색상으로 변경 */
+  border-radius: 50%;
+  height: 11px;
+  width: 11px;
+  padding: 1px;
+  font-size: 11px;
+  text-align: center;
+  display: inline-block;
+  box-sizing: content-box;
+}
+
 .orderManage-search-btn-box {
   display: flex;
   justify-content: center;
@@ -144,7 +178,7 @@
   cursor: pointer;
   height: 20px;
   border: 1px solid var(--c-darkgray);
-  box-shadow: 1px 1px 1px 1px var();
+  box-shadow: 1px 1px 1px 1px var(--c-lightgray);
   background-color: var(--c-lightgray);
 }
 
@@ -172,7 +206,7 @@
   cursor: pointer;
   height: 30px;
   border: 1px solid var(--c-darkgray);
-  box-shadow: 1px 1px 1px 1px var();
+  box-shadow: 1px 1px 1px 1px var(--c-lightgray);
   background-color: var(--c-lightgray);
 }
 
@@ -187,11 +221,11 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  /* height: 100%; */
   padding: 10px 25px;
   background-color: var(--c-bg-white);
   box-shadow: 0 0 0 0.2px var(--c-black);
   margin-bottom: 10px;
+  z-index: -1;
 }
 
 .orderManage-table-con {
@@ -212,60 +246,78 @@
   align-items: flex-start;
   justify-content: center;
   width: 100%;
+  max-height: 400px;
+  overflow-y: auto;
   height: 300px;
-  box-shadow: 0 0 0 0.5px var(--c-black);
+  /* box-shadow: 0 0 0 0.5px var(--c-black); */
   background-color: var(--c-lightgray);
+}
+
+.orderManage-table-box::-webkit-scrollbar {
+  width: 10px;
+}
+
+.orderManage-table-box::-webkit-scrollbar-thumb {
+  background-color: var(--c-darkgray);
+  border-radius: 10px;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+
+.orderManage-table-box::-webkit-scrollbar-track {
+  background-color: var(--c-bg-white);
+  /* box-shadow: inset 0px 0px 5px white; */
+  border-radius: 10px;
 }
 
 .orderManage-table {
   width: 100%;
   border-collapse: collapse;
-  flex-direction: column;
+  z-index: 0;
+}
+
+.orderManage-table-head th {
+  position: sticky;
+  top: 0;
+  background-color: var(--c-darkgray);
+  color: var(--c-bg-white);
+  z-index: 1;
 }
 
 .orderManage-table th,
 .orderManage-table td {
-  height: 30px;
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
+  padding: 0;
+  margin: 0;
+  font-size: 13px;
+  border: 1px solid var(--c-black);
   text-align: center;
-  box-shadow: 0 0 0 0.2px var(--c-black);
+  vertical-align: middle;
 }
 
-.orderManage-table tr {
-  display: flex;
+.orderManage-table th {
+  height: 25px;
 }
 
-/* 각 셀의 가로길이 조절 */
-.orderManage-table th:nth-child(4),
-.orderManage-table td:nth-child(4),
-.orderManage-table th:nth-child(5),
-.orderManage-table td:nth-child(5),
-.orderManage-table th:nth-child(6),
-.orderManage-table td:nth-child(6),
-.orderManage-table th:nth-child(7),
-.orderManage-table td:nth-child(7) {
-  width: 50%;
+.orderManage-table td {
+  height: 25px;
+  padding: 3px;
+  /* display:; */
 }
 
-.orderManage-table th:nth-child(8),
-.orderManage-table td:nth-child(8) {
-  width: 30%;
+.orderManage-td-link {
+  display: inline-block;
+  max-width: 200px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  border-bottom: 1px solid black;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  cursor: pointer;
 }
 
-.orderManage-table-head {
-  font-size: 11px;
-  background-color: var(--c-darkgray);
-  color: var(--c-bg-white);
-  height: 30px;
-}
-
-.orderManage-table-body {
-  font-size: 11px;
-  padding-left: 5px;
-  height: 20px;
+.orderManage-td-link:hover {
+  border-bottom: 1px solid black;
+  font-weight: 700;
 }
 
 .orderManage-page-btn-box {
@@ -292,12 +344,11 @@
   background: none;
   justify-content: center;
   align-items: center;
-  /* font-weight: 600; */
 }
 
-.orderManage-page-num:focus,
-.orderManage-page-btn:focus {
-  font-weight: 600;
+.orderManage-page-num.active {
+  font-weight: bold;
+  color: var(--c-point);
 }
 
 .orderManage-table-item-orderNum {
