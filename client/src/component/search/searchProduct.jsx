@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState,useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import useFetch from "../../hooks/useFetch";
 const Search = () => {
     const [Data, setData] = useState([]);
     const [searchWord, setSearchWord] = useState();
@@ -30,6 +31,9 @@ const Search = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const modalBackground = useRef();
     const [IsUpDown,setUpDown]= useState(Data)
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 15;
+    const [filteredData, setFilteredData] = useState(null);
     // 사용자 정보가 업데이트 됐을 경우 렌더링
     useEffect(() => {
         const fetchData = async () => {
@@ -130,6 +134,49 @@ const Search = () => {
         return setData(priceList())
       }
     }
+    //주문 
+    const { data, loading, error } = useFetch(`${apiUrl}/products`);
+    const orderList = Array.isArray(data) ? data : data?.rows || [];
+    if (!Array.isArray(orderList))
+      return <div>예상치 못한 데이터 형식입니다</div>
+    const dataToDisplay = filteredData || orderList;
+
+    const uniqueOrderCount = new Set(dataToDisplay.map((item) => item.order_id))
+      .size;
+  
+    const groupedItems = dataToDisplay.reduce((acc, item) => {
+        if (!acc[item.order_id]) acc[item.order_id] = [];
+        acc[item.order_id].push(item);
+        return acc;
+      }, {});
+    const groupedOrdersArray = Object.values(groupedItems);
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = groupedOrdersArray.slice(
+      indexOfFirstItem,
+      indexOfLastItem
+    );
+    const totalPages = Math.ceil(groupedOrdersArray.length / itemsPerPage);
+  
+    const handleClick = (pageNumber) => setCurrentPage(pageNumber);
+  
+    const renderPageNumbers = () => {
+      const pageNumbers = [];
+      for (let i = 1; i <= totalPages; i++) {
+        pageNumbers.push(
+          <button
+            key={i}
+            onClick={() => handleClick(i)}
+            className={`orderManage-page-num ${
+              currentPage === i ? "active" : ""
+            }`}
+          >
+            {i}
+          </button>
+        );
+      }
+      return pageNumbers;
+    };  
     return (
         <div>
             <div>
@@ -141,17 +188,10 @@ const Search = () => {
                     <option>등록순</option>
                     <option>가격순</option>
                 </select>
-                <input
-                type="text"
-                className="search-input"
-                onChange={(e) => setSearchWord(e.target.value)}
-                onKeyDown={handleKeyPress}
-                />
-  <button type="submit" className="search-btn" onClick={handleSearch}>검색</button>  
                 </div>
                 <div>
                 </div>
-                    <div className="product-container">
+                    <div>
                     <FontAwesomeIcon icon={faPlus} onClick={()=>navigate("/addproduct")}/>
                         <table className="notice-table">
                             <tr>
@@ -160,7 +200,8 @@ const Search = () => {
                             <th className='th'>할인율</th>
                             <th className='th'>할인된 가격</th>
                             <th className='th'>날짜</th>
-                            <th className="th">삭제/수정</th>
+                            <th className="th">수정</th>
+                            <th className="th">삭제</th>
                             </tr>
                             {(!Data || Data.length < 0) ? (
                                 <tr className="table-content">사용자 정보가 없습니다.</tr>
@@ -173,10 +214,31 @@ const Search = () => {
                                         <td className="td">{user.discounted_price}</td>
                                         <td className="td">{user.date}</td>
                                         <td className="td">
-                                        <FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(user.id)} />
                                         <FontAwesomeIcon icon={faPen} onClick={() => handleEditClick(user)}/>
                                         </td>
-   
+                                        <td className="td">
+                                        <FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(user.id)} />
+                                        </td>
+                                        </tr>
+                            )))}
+                             <div className="orderManage-page-btn-box">
+              <button
+                className="orderManage-page-btn"
+                onClick={() => handleClick(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                이전
+              </button>
+              {renderPageNumbers()}
+              <button
+                className="orderManage-page-btn"
+                onClick={() => handleClick(currentPage + 1)}
+                disabled={currentPage === totalPages}
+              >
+                다음
+              </button>
+            </div>
+                        </table>
         {modalOpen &&
     <div className='modal-container' ref={modalBackground} onClick={e => {
         if(e.target===modalBackground.currnet){
@@ -198,13 +260,9 @@ const Search = () => {
             </div>
         </div>
         }
-                                </tr>
-                            )))}
-                        </table>
                     </div>
                 </div>                     
             </div>
     );
 };
-
 export default Search;

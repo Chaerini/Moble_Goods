@@ -1,6 +1,7 @@
 import React, { useEffect,useState,useContext,useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./search.css";
+import "../../pages/admin/orderManage/orderManage.css";
 import {
   faPlus,
   faPen,
@@ -9,8 +10,6 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import { useNavigate,useLocation } from "react-router-dom";
-import { AuthContext } from "../../Context/AuthContext";
 const SearchUser = () =>{
     const modalBackground = useRef();
     const handleChange = (e) =>{
@@ -95,9 +94,9 @@ const SearchUser = () =>{
         }
     }
     return(
-        <div className="admin">
-            <div className="admin-center">
-                <div className="admin-search-bg">
+        <div>
+            <div>
+                <div>
                     <div className="search-input-wrap">
                     <h2><FontAwesomeIcon icon={faUser}/>고객</h2>
                 <input
@@ -112,32 +111,40 @@ const SearchUser = () =>{
                   </button>
                     </div>
                 </div>
-            <div className="product-container">
-                    <table className="notice-table">
+            <div>
+                    <table className="orderManage-table">
+                    <thead className="search-table-head">
                         <tr>
-                            <th className='th'>이름</th>
-                            <th className='th'>아이디</th>
-                            <th className='th'>주소</th>
-                            <th className='th'>핸드폰</th>
-                            <th className='th'>멤버십</th>
-                            <th className="th">삭제/수정</th>
+                            <th className='orderManage-th'>이름</th>
+                            <th className='orderManage-th'>아이디</th>
+                            <th className='orderManage-th'>주소</th>
+                            <th className='orderManage-th'>핸드폰</th>
+                            <th className='orderManage-th'>멤버십</th>
+                            <th className="orderManage-th">수정</th>
+                            <th className="orderManage-th">삭제</th>
                         </tr>
+                        </thead>
+                        <tbody className="orderManage-table-body">
                         {(!userData || userData.length < 0) ? (
                             <tr className="table-content">사용자 정보가 없습니다.</tr>
                         ) : (
                             userData.map((user, index) => (
                                 <tr className="product-content" key={index}>
-                                    <td className="td">{user.name}</td>
-                                    <td className="td">{user.username}</td>
-                                    <td className="td">{user.address}</td>
-                                    <td className="td">{user.phone}</td>
-                                    <td className="td">{user.membership_name}</td>
-                                    <td className="td">
-                                    <FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(user.id)} />
+                                    <td className="orderManage-td">{user.name}</td>
+                                    <td className="orderManage-td">{user.username}</td>
+                                    <td className="orderManage-td">{user.address}</td>
+                                    <td className="orderManage-td">{user.phone}</td>
+                                    <td className="orderManage-td">{user.membership_name}</td>
+                                    <td className="orderManage-td">
                                     <FontAwesomeIcon icon={faPen} onClick={() => handleEditClick(user)}/>
+                                        </td>
+                                <td className="orderMange-td">
+                                    <FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(user.id)} />
                                     </td>
                                 </tr>
                             )))}
+                        </tbody>
+                </table>
         {
           modalOpen &&
     <div className={'modal-container'} ref={modalBackground} onClick={e => {
@@ -159,7 +166,6 @@ const SearchUser = () =>{
         </div>
     </div>
         }
-                    </table>
                 </div>
             </div>
         </div>

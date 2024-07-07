@@ -76,3 +76,9 @@
   height: 30px;
   margin-right: 10px;
 }
+.search-table-head th {
+  top: 0;
+  background-color: var(--c-darkgray);
+  color: var(--c-bg-white);
+  z-index: 1;
+}

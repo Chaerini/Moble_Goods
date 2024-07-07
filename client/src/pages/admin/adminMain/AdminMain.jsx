@@ -14,7 +14,6 @@ const AdminMain = () => {
 
   const renderComponent = useCallback(() => {
     console.log("어드민 메인:", activeComponent);
-
     switch (activeComponent) {
       case "OrderManage":
         return <OrderManage />;
