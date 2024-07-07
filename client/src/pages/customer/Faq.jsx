@@ -1,53 +1,3 @@
-// import React, { useState } from "react";
-// import "./faq.css";
-
-// const Customer = () => {
-//   const [activeIndex, setActiveIndex] = useState(null);
-
-//   const toggleFaq = (index) => {
-//     setActiveIndex(activeIndex === index ? null : index);
-//   };
-
-//   return (
-//     <div className="faq-container">
-//       <header className="header">
-//         <h1>FAQ</h1>
-//         <div className="search-container">
-//           <input type="text" placeholder="궁금한 사항을 입력해 주세요." />
-//           <button type="button">
-//             <span role="img" aria-label="search">
-//               🔍
-//             </span>
-//           </button>
-//         </div>
-//         <nav className="nav-tabs">
-//           <a href="#휴대폰/실시간계좌이체">휴대폰/실시간계좌이체</a>
-//           <a href="#회원등급">회원등급</a>
-//           <a href="#회원가입/정보변경">회원가입/정보변경</a>
-//           <a href="#환불방법">환불방법</a>
-//         </nav>
-//       </header>
-//       <main>
-//         {faqItems.map((item, index) => (
-//           <div key={index} className="faq-item">
-//             <div className="faq-question" onClick={() => toggleFaq(index)}>
-//               <span>Q. {item}</span>
-//               <span>{activeIndex === index ? "▲" : "▼"}</span>
-//             </div>
-//             {activeIndex === index && (
-//               <div className="faq-answer">
-//                 <p>여기에 답변 내용이 들어갑니다.</p>
-//               </div>
-//             )}
-//           </div>
-//         ))}
-//       </main>
-//     </div>
-//   );
-// };
-
-// export default Customer;
-
 import React, { useState } from 'react';
 import './faq.css'; // CSS 파일을 가져옵니다.
 
@@ -55,6 +5,9 @@ const Faq = () => {
   // 상태 정의: 검색어와 활성화된 질문 인덱스
   const [searchTerm, setSearchTerm] = useState('');
   const [activeIndex, setActiveIndex] = useState(null);
+
+  // 상태 정의: 현재 보이는 첫 카테고리 인덱스
+  const [visibleIndex, setVisibleIndex] = useState(0);
 
   // 카테고리 배열
   const categories = [
@@ -80,6 +33,25 @@ const Faq = () => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
+  // 카테고리를 오른쪽으로 이동시키는 함수
+  const showNextCategories = () => {
+    if (visibleIndex < categories.length - 4) {
+      setVisibleIndex(visibleIndex + 4);
+    }
+  };
+
+  // 카테고리를 왼쪽으로 이동시키는 함수
+  const showPreviousCategories = () => {
+    if (visibleIndex > 0) {
+      setVisibleIndex(visibleIndex - 4);
+    }
+  };
+
+  // 카테고리를 클릭했을 때 해당 질문 목록으로 넘어가는 기능 추가
+  const scrollToQuestions = () => {
+    document.querySelector('.faq-list').scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="faq-container">
       {/* FAQ 헤더 */}
@@ -94,12 +66,21 @@ const Faq = () => {
         onFocus={e => e.target.placeholder = ''}
         onBlur={e => e.target.placeholder = '궁금한 사항을 입력해 주세요.'}
       />
-      {/* 카테고리 목록 */}
+      {/* 카테고리 목록 및 좌우 이동 버튼 */}
+      <div className="faq-categories-wrapper">
+      
       <div className="faq-categories">
-        {categories.map(category => (
-          <span key={category} className="faq-category">{category}</span>
+        {categories.slice(visibleIndex, visibleIndex + 4).map((category, index) => (
+          <span key={index} className="faq-category" onClick={() => { setActiveIndex(index); scrollToQuestions(); }}>
+            {category}
+            {index < visibleIndex + 3 && ' | '}
+          </span>
         ))}
       </div>
+      <button className="arrow left-arrow" onClick={showPreviousCategories}>&lt;</button>
+      <button className="arrow right-arrow" onClick={showNextCategories}>&gt;</button>
+    </div>
+
       {/* FAQ 질문 목록 */}
       <div className="faq-list">
         {faqs.map((faq, index) => (

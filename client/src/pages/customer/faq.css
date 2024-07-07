@@ -13,6 +13,7 @@
 .faq-header {
     font-size: 2em;
     margin-bottom: 20px;
+    margin: 50px;
 }
 
   /* 검색 입력란 스타일 */
@@ -21,21 +22,63 @@
     padding: 10px;
     font-size: 1em;
     margin-bottom: 20px;
+    background-color: #f5f5f5;
+    color: #333;
 }
 
   /* 카테고리 컨테이너 스타일 */
 .faq-categories {
     display: flex;
     justify-content: space-around;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
 }
 
   /* 카테고리 항목 스타일 */
 .faq-category {
-    margin: 5px;
-    padding: 5px 10px;
+    display: flex;
+    overflow: hidden;
+    width: calc(100% - 60px);
+    justify-content: space-around;
+    flex-wrap: nowrap;
+}
+
+ /* 카테고리 버튼 스타일 */
+.faq-categories-wrapper {
+    display: flex;
+    justify-content: space-between; /* 공간을 양쪽 끝에 분배 */
+    align-items: center;
+    width: 100%;
+}
+
+.faq-category {
+    color: #a2a2a2; /* 카테고리 텍스트 색상 통일 */
+}
+
+.arrow-container {
+    display: flex;
+    flex-direction: row; /* 버튼들을 양옆으로 나란히 */
+}
+
+.arrow {
+    background-color: #fff;
+    border: 1px solid #ccc;
     cursor: pointer;
+    padding: 5px 10px;
+    font-size: 1em; /* 텍스트 크기와 동일하게 설정 */
+    color: #a2a2a2;
+}
+
+.faq-categories {
+    display: flex;
+    overflow: hidden;
+    width: calc(100% - 60px); /* 버튼 공간을 제외한 넓이 */
+    justify-content: space-around;
+    flex-wrap: nowrap;
+}
+
+.hidden {
+    display: none;
 }
 
   /* 질문 목록 스타일 */
@@ -52,6 +95,10 @@
   /* 질문 텍스트 스타일 */
 .faq-question {
     cursor: pointer;
+}
+
+.dropdown-arrow {
+    float: right; /* 드롭다운 화살표를 오른쪽 끝에 배치 */
 }
 
   /* 답변 텍스트 스타일 */
