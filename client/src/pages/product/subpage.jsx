@@ -14,7 +14,8 @@ const SubPage = () => {
     const [productDetail, setProductDetail] = useState(null);
     const [images, setImages] = useState([]);
     const [cart, setCart] = useState([]);
-    const [sortOption, setSortOption] = useState('best');
+    const [quantity, setQuantity] = useState(1);
+    const [sortOption, setSortOption] = useState('best'); // 정렬 옵션 상태 추가
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -89,9 +90,8 @@ const SubPage = () => {
         addToCart({
             id: productDetail.id,
             name: productDetail.name,
-            option: '기본 옵션',
-            price: productDetail.price,
-            quantity: 1,
+            price: productDetail.price * quantity,
+            quantity: quantity,
             check: true,
             image: productDetail.productImageUrl,
         });
@@ -116,6 +116,10 @@ const SubPage = () => {
         setSortOption(e.target.value);
     };
 
+    const handleQuantityChange = (e) => {
+        setQuantity(parseInt(e.target.value, 10));
+    };
+
     const sortedProducts = sortProducts(products, sortOption);
 
     if (productId && productDetail) {
@@ -131,21 +135,14 @@ const SubPage = () => {
                     </div>
                     <div className="product-detail-info">
                         <h2>{productDetail.name}</h2>
-                        <p>가격: {productDetail.price}원</p>
-                        <p>할인된 가격: {productDetail.discounted_price}원</p>
+                        <p>가격: {productDetail.price * quantity}원</p>
+                        <p>할인된 가격: {productDetail.discounted_price * quantity}원</p>
                         <p>수량: {productDetail.quantity}</p>
                         <p>카테고리: {productDetail.mainCategoryName} / {productDetail.subCategoryName}</p>
                         <p>{productDetail.date}</p>
-                        <div className="product-detail-options">
-                            <label>옵션:</label>
-                            <select>
-                                <option value="S">S (35 x 35cm)</option>
-                                <option value="M">M (45 x 45cm)</option>
-                            </select>
-                        </div>
                         <div className="product-detail-quantity">
                             <label>수량:</label>
-                            <input type="number" defaultValue="1" min="1" />
+                            <input type="number" value={quantity} onChange={handleQuantityChange} min="1" />
                         </div>
                         <button className="add-to-cart-button" onClick={handleAddToCart}>장바구니 담기</button>
                         <div className="product-detail-shipping">

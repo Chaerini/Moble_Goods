@@ -1,32 +1,90 @@
 .header {
-    background-color: #f8f8f8;
-    padding: 10px 20px;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .header-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .header-top-left,
-  .header-top-right {
-    display: flex;
-    align-items: center;
-  }
-  
-  .header-logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    text-decoration: none;
-    margin-right: 20px;
-  }
-  
-  .header-top-right a {
-    margin-left: 15px;
-    color: #333;
-    text-decoration: none;
-  }
-  
+  background-color: #f8f8f8;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 100; /* 네비게이션 바보다 높은 값 설정 */
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.header-logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+  text-decoration: none;
+}
+
+.header-top-right {
+  display: flex;
+  align-items: center;
+  position: relative; /* 상대 위치 설정 */
+}
+
+.header-top-right a,
+.header-top-right span {
+  margin-left: 15px;
+  font-size: 16px;
+  color: #000;
+  text-decoration: none;
+}
+
+.header-top-right button {
+  margin-left: 15px;
+  font-size: 16px;
+  color: #000;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.header-top-right a:hover,
+.header-top-right button:hover {
+  color: #e40046;
+}
+
+.user-menu {
+  position: relative;
+}
+
+.username {
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%; /* 바로 아래에 나타나도록 설정 */
+  left: 0;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1050; /* 매우 높은 값으로 설정하여 다른 요소보다 앞에 나타나도록 */
+  white-space: nowrap; /* 한 줄에 표시되도록 설정 */
+}
+
+.dropdown-menu a,
+.dropdown-menu button {
+  display: block;
+  padding: 10px 15px;
+  color: #000;
+  text-decoration: none;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu button:hover {
+  background-color: #f7f7f7;
+  color: #e40046;
+}
