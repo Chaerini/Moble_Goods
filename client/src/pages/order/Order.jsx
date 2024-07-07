@@ -135,7 +135,7 @@ function Order() {
         total: selectedItems.reduce((total, item) => total + item.price * item.quantity, 0) + shippingFee,
         status_id: status_id, // status_id를 설정
         items: selectedItems.map(item => ({
-          product_id: item.id,
+          product_id: item.product_id,
           quantity: item.quantity,
           price: item.price
         }))
@@ -189,7 +189,7 @@ function Order() {
           </thead>
           <tbody>
             {selectedItems.map((item) => (
-              <tr className="order-item" key={item.id}>
+              <tr className="order-item" key={item.product_id}>
                 <td className="order-item-info">
                   <img src={item.url} alt={item.name} />
                   <div className="order-item-details">
