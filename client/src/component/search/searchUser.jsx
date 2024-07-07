@@ -10,6 +10,7 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import useFetch from "../../hooks/useFetch";
 const SearchUser = () =>{
     const modalBackground = useRef();
     const handleChange = (e) =>{
@@ -29,6 +30,11 @@ const SearchUser = () =>{
     const [userData, setUserData] = useState([]);
     const [searchWord, setSearchWord] = useState();
     const apiUrl = process.env.REACT_APP_API_URL;
+    const [currentPage, setCurrentPage] = useState(1);
+    const [filteredData, setFilteredData] = useState(null);
+    const itemsPerPage = 15;
+    const { data, loading, error } = useFetch(`${apiUrl}/orders/admin`);
+    const orderList = Array.isArray(data) ? data : data?.rows || [];
     useEffect(() => {
     const fetchData = async () => {
             try {
@@ -93,6 +99,32 @@ const SearchUser = () =>{
             console.log(err);
         }
     }
+    const handleClick = (pageNumber) => setCurrentPage(pageNumber);
+    const renderPageNumbers = () => {
+        const pageNumbers = [];
+        for (let i = 1; i <= totalPages; i++) {
+          pageNumbers.push(
+            <button
+              key={i}
+              onClick={() => handleClick(i)}
+              className={`orderManage-page-num ${
+                currentPage === i ? "active" : ""
+              }`}
+            >
+              {i}
+            </button>
+          );
+        }
+        return pageNumbers;
+      };
+    const dataToDisplay = filteredData || orderList;
+    const groupedItems = dataToDisplay.reduce((acc, item) => {
+        if (!acc[item.order_id]) acc[item.order_id] = [];
+        acc[item.order_id].push(item);
+        return acc;
+      }, {});
+    const groupedOrdersArray = Object.values(groupedItems);
+    const totalPages = Math.ceil(groupedOrdersArray.length / itemsPerPage);
     return(
         <div>
             <div>
@@ -115,6 +147,7 @@ const SearchUser = () =>{
                     <table className="orderManage-table">
                     <thead className="search-table-head">
                         <tr>
+                            <th className="orderManage-th">번호</th>
                             <th className='orderManage-th'>이름</th>
                             <th className='orderManage-th'>아이디</th>
                             <th className='orderManage-th'>주소</th>
@@ -130,6 +163,7 @@ const SearchUser = () =>{
                         ) : (
                             userData.map((user, index) => (
                                 <tr className="product-content" key={index}>
+                                    <td className="orderMange-td">{user.number}</td>
                                     <td className="orderManage-td">{user.name}</td>
                                     <td className="orderManage-td">{user.username}</td>
                                     <td className="orderManage-td">{user.address}</td>
@@ -143,6 +177,23 @@ const SearchUser = () =>{
                                     </td>
                                 </tr>
                             )))}
+                             <div className="orderManage-page-btn-box">
+              <button
+                className="orderManage-page-btn"
+                onClick={() => handleClick(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                이전
+              </button>
+              {renderPageNumbers()}
+              <button
+                className="orderManage-page-btn"
+                onClick={() => handleClick(currentPage + 1)}
+                disabled={currentPage === totalPages}
+              >
+                다음
+              </button>
+            </div>
                         </tbody>
                 </table>
         {
