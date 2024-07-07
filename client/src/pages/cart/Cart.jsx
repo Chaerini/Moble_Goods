@@ -64,8 +64,8 @@ export default function Cart() {
 
   return (
     <>
-      <Navbar />
       <Header />
+      <Navbar />
       <div className="cart-container">
         <h1>장바구니</h1>
         <div className="cart-header">
@@ -134,7 +134,7 @@ export default function Cart() {
                   </td>
                   <td className="cart-item-total">{formatNumber(item.price * item.quantity)}원</td>
                   <td>
-                    <button onClick={() => deleteCartItem(item.id)}>삭제</button>
+                    <button className="quantity-controls-del" onClick={() => deleteCartItem(item.id)}>삭제</button>
                   </td>
                 </tr>
               ))}

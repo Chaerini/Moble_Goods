@@ -168,8 +168,8 @@ function Order() {
 
   return (
     <>
-      <Navbar />
       <Header />
+      <Navbar />
       <div className="order-container">
         <h1>주문·결제</h1>
         <div className="order-header">

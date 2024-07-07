@@ -38,12 +38,11 @@
   padding: 10px;
 }
 
-.cart-controls {
+.quantity-controls {
   display: flex;
-  justify-content: flex-start;
-  margin-bottom: 20px;
-  padding: 0 12px;
-  line-height: 32px;
+  align-items: center;
+  justify-content: center; /* 추가 */
+  height: 100%; /* 추가 */
 }
 
 .cart-controls button {
@@ -114,7 +113,13 @@
 }
 
 .cart-item-quantity {
-  font-size: 20px; /* 추가 */
+  font-size: 20px;
+}
+
+.cart-item-quantity td{
+  padding: 20px; /* 기존 20px 유지 */
+  text-align: center; /* 추가 */
+  vertical-align: middle; /* 추가 */
 }
 
 .cart-item-price {
@@ -188,4 +193,9 @@
 .cart-guide p {
   color: red;
   margin-bottom: 10px;
+}
+
+.quantity-controls-del {
+  color:#191919;
+  background-color: white;
 }
