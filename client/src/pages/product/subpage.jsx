@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Link as ScrollLink, Element } from 'react-scroll';
 import './subpage.css';
 import Navbar from '../../component/navbar/navbar';
 import Header from '../../component/header/header';
@@ -156,6 +157,16 @@ const SubPage = () => {
         );
     }
 
+    // Group products by subcategory
+    const groupedProducts = products.reduce((acc, product) => {
+        const { subCategoryName } = product;
+        if (!acc[subCategoryName]) {
+            acc[subCategoryName] = [];
+        }
+        acc[subCategoryName].push(product);
+        return acc;
+    }, {});
+
     return (
         <>
             <Header />
@@ -170,20 +181,39 @@ const SubPage = () => {
                     </select>
                 </div>
                 <h1>상품</h1>
-                <div className="product-list">
-                    {sortedProducts.map(product => (
-                        <div key={product.id} className="product-card">
-                            <Link to={`/category/${categoryId}${subCategoryId ? `/subcategory/${subCategoryId}` : ''}/product/${product.id}`}>
-                                {product.productImageUrl && (
-                                    <img src={product.productImageUrl} alt={product.name} />
-                                )}
-                                <h2>{product.name}</h2>
-                                <p>{product.subCategoryName}</p>
-                                <div className="price">{product.price}원</div>
-                            </Link>
-                        </div>
+                <div className="scroll-links">
+                    {Object.keys(groupedProducts).map(subCategoryName => (
+                        <ScrollLink
+                            key={subCategoryName}
+                            to={subCategoryName}
+                            smooth={true}
+                            duration={500}
+                            className="scroll-link"
+                        >
+                            {subCategoryName}
+                        </ScrollLink>
                     ))}
                 </div>
+                {Object.entries(groupedProducts).map(([subCategoryName, subCategoryProducts]) => (
+                    <Element name={subCategoryName} key={subCategoryName}>
+                        <h2 className="subcategory-title">{subCategoryName}</h2>
+                        <hr className="subcategory-divider" />
+                        <div className="product-list">
+                            {subCategoryProducts.map(product => (
+                                <div key={product.id} className="product-card">
+                                    <Link to={`/category/${categoryId}${subCategoryId ? `/subcategory/${subCategoryId}` : ''}/product/${product.id}`}>
+                                        {product.productImageUrl && (
+                                            <img src={product.productImageUrl} alt={product.name} />
+                                        )}
+                                        <h2>{product.name}</h2>
+                                        <p>{product.subCategoryName}</p>
+                                        <div className="price">{product.price}원</div>
+                                    </Link>
+                                </div>
+                            ))}
+                        </div>
+                    </Element>
+                ))}
             </div>
             <Footer />
         </>

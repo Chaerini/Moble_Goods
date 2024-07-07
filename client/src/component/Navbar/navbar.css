@@ -7,7 +7,7 @@ nav {
   background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
-  z-index: 5; /* 헤더보다 낮은 값 설정 */
+  z-index: 5; /* 드롭다운 메뉴보다 낮게 설정 */
 }
 
 /* 로고 스타일 */
