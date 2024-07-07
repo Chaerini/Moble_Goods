@@ -48,7 +48,8 @@ const GetNotice = () => {
             <tr>
               <th className="th">제목</th>
               <th className="th">내용</th>
-              <th className="th">삭제/수정</th>
+              <th className="th">수정</th>
+              <th className="th">삭제</th>
             </tr>
           </thead>
           <tbody>
@@ -58,12 +59,14 @@ const GetNotice = () => {
                 <td className="td">{notice.content}</td>
                 <td className="td">
                   <FontAwesomeIcon
-                    icon={faTrash}
+                    icon={faPen}
                     onClick={() => handleDelete(notice.id)}
                   />
+                  </td>
+                  <td className="td">
                   <FontAwesomeIcon
-                    icon={faPen}
-                    onClick={() => navigate(`/updatenotice/${notice.id}`)}
+                    icon={faTrash}
+                    onClick={() => handleDelete(notice.id)}
                   />
                 </td>
               </tr>
