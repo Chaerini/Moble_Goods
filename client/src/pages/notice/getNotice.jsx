@@ -69,27 +69,29 @@ const handleEditAction = async (userId) =>{
 }
   return (
     <div>
-      <div className="product-container">
-        <h2 className="notice">공지사항</h2>
+      <div>
+      <div className="search-input-wrap">
+        <h2>공지사항</h2>
         <FontAwesomeIcon icon={faPlus} onClick={() => navigate("/addnotice")} />
-        <table className="notice-table">
-          <thead>
+          </div>
+        <table className="orderManage-table">
+          <thead className="search-table-head">
             <tr>
-              <th className="th">제목</th>
-              <th className="th">내용</th>
-              <th className="th">수정</th>
-              <th className="th">삭제</th>
+            <th className="orderManage-th">제목</th>
+            <th className="orderManage-th">내용</th>
+            <th className="orderManage-th">수정</th>
+            <th className="orderManage-th">삭제</th>
             </tr>
           </thead>
           <tbody>
             {notice.map((notice) => (
-              <tr key={notice.id} className="tr">
-                <td className="td">{notice.title}</td>
-                <td className="td">{notice.content}</td>
-                <td className="td">
+              <tr key={notice.id} className="product-content">
+                <td className="orderMange-td">{notice.title}</td>
+                <td className="orderMange-td">{notice.content}</td>
+                <td className="orderMange-td">
                 <FontAwesomeIcon icon={faPen} onClick={() => handleEditClick(notice)}/>
                   </td>
-                  <td className="td">
+                  <td className="orderMange-td">
                   <FontAwesomeIcon
                     icon={faTrash}
                     onClick={() => handleDelete(notice.id)}
