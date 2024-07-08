@@ -269,10 +269,14 @@ function ReviewWrite({ user_id, product_id, order_id, onClose }) {
 
             const reviewId = reviewResponse.data.reviewId;
 
+            if (!reviewId) {
+                throw new Error('리뷰 ID를 가져오지 못했습니다.');
+            }
+
             // 이미지 데이터 전송
             const formData = new FormData();
-            images.forEach((image, index) => {
-                formData.append(`image_${index + 1}`, image);
+            images.forEach((image) => {
+                formData.append('image', image); // 'image'라는 필드명으로 이미지 추가
             });
 
             await axios.post(`${apiUrl}/review_image/${reviewId}`, formData, {
@@ -360,6 +364,7 @@ function ReviewWrite({ user_id, product_id, order_id, onClose }) {
 }
 
 export default ReviewWrite;
+
 
 
 

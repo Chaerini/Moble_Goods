@@ -6,6 +6,7 @@ import morgan from "morgan";
 import mysql from 'mysql2' // npm install mysql2 
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
 
 import reviewRoutes from "./routes/reviews.js";
 import reviewImageRoutes from "./routes/review_image.js"
@@ -33,6 +34,12 @@ const __dirname = path.dirname(__filename);
 const app = express();
 dotenv.config();
 
+//서버 시작할 때 업로드 폴더 없으면 생성 
+const uploadsDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir);
+}
+
 //middlewares
 const corsOptions = {
     origin: ['http://localhost:3000', 'http://localhost:3001'], // 클라이언트 url 
@@ -53,6 +60,8 @@ app.use((err, req, res, next) => {
         stack: err.stack,
     });
 });
+// 정적 파일 경로 추가
+app.use('/uploads', express.static('uploads'));
 
 // MySQL 연결 풀 설정
 const db = mysql.createPool({
