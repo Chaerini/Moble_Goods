@@ -9,7 +9,7 @@ const AddNotice = () => {
   const [notice, setNotice] = useState({
     title: "",
     content: "",
-    userId:""
+    userId: ""
   });
   const handleChange = (e) => {
     setNotice((prev) => ({ ...prev, [e.target.name]: e.target.value }));
