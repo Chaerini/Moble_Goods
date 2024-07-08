@@ -46,8 +46,7 @@ function Header() {
               <Link to="/register">회원가입</Link>
             </>
           )}
-          <Link to="/">이벤트</Link>
-          <Link to="/">쿠폰·머니</Link>
+          <Link to="/mycoupon">쿠폰·머니</Link>
           <Link to="/myorder">주문·배송</Link>
         </div>
       </div>

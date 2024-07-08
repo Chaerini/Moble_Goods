@@ -36,7 +36,6 @@ const Product = () =>{
             <input type="number" onChange={handleChange} placeholder="수량" name="quantity" className="login-input"/>
             <input type="number" onChange={handleChange} placeholder="할인율" name="discount_rate" className="login-input"/>
             <input type="number" onChange={handleChange} placeholder="할인된 가격" name="discounted_price" className="login-input"/>
-            <input type="file" name="img1" accept="img/*"></input>
             </div>
             <button onClick={handleClick} className="login-button" type="submit"><Link to="/getproduct">추가</Link></button>
             </div>
