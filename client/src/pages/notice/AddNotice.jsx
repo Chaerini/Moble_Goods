@@ -4,11 +4,12 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import "../productManage/productmanage.css";
-const Product = () => {
+const AddNotice = () => {
   const apiUrl = process.env.REACT_APP_API_URL;
   const [notice, setNotice] = useState({
     title: "",
     content: "",
+    userId:""
   });
   const handleChange = (e) => {
     setNotice((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -17,10 +18,12 @@ const Product = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`http://localhost:8080/api/notice`, notice);
+      await axios.post(`${apiUrl}/notice`, notice);
       console.log("등록 완료");
+      alert("공지가 추가되었습니다.")
     } catch (err) {
       console.log(err);
+      alert("공지 추가에 실패했습니다.")
     }
   };
   return (
@@ -30,7 +33,7 @@ const Product = () => {
         <input
           type="text"
           onChange={handleChange}
-          placeholder="이름"
+          placeholder="제목"
           name="title"
           className="product-input"
         />
@@ -41,6 +44,13 @@ const Product = () => {
           name="content"
           className="product-input"
         />
+        <input
+          type="text"
+          onChange={handleChange}
+          placeholder="작성자"
+          name="userId"
+          className="product-input"
+        />
         <button onClick={handleClick} className="login-button" type="submit">
           <Link to="/getnotice">추가</Link>
         </button>
@@ -48,4 +58,4 @@ const Product = () => {
     </div>
   );
 };
-export default Product;
+export default AddNotice;

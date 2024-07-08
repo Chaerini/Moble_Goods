@@ -24,7 +24,7 @@ import cartRoutes from "./routes/carts.js";
 import searchRoutes from "./routes/searches.js";
 import categoryRoutes from './routes/category.js';
 import searchUserRoutes from "./routes/searchUsers.js";
-
+import searchNoticeRoutes from "./routes/searchNotices.js";
 // __filename과 __dirname을 생성
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -90,7 +90,7 @@ app.use('/api/carts', cartRoutes);
 app.use("/api/search",searchRoutes);
 app.use('/api/maincategory', categoryRoutes);
 app.use("/api/searchuser",searchUserRoutes);
-
+app.use("/api/searchnotice",searchNoticeRoutes);
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
 });

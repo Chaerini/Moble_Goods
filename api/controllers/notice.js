@@ -5,7 +5,7 @@ export const createNotice = async(req,res) =>{
     const {title,content}=req.body;
     console.log(req.body);
     try{
-        const [result] = await pool.query(`INSERT INTO notice (title,content,user_id) VALUES (?,?,?)`,[title,content,userId]);
+        const [rows] = await pool.query(`INSERT INTO notice (title,content,user_id) VALUES (?,?,?)`,[title,content,userId]);
 
         res.status(200).json({message:"공지 등록 완료"});
     }catch(error){
@@ -18,7 +18,7 @@ export const updateNotice = async(req,res) => {
     console.log(req.body);
     console.log(req.params);
     try{
-        const [result] = await pool.query(`UPDATE notice SET title=?,content=? WHERE id=?`,[title,content,noticeId]);
+        const [rows] = await pool.query(`UPDATE notice SET title=?,content=? WHERE id=?`,[title,content,noticeId]);
         res.status(200).json({message:"수정 완료"})
     }catch(error){
         res.status(400).json({error:error.message});
@@ -28,7 +28,7 @@ export const deleteNotice = async(req,res) => {
     const {noticeId} = req.params;
     console.log(req.params);
     try{
-        const [result] = await pool.query(`DELETE FROM notice WHERE id=?`,[noticeId]);
+        const [rows] = await pool.query(`DELETE FROM notice WHERE id=?`,[noticeId]);
         res.status(200).json({message:"삭제 완료"})
     }catch(error){
         res.status(400).json({error:error.message});

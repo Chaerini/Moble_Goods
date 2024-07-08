@@ -4,9 +4,9 @@ import { AuthContext } from "../../Context/AuthContext";
 import { Link } from "react-router-dom";
 import "../productManage/productmanage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPen, faPlus,faClipboardList } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import Search from "../../component/search/searchProduct";
+import SearchNotice from "../../component/search/searchNotice";
 import "./Notice.css";
 const GetNotice = () => {
   const navigate = useNavigate();
@@ -66,13 +66,24 @@ const handleEditAction = async (userId) =>{
       console.log(err);
   }
 }
-  return (
-    <div className="container">
-      <div>
-    <h1>공지사항</h1>
-        <FontAwesomeIcon icon={faPlus} onClick={() => navigate("/addnotice")} />
-          </div>
-        <table className="notice-table">
+const handleSearch = async (e) => {
+  // e.preventDefault();
+  try {
+      alert("조회되었습니다.")
+  } catch (err) {
+      console.log(err);
+      alert("일치하는 상품이 없습니다.")
+  }
+}
+const handleKeyPress = (e) => {
+  if (e.key === 'Enter') {
+      handleSearch(e);
+  }
+}
+return (
+  <div>
+          <SearchNotice/>
+        {/* <table className="notice-table">
           <thead className="search-table-head">
           <tr>
             <th>제목</th>
@@ -117,8 +128,8 @@ const handleEditAction = async (userId) =>{
                 </div>
             </div>
         </div>
-    </div>
-        }
+    </div> */}
+        {/* } */}
       </div>
   );
 };

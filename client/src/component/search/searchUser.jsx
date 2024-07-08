@@ -146,9 +146,7 @@ const SearchUser = () =>{
       }
     }
     return(
-        <div className="orderManage-wrapper">
-            <div className="orderManage-content-wrapper">
-                <div>
+        <div className="orderManage-table-container">
                     <div className="search-input-wrap">
                     <h2><FontAwesomeIcon icon={faUser}/>고객</h2>
                     <select
@@ -166,22 +164,20 @@ const SearchUser = () =>{
                     검색
                   </button>
                   </div>
-                    </div>
-                </div>
-            <div>
-                    <table className="orderManage-table">
+            <div className="orderManage-table-box">
+                    <table className="notice-table">
                     <thead className="search-table-head">
                         <tr>
-                            <th className='orderManage-th'>이름</th>
-                            <th className='orderManage-th'>아이디</th>
-                            <th className='orderManage-th'>주소</th>
-                            <th className='orderManage-th'>핸드폰</th>
-                            <th className='orderManage-th'>멤버십</th>
-                            <th className="orderManage-th">수정</th>
-                            <th className="orderManage-th">삭제</th>
+                            <th>이름</th>
+                            <th>아이디</th>
+                            <th>주소</th>
+                            <th>핸드폰</th>
+                            <th>멤버십</th>
+                            <th>수정</th>
+                            <th>삭제</th>
                         </tr>
                         </thead>
-                        <tbody className="orderManage-table-body">
+                        <tbody className="orderManage-table">
                         {(!userData || userData.length < 0) ? (
                             <tr className="table-content">사용자 정보가 없습니다.</tr>
                         ) : (
@@ -193,9 +189,9 @@ const SearchUser = () =>{
                                     <td className="orderManage-td">{user.phone}</td>
                                     <td className="orderManage-td">{user.membership_name}</td>
                                     <td className="orderManage-td">
-                                    <FontAwesomeIcon icon={faPen} onClick={() => handleEditClick(user)}/>
-                                        </td>
-                                <td className="orderMange-td">
+                                    <FontAwesomeIcon icon={faPen} onClick={() => handleEditClick(user)}/> 
+                                    </td>
+                                    <td className="orderMange-td">
                                     <FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(user.id)} />
                                     </td>
                                 </tr>
