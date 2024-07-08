@@ -31,6 +31,8 @@ import SearchUser from "./component/search/searchUser";
 import Faq from "./pages/customer/Faq";
 import AddFaq from "./pages/customer/addFaq";
 import MyqnaList from "./pages/customer/MyqnaList";
+
+
 function App() {
   return (
     <BrowserRouter>
