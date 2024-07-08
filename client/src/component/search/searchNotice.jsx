@@ -26,12 +26,20 @@ const SearchNotice = () => {
         content:""
 
     });
+    const [modalIsOpen, setModalIsOpen] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const modalBackground = useRef();
     const [IsUpDown,setUpDown]= useState(Data)
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 15;
     const [filteredData, setFilteredData] = useState(null);
+    const [selectedOrderData, setSelectedOrderData] = useState(null);
+    const [notice, setNotice] = useState({
+      title: "",
+      content: "",
+      userId: "",
+      date:""
+    });
     // 사용자 정보가 업데이트 됐을 경우 렌더링
     useEffect(() => {
         const fetchData = async () => {
@@ -49,6 +57,7 @@ const SearchNotice = () => {
     // 검색 버튼 클릭 했을 때
     const handleSearch = async (e) => {
         // e.preventDefault();
+        console.log("검색어",searchWord);
         try {
             const res = await axios.get(`${apiUrl}/searchnotice?title=${searchWord}`);
             setData(res.data.rows);
@@ -100,29 +109,6 @@ const SearchNotice = () => {
             console.log(err);
         }
     }
-    const handleUpDown =(e) =>{
-        //옵션을 클릭했을때 옵션의 값을 가져온다.
-      const value = e.target.value
-    // 최신순 리스트로 정렬 함수(sort)
-      const newList = ()=> Data.sort(function(a,b) {
-        //기존 할일리스트의 생성일로 비교
-        //시간를 new Date()로 감싸줘야한다.
-        return new Date (b.date) - new Date (a.date);
-      });
-    // 등록순 리스트로 정렬 함수
-      const oldList = () =>Data.sort(function(a,b) {
-        return new Date(a.date) - new Date(b.date)
-      });
-      // 옵션의 값이 '최신순'이면 상태를 '최신순'으로 바꾸고 
-     // 각 맞는 정렬함수를 넣어준다.
-      if(value === '최신순'){
-        setUpDown('최신순')
-        return setData(newList())
-      }else if(value === '등록순'){
-        setUpDown('등록순')
-        return setData(oldList())
-      }
-    }
     //주문 
     const { data, loading, error } = useFetch(`${apiUrl}/notices`);
     const orderList = Array.isArray(data) ? data : data?.rows || [];
@@ -166,20 +152,28 @@ const SearchNotice = () => {
       }
       return pageNumbers;
     };  
+    const handleAddChange = (e) => {
+      setNotice((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    };
+    console.log(notice);
+    const handleAddClick = async (e) => {
+      setModalIsOpen(true);
+      try {
+        await axios.post(`${apiUrl}/notice`, notice);
+        alert("공지가 추가되었습니다.")
+      } catch (err) {
+        console.log(err);
+        alert("공지 추가에 실패했습니다.")
+      }
+    };
 return (
     <div className="search-table-container">
         <div className="search-input-wrap">
             <h2><FontAwesomeIcon icon={faClipboardList}/>공지</h2>
-            <FontAwesomeIcon icon={faPlus} onClick={()=>navigate("/addnotice")}/>
-            <select
-                onClick={handleUpDown} className="select-date">
-                    <option>최신순</option>
-                    <option>등록순</option>
-            </select>
                 <input
                 type="text"
                 className="search-input"
-                placeholder="검색할 상품을 입력하세요"
+                placeholder="검색할 공지를 입력하세요"
                 onChange={(e) => setSearchWord(e.target.value)}
                 onKeyDown={handleKeyPress}
                 />
@@ -193,6 +187,7 @@ return (
                             <th >내용</th>
                             <th >수정</th>
                             <th >삭제</th>
+                            <th>추가</th>
                             </tr>
                             </thead>
                             <tbody className="orderManage-table">
@@ -209,25 +204,12 @@ return (
                                         <td className="orderMange-td">
                                         <FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(user.id)} />
                                         </td>
+                                        <td>
+                                        <FontAwesomeIcon icon={faPlus} onClick={()=>handleAddClick(user)}/>
+                                        </td>
                                         </tr>
                             )))}
-                             <div className="orderManage-page-btn-box">
-              <button
-                className="orderManage-page-btn"
-                onClick={() => handleClick(currentPage - 1)}
-                disabled={currentPage === 1}
-              >
-                이전
-              </button>
-              {renderPageNumbers()}
-              <button
-                className="orderManage-page-btn"
-                onClick={() => handleClick(currentPage + 1)}
-                disabled={currentPage === totalPages}
-              >
-                다음
-              </button>
-            </div>
+                             
             </tbody>
         </table>
         {modalOpen &&
@@ -247,6 +229,23 @@ return (
             </div>
     </div>
         }
+         {modalIsOpen &&
+              <div className='modal-container' ref={modalBackground} onClick={e => {
+                  if (e.target === modalBackground.currnet) {
+                      setModalOpen(false);
+                  }
+              }}>
+                  <div className="login">
+                      <div className="search-container">
+                          <label>공지사항 추가하기</label>
+                          <input type="hidden" name="id" className="product-input" value={mpData.userId} />
+                          <input type="text" onChange={handleAddChange} name="title" className="product-input" placeholder="제목" />
+                          <input type="text" onChange={handleAddChange} name="content" className="product-input"placeholder="내용" />
+                          <button onClick={handleAddClick} className="btn">추가</button>
+                      </div>
+                  </div>
+              </div>
+          }
         </div>
     </div>                     
     );

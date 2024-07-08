@@ -6,7 +6,8 @@ import {
   faPen,
   faTrash,
   faPlus,
-  faBoxOpen
+  faBoxOpen,
+  faL
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState, useRef } from "react";
@@ -30,12 +31,19 @@ const Search = () => {
       date: "",
       subCategoryId:""
   });
+  const [product,setProduct] = useState({
+    name:"",
+    price:"",
+    quantity:"",
+    discount_rate:"",
+    discounted_price:"",
+});
   const [modalOpen, setModalOpen] = useState(false);
   const modalBackground = useRef();
   const [IsUpDown, setUpDown] = useState(Data);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-
+  const [modalIsOpen,setModalIsOpen]=useState(false);
   // 데이터 가져오기
   useEffect(() => {
       const fetchData = async () => {
@@ -71,11 +79,10 @@ const Search = () => {
       }
   }
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id,e) => {
       try {
           const res = await axios.delete(`${apiUrl}/products/` + id)
           alert("삭제되었습니다.");
-          window.location.reload();
       } catch (err) {
           console.log(err)
       }
@@ -96,7 +103,6 @@ const Search = () => {
       setModalOpen(true);
       console.log(mpData)
   }
-
   const handleChange = (e) => {
       const { name, value } = e.target;
       setMpData((prev) => ({ ...prev, [name]: value }));
@@ -159,12 +165,28 @@ const Search = () => {
       }
       return pageNumbers;
   };
+const handleAddChange = (e) =>{
+    setProduct((prev) => ({...prev,[e.target.name]:e.target.value}));
+};
+console.log(product)
+const handleAddClick = async e =>{
+    setModalIsOpen(true);
+    try{
+        await axios.post(`${apiUrl}/products`,product);
+        alert("상품이 추가되었습니다.")
+        setModalIsOpen(false);
+    }catch(err){
+        console.log(err);
+        alert("상품 추가에 실패했습니다.")
+    }
+
+}
+
 
   return (
       <div className="search-table-container">
           <div className="search-input-wrap">
               <h2><FontAwesomeIcon icon={faBoxOpen} />상품</h2>
-              <FontAwesomeIcon icon={faPlus} onClick={() => navigate("/addproduct")} />
               <select
                   onClick={handleUpDown} className="select-date">
                   <option>최신순</option>
@@ -191,6 +213,7 @@ const Search = () => {
                           <th>날짜</th>
                           <th>수정</th>
                           <th>삭제</th>
+                          <th>추가</th>
                       </tr>
                   </thead>
                   <tbody className="orderManage-table">
@@ -209,6 +232,9 @@ const Search = () => {
                                   </td>
                                   <td className="orderMange-td">
                                       <FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(user.id)} />
+                                  </td>
+                                  <td>
+                                  <FontAwesomeIcon icon={faPlus} onClick={() =>handleAddClick(user)} />
                                   </td>
                               </tr>
                           )))}
@@ -250,6 +276,27 @@ const Search = () => {
                           <input type="text" onChange={handleChange} name="date" placeholder="날짜" className="product-input" value={mpData.date} />
                           <input type="text" onChange={handleChange} name="subcategory_id" placeholder="중분류" className="product-input" value={mpData.subCategoryId}/>
                           <button onClick={() => handleEditAction(mpData.userId)} className="btn">수정</button>
+                      </div>
+                  </div>
+              </div>
+          }
+          {modalIsOpen &&
+              <div className='modal-container' ref={modalBackground} onClick={e => {
+                  if (e.target === modalBackground.currnet) {
+                      setModalOpen(false);
+                  }
+              }}>
+                  <div className="login">
+                      <div className="search-container">
+                          <label>상품정보 추가하기</label>
+                          <input type="hidden" name="id" className="product-input" value={mpData.userId} />
+                          <input type="text" onChange={handleAddChange} name="name" className="product-input" placeholder="이름" />
+                          <input type="text" onChange={handleAddChange} name="quantity" className="product-input"placeholder="수량" />
+                          <input type="text" onChange={handleAddChange} name="price" placeholder="가격" className="product-input" />
+                          <input type="text" onChange={handleAddChange} name="discount_rate" placeholder="할인율" className="product-input" />
+                          <input type="text" onChange={handleAddChange} name="discounted_price" placeholder="할인된 가격" className="product-input" />
+                          <input type="text" onChange={handleAddChange} name="date" placeholder="날짜" className="product-input"  />
+                          <button onClick={handleAddClick} className="btn">추가</button>
                       </div>
                   </div>
               </div>
