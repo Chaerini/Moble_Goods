@@ -37,6 +37,7 @@ const SearchUser = () =>{
     const { data} = useFetch(`${apiUrl}/users`);
     const orderList = Array.isArray(data) ? data : data?.rows || [];
     const [IsUpDown,setUpDown]= useState(Data)
+    
     useEffect(() => {
     const fetchData = async () => {
             try {
@@ -146,7 +147,7 @@ const SearchUser = () =>{
       }
     }
     return(
-        <div className="orderManage-table-container">
+        <div className="search-table-container">
                     <div className="search-input-wrap">
                     <h2><FontAwesomeIcon icon={faUser}/>고객</h2>
                     <select
@@ -222,16 +223,14 @@ const SearchUser = () =>{
             setModalOpen(false);
         }
     }}>
-        <div className={'modal-content'}>
-            <div className="Product">
-                <div className="product">
+        <div className='login'>
+            <div className="search-container">
                 <label>고객정보 수정하기</label>
                 <input type="hidden"  name="id"  className="product-input" value={mpData.userId}/>
                 <input type="text" onChange={handleChange} name="name" placeholder="이름" className="product-input" value={mpData.name}/>
                 <input type="text" onChange={handleChange} name="address" placeholder="주소" className="product-input" value={mpData.address}/>
                 <input type="text" onChange={handleChange} name="phone" placeholder="핸드폰" className="product-input" value={mpData.phone}/>
                 <button onClick={()=>handleEditAction(mpData.userId)} className="btn">수정</button>
-                </div>
             </div>
         </div>
     </div>

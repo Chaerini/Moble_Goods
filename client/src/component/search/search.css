@@ -82,3 +82,28 @@
   color: var(--c-bg-white);
   z-index: 1;
 }
+.search-table-container {
+  display: flex;
+  width: 1200px;
+  height: 600px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px 25px;
+  background-color: var(--c-bg-white);
+  box-shadow: 0 0 0 0.2px var(--c-black);
+  margin-bottom: 10px;
+  z-index: -1;
+}
+.search-container {
+  width: 360px;
+  height: 480px;
+  padding: 40px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  box-sizing: content-box;
+  border:1px solid #000000
+}

@@ -6,8 +6,7 @@ import {
     faPen,
     faTrash,
     faPlus,
-    faBoxOpen,
-    faClipboardList
+    faBoxOpen
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState,useRef } from "react";
@@ -15,15 +14,19 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import "./search.css";
-const SearchNotice = () => {
+const Search = () => {
     const [Data, setData] = useState([]);
     const [searchWord, setSearchWord] = useState();
     const apiUrl = process.env.REACT_APP_API_URL;
     const navigate = useNavigate();
     const [mpData,setMpData] = useState({
         userId:"",
-        title:"",
-        content:""
+        name:"",
+        quantity:"",
+        price:"",
+        discount_rate:"",
+        discounted_price:"",
+        date:""
 
     });
     const [modalOpen, setModalOpen] = useState(false);
@@ -36,9 +39,9 @@ const SearchNotice = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`${apiUrl}/notice`);
-                console.log("data",response.data.rows);
-                setData(response.data.rows);
+                const response = await axios.get(`${apiUrl}/products`);
+                console.log("data",response.data);
+                setData(response.data);
             }catch (error) {
                 console.error('Error fetching data', error);
             }
@@ -50,13 +53,13 @@ const SearchNotice = () => {
     const handleSearch = async (e) => {
         // e.preventDefault();
         try {
-            const res = await axios.get(`${apiUrl}/searchnotice?title=${searchWord}`);
-            setData(res.data.rows);
-            console.log(res.data.rows);
+            const res = await axios.get(`${apiUrl}/search?name=${searchWord}`);
+            setData(res.data.result);
+            console.log(res.data.result);
             alert("조회되었습니다.")
         } catch (err) {
             console.log(err);
-            alert("일치하는 공지가 없습니다.")
+            alert("일치하는 상품이 없습니다.")
         }
     }
 
@@ -67,19 +70,21 @@ const SearchNotice = () => {
     }
     const handleDelete  = async(id) =>{
         try{
-            const res= await axios.delete(`${apiUrl}/notice/`+id);
-            alert("삭제되었습니다.");
+            const res= await axios.delete(`${apiUrl}/products/`+id)
         }catch(err){
             console.log(err)
         }
     }
     const handleEditClick = async(user) =>{
 
-        console.log("notice",user);
+        console.log("product",user);
         setMpData({
             userId:user.id,
-            title:user.title,
-            content:user.content,
+            name: user.name,
+            quantity:user.quantity,
+            price:user.price,
+            discount_rate:user.discount_rate,
+            discounted_price:user.discounted_price,
             date:user.date
           });
         setModalOpen(true);
@@ -91,12 +96,12 @@ const SearchNotice = () => {
     };
     const handleEditAction = async (userId) =>{
         setModalOpen(false);
-        console.log("=======notice=====",userId)
+        console.log("=======data=====",userId)
         try {
-            const res=await axios.put(`${apiUrl}/notice/`+userId,mpData, { withCredentials: true });
-            alert('공지가 수정되었습니다.');
+            const res=await axios.put(`${apiUrl}/products/`+userId,mpData, { withCredentials: true });
+            alert('상품 정보가 수정되었습니다.');
         } catch (err) {
-            alert('공지 수정을 실패했습니다. 다시 시도해주세요.')
+            alert('상품정보 수정을 실패했습니다. 다시 시도해주세요.')
             console.log(err);
         }
     }
@@ -113,6 +118,9 @@ const SearchNotice = () => {
       const oldList = () =>Data.sort(function(a,b) {
         return new Date(a.date) - new Date(b.date)
       });
+      const priceList = () =>Data.sort(function(a,b){
+        return b.price-a.price;
+      });
       // 옵션의 값이 '최신순'이면 상태를 '최신순'으로 바꾸고 
      // 각 맞는 정렬함수를 넣어준다.
       if(value === '최신순'){
@@ -121,10 +129,13 @@ const SearchNotice = () => {
       }else if(value === '등록순'){
         setUpDown('등록순')
         return setData(oldList())
+      }else if(value=="가격순"){
+        setUpDown("가격순")
+        return setData(priceList())
       }
     }
     //주문 
-    const { data, loading, error } = useFetch(`${apiUrl}/notices`);
+    const { data, loading, error } = useFetch(`${apiUrl}/products`);
     const orderList = Array.isArray(data) ? data : data?.rows || [];
     if (!Array.isArray(orderList))
       return <div>예상치 못한 데이터 형식입니다</div>
@@ -166,15 +177,16 @@ const SearchNotice = () => {
       }
       return pageNumbers;
     };  
-return (
-    <div className="search-table-container">
+    return (
+    <div className="orderManage-table-container">
         <div className="search-input-wrap">
-            <h2><FontAwesomeIcon icon={faClipboardList}/>공지</h2>
-            <FontAwesomeIcon icon={faPlus} onClick={()=>navigate("/addnotice")}/>
+            <h2><FontAwesomeIcon icon={faBoxOpen}/>상품</h2>
+            <FontAwesomeIcon icon={faPlus} onClick={()=>navigate("/addproduct")}/>
             <select
                 onClick={handleUpDown} className="select-date">
                     <option>최신순</option>
                     <option>등록순</option>
+                    <option>가격순</option>
             </select>
                 <input
                 type="text"
@@ -189,10 +201,13 @@ return (
                         <table className="notice-table">
                             <thead className="search-table-head">
                             <tr>
-                            <th >제목</th>
-                            <th >내용</th>
-                            <th >수정</th>
-                            <th >삭제</th>
+                            <th>이름</th>
+                            <th>수량</th>
+                            <th>할인율</th>
+                            <th>할인된 가격</th>
+                            <th>날짜</th>
+                            <th>수정</th>
+                            <th>삭제</th>
                             </tr>
                             </thead>
                             <tbody className="orderManage-table">
@@ -201,8 +216,11 @@ return (
                             ) : (
                                 Data.map((user, index) => (
                                     <tr className="product-content" key={index}>
-                                        <td className="orderMange-td">{user.title}</td>
-                                        <td className="orderMange-td">{user.content}</td>
+                                        <td className="orderMange-td">{user.name}</td>
+                                        <td className="orderMange-td">{user.quantity}</td>
+                                        <td className="orderMange-td">{user.discount_rate}</td>
+                                        <td className="orderMange-td">{user.discounted_price}</td>
+                                        <td className="orderMange-td">{user.date}</td>
                                         <td className="orderMange-td">
                                         <FontAwesomeIcon icon={faPen} onClick={() => handleEditClick(user)}/>
                                         </td>
@@ -237,11 +255,15 @@ return (
         }
     }}>
             <div className="login">
-                <div className="search-container">
-                <label>공지 수정하기</label>
+                <div className="login-container">
+                <label>상품정보 수정하기</label>
                 <input type="hidden"  name="id"  className="product-input" value={mpData.userId}/>
-                <input type="text" onChange={handleChange} name="title" className="product-input"  value={mpData.title}/>
-                <input type="text" onChange={handleChange} name="content"className="product-input" value={mpData.content}/>
+                <input type="text" onChange={handleChange} name="name" className="product-input"  value={mpData.name}/>
+                <input type="text" onChange={handleChange} name="quantity"className="product-input" value={mpData.quantity}/>
+                <input type="text" onChange={handleChange} name="price" placeholder="가격" className="product-input" value={mpData.price}/>
+                <input type="text" onChange={handleChange} name="discount_rate" placeholder="할인율" className="product-input" value={mpData.discount_rate}/>
+                <input type="text" onChange={handleChange} name="discounted_price" placeholder="할인된 가격" className="product-input" value={mpData.discounted_price}/>
+                <input type="text" onChange={handleChange} name="date" placeholder="날짜" className="product-input" value={mpData.date}/>
                 <button onClick={()=>handleEditAction(mpData.userId)} className="btn">수정</button>
                 </div>
             </div>
@@ -251,4 +273,4 @@ return (
     </div>                     
     );
 };
-export default SearchNotice;
+export default Search;
