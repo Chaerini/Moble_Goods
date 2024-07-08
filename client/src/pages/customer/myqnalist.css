@@ -1,0 +1,41 @@
+/* src/components/myqnalist.css */
+
+/* 폼 자체는 가운데 정렬 */
+.qnaList {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 600px;
+  }
+  
+  /* 기본 폰트는 검정 */
+  body {
+    color: black;
+  }
+  
+  /* 질문 리스트는 왼쪽 정렬로 문의 제목 출력 */
+  .qnaList-question {
+    text-align: left;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 10px 0;
+  }
+  
+  /* 리스트 끝에 문의한 날짜 출력 */
+  .qnaList-date {
+    float: right;
+    font-size: 0.9em;
+    color: gray;
+  }
+  
+  /* 질문과 답변 사이에 시각적으로 나누어지는 느낌을 위해 실선으로 표현 */
+  .qnaList-hr {
+    margin: 10px 0;
+  }
+  
+  /* 답변의 컬러는 빨강 */
+  .qnaList-answer {
+    color: red;
+    text-align: left;
+    padding: 10px 0;
+  }
+  

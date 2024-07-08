@@ -76,6 +76,8 @@
     width: 100%;
     max-height: 400px; /* 스크롤 가능한 높이 설정 */
     overflow-y: auto; /* 스크롤 활성화 */
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
   /* 질문 항목 스타일 */
@@ -103,14 +105,6 @@
     padding: 10px 0;
     color: #333; /* 기본 텍스트 색상 */
     text-align: left; /* 텍스트 왼쪽 정렬 */
-}
-
-.faq-list {
-    width: 100%;
-    max-height: 500px; /* 스크롤 가능한 높이 설정 */
-    overflow-y: auto; /* 스크롤 활성화 */
-    margin-top: 20px;
-    margin-bottom: 20px;
 }
 
   /* 활성화된 카테고리 텍스트 빨간색 */

@@ -30,6 +30,7 @@ import SubPage from "./pages/product/subpage";
 import SearchUser from "./component/search/searchUser";
 import Faq from "./pages/customer/Faq";
 import AddFaq from "./pages/customer/addFaq";
+import MyqnaList from "./pages/customer/MyqnaList";
 function App() {
   return (
     <BrowserRouter>
@@ -66,6 +67,7 @@ function App() {
           <Route path="/searchUser" element={<SearchUser/>}/>
           <Route path="/faq" element={<Faq/>}/>
           <Route path="/addfaq" element={<AddFaq/>}/>
+          <Route path="/myqnalist" element={<MyqnaList />}/>
       </Routes>
     </BrowserRouter>
   );
