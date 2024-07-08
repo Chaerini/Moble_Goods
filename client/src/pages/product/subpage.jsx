@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Link as ScrollLink, Element } from 'react-scroll';
@@ -6,17 +6,21 @@ import './subpage.css';
 import Navbar from '../../component/navbar/navbar';
 import Header from '../../component/header/header';
 import Footer from '../../component/footer/footer';
+import { CartContext } from '../../Context/CartContext'; // CartContext import
+import { AuthContext } from '../../Context/AuthContext'; // AuthContext import
 
 const SubPage = () => {
     const { categoryId, subCategoryId, productId } = useParams();
+    const { user } = useContext(AuthContext); // Get user from AuthContext
+    const { addToCart, fetchCartItems } = useContext(CartContext); // Get addToCart and fetchCartItems function from CartContext
     const [categories, setCategories] = useState([]);
     const [subcategories, setSubcategories] = useState([]);
     const [products, setProducts] = useState([]);
     const [productDetail, setProductDetail] = useState(null);
     const [images, setImages] = useState([]);
-    const [cart, setCart] = useState([]);
     const [quantity, setQuantity] = useState(1);
-    const [sortOption, setSortOption] = useState('best'); // 정렬 옵션 상태 추가
+    const [sortOption, setSortOption] = useState('best');
+    const [showModal, setShowModal] = useState(false); // 모달 상태 추가
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -83,25 +87,25 @@ const SubPage = () => {
         }
     }, [productId]);
 
-    const addToCart = (item) => {
-        setCart([...cart, item]);
-    };
-
-    const handleAddToCart = () => {
-        addToCart({
-            id: productDetail.id,
-            name: productDetail.name,
-            price: productDetail.price * quantity,
-            quantity: quantity,
-            check: true,
-            image: productDetail.productImageUrl,
-        });
+    const handleAddToCart = async () => {
+        if (productDetail) {
+            await addToCart({
+                id: productDetail.id,
+                name: productDetail.name,
+                price: productDetail.price * quantity,
+                quantity: quantity,
+                checking: true,
+                image: images.length > 0 ? images[0].url : "", // 첫 번째 이미지를 사용
+            });
+            setShowModal(true); // 모달 표시
+            fetchCartItems(); // 장바구니 상태 업데이트
+        }
     };
 
     const sortProducts = (products, option) => {
         switch (option) {
             case 'best':
-                return products.sort((a, b) => b.rating - a.rating); // 예시: rating 기준 정렬
+                return products.sort((a, b) => b.rating - a.rating); 
             case 'newest':
                 return products.sort((a, b) => new Date(b.date) - new Date(a.date));
             case 'priceLow':
@@ -121,6 +125,10 @@ const SubPage = () => {
         setQuantity(parseInt(e.target.value, 10));
     };
 
+    const closeModal = () => {
+        setShowModal(false);
+    };
+
     const sortedProducts = sortProducts(products, sortOption);
 
     if (productId && productDetail) {
@@ -128,6 +136,14 @@ const SubPage = () => {
             <>
                 <Header />
                 <Navbar />
+                {showModal && (
+                    <div className="modal">
+                        <div className="modal-content">
+                            <span className="close" onClick={closeModal}>&times;</span>
+                            <p>장바구니에 상품이 추가되었습니다.</p>
+                        </div>
+                    </div>
+                )}
                 <div className="product-detail-container">
                     <div className="product-detail-image">
                         {images.map(image => (
@@ -138,9 +154,7 @@ const SubPage = () => {
                         <h2>{productDetail.name}</h2>
                         <p>가격: {productDetail.price * quantity}원</p>
                         <p>할인된 가격: {productDetail.discounted_price * quantity}원</p>
-                        <p>수량: {productDetail.quantity}</p>
                         <p>카테고리: {productDetail.mainCategoryName} / {productDetail.subCategoryName}</p>
-                        <p>{productDetail.date}</p>
                         <div className="product-detail-quantity">
                             <label>수량:</label>
                             <input type="number" value={quantity} onChange={handleQuantityChange} min="1" />
@@ -157,7 +171,6 @@ const SubPage = () => {
         );
     }
 
-    // Group products by subcategory
     const groupedProducts = products.reduce((acc, product) => {
         const { subCategoryName } = product;
         if (!acc[subCategoryName]) {
@@ -171,6 +184,14 @@ const SubPage = () => {
         <>
             <Header />
             <Navbar />
+            {showModal && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <span className="close" onClick={closeModal}>&times;</span>
+                        <p>장바구니에 상품이 추가되었습니다.</p>
+                    </div>
+                </div>
+            )}
             <div className="products-container">
                 <div className="sort-options">
                     <select value={sortOption} onChange={handleSortChange}>
