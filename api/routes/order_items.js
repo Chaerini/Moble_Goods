@@ -38,7 +38,8 @@ import {
   getOrderItemsByOrderId,
   createOrderItem,
   updateOrderItem,
-  deleteOrderItem
+  deleteOrderItem,
+  getOrderItemsByOrderIds
 } from '../controllers/order_item.js';
 
 const router = express.Router();
@@ -51,6 +52,9 @@ router.get('/:id', getOrderItemById);
 
 // 주문 아이디로 주문 항목 조회 - 특정 주문 아이디에 해당하는 모든 주문 항목을 조회함
 router.get('/order/:order_id', getOrderItemsByOrderId);
+
+// 주문 아이디로 주문 항목 조회2 - 특정 주문 아이디에 해당하는 모든 주문 항목을 조회함
+router.get('/orders/:order_id', getOrderItemsByOrderIds);
 
 // 주문 항목 추가 - 새로운 주문 항목을 추가함
 router.post('/', createOrderItem);

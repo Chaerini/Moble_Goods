@@ -65,7 +65,8 @@ export const updateUserMembership = async (req, res) => {
 // UPDATE (비밀번호 변경)
 export const updatePassword = async (req, res) => {
     const { userId } = req.params;
-    const { password } = req.body;
+    const { password, newPassword } = req.body;
+    console.log(newPassword);
 
     try {
         console.log(`Updating password for user: ${userId}`);
@@ -85,8 +86,16 @@ export const updatePassword = async (req, res) => {
 
         const user = users[0];
 
+        // 현재 비밀번호와 같은지 확인
+        const isMatch = await bcrypt.compare(password, user.password);
+        console.log(isMatch);
+
+        if (!isMatch) {
+            return res.status(400).json({ error: "Invalid credentials" });
+        }
+
         // 새 비밀번호를 암호화하여 저장
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
         const [updateResult] = await pool.query("UPDATE users SET password = ? WHERE id = ?", [
             hashedPassword,
             userId,
@@ -103,7 +112,7 @@ export const updatePassword = async (req, res) => {
             message: "Password updated successfully",
         });
     } catch (err) {
-        console.error("Error updating password:", err);
+        console.error("Error updating password:", err.message);
         res.status(500).json({ success: false, message: "Server error" });
     }
 };
@@ -112,7 +121,7 @@ export const updatePassword = async (req, res) => {
 // DELETE (회원 탈퇴/삭제)
 export const deleteUser = async (req, res) => {
     // 트랜잭션을 위한 커넥션 가져오기
-    const connection = await pool.getConnection(); 
+    const connection = await pool.getConnection();
     try {
         const { userId } = req.params;
         console.log("userId:", userId);
@@ -127,7 +136,7 @@ export const deleteUser = async (req, res) => {
 
         if (result.affectedRows > 0) {
             // 트랜잭션 커밋
-            await connection.commit(); 
+            await connection.commit();
             res.status(200).json({ message: "User has been deleted." });
         } else {
             // 트랜잭션 롤백
@@ -136,12 +145,12 @@ export const deleteUser = async (req, res) => {
         }
     } catch (error) {
         // 트랜잭션 롤백
-        await connection.rollback(); 
+        await connection.rollback();
         console.error("Error deleting user:", error);
         res.status(500).json({ error: "Server error" });
     } finally {
         // 커넥션 반환
-        connection.release(); 
+        connection.release();
     }
 };
 

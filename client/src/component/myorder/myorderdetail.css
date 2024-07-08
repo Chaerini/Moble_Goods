@@ -1,0 +1,161 @@
+.myorderdetail {
+    width: 100vw;
+    height: 80vh;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.myorderdetail-container {
+    width: 700px;
+    height: 500px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border: 1px solid #555;
+    overflow-x: auto;
+}
+
+.myorderdetail-top {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+}
+
+.myorderdetail-h1 {
+    font-size: 28px;
+    font-weight: 400;
+    height: 90px;
+    padding: 30px;
+}
+
+.myorderdetail-middle {
+    width: 90%;
+}
+
+.myorderdetail-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.myorderdetail-title-tr {
+    border-top: 1px solid #191919;
+}
+
+.myorderdetail-th {
+    height: 50px;
+    background-color: #fafafa;
+    font-size: 13px;
+}
+
+.myorderdetail-tr {
+    border-bottom: 1px solid #eee;
+}
+
+.myorderdetail-date {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.myorderdetail-td {
+    text-align: center;
+    font-size: 13px;
+}
+
+.myorderdetail-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.myorderdetail-image {
+    padding: 15px;
+    width: 100px;
+    height: 100px;
+}
+
+.bu-top {
+    width: inherit;
+    display: flex;
+    justify-content: flex-end;
+    box-shadow: 0px 0px 4px #888;
+}
+
+.bu-center {
+    display: flex;
+    flex-direction: row;
+    margin: 20px 0px;
+}
+
+.bu-left {
+    border-right: 1px dashed #999;
+    width: 230px;
+    padding-right: 20px;
+}
+
+.bu-left img {
+    width: 230px;
+    height: 300px;
+}
+
+.bu-left label {
+    display: inline-block;
+    text-align: start;
+    width: 80px;
+    margin-bottom: 10px;
+}
+
+.bu-right {
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+}
+
+.bu-right label {
+    display: inline-block;
+    text-align: start;
+    width: 80px;
+}
+
+.bu-right input {
+    border: none;
+    background-color: #eee;
+    border-radius: 10px;
+    width: 250px;
+    height: 30px;
+    margin: 5px;
+    padding-left: 10px;
+}
+
+.bu-right button {
+    height: 30px;
+    border-radius: 20px;
+    background-color: #ccc;
+    border: none;
+    padding: 0px 15px;
+    margin: 5px;
+}
+
+.bu-bottom {
+    width: inherit;
+    display: flex;
+    justify-content: center;
+    height: 35px;
+}
+
+.bu-bottom button {
+    background-color: #555;
+    border: none;
+    border-radius: 10px;
+    width: 100px;
+    color: white;
+    font-size: 16px;
+}

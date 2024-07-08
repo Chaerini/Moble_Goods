@@ -11,6 +11,7 @@ import {
   getOrdersByDate,
   getOrdersByDeliveryStatusId,
   getOrdersByUserIdDate,
+  getOrdersByCount,
 } from "../controllers/order.js";
 
 const router = express.Router();
@@ -29,6 +30,9 @@ router.get("/user/:user_id", getOrdersByUserId);
 
 // 특정 날짜의 유저 아이디로 조회
 router.get("/user/date/:user_id", getOrdersByUserIdDate);
+
+// 주문 별 아이템 개수 조회
+router.get("/count/:user_id/:order_id", getOrdersByCount);
 
 // 주문 상태 아이디로 조회
 router.get("/status/:status_id", getOrdersByStatusId);

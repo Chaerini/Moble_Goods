@@ -10,6 +10,7 @@ import './myorder.css';
 import { useAsyncError, useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
+import MyOrderDetail from '../../component/myorder/MyOrderDetail';
 import axios from 'axios';
 
 const MyOrder = () => {
@@ -23,6 +24,8 @@ const MyOrder = () => {
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [render, setRender] = useState(0);
+    const [openModal, setOpenModal] = useState(false);
+    const [selectOrderId, setSelectOrderId] = useState();
 
     // 현재 날짜 포맷
     const formatEndDate = () => {
@@ -53,6 +56,7 @@ const MyOrder = () => {
                     headers: { 'auth-token': user.token },
                     withCredentials: true
                 });
+            // const count = await axios.get(`${apiUrl}/orders/count/${user.id}/${}`)
             setOrderData(res.data);
             setRender(1);
             console.log(res.data);
@@ -104,6 +108,16 @@ const MyOrder = () => {
                 alert('주문을 취소하는 데에 실패했습니다. 다시 시도해주세요.');
                 console.log(err);
             }
+        }
+    }
+
+    // 주문상세 클릭했을 경우
+    const DetailClick = (orderId) => {
+        try {
+            setSelectOrderId(orderId);
+            setOpenModal(true);
+        } catch (err) {
+            console.log(err);
         }
     }
 
@@ -167,8 +181,8 @@ const MyOrder = () => {
                                                 <div className='myorder-row'>
                                                     <div><img src={`${process.env.PUBLIC_URL}/logo192.png`} className='myorder-image'></img></div>
                                                     <div className='myorder-row-right'>
-                                                        <p className='myorder-title'>{order.name} 외 1건</p>
-                                                        <a className='myorder-detail'>주문 상세</a>
+                                                        <p className='myorder-title'>{order.name}</p>
+                                                        <a className='myorder-detail' onClick={() => DetailClick(order.id)}>주문 상세</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -180,9 +194,12 @@ const MyOrder = () => {
                                             <td className='myorder-td'>
                                                 <p className='myorder-status'>{order.delivery_status}</p>
                                             </td>
-                                            <td className='myorder-td'>
-                                                <button className='myorder-button' onClick={() => deleteOrderClick(order.id)}>주문취소</button>
-                                            </td>
+                                            {order.delivery_status === '배송완료' ? (<></>) : (
+                                                <td className='myorder-td'>
+                                                    <button className='myorder-button' onClick={() => deleteOrderClick(order.id)}>주문취소</button>
+                                                </td>
+                                            )}
+
                                         </tr>
                                     </>
                                 ))
@@ -213,8 +230,11 @@ const MyOrder = () => {
                         </div>
                     </div>
                 </div>
+                {openModal && <MyOrderDetail setOpen={setOpenModal} orderId={selectOrderId} />}
             </div>
+
             <Footer />
+
         </>
     );
 };

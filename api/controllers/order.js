@@ -96,7 +96,7 @@ export const getOrdersByUserId = async (req, res) => {
 export const getOrdersByUserIdDate = async (req, res) => {
   const { user_id } = req.params;
   const { startDate, endDate } = req.query;
-  console.log('start', startDate);
+  console.log('start', endDate);
   try {
     const [rows] = await pool.query(`
       SELECT 
@@ -112,14 +112,31 @@ export const getOrdersByUserIdDate = async (req, res) => {
         MAX(product.id) AS product_id, 
         MAX(product.name) AS name, 
         MAX(product_image.url) AS product_image_url
-      FROM \`order\`
-      JOIN order_item ON order_item.order_id = \`order\`.id
-      JOIN status ON status.id = \`order\`.status_id
-      JOIN product ON product.id = order_item.product_id
-      JOIN product_image ON product_image.product_id = product.id
-      WHERE \`order\`.user_id = ? AND \`order\`.order_date BETWEEN ? AND ?
-      GROUP BY \`order\`.id;
+        FROM \`order\`
+        JOIN order_item ON order_item.order_id = \`order\`.id
+        JOIN status ON status.id = \`order\`.status_id
+        JOIN product ON product.id = order_item.product_id
+        LEFT JOIN product_image ON product_image.product_id = product.id
+        WHERE \`order\`.user_id = ? AND (\`order\`.order_date >= ? AND DATE(\`order\`.order_date) <= ?)
+        GROUP BY \`order\`.id;
     `, [user_id, startDate, endDate]);
+
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// 주문에 해당하는 아이템의 개수 조회
+export const getOrdersByCount = async (req, res) => {
+  const { user_id, order_id } = req.params;
+
+  try {
+    const [rows] = await pool.query(`
+      SELECT COUNT(*) AS \`COUNT\`
+      FROM \`order\` JOIN order_item ON \`order\`.id = order_item.order_id
+      WHERE \`order\`.user_id = ? AND \`order\`.id = ?; 
+    `, [user_id, order_id]);
     res.json(rows);
   } catch (err) {
     res.status(500).json({ message: err.message });

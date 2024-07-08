@@ -18,6 +18,12 @@ const Profile = () => {
         phone: ''
     })
     const [isChangePassword, setIsChangePassword] = useState(false);
+    const [passwordData, setPasswordData] = useState({
+        password: '',
+        newpassword: '',
+        newpasswordcheck: ''
+    });
+    const [isPasswordCheck, setIsPasswordCheck] = useState(undefined);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -39,6 +45,13 @@ const Profile = () => {
     const handleClick = async () => {
         try {
             const res = await axios.put(`http://localhost:8080/api/users/${user.id}`, userData, { withCredentials: true });
+            if (isChangePassword) {
+                const { newpasswordcheck, ...userpasswordData } = passwordData;
+                const change = await axios.put(`${apiUrl}/users/changedPw/${user.id}`, {
+                    password: userpasswordData.password,
+                    newPassword: userpasswordData.newpassword
+                }, { headers: { 'auth-token': user.token }, withCredentials: true });
+            }
             alert('회원 정보가 수정되었습니다.');
             navigate('/profile');
         } catch (err) {
@@ -49,12 +62,29 @@ const Profile = () => {
 
     const handleChange = (e) => {
         const { id, value } = e.target;
+        console.log(id, ",", value);
         setUserData((prev) => ({
             ...prev,
             [id]: value
         }));
-        console.log(id, ",", value);
+        if (id === 'password' || id === 'newpassword' || id === 'newpasswordcheck') {
+            setPasswordData((prev) => ({
+                ...prev,
+                [id]: value
+            }))
+            if (id === 'newpasswordcheck') {
+                if (passwordData.password !== value) {
+                    setIsPasswordCheck(false);
+                    console.log(passwordData.password, ",", value);
+                } else {
+                    setIsPasswordCheck(true);
+                    console.log(passwordData.password, ",", value);
+                }
+            }
+
+        }
     }
+
 
     return (
         <>
@@ -83,15 +113,15 @@ const Profile = () => {
                             <div>
                                 <div className='profile-pwd-list'>
                                     <span className='profile-pwd-left'>현재 비밀번호</span>
-                                    <input type='text' placeholder='현재 비밀번호 입력' className='profile-pwd-input'></input>
+                                    <input type='text' placeholder='현재 비밀번호 입력' className='profile-pwd-input' id='password' onChange={handleChange}></input>
                                 </div>
                                 <div className='profile-pwd-list'>
                                     <span className='profile-pwd-left'>새 비밀번호</span>
-                                    <input type='text' placeholder='비밀번호(영문·숫자 조합 8~15자리)' className='profile-pwd-input'></input>
+                                    <input type='text' placeholder='비밀번호(영문·숫자 조합 8~15자리)' className='profile-pwd-input' id='newpassword' onChange={handleChange}></input>
                                 </div>
                                 <div className='profile-pwd-list'>
                                     <span className='profile-pwd-left'>현재 비밀번호</span>
-                                    <input type='text' placeholder='새 비밀번호 확인' className='profile-pwd-input'></input>
+                                    <input type='text' placeholder='새 비밀번호 확인' className='profile-pwd-input' id='newpasswordcheck' onChange={handleChange}></input>
                                 </div>
                                 <div className='profile-cancel'><span onClick={ChangePasswordClick}>취소</span></div>
                             </div>

@@ -102,6 +102,32 @@ export const getOrderItemsByOrderId = async (req, res) => {
   }
 };
 
+// 주문 아이디로 주문 항목 조회2 - 특정 주문 아이디에 해당하는 모든 주문 항목을 조회함
+export const getOrderItemsByOrderIds = async (req, res) => {
+  const { order_id } = req.params;
+  try {
+    const [rows] = await pool.query(
+      `SELECT order_item.id,
+      order_item.order_id,
+      order_item.quantity,
+      order_item.product_id,
+      order_item.price,
+      product.name,
+      product.discounted_price,
+      \`order\`.total,
+      \`order\`.order_date,
+      status.waybill_number
+      FROM order_item JOIN product ON product.id = order_item.product_id
+      JOIN \`order\` ON \`order\`.id = order_item.order_id
+      JOIN status ON status.id = \`order\`.status_id
+      WHERE order_id = 11;`,
+      [order_id]);
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 // 주문 항목 추가 - 새로운 주문 항목을 추가함
 export const createOrderItem = async (req, res) => {
   const { order_id, quantity, product_id, price } = req.body;
