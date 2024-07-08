@@ -1,4 +1,5 @@
 import pool from "../db.js";
+
 export const createReview = async (req, res) => {
     const { userId } = req.params;
     const { product_id, order_id, detail, rating } = req.body;
@@ -16,8 +17,11 @@ export const createReview = async (req, res) => {
             "INSERT INTO reviews (product_id, order_id, detail, rating, user_id) VALUES (?, ?, ?, ?, ?)",
             [product_id, order_id, detail, rating, userId]);
 
+            // 생성된 리뷰의 ID
+        const reviewId = result.insertId;
+
         // 응답에 username 포함
-        res.status(200).json({ message: "리뷰 작성 완료", "작성자": name });
+        res.status(200).json({ message: "리뷰 작성 완료", "작성자": name,reviewId });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }

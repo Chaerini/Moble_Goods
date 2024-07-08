@@ -1,4 +1,5 @@
 import pool from "../db.js";
+
 export const createImage=async(req,res)=>{
         const {reviewId}=req.params;
         const {image_url}=req.body;
