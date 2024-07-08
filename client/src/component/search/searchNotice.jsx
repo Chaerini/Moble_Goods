@@ -56,18 +56,18 @@ const SearchNotice = () => {
     }, []);
     // 검색 버튼 클릭 했을 때
     const handleSearch = async (e) => {
-        // e.preventDefault();
-        console.log("검색어",searchWord);
-        try {
-            const res = await axios.get(`${apiUrl}/searchnotice?title=${searchWord}`);
-            setData(res.data.rows);
-            console.log(res.data.rows);
-            alert("조회되었습니다.")
-        } catch (err) {
-            console.log(err);
-            alert("일치하는 공지가 없습니다.")
-        }
-    }
+      console.log("검색어", searchWord);
+      e.preventDefault();
+      try {
+        const res = await axios.get(`${apiUrl}/searchnotice?title=${searchWord}`);
+        setData(res.data.result);
+        console.log(res.data.result);
+        alert("조회되었습니다.");
+      } catch (err) {
+        console.log(err);
+        alert("일치하는 고객이 없습니다.");
+      }
+    };
 
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {

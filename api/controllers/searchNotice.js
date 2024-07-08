@@ -4,7 +4,7 @@ export const searchNoticetitle = async (req, res) => {
     console.log("title",title);
     try {
         const [result] = await pool.query(
-            `SELECT * FROM notices WHERE title LIKE ?`,
+            `SELECT * FROM notice WHERE title LIKE ?`,
             [`%${title}%`]
         );
         if (result.length > 0) {
