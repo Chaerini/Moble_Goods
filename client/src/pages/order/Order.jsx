@@ -1,12 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { CartContext } from '../../Context/CartContext'; // CartContext 경로 수정
+import { CartContext } from '../../Context/CartContext';
 import { AuthContext } from '../../Context/AuthContext';
 import Navbar from '../../component/navbar/navbar';
 import Header from '../../component/header/header';
 import Footer from '../../component/footer/footer';
 import axios from 'axios';
 import OrderComplete from './OrderComplete'; // OrderComplete 모달을 가져옵니다.
+import OrderCouponModal from './OrderCouponModal'; // OrderCoupon모달을 가져옵니다.
 import './Order.css';
 
 const apiUrl = process.env.REACT_APP_API_URL;
@@ -15,7 +16,6 @@ function Order() {
   const location = useLocation();
   const { selectedItems } = location.state || { selectedItems: [] };
   const { user } = useContext(AuthContext); // UserContext에서 로그인된 유저 정보를 가져옵니다.
-
   const { cartItems } = useContext(CartContext);
   const [orderer, setOrderer] = useState({
     name: '',
@@ -39,6 +39,8 @@ function Order() {
   const [promoChecked, setPromoChecked] = useState(false);
   const [showOrderComplete, setShowOrderComplete] = useState(false);
   const [orderId, setOrderId] = useState(null);
+  const [showCouponModal, setShowCouponModal] = useState(false); // 쿠폰 모달 상태 추가
+  const [selectedCoupon, setSelectedCoupon] = useState(null); // 선택된 쿠폰 상태 추가
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -120,8 +122,14 @@ function Order() {
       ...prevRecipient,
       name: orderer.name,
       phone: orderer.phone,
-      address: orderer.address, // 주소 복사
+      address: orderer.address,
     }));
+  };
+
+  // 쿠폰모달
+  const handleCouponApply = (coupon) => {
+    setSelectedCoupon(coupon);
+    setShowCouponModal(false);
   };
 
   const handleSubmit = async () => {
@@ -138,7 +146,8 @@ function Order() {
           product_id: item.product_id,
           quantity: item.quantity,
           price: item.price
-        }))
+        })),
+        coupon_id: selectedCoupon ? selectedCoupon.id : null
       };
 
       console.log('Order data prepared:', orderData);
@@ -164,6 +173,12 @@ function Order() {
 
   const formatNumber = (num) => {
     return num.toLocaleString('ko-KR');
+  };
+
+  const calculateTotal = () => {
+    const itemTotal = selectedItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    const discount = selectedCoupon ? selectedCoupon.discount : 0;
+    return itemTotal - discount + shippingFee;
   };
 
   return (
@@ -298,8 +313,8 @@ function Order() {
                     <div className="form-group">
                       <label>할인 금액</label>
                       <div className="input-group">
-                        <input type="text" value="0원" readOnly />
-                        <button className="apply-coupon-button">쿠폰 사용</button>
+                        <input type="text" value={selectedCoupon ? `${selectedCoupon.discount}원` : "0원"} readOnly />
+                        <button className="apply-coupon-button" onClick={() => setShowCouponModal(true)}>쿠폰 사용</button>
                       </div>
                     </div>
                     <div className="form-group">
@@ -360,7 +375,8 @@ function Order() {
             <div className="order-summary">
               <h3>최종 결제 금액 확인</h3>
               <div className="summary-content">
-                <p className="summary-total">합계: {formatNumber(selectedItems.reduce((total, item) => total + item.price * item.quantity, 0) + shippingFee)}원</p>
+                {/* <p className="summary-total">합계: {formatNumber(selectedItems.reduce((total, item) => total + item.price * item.quantity, 0) + shippingFee)}원</p> */}
+                <p className="summary-total">합계: {formatNumber(calculateTotal())}원</p>
                 <br />
                 <div className="summary-details">
                   <p>상품 금액:</p>
@@ -368,7 +384,7 @@ function Order() {
                 </div>
                 <div className="summary-details">
                   <p>할인 금액:</p>
-                  <p>0원</p>
+                  <p>{selectedCoupon ? `${selectedCoupon.discount}원` : "0원"}</p>
                 </div>
                 <div className="summary-details">
                   <p>쿠폰 할인 금액:</p>
@@ -392,6 +408,7 @@ function Order() {
       </div>
       <Footer />
       {showOrderComplete && <OrderComplete onClose={closeOrderCompleteModal} selectedItems={selectedItems} />}
+      {showCouponModal && <OrderCouponModal onClose={() => setShowCouponModal(false)} applyCoupon={handleCouponApply} userId={user.id} />}
     </>
   );
 }

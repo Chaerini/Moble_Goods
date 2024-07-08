@@ -136,3 +136,28 @@ export const getNotUserCouponCount = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
+
+// 유저가 발급받은 쿠폰 조회
+export const getUserCoupons = async (req, res) => {
+    const { userId } = req.params;
+
+    console.log("Received request to get user coupons for userId:", userId); // 디버깅 로그 추가
+
+    try {
+        const [result] = await pool.query(
+            `SELECT coupon.id, coupon.name, coupon.discount, coupon.start_date, coupon.end_date, coupon.conditions
+             FROM coupon
+             JOIN usercoupon ON coupon.id = usercoupon.coupon_id
+             WHERE usercoupon.user_id = ? AND usercoupon.used = 0
+             AND DATE(coupon.end_date) >= CURDATE()`,
+            [userId]
+        );
+        
+        console.log("Query result:", result); // 디버깅 로그 추가
+
+        res.status(200).json({ result });
+    } catch (error) {
+        console.error("Error occurred while fetching user coupons:", error); // 디버깅 로그 추가
+        res.status(400).json({ error: error.message });
+    }
+};
