@@ -1,9 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faX
+} from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios';
 import './register.css';
 
-const Register = () => {
+const Register = ({ setOpen }) => {
     const [credentials, setCredentials] = useState({
         username: undefined,
         password: undefined,
@@ -49,7 +53,7 @@ const Register = () => {
                 const { passwordcheck, ...userData } = credentials;
 
                 const res = await axios.post(`${apiUrl}/auth/register`, userData);
-                navigate('/login');
+                setOpen(false);
             } else {
                 alert('모든 필수 입력 항목을 입력하세요.');
             }
@@ -77,9 +81,15 @@ const Register = () => {
         );
     };
 
+    // x 버튼 클릭했을 때 모달 없앰
+    const xClick = () => {
+        setOpen(false);
+    }
+
     return (
         <div className="register">
             <div className="register-container">
+                <div className='login-top'><FontAwesomeIcon icon={faX} className="myorderdetail-icon" onClick={() => xClick()} /></div>
                 <h1 className='register-h1'>회원가입</h1>
                 <div className='register-list'>
                     <span className='register-left'>아이디<em className='register-em'>*</em></span>

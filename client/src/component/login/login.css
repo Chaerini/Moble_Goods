@@ -7,18 +7,31 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    z-index: 9999;
+    top: 0;
 }
 
 .login-container {
     width: 360px;
     height: 480px;
-    padding: 40px;
+    padding: 20px 40px 40px;
     background-color: white;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     box-sizing: content-box;
+}
+
+.login-top {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.login-image {
+    width: 270px;
+    height: 160px;
 }
 
 .login-input {

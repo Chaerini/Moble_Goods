@@ -2,9 +2,14 @@ import './login.css';
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faX
+} from "@fortawesome/free-solid-svg-icons";
+// import Logo from '/images/로고.png';
 import axios from "axios";
 
-const Login = () => {
+const Login = ({ setOpen }) => {
     const [credentials, setCredentials] = useState({
         username: undefined,
         password: undefined,
@@ -25,7 +30,7 @@ const Login = () => {
             const res = await axios.post(`${apiUrl}/auth/login`, credentials, { withCredentials: true });
             dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
             console.log(res.data.details);
-            navigate('/');
+            setOpen(false);
         } catch (err) {
             dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
         }
@@ -37,10 +42,16 @@ const Login = () => {
         }
     }
 
+    // x 버튼 클릭했을 때 모달 없앰
+    const xClick = () => {
+        setOpen(false);
+    }
+
     return (
         <div className="login">
             <div className="login-container">
-                <h1>로고</h1>
+                <div className='login-top'><FontAwesomeIcon icon={faX} className="myorderdetail-icon" onClick={() => xClick()} /></div>
+                <img src='/images/로고.png' className='login-image' />
                 <div className='login-input-wrap'>
                     <input type='text' placeholder='아이디 입력' className='login-input' id='username' onChange={handleChange}></input>
                     <input type='password' placeholder='비밀번호 입력' className='login-input' id='password' onChange={handleChange} onKeyDown={handleKeyPress}></input>
