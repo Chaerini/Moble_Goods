@@ -33,6 +33,9 @@ function Header() {
                   <Link to="/mycoupon">내 등급 혜택</Link>
                   <Link to="/profile">회원정보수정</Link>
                   <Link to="/myreview">나의 리뷰</Link>
+                  {user.is_admin === 1 && (  // 관리자일 때만 표시
+                    <Link to="/admin">관리자 페이지</Link>
+                  )}
                   <button onClick={handleLogout}>로그아웃</button>
                 </div>
               )}
