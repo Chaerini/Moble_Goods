@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import './myqnalist.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 const MyqnaList = () => {
   // QnA 데이터를 저장할 state 생성
   const [qnaList, setQnaList] = useState([]);
@@ -11,7 +12,6 @@ const MyqnaList = () => {
     const fetchData = async () => {
         try {
             const response = await axios.get(`${apiUrl}/asks`);
-            console.log("data", response.data.result);
             setQnaList(response.data.result);
         } catch (error) {
             console.error('데이터 가져오기 오류', error);
@@ -28,15 +28,16 @@ const MyqnaList = () => {
   return (
     <div className="qnaList">
       <h1>나의 문의 리스트</h1>
-      <div className="qnaList">
         {qnaList.map((qna, index) => (
           <div key={index} className="qnaList-item">
             <div className="qnaList-question" onClick={() => toggleAnswer(index)}>
             <table className="notice-table">
                             <thead>
                             <tr>
+                            <th>작성자</th>
                             <th >제목</th>
                             <th >내용</th>
+                            <th>작성날짜</th>
                             </tr>
                             </thead>
                             <tbody className="orderManage-table">
@@ -45,12 +46,14 @@ const MyqnaList = () => {
                             ) : (
                                 qnaList.map((user, index) => (
                                     <tr className="product-content" key={index}>
+                                        <td className='orderManage-td'>{user.name}</td>
                                         <td className="orderMange-td">{user.title}</td>
                                         <td className="orderMange-td">{user.contents}</td>
-                                        </tr>
+                                        <td className="orderManage-td">{qna.date}</td>
+                                    </tr>
                             )))}
             </tbody>
-        </table>              <span className="qnaList-date">{qna.date}</span>
+        </table>           
             </div>
             {qna.showAnswer && (
               <div className="qnaList-answer">
@@ -61,7 +64,6 @@ const MyqnaList = () => {
           </div>
         ))}
       </div>
-    </div>
   );
 };
 

@@ -27,7 +27,8 @@ const Search = () => {
       price: "",
       discount_rate: "",
       discounted_price: "",
-      date: ""
+      date: "",
+      subCategoryId:""
   });
   const [modalOpen, setModalOpen] = useState(false);
   const modalBackground = useRef();
@@ -73,6 +74,8 @@ const Search = () => {
   const handleDelete = async (id) => {
       try {
           const res = await axios.delete(`${apiUrl}/products/` + id)
+          alert("삭제되었습니다.");
+          window.location.reload();
       } catch (err) {
           console.log(err)
       }
@@ -87,8 +90,9 @@ const Search = () => {
           price: user.price,
           discount_rate: user.discount_rate,
           discounted_price: user.discounted_price,
-          date: user.date
-      });
+          date: user.date,
+          subCategoryId:user.subCategoryId        
+        });
       setModalOpen(true);
       console.log(mpData)
   }
@@ -244,6 +248,7 @@ const Search = () => {
                           <input type="text" onChange={handleChange} name="discount_rate" placeholder="할인율" className="product-input" value={mpData.discount_rate} />
                           <input type="text" onChange={handleChange} name="discounted_price" placeholder="할인된 가격" className="product-input" value={mpData.discounted_price} />
                           <input type="text" onChange={handleChange} name="date" placeholder="날짜" className="product-input" value={mpData.date} />
+                          <input type="text" onChange={handleChange} name="subcategory_id" placeholder="중분류" className="product-input" value={mpData.subCategoryId}/>
                           <button onClick={() => handleEditAction(mpData.userId)} className="btn">수정</button>
                       </div>
                   </div>

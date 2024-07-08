@@ -51,6 +51,20 @@ const ContentInput = ({ onChange, value, placeholder }) => (
     ></textarea>
   </div>
 );
+const NameInput = ({ onChange, value, placeholder }) => (
+  <div className="myqna-input-field">
+    <label className="myqna-input-label">작성자<span className="myqna-required">*</span></label>
+    <input
+      type="text"
+      name="userId"
+      value={value}
+      onChange={onChange}
+      maxLength={25}
+      placeholder={placeholder}
+      className="myqna-input-box"
+    />
+  </div>
+);
 
 // 메시지 알림 체크박스 컴포넌트
 const MessageAlertCheckbox = ({ onChange }) => (
@@ -90,6 +104,7 @@ const ContactForm = () => {
         console.log("====질문=====",formData)
         await axios.post(`http://localhost:8080/api/asks`,formData);
         console.log("추가완료");
+        alert("추가완료")
     }catch(err){
         console.log("error",err);
     }
@@ -113,6 +128,12 @@ const ContactForm = () => {
           />
         </div>
       <MessageAlertCheckbox onChange={handleChange} />
+      <NameInput
+        name="userId"
+        placeholder="아이디를 입력해 주세요. (최대 25자)"
+        onChange={handleChange}
+        className="myqna-input-box"
+      />
       <TitleInput
         name="title"
         placeholder="제목을 입력해 주세요. (최대 25자)"
