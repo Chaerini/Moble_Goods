@@ -1,0 +1,35 @@
+.addcomment {
+    width: 100vw;
+    height: 80vh;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.addcomment-container {
+    width: 700px;
+    height: 500px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border: 1px solid #555;
+    overflow-x: auto;
+}
+
+.addcomment-input {
+    width: 90%;
+    height: 300px;
+    border: 1px solid #eee;
+}
+
+.addcomment-button {
+    margin-top: 10px;
+    width: 50px;
+    height: 30px;
+}

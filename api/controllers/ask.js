@@ -83,7 +83,10 @@ export const getUserAsk = async (req, res) => {
 export const getAsks = async (req, res) => {
     try {
         const [result] = await pool.query(
-            `SELECT ask.*, users.name FROM ask JOIN users ON users.id = ask.user_id ORDER BY date DESC`
+            `SELECT ask.*, users.name, comment.contents AS comment
+            FROM ask JOIN users ON users.id = ask.user_id
+            LEFT JOIN comment ON comment.ask_id = ask.id
+            ORDER BY date DESC;`
         );
         res.status(200).json({ result });
     } catch (error) {

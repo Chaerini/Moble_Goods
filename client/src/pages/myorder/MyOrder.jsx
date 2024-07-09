@@ -4,7 +4,8 @@ import Footer from '../../component/footer/footer';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faAlignLeft,
-    faCircleExclamation
+    faCircleExclamation,
+    faX
 } from "@fortawesome/free-solid-svg-icons";
 import './myorder.css';
 import { useAsyncError, useNavigate } from 'react-router-dom';
