@@ -2,16 +2,11 @@ import React, { useState } from "react";
 import useFetch from "../../../hooks/useFetch";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-import OrderManageModal from "./orderManageModal";
 import "./orderManage.css";
 
 const OrderManage = () => {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [selectedOrderData, setSelectedOrderData] = useState(null);
-
-  const apiUrl = process.env.REACT_APP_API_URL;
-
-  // 검색어 상태 추가
+  // 검색 필터
+  const [selectedOrders, setSelectedOrders] = useState([]);
   const [searchOrderNumber, setSearchOrderNumber] = useState("");
   const [filteredData, setFilteredData] = useState(null);
   const [orderStatus, setOrderStatus] = useState("전체");
@@ -21,6 +16,7 @@ const OrderManage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 15;
 
+  const apiUrl = process.env.REACT_APP_API_URL;
   const { data, loading, error } = useFetch(`${apiUrl}/orders/admin`);
 
   if (loading) return <div>로딩 중...</div>;
@@ -28,11 +24,9 @@ const OrderManage = () => {
     return <div>데이터를 가져오는 중 오류가 발생했습니다: {error.message}</div>;
 
   const orderList = Array.isArray(data) ? data : data?.rows || [];
-
   if (!Array.isArray(orderList))
     return <div>예상치 못한 데이터 형식입니다</div>;
 
-  // 주문일시 한국 시간 YYYYMMDDhhmmss로 출력
   const formatKoreanDate = (dateString) => {
     const date = new Date(dateString);
     const year = date.getFullYear();
@@ -45,7 +39,6 @@ const OrderManage = () => {
     return `${year}${month}${day}${hours}${minutes}${seconds}`;
   };
 
-  // 데이터 필터링
   const dataToDisplay = filteredData || orderList;
 
   const uniqueOrderCount = new Set(dataToDisplay.map((item) => item.order_id))
@@ -57,7 +50,6 @@ const OrderManage = () => {
     return acc;
   }, {});
 
-  //페이지 수
   const groupedOrdersArray = Object.values(groupedItems);
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -88,10 +80,7 @@ const OrderManage = () => {
     return pageNumbers;
   };
 
-  // 검색어 상태 업데이트
-  const handleSearchChange = (e) => {
-    setSearchOrderNumber(e.target.value);
-  };
+  const handleSearchChange = (e) => setSearchOrderNumber(e.target.value);
   const handleStatusChange = (e) => setOrderStatus(e.target.value);
   const handlePaymentMethodChange = (e) => setPaymentMethod(e.target.value);
   const handleExtraOptionsChange = (e) => {
@@ -103,7 +92,37 @@ const OrderManage = () => {
     );
   };
 
-  // 검색 제출
+  const handleCheckboxChange = (orderId) => {
+    setSelectedOrders((prevSelected) => {
+      if (prevSelected.includes(orderId)) {
+        return prevSelected.filter((id) => id !== orderId);
+      } else {
+        return [...prevSelected, orderId];
+      }
+    });
+  };
+
+  // 주문내역 삭제
+  const handleDeleteOrders = async () => {
+    try {
+      await Promise.all(
+        selectedOrders.map((orderId) =>
+          fetch(`${apiUrl}/orders/${orderId}`, { method: "DELETE" })
+        )
+      );
+
+      setFilteredData(
+        dataToDisplay.filter(
+          (order) => !selectedOrders.includes(order.order_id)
+        )
+      );
+
+      setSelectedOrders([]);
+    } catch (error) {
+      console.error("Error deleting orders:", error);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     let filtered = orderList;
@@ -141,19 +160,6 @@ const OrderManage = () => {
     }
 
     setFilteredData(filtered);
-  };
-
-  // 모달
-  const openModal = (order) => {
-    setSelectedOrderData(order);
-    setModalIsOpen(true);
-    console.log("setSelectedOrderData : ", setSelectedOrderData);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
-    setSelectedOrderData(null);
-    console.log("setModalIsOpen : ", setModalIsOpen);
   };
 
   return (
@@ -255,9 +261,7 @@ const OrderManage = () => {
                     selectsRange={true}
                     startDate={orderDateRange[0]}
                     endDate={orderDateRange[1]}
-                    onChange={(update) => {
-                      setOrderDateRange(update);
-                    }}
+                    onChange={(update) => setOrderDateRange(update)}
                     isClearable={true}
                     dateFormat="yyyy/MM/dd"
                     placeholderText="시작일      -      종료일"
@@ -271,30 +275,35 @@ const OrderManage = () => {
               </div>
             </form>
           </div>
+
           <div className="orderManage-table-container">
             <div className="orderManage-table-con">
               <div className="orderManage-top">
                 <div className="orderManage-table-summary">
                   검색 결과: {uniqueOrderCount} 건
                 </div>
-                {/* <div>
-                  <button className="orderManage-status-change-btn">
-                    선택수정
+                <div>
+                  <button
+                    className="orderManage-status-delete-btn"
+                    onClick={handleDeleteOrders}
+                    disabled={selectedOrders.length === 0}
+                  >
+                    주문 삭제
                   </button>
-                </div> */}
+                </div>
               </div>
               <div className="orderManage-table-box">
                 <table className="orderManage-table">
                   <colgroup>
                     <col style={{ width: "4%" }} />
-                    <col style={{ width: "25%" }} />
+                    <col style={{ width: "20%" }} />
                     <col style={{ width: "10%" }} />
                     <col style={{ width: "20%" }} />
-                    <col style={{ width: "6%" }} />
-                    <col style={{ width: "10%" }} />
-                    <col style={{ width: "10%" }} />
+                    <col style={{ width: "7%" }} />
+                    <col style={{ width: "7%" }} />
+                    <col style={{ width: "7%" }} />
                     <col style={{ width: "15%" }} />
-                    {/* <col style={{ width: "8%" }} /> */}
+                    <col style={{ width: "4%" }} />
                   </colgroup>
                   <thead className="orderManage-table-head">
                     <tr>
@@ -306,7 +315,7 @@ const OrderManage = () => {
                       <th className="orderManage-th">결제금액(원)</th>
                       <th className="orderManage-th">배송상태</th>
                       <th className="orderManage-th">운송장번호</th>
-                      {/* <th className="orderManage-th">삭제</th> */}
+                      <th className="orderManage-th">선택</th>
                     </tr>
                   </thead>
                   <tbody className="orderManage-table-body">
@@ -342,13 +351,8 @@ const OrderManage = () => {
                                 rowSpan={items.length}
                                 className="orderManage-td"
                               >
-                                <div
-                                  onClick={() => openModal(item)}
-                                  className="orderManage-td-link"
-                                >
-                                  {formatKoreanDate(item.order_date) || ""} -
-                                  {item.order_id || ""}
-                                </div>
+                                {formatKoreanDate(item.order_date) || ""} -{" "}
+                                {item.order_id || ""}
                               </td>
                             )}
                             {index === 0 && (
@@ -389,6 +393,23 @@ const OrderManage = () => {
                                 {item.waybill_number || ""}
                               </td>
                             )}
+                            {index === 0 && (
+                              <td
+                                rowSpan={items.length}
+                                className="orderManage-td"
+                              >
+                                <input
+                                  type="checkbox"
+                                  className="orderManage-checkbox"
+                                  onChange={() =>
+                                    handleCheckboxChange(item.order_id)
+                                  }
+                                  checked={selectedOrders.includes(
+                                    item.order_id
+                                  )}
+                                />
+                              </td>
+                            )}
                           </tr>
                         ));
                       })
@@ -417,14 +438,6 @@ const OrderManage = () => {
           </div>
         </div>
       </div>
-      {selectedOrderData && (
-        <OrderManageModal
-          isOpen={modalIsOpen}
-          onClose={closeModal}
-          orderData={selectedOrderData}
-          setOrderData={setSelectedOrderData}
-        />
-      )}
     </div>
   );
 };

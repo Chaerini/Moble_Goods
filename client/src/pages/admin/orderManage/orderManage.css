@@ -309,16 +309,14 @@
   max-width: 200px;
   white-space: nowrap;
   text-overflow: ellipsis;
-  border-bottom: 1px solid black;
   padding: 5px 10px;
   box-sizing: border-box;
   cursor: pointer;
 }
 
-.orderManage-td-link:hover {
-  border-bottom: 1px solid black;
+/* .orderManage-td-link:hover {
   font-weight: 700;
-}
+} */
 
 .orderManage-page-btn-box {
   background: none;
@@ -367,7 +365,7 @@
   margin-bottom: 5px;
 }
 
-.orderManage-status-change-btn {
+.orderManage-status-delete-btn {
   width: 70px;
   height: 25px;
   display: flex;
@@ -379,7 +377,7 @@
   cursor: pointer;
 }
 
-.orderManage-status-change-btn:active {
+.orderManage-status-delete-btn:active {
   color: var(--c-point);
   background-color: var(--c-bg-white);
   box-shadow: 0 0 0.5px 0.2px var(--c-black);
