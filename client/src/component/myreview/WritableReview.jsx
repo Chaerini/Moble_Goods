@@ -119,7 +119,7 @@ const WritableReview = () => {
         const fetchData = async () => {
             try {
                 const res = await axios.get(`${apiUrl}/reviews/writable/${user.id}`, { headers: { 'auth-token': user.token }, withCredentials: true });
-
+                console.log(res.data);
                 // 작성 기한이 지나면 목록에 뜨지 않도록 구현
                 const filteredData = res.data.result.filter(review => {
                     const deadline = new Date(review.order_date);
@@ -200,10 +200,10 @@ const WritableReview = () => {
                         <tr className="writablereview-not"><td colSpan="4">작성 가능한 리뷰가 없습니다.</td></tr>
                     ) : (
                         reviewData.map((review, index) => (
-                            <tr className='writablereview-tr'>
+                            <tr className='writablereview-tr' key={index}>
                                 <td>
                                     <div className='writablereview-row'>
-                                        <div><img src={`${process.env.PUBLIC_URL}/logo192.png`} className='writablereview-image'></img></div>
+                                        <div><img src={review.image} className='writablereview-image'></img></div>
                                         <div className='writablereview-right'>
                                             <p className='writablereview-title'>{review.name}</p>
                                             <p className='writablereview-quantity'>수량 : {review.quantity}개</p>
@@ -211,7 +211,7 @@ const WritableReview = () => {
                                     </div>
                                 </td>
                                 <td className='writablereview-td'>{formatDate(review.order_date)}</td>
-                                <td className='writablereview-td'>{withinDate(review.order_date)}(D-{dDay(review.order_date)})</td>
+                                <td className='writablereview-td'>{withinDate(review.order_date)} (D-{dDay(review.order_date)})</td>
                                 <td className='writablereview-td'><button className='writablereview-button' onClick={() => handleReviewWrite(review)}>리뷰작성</button></td>
                             </tr>
                         ))
