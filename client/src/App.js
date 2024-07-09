@@ -6,7 +6,6 @@ import Cart from "./pages/cart/Cart";
 import Order from "./pages/order/Order";
 import OrderComplete from "./pages/order/OrderComplete";
 import ReviewWrite from "./pages/review/ReviewWrite";
-import AddNotice from "./pages/notice/AddNotice";
 import GetProduct from "./pages/productManage/getProduct";
 import Product from './pages/productManage/addProduct';
 import Main from './pages/productManage/main';
@@ -41,9 +40,7 @@ function App() {
           <Route path="/Order" element={<Order />} />
           <Route path="/Order-Complete" element={<OrderComplete />} />
           <Route path="/ReviewWrite" element={<ReviewWrite />} />
-          <Route path="/addnotice" element={<AddNotice />} />
           <Route path="/getproduct" element={<GetProduct />} />
-          <Route path="/addproduct" element={<Product />} />
           <Route path="/" element={<Main />} />
           <Route path="/getuser" element={<GetUser />} />
           <Route path="/addcoupon" element={<Coupon />} />
