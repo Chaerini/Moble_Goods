@@ -150,7 +150,7 @@ const SubPage = () => {
                     </div>
                     <div className="product-detail-info">
                         <h2>{productDetail.name}</h2>
-                        <p>가격: {productDetail.price * quantity}원</p>
+                        <p>가격: {productDetail.price}원</p>
                         <p>할인된 가격: {productDetail.discounted_price * quantity}원</p>
                         <p>카테고리: {productDetail.mainCategoryName} / {productDetail.subCategoryName}</p>
                         <div className="product-detail-quantity">
