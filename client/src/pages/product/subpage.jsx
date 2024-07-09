@@ -95,7 +95,7 @@ const SubPage = () => {
                 price: productDetail.price * quantity,
                 quantity: quantity,
                 checking: true,
-                image: images.length > 0 ? images[0].url : "", // 첫 번째 이미지를 사용
+                image: productDetail.productImageUrl,
             });
             setShowModal(true); // 모달 표시
             fetchCartItems(); // 장바구니 상태 업데이트
@@ -146,9 +146,7 @@ const SubPage = () => {
                 )}
                 <div className="product-detail-container">
                     <div className="product-detail-image">
-                        {images.map(image => (
-                            <img key={image.imageId} src={image.url} alt={productDetail.name} />
-                        ))}
+                        <img src={productDetail.productImageUrl} alt={productDetail.name} />
                     </div>
                     <div className="product-detail-info">
                         <h2>{productDetail.name}</h2>
