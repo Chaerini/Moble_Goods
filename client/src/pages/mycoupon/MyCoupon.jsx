@@ -31,6 +31,7 @@ const MyCoupon = () => {
                 headers: { 'auth-token': user.token },
                 withCredentials: true
             })
+            console.log(res.data);
             setDownloadCount(res.data.result.length);
             setUseCount(result.data.result.length);
         } catch (err) {
@@ -57,7 +58,7 @@ const MyCoupon = () => {
                                 <FontAwesomeIcon icon={faCrown} className='mycoupon-icon-bronze' />
                             </div>
                             <div className='mycoupon-membership-right'>
-                                <p className='mycoupon-membership-p-top'>이채린님 환영합니다!</p>
+                                <p className='mycoupon-membership-p-top'>{user?.name}님 환영합니다!</p>
                                 <p className='mycoupon-membership-p-bottom'>구매 후 쿠폰혜택을 누리세요</p>
                                 <p className='mycoupon-membership-p-bottom'>추가 주문 건수 1건 이상 SILVER 등급이 됩니다.</p>
                             </div>

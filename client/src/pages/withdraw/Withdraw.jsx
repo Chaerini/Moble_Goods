@@ -19,6 +19,7 @@ const Withdraw = () => {
             const res = await axios.delete(`${apiUrl}/users/${user.id}`, { headers: { 'auth-token': user.token }, withCredentials: true });
             const logout = await axios.post(`${apiUrl}/auth/logout`, {}, { headers: { 'auth-token': user.token }, withCredentials: true });
             dispatch({ type: "LOGOUT" });
+            alert("탈퇴되었습니다.");
             console.log(logout.data);
             navigate('/');
         } catch (err) {

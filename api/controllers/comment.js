@@ -61,7 +61,7 @@ export const getComment = async (req, res) => {
 
     try {
         const [result] = await pool.query(
-            `SELECT comment.*, users.name FROM comment JOIN users ON users.id = comment.admin_id WHERE ask_id = ?`,
+            `SELECT comment.*, users.name FROM comment JOIN users ON users.id = comment.admin_id WHERE comment.ask_id = ?`,
             [askid]
         );
         res.status(200).json({ result });

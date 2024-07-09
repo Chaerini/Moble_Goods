@@ -129,6 +129,7 @@
     height: 45px;
     display: flex;
     justify-content: center;
+    margin-bottom: 100px;
 }
 
 .profile-cancel-btn {
