@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPen, faPlus,faClipboardList } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import SearchNotice from "../../component/search/searchNotice";
-import "./Notice.css";
+import "./AdminNotice.css";
 const GetNotice = () => {
   const navigate = useNavigate();
   const [notice, setNotice] = useState([]);
