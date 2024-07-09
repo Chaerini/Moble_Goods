@@ -26,7 +26,8 @@ function OrderCouponModal({ onClose, applyCoupon, userId }) {
         <div className="order-coupon-modal-overlay">
             <div className="order-coupon-modal-content">
                 <button className="order-coupon-close-button" onClick={onClose}>X</button>
-                <h2>사용 가능한 쿠폰</h2>
+                <h3>사용 가능한 쿠폰</h3>
+                <br />
                 <ul className="order-coupon-list">
                     {coupons.length === 0 ? (
                         <li>사용 가능한 쿠폰이 없습니다.</li>
