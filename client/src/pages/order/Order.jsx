@@ -138,9 +138,12 @@ function Order() {
       const statusResponse = await axios.post(`${apiUrl}/statuses`, { delivery_status: "배송완료" });
       const status_id = statusResponse.data.id;
 
+      // 쿠폰 할인 적용된 총 금액 계산
+      const finalTotal = calculateTotal();
+
       const orderData = {
         user_id: user.id,
-        total: selectedItems.reduce((total, item) => total + item.price * item.quantity, 0) + shippingFee,
+        total: finalTotal, // 쿠폰 할인 적용된 총 금액
         status_id: status_id, // status_id를 설정
         items: selectedItems.map(item => ({
           product_id: item.product_id,
