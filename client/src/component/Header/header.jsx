@@ -7,17 +7,12 @@ import './header.css';
 
 function Header() {
   const { user, dispatch } = useContext(AuthContext);
-  const [dropdownVisible, setDropdownVisible] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [openRegisterModal, setOpenRegisterModal] = useState(false);
 
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
     localStorage.removeItem("user");
-  };
-
-  const toggleDropdown = () => {
-    setDropdownVisible(!dropdownVisible);
   };
 
   return (
@@ -30,20 +25,21 @@ function Header() {
           <div className="header-top-right">
             {user ? (
               <div className="user-menu">
-                <span onClick={toggleDropdown} className="username">
+                <span className="username">
                   {user.username}님
+                  <span className="dropdown-icon">▼</span>
                 </span>
-                {dropdownVisible && (
-                  <div className="dropdown-menu">
-                    <Link to="/mycoupon">내 등급 혜택</Link>
-                    <Link to="/profile">회원정보수정</Link>
-                    <Link to="/myreview">나의 리뷰</Link>
-                    {user.is_admin === 1 && (  // 관리자일 때만 표시
-                      <Link to="/admin">관리자 페이지</Link>
-                    )}
-                    <button onClick={handleLogout}>로그아웃</button>
-                  </div>
-                )}
+                <div className="dropdown-menu">
+                  <Link to="/mycoupon">내 등급 혜택</Link>
+                  <Link to="/profile">회원정보수정</Link>
+                  <Link to="/myreview">나의 리뷰</Link>
+                  <Link to="/myqnalist">나의 Q&A 리스트</Link>
+                  <Link to="/myqna">1:1 문의하기</Link>
+                  {user.is_admin === 1 && (  // 관리자일 때만 표시
+                    <Link to="/admin">관리자 페이지</Link>
+                  )}
+                  <button onClick={handleLogout}>로그아웃</button>
+                </div>
               </div>
             ) : (
               <>

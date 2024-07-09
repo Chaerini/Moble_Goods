@@ -1,16 +1,63 @@
 .footer {
-    background-color: #f8f8f8;
-    padding: 20px;
-    border-top: 1px solid #ddd;
-    margin-top: auto;
-  }
-  
-  .footer-container {
-    text-align: center;
-  }
-  
-  .footer p {
-    margin: 5px 0;
-    color: #666;
-  }
-  
+  background-color: #fff;
+  color: #333;
+  padding: 40px 60px;
+  text-align: left;
+  font-family: Arial, sans-serif;
+  border-top: 1px solid #ddd;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.footer-logo {
+  height: 40px; /* 로고의 높이 조정 */
+}
+
+.footer-links {
+  display: flex;
+  gap: 30px;
+}
+
+.footer-link {
+  color: #333;
+  text-decoration: none;
+  font-size: 1em;
+  padding: 10px 0; /* padding을 추가하여 높이 일치 */
+  line-height: 1.5; /* 텍스트의 세로 정렬 */
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+  color: #e40046; /* 링크 hover 시 색상 변경 */
+}
+
+.footer-middle {
+  display: flex;
+  justify-content: center; /* 가운데 정렬 */
+  align-items: center; /* 수직 정렬 */
+  flex-direction: column; /* 세로 정렬 */
+  gap: 20px; /* 요소 간의 간격 조정 */
+  padding: 20px 0;
+}
+
+.footer-company-info p {
+  margin: 5px 0;
+  font-size: 0.9em;
+  text-align: center; /* 가운데 정렬 */
+  color: #555;
+}
+
+.footer-language-selector select {
+  padding: 5px;
+  font-size: 1em;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+}

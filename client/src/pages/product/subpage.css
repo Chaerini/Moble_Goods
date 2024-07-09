@@ -177,7 +177,7 @@
 }
 
 .add-to-cart-button {
-  background-color:orangered;
+  background-color: orangered;
   color: #fff;
   padding: 15px 30px;
   border: none;
@@ -207,10 +207,11 @@ a {
 .subcategory-title {
   font-size: 2em;
   color: #333;
-  margin-bottom: 20px; /* 여백 추가 */
+  margin: 170px 0 20px; /* 위쪽 여백 추가 */
   border-bottom: 2px solid #ddd; /* 밑줄 추가 */
   padding-bottom: 10px; /* 밑줄과의 간격 */
 }
+
 /* 모달 스타일 */
 .modal {
   display: flex;
