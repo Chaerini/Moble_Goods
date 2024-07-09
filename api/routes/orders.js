@@ -1,6 +1,7 @@
 import express from "express";
 import {
   getAdminAllOrders,
+  DeleteAdminOrder,
   getAllOrders,
   getOrderById,
   getOrdersByStatusId,
@@ -18,6 +19,9 @@ const router = express.Router();
 
 // 관리자 - 전체 주문내역 조회
 router.get("/admin", getAdminAllOrders);
+
+// 관리자 - 주문 내역 삭제 라우터
+router.delete("/admin/:id", DeleteAdminOrder);
 
 // 모든 주문 조회
 router.get("/", getAllOrders);

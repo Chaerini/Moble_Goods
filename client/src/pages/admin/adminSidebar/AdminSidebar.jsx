@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import "./adminSidebar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faG,
   faChartSimple,
   faShoppingCart,
   faUser,
   faBoxOpen,
   faClipboardList,
   faSignOutAlt,
+  faHeadset,
 } from "@fortawesome/free-solid-svg-icons";
 
 const AdminSidebar = ({ setActiveComponent }) => {
@@ -27,8 +27,6 @@ const AdminSidebar = ({ setActiveComponent }) => {
   const [username, setUsername] = useState("");
 
   useEffect(() => {
-    // 여기서 로그인 상태를 체크하는 로직을 추가합니다.
-    // 예를 들어, localStorage에서 사용자 정보를 가져오는 방식으로 구현할 수 있습니다.
     const user = JSON.parse(localStorage.getItem("user"));
     if (user && user.isLoggedIn) {
       setIsLoggedIn(true);
@@ -37,7 +35,7 @@ const AdminSidebar = ({ setActiveComponent }) => {
   }, []);
 
   const handleLogout = () => {
-    // 로그아웃 처리 로직을 추가합니다.
+    // 로그아웃 코드 추가
     localStorage.removeItem("user");
     setIsLoggedIn(false);
     setUsername("");
@@ -46,8 +44,9 @@ const AdminSidebar = ({ setActiveComponent }) => {
   return (
     <div className="sidebar-wrapper">
       <div className="sidebar-logo-box">
-        {/* <FontAwesomeIcon icon={faG} className="sidebar-logo-icon" /> */}
-        <div className="sidebar-logo-text">Goods For YOU</div>
+        <div className="sidebar-logo-image">
+          <img src="/images/로고.png" className="sidebar-logo" />
+        </div>
       </div>
       <div className="sidebar-menu">
         <ul className="sidebar-menu-list">
@@ -83,13 +82,20 @@ const AdminSidebar = ({ setActiveComponent }) => {
           </li>
           <li onClick={() => handleMenuClick("GetNotice")}>
             <div className="sidebar-menu-item">
+              <FontAwesomeIcon icon={faHeadset} className="sidebar-menu-icon" />
+              <p className="sidebar-menu-text">1:1 문의</p>
+            </div>
+          </li>
+          <li onClick={() => handleMenuClick("GetNotice")}>
+            <div className="sidebar-menu-item">
               <FontAwesomeIcon
                 icon={faClipboardList}
                 className="sidebar-menu-icon"
               />
-              <p className="sidebar-menu-text">공지/문의</p>
+              <p className="sidebar-menu-text">공지사항</p>
             </div>
           </li>
+
           <li>
             <div className="sidebar-menu-line">
               <div className="sidebar-menu-item" onClick={handleLogout}>

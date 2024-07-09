@@ -1,24 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import useFetch from "../../../hooks/useFetch";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import "./orderManage.css";
 
 const OrderManage = () => {
-  // 검색 필터
-  const [selectedOrders, setSelectedOrders] = useState([]);
-  const [searchOrderNumber, setSearchOrderNumber] = useState("");
-  const [filteredData, setFilteredData] = useState(null);
-  const [orderStatus, setOrderStatus] = useState("전체");
-  const [paymentMethod, setPaymentMethod] = useState("전체");
-  const [extraOptions, setExtraOptions] = useState([]);
-  const [orderDateRange, setOrderDateRange] = useState([null, null]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 15;
-
+  // API URL 설정
   const apiUrl = process.env.REACT_APP_API_URL;
   const { data, loading, error } = useFetch(`${apiUrl}/orders/admin`);
 
+  // 검색 필터 상태
+  const [selectedOrders, setSelectedOrders] = useState([]); // 선택 항목
+  const [searchOrderNumber, setSearchOrderNumber] = useState(""); // 검색 - 주문번호
+  const [filteredData, setFilteredData] = useState(null); //검색데이터
+  const [orderStatus, setOrderStatus] = useState("전체"); // 검색 - 주문상태
+  const [paymentMethod, setPaymentMethod] = useState("전체"); // 검색 - 결제방법
+  const [orderDateRange, setOrderDateRange] = useState([null, null]); //검색 - 주문일시
+  const [currentPage, setCurrentPage] = useState(1); //현재 페이지
+  const itemsPerPage = 15;
+
+  // 로딩 상태 처리
   if (loading) return <div>로딩 중...</div>;
   if (error)
     return <div>데이터를 가져오는 중 오류가 발생했습니다: {error.message}</div>;
@@ -27,6 +29,7 @@ const OrderManage = () => {
   if (!Array.isArray(orderList))
     return <div>예상치 못한 데이터 형식입니다</div>;
 
+  // 날짜 형식 변경
   const formatKoreanDate = (dateString) => {
     const date = new Date(dateString);
     const year = date.getFullYear();
@@ -39,7 +42,13 @@ const OrderManage = () => {
     return `${year}${month}${day}${hours}${minutes}${seconds}`;
   };
 
-  const dataToDisplay = filteredData || orderList;
+  //// 페이지 넘기기
+  let dataToDisplay = filteredData || orderList;
+
+  // 최신순 정렬
+  dataToDisplay = dataToDisplay.sort(
+    (a, b) => new Date(b.order_date || 0) - new Date(a.order_date || 0)
+  );
 
   const uniqueOrderCount = new Set(dataToDisplay.map((item) => item.order_id))
     .size;
@@ -80,18 +89,39 @@ const OrderManage = () => {
     return pageNumbers;
   };
 
+  /////////////////////////////////////////////////////////////////////////////
+  // 주문내역 삭제
+  const handleDeleteOrders = async () => {
+    console.log("오더매니지 주문내역삭제 들어옴");
+    try {
+      // 선택된 주문 삭제
+      for (const order_id of selectedOrders) {
+        // 주문 및 관련된 order_items 삭제
+        await axios.delete(`${apiUrl}/orders/admin/${order_id}`);
+      }
+
+      //삭제 후 필터링된 데이터를 갱신
+      setFilteredData((prevData) => {
+        const updatedData = (prevData || orderList).filter(
+          (order) => !selectedOrders.includes(order.order_id)
+        );
+        return updatedData;
+      });
+
+      // 선택된 주문 목록 초기화
+      setSelectedOrders([]);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  //////////////////////////////////////////////////////////////////////////////////////////
+  // 검색 필터 상태 업데이트
   const handleSearchChange = (e) => setSearchOrderNumber(e.target.value);
   const handleStatusChange = (e) => setOrderStatus(e.target.value);
   const handlePaymentMethodChange = (e) => setPaymentMethod(e.target.value);
-  const handleExtraOptionsChange = (e) => {
-    const value = e.target.value;
-    setExtraOptions((prev) =>
-      prev.includes(value)
-        ? prev.filter((opt) => opt !== value)
-        : [...prev, value]
-    );
-  };
 
+  // 체크박스 선택 상태 업데이트
   const handleCheckboxChange = (orderId) => {
     setSelectedOrders((prevSelected) => {
       if (prevSelected.includes(orderId)) {
@@ -102,27 +132,7 @@ const OrderManage = () => {
     });
   };
 
-  // 주문내역 삭제
-  const handleDeleteOrders = async () => {
-    try {
-      await Promise.all(
-        selectedOrders.map((orderId) =>
-          fetch(`${apiUrl}/orders/${orderId}`, { method: "DELETE" })
-        )
-      );
-
-      setFilteredData(
-        dataToDisplay.filter(
-          (order) => !selectedOrders.includes(order.order_id)
-        )
-      );
-
-      setSelectedOrders([]);
-    } catch (error) {
-      console.error("Error deleting orders:", error);
-    }
-  };
-
+  // 검색 제출
   const handleSubmit = (e) => {
     e.preventDefault();
     let filtered = orderList;
@@ -145,17 +155,15 @@ const OrderManage = () => {
       );
     }
 
-    if (extraOptions.length > 0) {
-      filtered = filtered.filter((order) =>
-        extraOptions.every((opt) => order.extra_options?.includes(opt))
-      );
-    }
-
     const [startDate, endDate] = orderDateRange;
     if (startDate && endDate) {
+      const TimeOfEndDate = new Date(endDate);
+
+      //endDate 시간 설정
+      TimeOfEndDate.setHours(23, 59, 59, 999);
       filtered = filtered.filter((order) => {
         const orderDate = new Date(order.order_date);
-        return orderDate >= startDate && orderDate <= endDate;
+        return orderDate >= startDate && orderDate <= TimeOfEndDate;
       });
     }
 
@@ -231,25 +239,6 @@ const OrderManage = () => {
                       </label>
                     )
                   )}
-                </div>
-              </div>
-
-              <div className="orderManage-select-box">
-                <label className="orderManage-select-label">기타 선택</label>
-                <div className="orderManage-select-item">
-                  {["포인트사용", "쿠폰사용"].map((option) => (
-                    <label key={option}>
-                      <input
-                        type="checkbox"
-                        name="extra-options"
-                        className="orderManage-check"
-                        value={option}
-                        checked={extraOptions.includes(option)}
-                        onChange={handleExtraOptionsChange}
-                      />
-                      {option}
-                    </label>
-                  ))}
                 </div>
               </div>
 
@@ -343,7 +332,7 @@ const OrderManage = () => {
                                 rowSpan={items.length}
                                 className="orderManage-td"
                               >
-                                {orderIndex + 1}
+                                {indexOfFirstItem + orderIndex + 1}
                               </td>
                             )}
                             {index === 0 && (

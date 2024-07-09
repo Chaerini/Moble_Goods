@@ -128,43 +128,43 @@
 
 .orderManage-datePicker-wrapper .react-datepicker {
   /* position: relative; */
-  z-index: 9999;
-  position: absolute; /* z-index가 작동하도록 설정 */
-  z-index: 1000;
+  /* z-index: 9999 !important; */
+  position: absolute !important; /* z-index가 작동하도록 설정 */
+  z-index: 1000 !important;
 }
 
 .react-datepicker__input-container input {
-  width: 200px;
-  padding: 3px 6px;
-  text-align: center;
-  letter-spacing: 1px;
-  border: 1px solid var(--c-darkgray);
-  font-size: 11px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 200px !important;
+  padding: 3px 6px !important;
+  text-align: center !important;
+  letter-spacing: 1px !important;
+  border: 1px solid var(--c-darkgray) !important;
+  font-size: 11px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 .orderManage-datePicker-wrapper react-datepicker-ignore-onclickoutside {
-  width: 13px;
-  height: 13px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  width: 13px !important;
+  height: 13px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
 }
 
 .react-datepicker__close-icon::after {
-  background-color: #ff5733; /* 원하는 배경색으로 변경 */
-  color: #fff; /* 원하는 텍스트 색상으로 변경 */
-  border-radius: 50%;
-  height: 11px;
-  width: 11px;
-  padding: 1px;
-  font-size: 11px;
-  text-align: center;
-  display: inline-block;
-  box-sizing: content-box;
+  background-color: #ff5733 !important; /* 원하는 배경색으로 변경 */
+  color: #fff !important; /* 원하는 텍스트 색상으로 변경 */
+  border-radius: 50% !important;
+  height: 11px !important;
+  width: 11px !important;
+  padding: 1px !important;
+  font-size: 11px !important;
+  text-align: center !important;
+  display: inline-block !important;
+  box-sizing: content-box !important;
 }
 
 .orderManage-search-btn-box {
@@ -309,14 +309,16 @@
   max-width: 200px;
   white-space: nowrap;
   text-overflow: ellipsis;
+  border-bottom: 1px solid black;
   padding: 5px 10px;
   box-sizing: border-box;
   cursor: pointer;
 }
 
-/* .orderManage-td-link:hover {
+.orderManage-td-link:hover {
+  border-bottom: 1px solid black;
   font-weight: 700;
-} */
+}
 
 .orderManage-page-btn-box {
   background: none;
@@ -371,6 +373,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 10px;
   color: var(--c-bg-white);
   background-color: var(--c-point);
   box-shadow: 0 0 0.5px 0.2px var(--c-black);
