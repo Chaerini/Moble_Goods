@@ -14,13 +14,13 @@ const MyqnaList = () => {
       try {
         const apiUrl = process.env.REACT_APP_API_URL;
         const response = await axios.get(`${apiUrl}/asks`);
-        console.log('응답 데이터:', response.data); // 응답 데이터 확인
-        const data = Array.isArray(response.data) ? response.data : []; // 배열 형태로 데이터 설정
-        setQnaList(data);
+        console.log('응답 데이터:', response.data.result); // 응답 데이터 확인
+        // const data = Array.isArray(response.data.result) ? response.data.result : []; // 배열 형태로 데이터 설정
+        setQnaList(response.data.result);
       } catch (error) {
         console.error('QnA 데이터를 가져오는 중 에러 발생:', error);
         setQnaList([]); // 에러 발생 시 빈 배열로 설정
-      }finally {
+      } finally {
         setLoading(false); // 로딩 완료
       }
     };
@@ -32,6 +32,15 @@ const MyqnaList = () => {
   const toggleAnswer = (index) => {
     setQnaList(qnaList.map((item, i) => i === index ? { ...item, showAnswer: !item.showAnswer } : item));
   };
+
+  // 날짜 형식을 0000.00.00로 변환하는 함수 추가
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}.${month}.${day}`;
+};
 
   return (
     <div className="qnaList">
@@ -45,13 +54,14 @@ const MyqnaList = () => {
           qnaList.map((qna, index) => (
             <div key={index} className="qnaList-item">
               <div className="qnaList-question" onClick={() => toggleAnswer(index)}>
-                Q. {qna.question} {/* "Q. " 고정 출력 */}
-                <span className="qnaList-date">{qna.date}</span>
+                Q. {qna.title} {/* "Q. " 고정 출력 */}
+                <div className="qnaList-date">{formatDate(qna.date)}</div>
               </div>
               {qna.showAnswer && (
                 <div className="qnaList-content-answer">
                   <div className="qnaList-content-box">
-                  <div className="qnaList-content">{qna.content}</div> {/* 문의 내용 출력 */}
+                    <div className="qnaList-content">{qna.contents}</div> {/* 문의 내용 출력 */}
+                    <div className="qnaList-divider"></div> {/* 문의 내용과 답변 사이에 실선 추가 */}
                     <div className="qnaList-answer">
                       A. {qna.answer}
                     </div>
