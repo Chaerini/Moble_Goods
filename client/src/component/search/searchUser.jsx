@@ -26,6 +26,7 @@ const SearchUser = () => {
     address: "",
     phone: "",
     membership_name: "",
+    membership_id:""
   });
   const [userData, setUserData] = useState([]);
   const [searchWord, setSearchWord] = useState("");
@@ -74,7 +75,7 @@ const SearchUser = () => {
       name: user.name,
       address: user.address,
       phone: user.phone,
-      membership_name: user.membership_name,
+      membership_id: user.membership_id,
     });
     setModalOpen(true);
     console.log(mpData);
@@ -94,7 +95,7 @@ const SearchUser = () => {
     setModalOpen(false);
     console.log("=======data=====", userId);
     try {
-      await axios.put(`${apiUrl}/users/` + userId, mpData, { withCredentials: true });
+      await axios.put(`${apiUrl}/users/admin/` + userId, mpData, { withCredentials: true });
       alert('회원 정보가 수정되었습니다.');
     } catch (err) {
       alert('회원정보 수정을 실패했습니다. 다시 시도해주세요.');
@@ -206,6 +207,7 @@ const SearchUser = () => {
               <input type="text" onChange={handleChange} name="name" placeholder="이름" className="product-input" value={mpData.name} />
               <input type="text" onChange={handleChange} name="address" placeholder="주소" className="product-input" value={mpData.address} />
               <input type="text" onChange={handleChange} name="phone" placeholder="핸드폰" className="product-input" value={mpData.phone} />
+              <input type="text" onCanPlay={handleChange} name="membership_id" placeholder="멤버십" className="product-input" value={mpData.membership_id}/>
               <button onClick={() => handleEditAction(mpData.userId)} className="btn">수정</button>
             </div>
           </div>

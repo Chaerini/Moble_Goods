@@ -33,7 +33,38 @@ export const updateUser = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
+//유저 정보 변경(관리자)
+export const updateUserAdmin = async (req, res) => {
+    try {
+        const { userId } = req.params;
+        console.log("userId : ", userId);
 
+        const { name, phone, address,membership_id } = req.body;
+
+        console.log("Received data:", { name, phone, address,membership_id });
+
+        const [result] = await pool.query(
+            "UPDATE users SET name = ?, phone = ?, address = ?,membership_id=? WHERE id = ?",
+            [name, phone, address,membership_id, userId]
+        );
+
+        if (result.affectedRows > 0) {
+            res.status(200).json({
+                userId,
+                name,
+                phone,
+                address,
+                membership_id,
+                message: "User updated successfully",
+            });
+        } else {
+            res.status(404).json({ error: "User not found" });
+        }
+    } catch (error) {
+        console.error("Error updating user:", error);
+        res.status(400).json({ error: error.message });
+    }
+};
 // UPDATE (유저 멤버십 변경)
 export const updateUserMembership = async (req, res) => {
     try {

@@ -37,6 +37,7 @@ const Search = () => {
     quantity:"",
     discount_rate:"",
     discounted_price:"",
+    subCategoryId:""
 });
   const [modalOpen, setModalOpen] = useState(false);
   const modalBackground = useRef();
@@ -114,6 +115,7 @@ const Search = () => {
       try {
           const res = await axios.put(`${apiUrl}/products/` + userId, mpData, { withCredentials: true });
           alert('상품 정보가 수정되었습니다.');
+          console.log(mpData);
       } catch (err) {
           alert('상품 정보 수정을 실패했습니다. 다시 시도해주세요.')
           console.log(err);
@@ -213,6 +215,7 @@ const handleAddAction = () =>{
                           <th>할인율</th>
                           <th>할인된 가격</th>
                           <th>날짜</th>
+                          <th>중분류</th>
                           <th>수정</th>
                           <th>삭제</th>
                           <th>추가</th>
@@ -229,6 +232,7 @@ const handleAddAction = () =>{
                                   <td className="orderMange-td">{user.discount_rate}</td>
                                   <td className="orderMange-td">{user.discounted_price}</td>
                                   <td className="orderMange-td">{user.date}</td>
+                                  <td className="orderManage-td">{user.subCategoryId}</td>
                                   <td className="orderMange-td">
                                       <FontAwesomeIcon icon={faPen} onClick={() => handleEditClick(user)} />
                                   </td>
@@ -276,7 +280,7 @@ const handleAddAction = () =>{
                           <input type="text" onChange={handleChange} name="discount_rate" placeholder="할인율" className="product-input" value={mpData.discount_rate} />
                           <input type="text" onChange={handleChange} name="discounted_price" placeholder="할인된 가격" className="product-input" value={mpData.discounted_price} />
                           <input type="text" onChange={handleChange} name="date" placeholder="날짜" className="product-input" value={mpData.date} />
-                          <input type="text" onChange={handleChange} name="subcategory_id" placeholder="중분류" className="product-input" value={mpData.subCategoryId}/>
+                          <input type="text" onChange={handleChange} name="subCategoryId" placeholder="중분류" className="product-input" value={mpData.subCategoryId}/>
                           <button onClick={() => handleEditAction(mpData.userId)} className="btn">수정</button>
                       </div>
                   </div>
@@ -297,6 +301,7 @@ const handleAddAction = () =>{
                           <input type="text" onChange={handleAddChange} name="price" placeholder="가격" className="product-input" />
                           <input type="text" onChange={handleAddChange} name="discount_rate" placeholder="할인율" className="product-input" />
                           <input type="text" onChange={handleAddChange} name="discounted_price" placeholder="할인된 가격" className="product-input" />
+                          <input type="text" onChange={handleAddChange} name="subCategoryId" placeholder="중분류" className="product-input"/>
                           <input type="text" onChange={handleAddChange} name="date" placeholder="날짜" className="product-input"  />
                           <button onClick={handleAddClick} className="btn">추가</button>
                       </div>

@@ -2,7 +2,7 @@ import pool from '../db.js';
 
 // 상품등록
 export const createProduct = async ( req, res ) => {
-    const { name, quantity, subCategory_id, discount_rate, price } = req.body;
+    const { name, quantity, subCategoryId, discount_rate, price } = req.body;
     console.log(req.body);
     //discounted_price를 계산
     let discounted_price;
@@ -13,11 +13,11 @@ export const createProduct = async ( req, res ) => {
     }
     try {
         const [result] = await pool.query(
-            'INSERT INTO product (name, quantity, subCategory_id, discount_rate, price, discounted_price, date) VALUES (?, ?, ?, ?, ?, ?, NOW())',
-            [name, quantity, subCategory_id, discount_rate, price, discounted_price]
+            'INSERT INTO product (name, quantity, subCategoryId, discount_rate, price, discounted_price, date) VALUES (?, ?, ?, ?, ?, ?, NOW())',
+            [name, quantity, subCategoryId, discount_rate, price, discounted_price]
         );
         
-        res.status(201).json({ message: 'Product created successfully', productId: result.insertId, name, quantity, subCategory_id, discount_rate, price, discounted_price });
+        res.status(201).json({ message: 'Product created successfully', productId: result.insertId, name, quantity, subCategoryId, discount_rate, price, discounted_price });
     } catch (error) {
         res.status(500).json({ message: 'Error creating product', error: error.message });
     }
@@ -26,7 +26,7 @@ export const createProduct = async ( req, res ) => {
 // 상품수정
 export const updateProduct = async (req, res) => {
     const { id } = req.params;
-    const { name, quantity, subCategory_id, discount_rate, price } = req.body;
+    const { name, quantity, subCategoryId, discount_rate, price } = req.body;
 
     try {
         // 현재 값 조회
@@ -42,7 +42,7 @@ export const updateProduct = async (req, res) => {
         const fieldsToUpdate = {};
         if (name !== undefined) fieldsToUpdate.name = name;
         if (quantity !== undefined) fieldsToUpdate.quantity = quantity;
-        if (subCategory_id !== undefined) fieldsToUpdate.subCategory_id = subCategory_id;
+        if (subCategoryId !== undefined) fieldsToUpdate.subCategoryId = subCategoryId;
         if (discount_rate !== undefined) fieldsToUpdate.discount_rate = discount_rate;
         if (price !== undefined) fieldsToUpdate.price = price;
 
@@ -69,7 +69,7 @@ export const updateProduct = async (req, res) => {
             id, 
             name: name || existingProduct.name, 
             quantity: quantity || existingProduct.quantity, 
-            subCategory_id: subCategory_id || existingProduct.subCategory_id, 
+            subCategoryId: subCategoryId || existingProduct.subCategoryId, 
             discount_rate: updatedDiscountRate, 
             price: updatedPrice, 
             discounted_price: fieldsToUpdate.discounted_price
@@ -113,7 +113,7 @@ export const getAllProducts = async (req, res) => {
             mc.id AS mainCategoryId,
             COALESCE(pi.url, '') AS productImageUrl
         FROM product p
-        LEFT JOIN subcategory sc ON p.subcategory_id = sc.id
+        LEFT JOIN subcategory sc ON p.subCategoryId = sc.id
         LEFT JOIN maincategory mc ON sc.maincategory_id = mc.id
         LEFT JOIN product_image pi ON p.id = pi.product_id
     `;
@@ -159,7 +159,7 @@ export const getProductById = async (req, res) => {
                 mc.name AS mainCategoryName, 
                 pi.url AS productImageUrl
             FROM product p
-            LEFT JOIN subcategory sc ON p.subcategory_id = sc.id
+            LEFT JOIN subcategory sc ON p.subCategoryId = sc.id
             LEFT JOIN maincategory mc ON sc.maincategory_id = mc.id
             LEFT JOIN product_image pi ON p.id = pi.product_id
             WHERE p.id = ?
@@ -191,7 +191,7 @@ export const getProductsByMainCategory = async (req, res) => {
                 sc.name AS subCategoryName, 
                 mc.name AS mainCategoryName
             FROM product p
-            JOIN subcategory sc ON p.subcategory_id = sc.id
+            JOIN subcategory sc ON p.subCategoryId = sc.id
             JOIN maincategory mc ON sc.maincategory_id = mc.id
             WHERE mc.id = ?
             ORDER BY sc.id, p.id;
@@ -223,7 +223,7 @@ export const getProductsBySubCategory = async (req, res) => {
                 sc.name AS subCategoryName, 
                 mc.name AS mainCategoryName
             FROM product p
-            JOIN subcategory sc ON p.subcategory_id = sc.id
+            JOIN subcategory sc ON p.subCategoryId = sc.id
             JOIN maincategory mc ON sc.maincategory_id = mc.id
             WHERE sc.id = ?
             ORDER BY sc.id, p.id;
@@ -260,7 +260,7 @@ export const getProductsByPrice = async (req, res) => {
                 mc.name AS mainCategoryName, 
                 pi.url AS productImageUrl
             FROM product p
-            LEFT JOIN subcategory sc ON p.subcategory_id = sc.id
+            LEFT JOIN subcategory sc ON p.subCategoryId = sc.id
             LEFT JOIN maincategory mc ON sc.maincategory_id = mc.id
             LEFT JOIN product_image pi ON p.id = pi.product_id
             ORDER BY p.discounted_price ${sortOrder};
@@ -284,7 +284,7 @@ export const getPopularProducts = async (req, res) => {
                 p.id AS id, 
                 p.name AS name, 
                 p.quantity AS quantity, 
-                p.subcategory_id AS subCategoryId, 
+                p.subCategoryId AS subCategoryId, 
                 p.discount_rate AS discountRate, 
                 p.price AS price, 
                 p.date AS date, 

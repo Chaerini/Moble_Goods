@@ -56,18 +56,18 @@ const SearchNotice = () => {
     }, []);
     // 검색 버튼 클릭 했을 때
     const handleSearch = async (e) => {
-      console.log("검색어", searchWord);
-      e.preventDefault();
-      try {
-        const res = await axios.get(`${apiUrl}/searchnotice?title=${searchWord}`);
-        setData(res.data.result);
-        console.log(res.data.result);
-        alert("조회되었습니다.");
-      } catch (err) {
-        console.log(err);
-        alert("일치하는 고객이 없습니다.");
-      }
-    };
+        // e.preventDefault();
+        console.log("검색어",searchWord);
+        try {
+            const res = await axios.get(`${apiUrl}/searchnotice?title=${searchWord}`);
+            setData(res.data.rows);
+            console.log(res.data.rows);
+            alert("조회되었습니다.")
+        } catch (err) {
+            console.log(err);
+            alert("일치하는 공지가 없습니다.")
+        }
+    }
 
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
@@ -157,18 +157,15 @@ const SearchNotice = () => {
     };
     console.log(notice);
     const handleAddClick = async (e) => {
+      setModalIsOpen(true);
       try {
         await axios.post(`${apiUrl}/notice`, notice);
-        alert("공지가 추가되었습니다.");
-        setModalIsOpen(false);
+        alert("공지가 추가되었습니다.")
       } catch (err) {
         console.log(err);
         alert("공지 추가에 실패했습니다.")
       }
     };
-    const handleAddAction = () =>{
-      setModalIsOpen(true)
-    }
 return (
     <div className="search-table-container">
         <div className="search-input-wrap">
@@ -180,10 +177,9 @@ return (
                 onChange={(e) => setSearchWord(e.target.value)}
                 onKeyDown={handleKeyPress}
                 />
-    <button type="submit" className="search-btn" onClick={handleSearch}>검색</button>
-    <FontAwesomeIcon icon={faPlus} onClick={()=>handleAddAction()}/> 
+    <button type="submit" className="search-btn" onClick={handleSearch}>검색</button> 
         </div>
-                    <div className="notice-table-box">
+                    <div className="orderManage-table-box">
                         <table className="notice-table">
                             <thead className="search-table-head">
                             <tr>
@@ -191,6 +187,7 @@ return (
                             <th >내용</th>
                             <th >수정</th>
                             <th >삭제</th>
+                            <th>추가</th>
                             </tr>
                             </thead>
                             <tbody className="orderManage-table">
@@ -206,6 +203,9 @@ return (
                                         </td>
                                         <td className="orderMange-td">
                                         <FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(user.id)} />
+                                        </td>
+                                        <td>
+                                        <FontAwesomeIcon icon={faPlus} onClick={()=>handleAddClick(user)}/>
                                         </td>
                                         </tr>
                             )))}
