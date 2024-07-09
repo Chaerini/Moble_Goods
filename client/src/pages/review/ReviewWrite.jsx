@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import './ReviewWrite.css';
 import { AuthContext } from '../../Context/AuthContext';
@@ -10,6 +9,7 @@ function ReviewWrite({ user_id, product_id, order_id, onClose }) {
     const [review, setReview] = useState('');
     const [images, setImages] = useState([]);
     const [product, setProduct] = useState(null);
+    const [productImage, setProductImage] = useState('');
     const fileInputRef = useRef(null);
     const { user } = useContext(AuthContext);
     const apiUrl = process.env.REACT_APP_API_URL;
@@ -22,8 +22,15 @@ function ReviewWrite({ user_id, product_id, order_id, onClose }) {
         }
         const fetchProduct = async () => {
             try {
-                const response = await axios.get(`${apiUrl}/products/${product_id}`);
-                setProduct(response.data);
+                const productResponse = await axios.get(`${apiUrl}/products/${product_id}`);
+                setProduct(productResponse.data);
+
+                const imageResponse = await axios.get(`${apiUrl}/products/${product_id}/images`);
+                if (imageResponse.data.length > 0) {
+                    const imageUrl = imageResponse.data[0].ImageUrl;  // 필드 이름 수정
+                    console.log('Fetched product image URL:', imageUrl);  // 이미지 URL 로그로 출력
+                    setProductImage(imageUrl); // 첫 번째 이미지 URL을 설정합니다.
+                }
             } catch (error) {
                 console.error('상품 정보를 가져오는 데 실패했습니다.', error);
                 alert('상품 정보를 가져오는 데 실패했습니다.');
@@ -128,7 +135,11 @@ function ReviewWrite({ user_id, product_id, order_id, onClose }) {
                 <h1>리뷰 작성</h1>
                 {product && (
                     <div className="review-modal-product">
-                        <img src={product.image_url} alt="상품 이미지" />
+                        {productImage ? (
+                            <img src={productImage} alt="상품 이미지" />
+                        ) : (
+                            <p>상품 이미지를 불러오는 중입니다...</p>
+                        )}
                         <div className="review-product-info">
                             <p>{product.name}</p>
                         </div>
@@ -181,8 +192,3 @@ function ReviewWrite({ user_id, product_id, order_id, onClose }) {
 }
 
 export default ReviewWrite;
-
-
-
-
-
