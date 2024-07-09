@@ -1,6 +1,6 @@
 import express from 'express';
 import { verifyAdmin, verifyToken, verifyTokenNext, verifyUser } from '../utils/verifyToken.js';
-import { createAsk, deleteAsk, getAsk, getAsks, getUserAsk, updateAsk } from '../controllers/ask.js';
+import { createAsk, deleteAsk, getAsk, getAsks, getUserAsk, updateAsk, getAskNoComment } from '../controllers/ask.js';
 
 const router = express.Router();
 
@@ -21,6 +21,9 @@ router.get('/user/:userid', getUserAsk);
 
 // 질문 ID 별 조회
 router.get('/:id', getAsk);
+
+// 관리자 - 미답변 질문 조회
+router.get('/admin/nocomment', getAskNoComment);
 
 
 

@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import "./myqna.css";
 import axios from "axios";
 import { AuthContext } from "../../Context/AuthContext";
+import Navbar from "../../component/navbar/navbar";
+import Footer from "../../component/footer/footer";
+import Header from "../../component/header/header";
 
 // Dropdown 컴포넌트: 문의 유형과 세부 선택을 위한 드롭다운
 const Dropdown = ({ label, options, onSelect, selectedOption }) => {
@@ -115,13 +118,9 @@ const SubmitButton = ({ onSubmit, text, className }) => (
 const ContactForm = () => {
   const { user } = useContext(AuthContext);
   const [formData, setFormData] = useState({
-    // contact: "",
     user_id: user.id,
     title: "",
     contents: "",
-    // type: "",
-    // subType: "",
-    // messageAlert: false,
   });
 
   const handleChange = (e) => {
@@ -136,41 +135,39 @@ const ContactForm = () => {
 
   /* 나의 문의 내역보기 하이퍼링크 삽입*/
   const handleViewClick = () => {
-    // window.location.href = "http://localhost:3000/myqnalist";
     navigate('/myqnalist');
   };
 
   const handleSubmit = async e => {
-    
-    try{
     e.preventDefault();
-        console.log("====질문=====",formData)
-        await axios.post(`http://localhost:8080/api/asks`,formData);
-        console.log("추가완료");
-        alert("제출이 완료되었습니다.")
-    }catch(err){
-        console.log("error",err);
-        alert("문의 추가에 실패했습니다.");
+    try {
+      console.log("====질문=====", formData)
+      await axios.post(`http://localhost:8080/api/asks`, formData);
+      console.log("추가완료");
+      alert("제출이 완료되었습니다.")
+    } catch (err) {
+      console.log("error", err);
+      alert("문의 추가에 실패했습니다.");
     }
   };
 
   return (
     <form className="myqna-contact-form">
       <div className="myqna-input-group-row">
-          <label className="myqna-input-label">문의 유형<span className="myqna-required">*</span></label>
-          <Dropdown
-            label="문의 유형을 선택해 주세요."
-            options={["유형1", "유형2", "유형3"]}
-            onSelect={(option) => setFormData({ ...formData, type: option })}
-            selectedOption={formData.type}
-          />
-          <Dropdown
-            label="세부선택"
-            options={["세부1", "세부2", "세부3"]}
-            onSelect={(option) => setFormData({ ...formData, subType: option })}
-            selectedOption={formData.subType}
-          />
-        </div>
+        <label className="myqna-input-label">문의 유형<span className="myqna-required">*</span></label>
+        <Dropdown
+          label="문의 유형을 선택해 주세요."
+          options={["유형1", "유형2", "유형3"]}
+          onSelect={(option) => setFormData({ ...formData, type: option })}
+          selectedOption={formData.type}
+        />
+        <Dropdown
+          label="세부선택"
+          options={["세부1", "세부2", "세부3"]}
+          onSelect={(option) => setFormData({ ...formData, subType: option })}
+          selectedOption={formData.subType}
+        />
+      </div>
       <ContactInput
         value={formData.contact}
         onChange={handleChange}
@@ -188,12 +185,16 @@ const ContactForm = () => {
         placeholder="문의하실 내용을 입력해 주세요."
       />
       <div className="myqna-button-row">
-      <button onClick={handleViewClick} text="나의 문의 내역보기" className="myqna-view-button" />
-      <button onClick={handleSubmit} text="등록하기" className="myqna-submit-button" />
+        <button onClick={handleViewClick} className="myqna-view-button" >
+          나의 문의 내역
+        </button>
+        <button onClick={handleSubmit} className="myqna-submit-button" >
+          등록
+        </button>
       </div>
       <p className="myqna-center-text">
         전화문의 <span className="highlight">777-777</span> | 운영시간 <span className="highlight">평일 09:30~17:30</span>
-      </p>      
+      </p>
       <p className="myqna-left-text">고객센터 문의량 증가로 인해 전화상담이 지연되고 있습니다. 1:1문의를 남겨주시면 순차적으로 확인 후 빠르게 답변 드릴 수 있도록 노력하겠습니다.</p>
     </form>
   );
@@ -202,12 +203,17 @@ const ContactForm = () => {
 // 전체 페이지를 감싸는 컴포넌트
 const Myqna = () => {
   return (
-    <div className="myqna-myqna-container">
-      <div className="myqna-header">
-        <h1>1:1 문의</h1>
+    <>
+      <Header />
+      <Navbar />
+      <div className="myqna-myqna-container">
+        <div className="myqna-header">
+          <h1>1:1 문의</h1>
+        </div>
+        <ContactForm />
       </div>
-      <ContactForm />
-    </div>
+      <Footer />
+    </>
   );
 };
 

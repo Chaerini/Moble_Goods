@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../Context/AuthContext";
 import "./adminSidebar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -14,6 +16,8 @@ import {
 const AdminSidebar = ({ setActiveComponent }) => {
   console.log("사이드바:", typeof setActiveComponent);
 
+  const navigate = useNavigate();
+
   const handleMenuClick = (componentName) => {
     console.log("클릭한 메뉴:", componentName);
     if (typeof setActiveComponent === "function") {
@@ -23,29 +27,36 @@ const AdminSidebar = ({ setActiveComponent }) => {
     }
   };
 
+  const { user, dispatch } = useContext(AuthContext);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (user && user.isLoggedIn) {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (storedUser && storedUser.isLoggedIn) {
       setIsLoggedIn(true);
-      setUsername(user.name);
+      setUsername(storedUser.name);
+      dispatch({ type: "LOGIN_SUCCESS", payload: storedUser }); // 로컬 스토리지에서 가져온 정보를 AuthContext에 반영
     }
-  }, []);
+  }, [dispatch]);
 
   const handleLogout = () => {
-    // 로그아웃 코드 추가
+    dispatch({ type: "LOGOUT" });
     localStorage.removeItem("user");
     setIsLoggedIn(false);
     setUsername("");
+    navigate("/");
+  };
+
+  const handleGotoMain = () => {
+    navigate("/");
   };
 
   return (
     <div className="sidebar-wrapper">
-      <div className="sidebar-logo-box">
+      <div className="sidebar-logo-box" onClick={handleGotoMain}>
         <div className="sidebar-logo-image">
-          <img src="/images/로고.png" className="sidebar-logo" />
+          <img src="/images/로고.png" className="sidebar-logo" alt="로고" />
         </div>
       </div>
       <div className="sidebar-menu">
@@ -80,7 +91,7 @@ const AdminSidebar = ({ setActiveComponent }) => {
               <p className="sidebar-menu-text">고객</p>
             </div>
           </li>
-          <li onClick={() => handleMenuClick("GetNotice")}>
+          <li onClick={() => handleMenuClick("Myqna")}>
             <div className="sidebar-menu-item">
               <FontAwesomeIcon icon={faHeadset} className="sidebar-menu-icon" />
               <p className="sidebar-menu-text">1:1 문의</p>

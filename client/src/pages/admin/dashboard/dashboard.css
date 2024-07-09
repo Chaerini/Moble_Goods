@@ -1,183 +1,300 @@
 @import url("../../../root.css");
 
-.admin-dashboard-wrapper {
-  display: flex;
-  /* background-color: var(--c-lightgray); */
-}
-
-.dashboard-main-content {
+.dashboard {
   display: flex;
   width: 100%;
   height: 100%;
-  margin: auto;
-  flex-wrap: wrap;
-  justify-content: space-around;
 }
 
-/* 카드 1 */
-.dashboard-card-wrapper {
+.dashboard-main-wrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: var(--c-lightgray);
+  /* border: 1px solid black; */
+}
+
+.dashboard-main-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  /* border: 1px solid black; */
+}
+
+/* 카드 공통 스타일 */
+.dashboard-card-wrapper-1 {
+  display: flex;
+  width: 300px;
+  height: 260px;
+  flex-direction: column;
+  background-color: var(--c-bg-white);
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px 20px;
+  box-shadow: 0 0 0 0.2px var(--c-darkgray);
+
+  /* border: 1px solid black; */
+}
+
+.dashboard-card-wrapper-2 {
   display: flex;
   width: 700px;
-  height: 300px;
+  height: 260px;
   flex-direction: column;
   border-radius: 5px;
   background-color: var(--c-bg-white);
   margin: 10px;
   padding: 10px 20px;
+  box-shadow: 0 0 0 0.2px var(--c-darkgray);
+
+  /* border: 1px solid black; */
 }
 
-/* 헤더, 타이틀, 텍스트  */
+.dashboard-header-box,
+.dashboard-header-box-two {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  /* border: 1px solid black; */
+}
 
-.dashboard-card-header,
+.dashboard-header,
+.dashboard-header-two {
+  margin: 10px 0;
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+  font-weight: 600;
+  /* border: 1px solid black; */
+}
+
+/*////////////////// 내부 카드 4칸*/
+/* 4칸 카드 내용 래퍼 */
+.dashboard-card-contents-wrapper {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.dashboard-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: var(--c-bg-white);
+}
+
+/* 카드 컬러 */
+.dashboard-card-bg {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 5px;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--c-bg-white);
+  border-radius: 10px;
+  /* border: 1px solid black; */
+}
+
+/* 값 제목 */
+.dashboard-title {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  height: 30px;
+  font-size: 14px;
+  margin-left: 10px;
+  margin-top: 10px;
+  font-weight: 600;
+  /* border: 1px solid black; */
+}
+
+/* 값 */
+.dashboard-value {
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 16px;
+  margin-top: 15px;
+  font-weight: 600;
+  /* border: 1px solid black; */
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* /////////////////내부 카드2칸 */
+.dashboard-card-two {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 150px;
+  margin: 5px;
+  border-radius: 10px;
+  background-color: var(--c-bg-white);
+  /* border: 1px solid black; */
+}
+
+/* 카드 컬러 */
+.dashboard-card-bg-two {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 5px;
+  justify-content: flex-start;
+  flex-direction: column;
+  background-color: var(--c-bg-white);
+  border-radius: 10px;
+  /* border: 1px solid black; */
+}
+
+/* 값 제목 */
+.dashboard-title-two {
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+  width: 100%;
+  height: 30px;
+  font-size: 14px;
+  margin: 0 10px;
+
+  font-weight: 600;
+  /* border: 1px solid black; */
+}
+
+/* 값 */
+.dashboard-value-two {
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 16px;
+  margin-top: 5px;
+  margin-left: 10px;
+  font-weight: 600;
+  color: var(--c-black);
+  /* border: 1px solid black; */
+}
+
+/*////////////// 카드 별 색상 */
+.purple {
+  background-color: #f3e5fa;
+}
+
+.red {
+  background-color: #ffe8e8;
+}
+
+.yellow {
+  background-color: #fffbda;
+}
+
+.green {
+  background-color: #efffef;
+}
+
+.blue {
+  background-color: #f1f7ff;
+}
+
+.gray {
+  background-color: rgb(232, 232, 232);
+}
+
+/* 특수 카드 스타일 */
+.dashboard-visitor-insights-wrapper,
+.dashboard-revenue-wrapper,
+.dashboard-customer-satisfaction-wrapper,
+.dashboard-target-reality-wrapper {
+  display: flex;
+  width: 350px;
+  flex-direction: column;
+  background-color: var(--c-bg-white);
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px 20px;
+}
+
+.dashboard-visitor-insights-background,
+.dashboard-revenue-background,
+.dashboard-customer-satisfaction-background,
+.dashboard-target-reality-background {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
 .dashboard-visitor-insights-header,
 .dashboard-revenue-header,
 .dashboard-customer-satisfaction-header,
 .dashboard-target-reality-header {
   display: flex;
-  height: 25px;
-  margin: 15px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
-.dashboard-card-header-title,
 .dashboard-visitor-insights-title,
 .dashboard-revenue-title,
 .dashboard-customer-satisfaction-title,
 .dashboard-target-reality-title {
-  display: flex;
-  flex: 3;
-  color: var(--c-black);
-  flex-direction: column;
-  margin: 0;
-  padding: 0;
-}
-
-.dashboard-card-header-title-text,
-.dashboard-visitor-insights-title-text,
-.dashboard-revenue-title-text,
-.dashboard-customer-satisfaction-title-text,
-.dashboard-target-reality-title-text {
-  margin: 0;
-  padding: 0;
   font-size: 16px;
   font-weight: 600;
-  margin-bottom: 4px;
 }
 
-.dashboard-export-btn-box {
-  flex: 1;
+.dashboard-visitor-insights-content,
+.dashboard-revenue-chart,
+.dashboard-target-reality-chart {
   display: flex;
-  width: 100%;
-}
-
-.dashboard-export-btn {
-  width: 70px;
-  height: 30px;
-  font-weight: 600;
-  font-size: 13px;
-  border-radius: 10px;
-  background-color: var(--c-lightgray); /*export 버튼 컬러 정해야 됨*/
-  cursor: pointer;
-}
-
-.dashboard-export-btn:focus {
-  outline: 1px solid black;
-}
-
-.dashboard-card-contents-wrapper {
-  display: flex;
-  width: 100%;
-  height: 100%;
   justify-content: center;
   align-items: center;
-  justify-content: space-around;
-}
-
-.dashboard-card {
-  margin: 0;
-  padding: 0;
-}
-
-.dashboard-card-background {
-  width: 130px;
-  height: 135px;
-  display: flex;
-  border-radius: 10px;
-  padding: 10px;
-  margin-right: 10px;
-  background-color: var(--c-bg-white);
-  display: flex;
-  flex-direction: column;
-}
-
-.dashboard-card-title {
-  font-size: 13px;
-  margin: 2px;
-  padding: 0;
-}
-
-.dashboard-card-value {
-  font-size: 11px;
-  border: 1px solid var(--c-darkgray);
   width: 100%;
   height: 100%;
+  border: 1px solid var(--c-darkgray);
 }
 
-/* 카드 2 */
-.dashboard-visitor-insights-wrapper {
+.dashboard-legend-item {
   display: flex;
-  width: 400px;
-  height: 300px;
-  flex-direction: column;
-  background-color: var(--c-bg-white);
-  border-radius: 5px;
-  margin: 10px;
-  padding: 10px 20px;
+  align-items: center;
+  margin: 5px;
 }
 
-/* 카드 3 */
-.dashboard-revenue-wrapper {
-  display: flex;
-  width: 400px;
-  height: 250px;
-  flex-direction: column;
-  background-color: var(--c-bg-white);
-  border-radius: 5px;
-  margin: 10px;
-  padding: 10px 20px;
+.dashboard-legend-color {
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
 }
 
-/* 카드 4, 5 */
-.dashboard-customer-satisfaction-wrapper,
-.dashboard-target-reality-wrapper {
-  display: flex;
-  width: 350px;
-  height: 250px;
-  flex-direction: column;
-  background-color: var(--c-bg-white);
-  border-radius: 5px;
-  margin: 10px;
-  padding: 10px 20px;
+.dashboard-legend-text {
+  font-size: 12px;
 }
 
-.dashboard-target-reality-chart {
-  width: 250px;
-  height: 230px;
+.dashboard-chart-bar {
+  width: 50px;
+  height: 200px;
+  margin: 0 5px;
+}
 
-  border: 1px solid var(--c-black);
+.blue {
+  background-color: #cfe0ff;
 }
 
 .green {
   background-color: #cfffcf;
-}
-
-.purple {
-  background-color: #efcfff;
-}
-
-.yellow {
-  background-color: #fff9cf;
-}
-
-.red {
-  background-color: #f9cfcf;
 }

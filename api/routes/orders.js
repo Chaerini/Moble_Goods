@@ -13,6 +13,12 @@ import {
   getOrdersByDeliveryStatusId,
   getOrdersByUserIdDate,
   getOrdersByCount,
+  getTodayTotal,
+  getTodayOrder,
+  getPaymentComplete,
+  getPreparing,
+  getTransit,
+  getDelivered,
 } from "../controllers/order.js";
 
 const router = express.Router();
@@ -22,6 +28,24 @@ router.get("/admin", getAdminAllOrders);
 
 // 관리자 - 주문 내역 삭제 라우터
 router.delete("/admin/:id", DeleteAdminOrder);
+
+// 관리자 - 하루 매출액 조회
+router.get("/admin/todaytotal", getTodayTotal);
+
+// 관리자 - 하루 주문 건수 조회
+router.get("/admin/todayorder", getTodayOrder);
+
+// 관리자 - 결제완료 수 조회
+router.get("/admin/paymentcomplete", getPaymentComplete);
+
+// 관리자 - 배송준비중 수 조회
+router.get("/admin/preparing", getPreparing);
+
+// 관리자 - 배송중 수 조회
+router.get("/admin/transit", getTransit);
+
+// 관리자 - 배송완료 수 조회
+router.get("/admin/delivered", getDelivered);
 
 // 모든 주문 조회
 router.get("/", getAllOrders);

@@ -34,8 +34,6 @@
   display: flex;
   font-size: 30px;
   font-weight: 600;
-  /* border: 1px solid black; */
-  /* margin-top: 10px; */
   margin-bottom: 20px;
   justify-content: center;
   align-items: center;
@@ -81,9 +79,10 @@
 
 .sidebar-menu-item:focus,
 .sidebar-menu-item:hover {
-  color: var(--c-bg-white);
-  background: var(--c-darkgray);
+  color: var(--c-black);
+  background: var(--c-lightgray);
   border: none;
+  font-weight: 700;
 }
 
 .sidebar-menu-icon {
