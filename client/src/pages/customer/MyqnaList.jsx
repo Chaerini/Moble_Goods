@@ -129,10 +129,6 @@ const handleEditAction = async (ask_id) => {
                   <td className="orderManage-td">{user.admin_id}</td>
                   <td className="orderManage-td">{user.ask_id}</td>
                   <td className="orderManage-td">{user.contents}</td>
-                  <td className="orderManage-td">
-                  </td>
-                  <td className="orderMange-td">
-                  </td>
                 </tr>
               ))
             )}
@@ -192,10 +188,11 @@ const handleEditAction = async (ask_id) => {
                   </div>
               </div>
           }
-                      </div> {/* 문의 내용 출력 */}
-                    <div className="qnaList-divider"></div> {/* 문의 내용과 답변 사이에 실선 추가 */}
+                      </div> {mpData.contents}
+                    <div className="qnaList-divider">
+                      {mpData.content}</div> {/* 문의 내용과 답변 사이에 실선 추가 */}
                     <div className="qnaList-answer">
-                      A.{mpData.contents}
+                      A.   {mpData.content}
                     </div>
                   </div>
                 </div>

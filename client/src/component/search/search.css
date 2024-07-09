@@ -107,3 +107,21 @@
   box-sizing: content-box;
   border:1px solid #000000
 }
+.add-btn {
+  width: 60px;
+  cursor: pointer;
+  height: 30px;
+  border: 1px solid var(--c-darkgray);
+  box-shadow: 1px 1px 1px 1px var();
+  background-color: var(--c-lightgray);
+  margin-left: 1080px;
+}
+.add-notice-btn {
+  width: 60px;
+  cursor: pointer;
+  height: 30px;
+  border: 1px solid var(--c-darkgray);
+  box-shadow: 1px 1px 1px 1px var();
+  background-color: var(--c-lightgray);
+  margin-left: 1070px;
+}

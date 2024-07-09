@@ -104,7 +104,7 @@ const Register = ({ setOpen }) => {
                     <div className='register-list'>
                         <span className='register-left'>비밀번호<em className='register-em'>*</em></span>
                         <div className='register-input-wrap'>
-                            <input type='text' placeholder='비밀번호(영문·숫자 조합 8~15자리)' className={isCredentialsCheck.password === false ? ('register-input-red') : ('register-input')} id='password' onChange={handleChange} onBlur={credentialsCheck}></input>
+                            <input type='password' placeholder='비밀번호(영문·숫자 조합 8~15자리)' className={isCredentialsCheck.password === false ? ('register-input-red') : ('register-input')} id='password' onChange={handleChange} onBlur={credentialsCheck}></input>
                             {isCredentialsCheck.password === false ? (
                                 <div><span className='register-input-error'>필수 항목입니다.</span></div>) : (<></>)}
                         </div>
@@ -112,7 +112,7 @@ const Register = ({ setOpen }) => {
                     <div className='register-list'>
                         <span className='register-left'>비밀번호 확인<em className='register-em'>*</em></span>
                         <div className='register-input-wrap'>
-                            <input type='text' placeholder='비밀번호 확인' className={isCredentialsCheck.passwordcheck === false ? ('register-input-red') : ('register-input')} id='passwordcheck' onChange={handleChange} onBlur={credentialsCheck}></input>
+                            <input type='password' placeholder='비밀번호 확인' className={isCredentialsCheck.passwordcheck === false ? ('register-input-red') : ('register-input')} id='passwordcheck' onChange={handleChange} onBlur={credentialsCheck}></input>
                             {isCredentialsCheck.passwordcheck === false ? (
                                 <div><span className='register-input-error'>필수 항목입니다.</span></div>) : (<></>)}
                             {isPasswordCheck === false && isCredentialsCheck.passwordcheck === true ? (

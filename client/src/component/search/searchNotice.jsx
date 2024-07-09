@@ -181,10 +181,10 @@ return (
                 onKeyDown={handleKeyPress}
                 />
     <button type="submit" className="search-btn" onClick={handleSearch}>검색</button>
-    <FontAwesomeIcon icon={faPlus} onClick={()=>handleAddAction()}/> 
+    <button onClick={()=>handleAddAction()} className="add-notice-btn">추가</button> 
         </div>
-                    <div className="notice-table-box">
-                        <table className="notice-table">
+                    <div className="Admin-notice-table-box">
+                        <table className="Admin-notice-table">
                             <thead className="search-table-head">
                             <tr>
                             <th >제목</th>

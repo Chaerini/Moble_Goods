@@ -205,9 +205,10 @@ const handleAddAction = () =>{
                   onKeyDown={handleKeyPress}
               />
               <button type="submit" className="search-btn" onClick={handleSearch}>검색</button>
+              <button onClick={() =>handleAddAction()} className="add-btn">추가</button>
           </div>
           <div className="orderManage-table-box">
-              <table className="notice-table">
+              <table className="Admin-notice-table">
                   <thead className="search-table-head">
                       <tr>
                           <th>이름</th>
@@ -218,7 +219,6 @@ const handleAddAction = () =>{
                           <th>중분류</th>
                           <th>수정</th>
                           <th>삭제</th>
-                          <th>추가</th>
                       </tr>
                   </thead>
                   <tbody className="orderManage-table">
@@ -238,9 +238,6 @@ const handleAddAction = () =>{
                                   </td>
                                   <td className="orderMange-td">
                                       <FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(user.id)} />
-                                  </td>
-                                  <td>
-                                  <FontAwesomeIcon icon={faPlus} onClick={() =>handleAddAction(user)} />
                                   </td>
                               </tr>
                           )))}

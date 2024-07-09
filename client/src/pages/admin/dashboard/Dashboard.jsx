@@ -55,10 +55,12 @@ const Dashboard = () => {
         );
         console.log(todayTotalSalesRes);
         setTodayTotalSales(
-          todayTotalSalesRes.data.reduce(
-            (sum, order) => sum + order.total,
-            0
-          ) || 0
+          (
+            todayTotalSalesRes.data.reduce(
+              (sum, order) => sum + order.total,
+              0
+            ) || 0
+          ).toLocaleString()
         );
 
         const todayOrderCountRes = await axios.get(
@@ -125,7 +127,7 @@ const Dashboard = () => {
               <div className="dashboard-card-two">
                 <div className="dashboard-card-bg-two red">
                   <p className="dashboard-title-two">배송 준비중</p>
-                  <p className="dashboard-value-two">{preparingCount} 건</p>
+                  <p className="dashboard-value-two">{preparingCount}건</p>
                 </div>
               </div>
               <div className="dashboard-card-two">
@@ -147,20 +149,20 @@ const Dashboard = () => {
               <div className="dashboard-card-contents-wrapper">
                 <div className="dashboard-card">
                   <div className="dashboard-card-bg purple">
-                    <p className="dashboard-title">신규 고객</p>
-                    <p className="dashboard-value">{newCustomersToday} 명</p>
+                    <p className="dashboard-title">신규 고객(명)</p>
+                    <p className="dashboard-value">{newCustomersToday}</p>
                   </div>
                 </div>
                 <div className="dashboard-card">
                   <div className="dashboard-card-bg red">
-                    <p className="dashboard-title">총 매출</p>
-                    <p className="dashboard-value">{todayTotalSales} 원</p>
+                    <p className="dashboard-title">총 매출(원)</p>
+                    <p className="dashboard-value">{todayTotalSales}</p>
                   </div>
                 </div>
                 <div className="dashboard-card">
                   <div className="dashboard-card-bg yellow">
-                    <p className="dashboard-title">총 주문</p>
-                    <p className="dashboard-value">{todayOrderCount} 건</p>
+                    <p className="dashboard-title">총 주문(건)</p>
+                    <p className="dashboard-value">{todayOrderCount}</p>
                   </div>
                 </div>
               </div>

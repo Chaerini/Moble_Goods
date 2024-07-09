@@ -22,9 +22,8 @@ const UserNotice = () => {
     const apiUrl = process.env.REACT_APP_API_URL;
     const navigate = useNavigate();
     const [mpData,setMpData] = useState({
-        userId:"",
         title:"",
-        content:""
+        content:"",
 
     });
     const [IsUpDown,setUpDown]= useState(Data)
@@ -35,8 +34,6 @@ const UserNotice = () => {
     const [notice, setNotice] = useState({
       title: "",
       content: "",
-      userId: "",
-      date:""
     });
     // 사용자 정보가 업데이트 됐을 경우 렌더링
     useEffect(() => {
@@ -53,37 +50,6 @@ const UserNotice = () => {
         fetchData();
     }, []);
     // 검색 버튼 클릭 했을 때
-    const handleSearch = async (e) => {
-        // e.preventDefault();
-        console.log("검색어",searchWord);
-        try {
-            const res = await axios.get(`${apiUrl}/searchnotice?title=${searchWord}`);
-            setData(res.data.rows);
-            console.log(res.data.rows);
-            alert("조회되었습니다.")
-        } catch (err) {
-            console.log(err);
-            alert("일치하는 공지가 없습니다.")
-        }
-    }
-
-    const handleKeyPress = (e) => {
-        if (e.key === 'Enter') {
-            handleSearch(e);
-        }
-    }
-    const handleDelete  = async(id) =>{
-        try{
-            const res= await axios.delete(`${apiUrl}/notice/`+id);
-            alert("삭제되었습니다.");
-        }catch(err){
-            console.log(err)
-        }
-    }
-    const handleChange = (e) =>{
-        const{name,value}=e.target;
-        setMpData((prev) => ({...prev,[name]:value}));
-    };
     //주문 
     const { data, loading, error } = useFetch(`${apiUrl}/notices`);
     const orderList = Array.isArray(data) ? data : data?.rows || [];
@@ -126,33 +92,18 @@ const UserNotice = () => {
         );
       }
       return pageNumbers;
-    };  
-    const handleAddChange = (e) => {
-      setNotice((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    };
-    console.log(notice);
-    const handleAddClick = async (e) => {
-      try {
-        await axios.post(`${apiUrl}/notice`, notice);
-        alert("공지가 추가되었습니다.")
-      } catch (err) {
-        console.log(err);
-        alert("공지 추가에 실패했습니다.")
-      }
     };
 return (
-    <div className="container">
+    <div className="notice-list-container">
         <div className="search-input-wrap">
-            <h2><FontAwesomeIcon icon={faClipboardList}/>공지</h2>
+            <h2 className="notice-list-title"><FontAwesomeIcon icon={faClipboardList}/>공지</h2>
         </div>
                     <div className="notice-table-box">
-                        <table className="notice-table">
-                            <thead className="search-table-head">
-                            <tr>
-                            <th >제목</th>
-                            <th >내용</th>
+                        <table className="myorder-table">
+                            <tr className='myorder-title-tr'>
+                            <th className="myorder-th">제목</th>
+                            <th className="myorder-th">내용</th>
                             </tr>
-                            </thead>
                             <tbody>
                             {(!Data || Data.length < 0) ? (
                                 <tr className="table-content">사용자 정보가 없습니다.</tr>
@@ -160,7 +111,8 @@ return (
                                 Data.map((user, index) => (
                                     <tr className key={index}>
                                         <td className="orderMange-td">{user.title}</td>
-                                        <td className="orderMange-td">{user.content}</td>                            
+                                        <td className="orderMange-td">{user.content}</td>
+                                        
                                         </tr>
                             )))}
                              
