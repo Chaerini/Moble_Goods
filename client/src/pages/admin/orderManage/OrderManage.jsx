@@ -15,7 +15,6 @@ const OrderManage = () => {
   const [searchOrderNumber, setSearchOrderNumber] = useState(""); // 검색 - 주문번호
   const [filteredData, setFilteredData] = useState(null); //검색데이터
   const [orderStatus, setOrderStatus] = useState("전체"); // 검색 - 주문상태
-  const [paymentMethod, setPaymentMethod] = useState("전체"); // 검색 - 결제방법
   const [orderDateRange, setOrderDateRange] = useState([null, null]); //검색 - 주문일시
   const [currentPage, setCurrentPage] = useState(1); //현재 페이지
   const itemsPerPage = 15;
@@ -105,6 +104,7 @@ const OrderManage = () => {
         const updatedData = (prevData || orderList).filter(
           (order) => !selectedOrders.includes(order.order_id)
         );
+        console.log("updatedData : ", updatedData);
         return updatedData;
       });
 
@@ -119,7 +119,6 @@ const OrderManage = () => {
   // 검색 필터 상태 업데이트
   const handleSearchChange = (e) => setSearchOrderNumber(e.target.value);
   const handleStatusChange = (e) => setOrderStatus(e.target.value);
-  const handlePaymentMethodChange = (e) => setPaymentMethod(e.target.value);
 
   // 체크박스 선택 상태 업데이트
   const handleCheckboxChange = (orderId) => {
@@ -136,6 +135,7 @@ const OrderManage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let filtered = orderList;
+    // const filtered = orderList;
 
     if (searchOrderNumber) {
       filtered = filtered.filter((order) =>
@@ -146,12 +146,6 @@ const OrderManage = () => {
     if (orderStatus !== "전체") {
       filtered = filtered.filter(
         (order) => order.delivery_status === orderStatus
-      );
-    }
-
-    if (paymentMethod !== "전체") {
-      filtered = filtered.filter(
-        (order) => order.payment_method === paymentMethod
       );
     }
 
@@ -193,11 +187,6 @@ const OrderManage = () => {
                   value={searchOrderNumber}
                   onChange={handleSearchChange}
                 />
-                <div>
-                  <button type="submit" className="orderManage-search-btn">
-                    검색
-                  </button>
-                </div>
               </div>
 
               <div className="orderManage-select-box">
@@ -215,27 +204,6 @@ const OrderManage = () => {
                           onChange={handleStatusChange}
                         />
                         {status}
-                      </label>
-                    )
-                  )}
-                </div>
-              </div>
-
-              <div className="orderManage-select-box">
-                <label className="orderManage-select-label">결제 수단</label>
-                <div className="orderManage-select-item">
-                  {["전체", "신용카드", "실시간 계좌이체", "휴대폰결제"].map(
-                    (method) => (
-                      <label key={method}>
-                        <input
-                          type="radio"
-                          name="payment-method"
-                          className="orderManage-check"
-                          value={method}
-                          checked={paymentMethod === method}
-                          onChange={handlePaymentMethodChange}
-                        />
-                        {method}
                       </label>
                     )
                   )}
