@@ -90,3 +90,15 @@ export const getAsks = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
+
+// 관리자
+export const getAskNoComment = async (req, res) => {
+    try {
+        const [result] = await pool.query(
+            `SELECT id FROM ask WHERE status=0`
+        );
+        res.status(200).json({ result });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};

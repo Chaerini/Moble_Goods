@@ -7,6 +7,7 @@ import OrderManage from "../orderManage/OrderManage";
 import ProductManage from "../../productManage/getProduct";
 import UserManage from "../../userManage/getUser";
 import GetNotice from "../../notice/GetNotice";
+import Myqna from "../../customer/Myqna";
 
 const AdminMain = () => {
   const [activeComponent, setActiveComponent] = useState("Dashboard");
@@ -15,13 +16,15 @@ const AdminMain = () => {
   const renderComponent = useCallback(() => {
     console.log("어드민 메인:", activeComponent);
     switch (activeComponent) {
-      case "OrderManage":
+      case "OrderManage": // 주문
         return <OrderManage />;
-      case "ProductManage":
+      case "ProductManage": // 상품
         return <ProductManage />;
-      case "UserManage":
+      case "UserManage": // 고객
         return <UserManage />;
-      case "GetNotice":
+      case "Myqna": //문의
+        return <Myqna />;
+      case "GetNotice": //공지
         return <GetNotice />;
       default:
         return <Dashboard />;

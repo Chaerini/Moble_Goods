@@ -17,7 +17,7 @@ const OrderManage = () => {
   const [orderStatus, setOrderStatus] = useState("전체"); // 검색 - 주문상태
   const [orderDateRange, setOrderDateRange] = useState([null, null]); //검색 - 주문일시
   const [currentPage, setCurrentPage] = useState(1); //현재 페이지
-  const itemsPerPage = 15;
+  const itemsPerPage = 20;
 
   // 로딩 상태 처리
   if (loading) return <div>로딩 중...</div>;

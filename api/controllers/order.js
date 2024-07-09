@@ -34,7 +34,7 @@ export const getAdminAllOrders = async (req, res) => {
   }
 };
 
-// orderId와 연관된 orderItem 삭제
+// 관리자 - orderId와 연관된 orderItem 삭제
 export const DeleteAdminOrder = async (req, res) => {
   const orderId = req.params.id;
 
@@ -70,6 +70,80 @@ export const DeleteAdminOrder = async (req, res) => {
     });
   }
 };
+
+// 관리자 - 하루 매출액 조회
+export const getTodayTotal = async (req, res) => {
+  try {
+    const [rows] = await pool.query(
+      "SELECT id, status_id,total FROM `order` WHERE status_id in (SELECT id FROM status WHERE delivery_status = '결제완료')"
+    );
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// 관리자 - 하루 주문 건수 조회
+export const getTodayOrder = async (req, res) => {
+  try {
+    const [rows] = await pool.query(
+      "select id, order_date from `order` where date(order_date) = current_date"
+    );
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// 관리자 - 결제완료 수 조회
+export const getPaymentComplete = async (req, res) => {
+  try {
+    const [rows] = await pool.query(
+      "SELECT id, status_id FROM `order` WHERE status_id in (SELECT id FROM status WHERE delivery_status = '결제완료')"
+    );
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// 관리자 - 배송준비중 수 조회
+export const getPreparing = async (req, res) => {
+  try {
+    const [rows] = await pool.query(
+      "SELECT id, status_id FROM `order` WHERE status_id in (SELECT id FROM status WHERE delivery_status = '배송준비중')"
+    );
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// 관리자 - 배송중 수 조회
+export const getTransit = async (req, res) => {
+  try {
+    const [rows] = await pool.query(
+      "SELECT id, status_id FROM `order` WHERE status_id in (SELECT id FROM status WHERE delivery_status = '배송중')"
+    );
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// 관리자 - 배송완료 수 조회
+export const getDelivered = async (req, res) => {
+  try {
+    const [rows] = await pool.query(
+      "SELECT id, status_id FROM `order` WHERE status_id in (SELECT id FROM status WHERE delivery_status = '배송완료')"
+    );
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+
 // 모든 주문 조회함
 export const getAllOrders = async (req, res) => {
   try {
