@@ -170,7 +170,6 @@ const handleAddChange = (e) =>{
 };
 console.log(product)
 const handleAddClick = async e =>{
-    setModalIsOpen(true);
     try{
         await axios.post(`${apiUrl}/products`,product);
         alert("상품이 추가되었습니다.")
@@ -179,8 +178,11 @@ const handleAddClick = async e =>{
         console.log(err);
         alert("상품 추가에 실패했습니다.")
     }
-
 }
+const handleAddAction = () =>{
+    setModalIsOpen(true);
+
+};
 
 
   return (
@@ -234,7 +236,7 @@ const handleAddClick = async e =>{
                                       <FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(user.id)} />
                                   </td>
                                   <td>
-                                  <FontAwesomeIcon icon={faPlus} onClick={() =>handleAddClick(user)} />
+                                  <FontAwesomeIcon icon={faPlus} onClick={() =>handleAddAction(user)} />
                                   </td>
                               </tr>
                           )))}

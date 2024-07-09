@@ -157,15 +157,18 @@ const SearchNotice = () => {
     };
     console.log(notice);
     const handleAddClick = async (e) => {
-      setModalIsOpen(true);
       try {
         await axios.post(`${apiUrl}/notice`, notice);
-        alert("공지가 추가되었습니다.")
+        alert("공지가 추가되었습니다.");
+        setModalIsOpen(false);
       } catch (err) {
         console.log(err);
         alert("공지 추가에 실패했습니다.")
       }
     };
+    const handleAddAction = () =>{
+      setModalIsOpen(true)
+    }
 return (
     <div className="search-table-container">
         <div className="search-input-wrap">
@@ -205,7 +208,7 @@ return (
                                         <FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(user.id)} />
                                         </td>
                                         <td>
-                                        <FontAwesomeIcon icon={faPlus} onClick={()=>handleAddClick(user)}/>
+                                        <FontAwesomeIcon icon={faPlus} onClick={()=>handleAddAction(user)}/>
                                         </td>
                                         </tr>
                             )))}
