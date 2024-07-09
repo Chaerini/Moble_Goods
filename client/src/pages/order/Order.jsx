@@ -403,11 +403,12 @@ function Order() {
                 </div>
                 <div className="summary-details">
                   <p>할인 금액:</p>
-                  <p>{selectedCoupon ? `${selectedCoupon.discount}원` : "0원"}</p>
+                  <p>0원</p>
                 </div>
                 <div className="summary-details">
                   <p>쿠폰 할인 금액:</p>
-                  <p>0원</p>
+                  <p>{selectedCoupon ? `${selectedCoupon.discount}원` : "0원"}</p>
+
                 </div>
                 <div className="summary-details">
                   <p>배송비:</p>
