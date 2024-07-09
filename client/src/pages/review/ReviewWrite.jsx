@@ -230,8 +230,8 @@ function ReviewWrite({ user_id, product_id, order_id, onClose }) {
 
     const handleImageChange = (e) => {
         const selectedImages = Array.from(e.target.files);
-        if (selectedImages.length + images.length > 3) {
-            alert('최대 3개의 이미지만 업로드할 수 있습니다.');
+        if (selectedImages.length + images.length > 1) {
+            alert('1개의 이미지만 업로드할 수 있습니다.');
             return;
         }
         setImages(prevImages => [...prevImages, ...selectedImages]);
@@ -256,7 +256,6 @@ function ReviewWrite({ user_id, product_id, order_id, onClose }) {
         };
 
         try {
-            // 리뷰 데이터 전송
             const reviewResponse = await axios.post(`${apiUrl}/reviews/${user_id}`, reviewData, {
                 headers: {
                     'auth-token': user.token
@@ -264,19 +263,15 @@ function ReviewWrite({ user_id, product_id, order_id, onClose }) {
                 withCredentials: true
             });
 
-            console.log('reviewResponse:', reviewResponse);
-            console.log('reviewResponse.data:', reviewResponse.data);
-
             const reviewId = reviewResponse.data.reviewId;
 
             if (!reviewId) {
                 throw new Error('리뷰 ID를 가져오지 못했습니다.');
             }
 
-            // 이미지 데이터 전송
             const formData = new FormData();
             images.forEach((image) => {
-                formData.append('image', image); // 'image'라는 필드명으로 이미지 추가
+                formData.append('image', image);
             });
 
             await axios.post(`${apiUrl}/review_image/${reviewId}`, formData, {
@@ -344,7 +339,7 @@ function ReviewWrite({ user_id, product_id, order_id, onClose }) {
                 <div className="review-modal-attachment">
                     <button className="review-modal-attachment-button" onClick={handleImageUploadClick}>사진 첨부하기</button>
                     <input type="file" multiple ref={fileInputRef} onChange={handleImageChange} style={{ display: 'none' }} />
-                    <p className="review-modal-attachment-note">상품과 무관한 사진을 첨부한 리뷰는 통보없이 삭제됩니다. (최대 3개)</p>
+                    <p className="review-modal-attachment-note">상품과 무관한 사진을 첨부한 리뷰는 통보없이 삭제됩니다. (최대 1개)</p>
                     <div className="review-modal-images">
                         {images.map((image, index) => (
                             <div key={index} className="review-image-preview">
@@ -364,6 +359,7 @@ function ReviewWrite({ user_id, product_id, order_id, onClose }) {
 }
 
 export default ReviewWrite;
+
 
 
 
