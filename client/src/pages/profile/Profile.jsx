@@ -113,15 +113,15 @@ const Profile = () => {
                             <div>
                                 <div className='profile-pwd-list'>
                                     <span className='profile-pwd-left'>현재 비밀번호</span>
-                                    <input type='text' placeholder='현재 비밀번호 입력' className='profile-pwd-input' id='password' onChange={handleChange}></input>
+                                    <input type='password' placeholder='현재 비밀번호 입력' className='profile-pwd-input' id='password' onChange={handleChange}></input>
                                 </div>
                                 <div className='profile-pwd-list'>
                                     <span className='profile-pwd-left'>새 비밀번호</span>
-                                    <input type='text' placeholder='비밀번호(영문·숫자 조합 8~15자리)' className='profile-pwd-input' id='newpassword' onChange={handleChange}></input>
+                                    <input type='password' placeholder='비밀번호(영문·숫자 조합 8~15자리)' className='profile-pwd-input' id='newpassword' onChange={handleChange}></input>
                                 </div>
                                 <div className='profile-pwd-list'>
                                     <span className='profile-pwd-left'>현재 비밀번호</span>
-                                    <input type='text' placeholder='새 비밀번호 확인' className='profile-pwd-input' id='newpasswordcheck' onChange={handleChange}></input>
+                                    <input type='password' placeholder='새 비밀번호 확인' className='profile-pwd-input' id='newpasswordcheck' onChange={handleChange}></input>
                                 </div>
                                 <div className='profile-cancel'><span onClick={ChangePasswordClick}>취소</span></div>
                             </div>

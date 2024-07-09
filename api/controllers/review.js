@@ -17,11 +17,11 @@ export const createReview = async (req, res) => {
             "INSERT INTO reviews (product_id, order_id, detail, rating, user_id) VALUES (?, ?, ?, ?, ?)",
             [product_id, order_id, detail, rating, userId]);
 
-            // 생성된 리뷰의 ID
+        // 생성된 리뷰의 ID
         const reviewId = result.insertId;
 
         // 응답에 username 포함
-        res.status(200).json({ message: "리뷰 작성 완료", "작성자": name,reviewId });
+        res.status(200).json({ message: "리뷰 작성 완료", "작성자": name, reviewId });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
@@ -86,7 +86,8 @@ export const getReviewByUserID = async (req, res) => {
             reviews.create_date,
             review_image.image_url,
             product.id, 
-            product.name;`,
+            product.name
+            ORDER BY reviews.create_date DESC;`,
             [userId])
         res.status(201).json({ result });
     } catch (error) {
@@ -139,7 +140,8 @@ export const getWritableReview = async (req, res) => {
                 \`order\`.order_date,
                 order_item.quantity,
                 product.id,
-                product.name;`,
+                product.name
+            ORDER BY \`order\`.order_date DESC`,
             [userId, userId]
         );
         res.status(200).json({ result });

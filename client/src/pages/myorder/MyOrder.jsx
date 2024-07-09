@@ -56,7 +56,6 @@ const MyOrder = () => {
                     headers: { 'auth-token': user.token },
                     withCredentials: true
                 });
-            // const count = await axios.get(`${apiUrl}/orders/count/${user.id}/${}`)
             setOrderData(res.data);
             setRender(1);
             console.log(res.data);

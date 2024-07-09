@@ -114,7 +114,7 @@ const WrittenReview = () => {
                     <th className='writtenreview-th'>리뷰내용</th>
                     <th className='writtenreview-th'>작성일자</th>
                     <th className='writtenreview-th'>작성자</th>
-                    <th className='writtenreview-th'>수정/삭제</th>
+                    <th className='writtenreview-th'>삭제</th>
                 </tr>
 
                 {(!reviewData || reviewData.length <= 0) ? (
@@ -126,7 +126,7 @@ const WrittenReview = () => {
                                 <td colSpan='4'>
                                     <div className='writtenreview-top'>
                                         <div className='writtenreview-top-left'>
-                                            <img src={`${process.env.PUBLIC_URL}/logo192.png`} className='writtenreview-image'></img>
+                                            <img src={review.product_image} className='writtenreview-image'></img>
                                         </div>
                                         <div className='writtenreview-top-right'>
                                             <p className='writtenreview-title'>{review.product_name}</p>
@@ -136,10 +136,12 @@ const WrittenReview = () => {
                             </tr>
                             <tr className='writtenreview-tr-2'>
                                 <td>
-                                    <img src={`${process.env.PUBLIC_URL}/logo192.png`} className='writtenreview-bottom-image'></img>
-                                    <img src={`${process.env.PUBLIC_URL}/logo192.png`} className='writtenreview-bottom-image'></img>
-                                    <img src={`${process.env.PUBLIC_URL}/logo192.png`} className='writtenreview-bottom-image'></img>
-                                    <img src={`${process.env.PUBLIC_URL}/logo192.png`} className='writtenreview-bottom-image'></img>
+                                    {!review.review_image ? (
+                                        <></>
+                                    ) : (
+                                        <img src={`${process.env.REACT_APP_API_IMAGE_URL}${review.review_image}`} className='writtenreview-bottom-image'></img>
+                                    )}
+
                                     <p className='writtenreview-rating'>{formatRating(review.rating)}</p>
                                     <p className='writtenreview-contents'>
                                         {review.detail}
@@ -148,7 +150,6 @@ const WrittenReview = () => {
                                 <td className='writtenreview-td'>{formatDate(review.create_date)}</td>
                                 <td className='writtenreview-td'>{review.user_name}</td>
                                 <td className='writtenreview-td'>
-                                    <button className='writtenreview-button'>리뷰수정</button>
                                     <button className='writtenreview-button' onClick={() => deleteClick(review.id)}>리뷰삭제</button>
                                 </td>
                             </tr>

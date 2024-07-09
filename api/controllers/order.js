@@ -96,7 +96,7 @@ export const getOrdersByUserId = async (req, res) => {
 export const getOrdersByUserIdDate = async (req, res) => {
   const { user_id } = req.params;
   const { startDate, endDate } = req.query;
-  console.log('start', endDate);
+
   try {
     const [rows] = await pool.query(`
       SELECT 
@@ -118,7 +118,8 @@ export const getOrdersByUserIdDate = async (req, res) => {
         JOIN product ON product.id = order_item.product_id
         LEFT JOIN product_image ON product_image.product_id = product.id
         WHERE \`order\`.user_id = ? AND (\`order\`.order_date >= ? AND DATE(\`order\`.order_date) <= ?)
-        GROUP BY \`order\`.id;
+        GROUP BY \`order\`.id
+        ORDER BY \`order\`.order_date DESC;
     `, [user_id, startDate, endDate]);
 
     res.json(rows);

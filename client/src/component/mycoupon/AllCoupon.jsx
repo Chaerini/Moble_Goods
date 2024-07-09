@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
 import axios from 'axios';
 
-const AllCoupon = () => {
+const AllCoupon = ({ onFetchData }) => {
     const apiUrl = process.env.REACT_APP_API_URL;
     const { user } = useContext(AuthContext);
     const [couponData, setCouponData] = useState();
@@ -13,6 +13,7 @@ const AllCoupon = () => {
         try {
             const res = await axios.get(`${apiUrl}/coupons/not/${user.id}`, {}, { headers: { 'auth-token': user.token }, withCredentials: true });
             setCouponData(res.data.result);
+            onFetchData();
             console.log(res.data.result);
         } catch (err) {
             alert('쿠폰 정보를 불러오는 데 실패했습니다. 다시 시도해주세요.');

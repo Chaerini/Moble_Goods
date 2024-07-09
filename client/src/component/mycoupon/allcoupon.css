@@ -25,6 +25,7 @@
     border: 1px solid blue;
     background-color: #fff;
     color: blue;
+    cursor: pointer;
 }
 
 .allcoupon-not {

@@ -7,7 +7,7 @@ import Navbar from '../../component/navbar/navbar';
 import Header from '../../component/header/header';
 import Footer from '../../component/footer/footer';
 import { useNavigate } from 'react-router-dom';
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
 import axios from 'axios';
 
@@ -21,24 +21,24 @@ const MyCoupon = () => {
     const [useCount, setUseCount] = useState(0);
     const [downloadCount, setDownloadCount] = useState(0);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await axios.get(`${apiUrl}/coupons/not/${user.id}`, {}, {
-                    headers: { 'auth-token': user.token },
-                    withCredentials: true
-                })
-                const result = await axios.get(`${apiUrl}/usercoupons/${user.id}`, {}, {
-                    headers: { 'auth-token': user.token },
-                    withCredentials: true
-                })
-                setDownloadCount(res.data.result.length);
-                setUseCount(res.result.result.length);
-                console.log(res.data.result.length);
-            } catch (err) {
-                console.log(err);
-            }
+    const fetchData = useCallback(async () => {
+        try {
+            const res = await axios.get(`${apiUrl}/coupons/not/${user.id}`, {}, {
+                headers: { 'auth-token': user.token },
+                withCredentials: true
+            })
+            const result = await axios.get(`${apiUrl}/usercoupons/${user.id}`, {}, {
+                headers: { 'auth-token': user.token },
+                withCredentials: true
+            })
+            setDownloadCount(res.data.result.length);
+            setUseCount(result.data.result.length);
+        } catch (err) {
+            console.log(err);
         }
+    });
+
+    useEffect(() => {
         fetchData();
     }, [])
 
@@ -78,7 +78,7 @@ const MyCoupon = () => {
                         <button className={isMenu === 'mine' ? ('mycoupon-mine-click') : ('mycoupon-mine')} onClick={() => setIsMenu('mine')}>내 쿠폰</button>
                     </div>
                     <div className='myreview-middle'>
-                        {isMenu === 'all' ? (<AllCoupon />) : (<MineCoupon />)}
+                        {isMenu === 'all' ? (<AllCoupon onFetchData={fetchData} />) : (<MineCoupon />)}
 
                     </div>
                     <div className='mycoupon-notice'>

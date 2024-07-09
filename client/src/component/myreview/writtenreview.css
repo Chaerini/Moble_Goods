@@ -14,7 +14,7 @@
 }
 
 .writtenreview-tr-2 {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #ccc;
 }
 
 .writtenreview-row {
@@ -72,6 +72,7 @@
 }
 
 .writtenreview-rating {
+    padding: 10px 0px;
     color: rgb(223, 223, 51);
     font-size: 20px;
 }

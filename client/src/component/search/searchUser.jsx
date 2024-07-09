@@ -26,7 +26,7 @@ const SearchUser = () => {
     address: "",
     phone: "",
     membership_name: "",
-    membership_id:""
+    membership_id: ""
   });
   const [userData, setUserData] = useState([]);
   const [searchWord, setSearchWord] = useState("");
@@ -178,22 +178,22 @@ const SearchUser = () => {
         </table>
       </div>
       <div className="orderManage-page-btn-box">
-          <button
-            className="orderManage-page-btn"
-            onClick={() => handleClick(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            이전
-          </button>
-          {renderPageNumbers()}
-          <button
-            className="orderManage-page-btn"
-            onClick={() => handleClick(currentPage + 1)}
-            disabled={currentPage === totalPages}
-          >
-            다음
-          </button>
-        </div>
+        <button
+          className="orderManage-page-btn"
+          onClick={() => handleClick(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          이전
+        </button>
+        {renderPageNumbers()}
+        <button
+          className="orderManage-page-btn"
+          onClick={() => handleClick(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          다음
+        </button>
+      </div>
       {modalOpen && (
         <div className="modal-container" ref={modalBackground} onClick={e => {
           if (e.target === modalBackground.current) {
@@ -207,7 +207,7 @@ const SearchUser = () => {
               <input type="text" onChange={handleChange} name="name" placeholder="이름" className="product-input" value={mpData.name} />
               <input type="text" onChange={handleChange} name="address" placeholder="주소" className="product-input" value={mpData.address} />
               <input type="text" onChange={handleChange} name="phone" placeholder="핸드폰" className="product-input" value={mpData.phone} />
-              <input type="text" onCanPlay={handleChange} name="membership_id" placeholder="멤버십" className="product-input" value={mpData.membership_id}/>
+              <input type="text" onChange={handleChange} name="membership_id" placeholder="멤버십" className="product-input" value={mpData.membership_id} />
               <button onClick={() => handleEditAction(mpData.userId)} className="btn">수정</button>
             </div>
           </div>
