@@ -31,9 +31,9 @@
 }
 
 .current-step {
-  background-color: #d1e7fd;
-  color: #007bff;
-  border: 2px solid #007bff;
+  background-color: #888;
+  color: white;
+  border: 2px solid #757575;
   border-radius: 5px;
   padding: 10px;
 }
@@ -101,7 +101,7 @@
 .cart-item-details {
   display: flex;
   flex-direction: column;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .cart-item-name {
@@ -113,7 +113,7 @@
 }
 
 .cart-item-quantity {
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .cart-item-quantity td{
@@ -123,11 +123,11 @@
 }
 
 .cart-item-price {
-  font-size: 20px;
+  font-size: 15px;
   height: 200px;
 }
 .cart-item-total {
-  font-size: 20px;
+  font-size: 15px;
   height: 200px;
 }
 
@@ -175,16 +175,13 @@
 
 .cart-summary button {
   padding: 10px 20px;
-  background-color: #ff5722;
+  background-color: #757575;
   color: #fff;
   border: none;
   cursor: pointer;
   font-size: 14px;
 }
 
-.cart-summary button:hover {
-  background-color: #e64a19;
-}
 
 .cart-guide {
   font-size: 14px;
@@ -196,7 +193,7 @@
 }
 
 .quantity-controls-del {
-  color: #888;
+  color: #757575;
   background-color: white;
   font-size: 18px;
 }

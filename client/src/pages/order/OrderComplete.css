@@ -33,7 +33,7 @@
 
 .order-complete-modal button {
   padding: 10px 20px;
-  background-color: #ff5722;
+  background-color: #757575;
   color: white;
   border: none;
   border-radius: 5px;
@@ -41,6 +41,3 @@
   font-size: 20px;
 }
 
-.order-complete-modal button:hover {
-  background-color: #e64a19;
-}
