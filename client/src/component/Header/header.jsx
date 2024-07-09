@@ -20,7 +20,7 @@ function Header() {
       <header className="header">
         <div className="header-top">
           <div className="header-top-left">
-            <Link to="/" className="header-logo">Goods For YOU</Link>
+            <Link to="/" className="header-logo"></Link>
           </div>
           <div className="header-top-right">
             {user ? (

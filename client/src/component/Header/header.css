@@ -86,8 +86,10 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 1050;
   white-space: nowrap;
-  width: 200px; /* 메뉴 너비 고정 */
-  overflow: hidden; /* 메뉴 너비를 벗어나는 내용 숨기기 */
+  width: 200px;
+  /* 메뉴 너비 고정 */
+  overflow: hidden;
+  /* 메뉴 너비를 벗어나는 내용 숨기기 */
 }
 
 .dropdown-menu a,
@@ -101,7 +103,8 @@
   text-align: left;
   cursor: pointer;
   width: 100%;
-  box-sizing: border-box; /* 패딩을 포함하여 너비 계산 */
+  box-sizing: border-box;
+  /* 패딩을 포함하여 너비 계산 */
 }
 
 .dropdown-menu a:hover,

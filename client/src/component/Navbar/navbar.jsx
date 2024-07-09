@@ -6,7 +6,7 @@ import './navbar.css';
 const Navbar = () => {
     const [categories, setCategories] = useState([]);
     const [subcategories, setSubcategories] = useState({});
-    
+
     useEffect(() => {
         const fetchCategories = async () => {
             try {
@@ -36,7 +36,7 @@ const Navbar = () => {
 
     return (
         <nav>
-            <Link to="/" className="logo">굿포유</Link>
+            <Link to="/" className="logo"><img src='/images/로고네비바.png' className='navbar-image' /></Link>
             <ul>
                 {categories.map(category => (
                     <li key={category.id}>
