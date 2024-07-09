@@ -1,4 +1,7 @@
 import React, { useState, useRef } from 'react';
+import Navbar from "../../component/navbar/navbar";
+import Footer from "../../component/footer/footer";
+import Header from "../../component/header/header";
 import './faq.css'; // CSS 파일을 가져옵니다.
 
 const Faq = () => {
@@ -14,7 +17,7 @@ const Faq = () => {
 
   // 카테고리 배열
   const categories = [
-    '휴대폰/실시간계좌이체', '회원등급', '회원가입/정보변경', 
+    '휴대폰/실시간계좌이체', '회원등급', '회원가입/정보변경',
     '환불방법', '쿠폰/포인트', '상품문의', '배송조회', '기타'
   ];
 
@@ -75,7 +78,7 @@ const Faq = () => {
     }
   };
 
- // 텍스트를 강조하는 함수
+  // 텍스트를 강조하는 함수
   const highlightText = (faq, searchTerm) => {
     if (!searchTerm) return faq;
     const parts = faq.split(new RegExp(`(${searchTerm})`, 'gi'));
@@ -97,66 +100,71 @@ const Faq = () => {
   const filteredFaqs = faqs.filter(faq => faq.includes(searchTerm));
 
   return (
-    <div className="faq-container">
-      {/* FAQ 헤더 */}
-      <h1 className="faq-header">FAQ</h1>
-      {/* 검색 입력란 */}
-      <input
-        type="text"
-        className="faq-search"
-        placeholder="궁금한 사항을 입력해 주세요."
-        value={searchTerm}
-        onChange={e => setSearchTerm(e.target.value)}
-        onFocus={e => e.target.placeholder = ''}
-        onBlur={e => e.target.placeholder = '궁금한 사항을 입력해 주세요.'}
-      />
-      {/* 카테고리 목록 및 좌우 이동 버튼 */}
-      <div className="faq-categories-wrapper">
-        <div className="faq-categories">
-        {categories.slice(visibleIndex, visibleIndex + 4).map((category, index) => (
-            <React.Fragment key={index}>
-              <span className="faq-category" onClick={() => { setActiveIndex(index); }}>
-                {category}
-              </span>
-              {index < 3 && <span className="category-separator">|</span>}
-            </React.Fragment>
+    <>
+      <Header />
+      <Navbar />
+      <div className="faq-container">
+        {/* FAQ 헤더 */}
+        <h1 className="faq-header">FAQ</h1>
+        {/* 검색 입력란 */}
+        <input
+          type="text"
+          className="faq-search"
+          placeholder="궁금한 사항을 입력해 주세요."
+          value={searchTerm}
+          onChange={e => setSearchTerm(e.target.value)}
+          onFocus={e => e.target.placeholder = ''}
+          onBlur={e => e.target.placeholder = '궁금한 사항을 입력해 주세요.'}
+        />
+        {/* 카테고리 목록 및 좌우 이동 버튼 */}
+        <div className="faq-categories-wrapper">
+          <div className="faq-categories">
+            {categories.slice(visibleIndex, visibleIndex + 4).map((category, index) => (
+              <React.Fragment key={index}>
+                <span className="faq-category" onClick={() => { setActiveIndex(index); }}>
+                  {category}
+                </span>
+                {index < 3 && <span className="category-separator">|</span>}
+              </React.Fragment>
+            ))}
+          </div>
+          <button className="arrow left-arrow" onClick={showPreviousCategories}>&lt;</button>
+          <button className="arrow right-arrow" onClick={showNextCategories}>&gt;</button>
+        </div>
+
+        {/* FAQ 질문 목록 */}
+        <div className="faq-list">
+          {filteredFaqs.slice(0, 9).map((faq, index) => (
+            // 각 FAQ 항목에 대한 참조 설정
+            <div key={index} className="faq-item" ref={el => faqRefs.current[index] = el}>
+              <div className="faq-question" onClick={() => toggleDropdown(index)}>
+                Q. {highlightText(faq, searchTerm)}
+                <span className="dropdown-arrow">
+                  {activeIndex === index ? (
+                    // 선택된 항목일 경우 위쪽 화살표 아이콘
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M1 8L5 2L9 8" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  ) : (
+                    // 선택되지 않은 항목일 경우 아래쪽 화살표 아이콘
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M1 2L5 8L9 2" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  )}
+                </span>
+              </div>
+              {/* 답변 항목 */}
+              {activeIndex === index && (
+                <div className="faq-answer">
+                  A. {highlightText(faq, searchTerm)}의 답변입니다.
+                </div>
+              )}
+            </div>
           ))}
         </div>
-        <button className="arrow left-arrow" onClick={showPreviousCategories}>&lt;</button>
-        <button className="arrow right-arrow" onClick={showNextCategories}>&gt;</button>
       </div>
-
-      {/* FAQ 질문 목록 */}
-      <div className="faq-list">
-        {filteredFaqs.slice(0, 9).map((faq, index) => (
-          // 각 FAQ 항목에 대한 참조 설정
-          <div key={index} className="faq-item" ref={el => faqRefs.current[index] = el}>
-            <div className="faq-question" onClick={() => toggleDropdown(index)}>
-              Q. {highlightText(faq, searchTerm)}
-              <span className="dropdown-arrow">
-                {activeIndex === index ? (
-                  // 선택된 항목일 경우 위쪽 화살표 아이콘
-                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1 8L5 2L9 8" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                ) : (
-                  // 선택되지 않은 항목일 경우 아래쪽 화살표 아이콘
-                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1 2L5 8L9 2" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                )}
-              </span>
-            </div>
-            {/* 답변 항목 */}
-            {activeIndex === index && (
-              <div className="faq-answer">
-                A. {highlightText(faq, searchTerm)}의 답변입니다.
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
+      <Footer />
+    </>
   );
 }
 

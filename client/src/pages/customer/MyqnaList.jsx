@@ -1,5 +1,8 @@
 // src/components/MyqnaList.jsx
 import React, { useState, useEffect } from 'react';
+import Navbar from "../../component/navbar/navbar";
+import Footer from "../../component/footer/footer";
+import Header from "../../component/header/header";
 import './myqnalist.css';
 import axios from 'axios';
 
@@ -34,46 +37,51 @@ const MyqnaList = () => {
   };
 
   // 날짜 형식을 0000.00.00로 변환하는 함수 추가
-const formatDate = (dateString) => {
-  const date = new Date(dateString);
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  return `${year}.${month}.${day}`;
-};
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}.${month}.${day}`;
+  };
 
   return (
-    <div className="qnaList">
-      <h1 className="qnaList-header">나의 문의 리스트</h1>
-      <div className="qnaList-body">
-        {loading ? (
-          <p>로딩 중...</p>
-        ) : qnaList.length === 0 ? (
-          <p>문의 내역이 없습니다.</p>
-        ) : (
-          qnaList.map((qna, index) => (
-            <div key={index} className="qnaList-item">
-              <div className="qnaList-question" onClick={() => toggleAnswer(index)}>
-                Q. {qna.title} {/* "Q. " 고정 출력 */}
-                <div className="qnaList-date">{formatDate(qna.date)}</div>
-              </div>
-              {qna.showAnswer && (
-                <div className="qnaList-content-answer">
-                  <div className="qnaList-content-box">
-                    <div className="qnaList-content">{qna.contents}</div> {/* 문의 내용 출력 */}
-                    <div className="qnaList-divider"></div> {/* 문의 내용과 답변 사이에 실선 추가 */}
-                    <div className="qnaList-answer">
-                      A. {qna.answer}
+    <>
+      <Header />
+      <Navbar />
+      <div className="qnaList">
+        <h1 className="qnaList-header">나의 문의 리스트</h1>
+        <div className="qnaList-body">
+          {loading ? (
+            <p>로딩 중...</p>
+          ) : qnaList.length === 0 ? (
+            <p>문의 내역이 없습니다.</p>
+          ) : (
+            qnaList.map((qna, index) => (
+              <div key={index} className="qnaList-item">
+                <div className="qnaList-question" onClick={() => toggleAnswer(index)}>
+                  Q. {qna.title} {/* "Q. " 고정 출력 */}
+                  <div className="qnaList-date">{formatDate(qna.date)}</div>
+                </div>
+                {qna.showAnswer && (
+                  <div className="qnaList-content-answer">
+                    <div className="qnaList-content-box">
+                      <div className="qnaList-content">{qna.contents}</div> {/* 문의 내용 출력 */}
+                      <div className="qnaList-divider"></div> {/* 문의 내용과 답변 사이에 실선 추가 */}
+                      <div className="qnaList-answer">
+                        A. {qna.answer}
+                      </div>
                     </div>
                   </div>
-                </div>
-              )}
-              <hr className="qnaList-hr"/> {/* 실선 추가 */}
-            </div>
-          ))
-        )}
+                )}
+                <hr className="qnaList-hr" /> {/* 실선 추가 */}
+              </div>
+            ))
+          )}
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 
