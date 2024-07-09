@@ -116,11 +116,13 @@ export const getOrderItemsByOrderIds = async (req, res) => {
       product.discounted_price,
       \`order\`.total,
       \`order\`.order_date,
-      status.waybill_number
+      status.waybill_number,
+      product_image.url
       FROM order_item JOIN product ON product.id = order_item.product_id
       JOIN \`order\` ON \`order\`.id = order_item.order_id
       JOIN status ON status.id = \`order\`.status_id
-      WHERE order_id = 11;`,
+      JOIN product_image ON product_image.product_id = product.id
+      WHERE order_id = ?`,
       [order_id]);
     res.json(rows);
   } catch (err) {

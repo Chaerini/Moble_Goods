@@ -12,8 +12,6 @@ const MyOrderDetail = ({ setOpen, orderId }) => {
     const apiUrl = process.env.REACT_APP_API_URL;
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
-    console.log(user);
-    console.log(orderId);
     const [detailData, setDetailData] = useState();
 
 
@@ -73,7 +71,7 @@ const MyOrderDetail = ({ setOpen, orderId }) => {
                                     </td>
                                     <td>
                                         <div className='myorderdetail-row'>
-                                            <div><img src={`${process.env.PUBLIC_URL}/logo192.png`} className='myorderdetail-image'></img></div>
+                                            <div><img src={detail.url} className='myorderdetail-image'></img></div>
                                             <div className='myorder-row-right'>
                                                 <p className='myorder-title'>{detail.name}</p>
                                                 <a className='myorder-detail'>수량: {detail.quantity}개</a>

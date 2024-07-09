@@ -17,7 +17,7 @@ const MyOrder = () => {
     const apiUrl = process.env.REACT_APP_API_URL;
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
-    console.log(user);
+    // console.log(user);
 
     const [orderData, setOrderData] = useState();
     const [selectMonth, setSelectMonth] = useState(6);
@@ -68,7 +68,7 @@ const MyOrder = () => {
 
     useEffect(() => {
         formatStartDate(formatEndDate());
-        console.log(startDate);
+        // console.log(startDate);
         fetchData();
     }, [render])
 
@@ -179,10 +179,10 @@ const MyOrder = () => {
                                             </td>
                                             <td>
                                                 <div className='myorder-row'>
-                                                    <div><img src={`${process.env.PUBLIC_URL}/logo192.png`} className='myorder-image'></img></div>
+                                                    <div><img src={order.product_image_url} className='myorder-image'></img></div>
                                                     <div className='myorder-row-right'>
                                                         <p className='myorder-title'>{order.name}</p>
-                                                        <a className='myorder-detail' onClick={() => DetailClick(order.id)}>주문 상세</a>
+                                                        <a className='myorder-detail' onClick={() => DetailClick(order.id)}>주문 상세 ▶</a>
                                                     </div>
                                                 </div>
                                             </td>

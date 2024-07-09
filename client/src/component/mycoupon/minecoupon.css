@@ -26,3 +26,11 @@
     background-color: #fff;
     color: red;
 }
+
+.minecoupon-not {
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    height: 300px;
+    text-align: center;
+    font-size: 12px;
+}

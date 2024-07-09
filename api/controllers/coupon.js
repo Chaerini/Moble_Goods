@@ -105,9 +105,7 @@ export const getNotUserCoupons = async (req, res) => {
             FROM coupon LEFT JOIN usercoupon ON coupon.id = usercoupon.coupon_id
             WHERE DATE(end_date) >= CURDATE()
             AND coupon.id NOT IN(
-            SELECT coupon.id
-            FROM coupon JOIN usercoupon ON usercoupon.coupon_id = coupon.id 
-            WHERE usercoupon.user_id = ?);`,
+            SELECT coupon_id FROM usercoupon WHERE user_id = ?);`,
             [id]
         );
         res.status(200).json({ result });
@@ -152,7 +150,7 @@ export const getUserCoupons = async (req, res) => {
              AND DATE(coupon.end_date) >= CURDATE()`,
             [userId]
         );
-        
+
         console.log("Query result:", result); // 디버깅 로그 추가
 
         res.status(200).json({ result });

@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faX
 } from "@fortawesome/free-solid-svg-icons";
-// import Logo from '/images/로고.png';
+import Register from '../register/Register.jsx';
 import axios from "axios";
 
 const Login = ({ setOpen }) => {
@@ -14,13 +14,14 @@ const Login = ({ setOpen }) => {
         username: undefined,
         password: undefined,
     });
-
+    const [openRegisterModal, setOpenRegisterModal] = useState(false);
     const { loading, error, dispatch } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleChange = (e) => {
         setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
     };
+
 
     const handleClick = async (e) => {
         e.preventDefault();
@@ -31,6 +32,7 @@ const Login = ({ setOpen }) => {
             dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
             console.log(res.data.details);
             setOpen(false);
+            setOpenRegisterModal(false);
         } catch (err) {
             dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
         }
@@ -48,22 +50,23 @@ const Login = ({ setOpen }) => {
     }
 
     return (
-        <div className="login">
-            <div className="login-container">
-                <div className='login-top'><FontAwesomeIcon icon={faX} className="myorderdetail-icon" onClick={() => xClick()} /></div>
-                <img src='/images/로고.png' className='login-image' />
-                <div className='login-input-wrap'>
-                    <input type='text' placeholder='아이디 입력' className='login-input' id='username' onChange={handleChange}></input>
-                    <input type='password' placeholder='비밀번호 입력' className='login-input' id='password' onChange={handleChange} onKeyDown={handleKeyPress}></input>
-                </div>
-                <button className='login-button' disabled={loading} onClick={handleClick}>로그인</button>
-                <div className='login-div-a'>
-                    <a className='login-a' href='/register'>회원가입</a>
-                    <span className='login-line'>|</span>
-                    <a className='login-a'>비밀번호 찾기</a>
+        <>
+            <div className="login">
+                <div className="login-container">
+                    <div className='login-top'><FontAwesomeIcon icon={faX} className="myorderdetail-icon" onClick={() => xClick()} /></div>
+                    <img src='/images/로고.png' className='login-image' />
+                    <div className='login-input-wrap'>
+                        <input type='text' placeholder='아이디 입력' className='login-input' id='username' onChange={handleChange}></input>
+                        <input type='password' placeholder='비밀번호 입력' className='login-input' id='password' onChange={handleChange} onKeyDown={handleKeyPress}></input>
+                    </div>
+                    <button className='login-button' disabled={loading} onClick={handleClick}>로그인</button>
+                    <div className='login-div-a'>
+                        <span>아직 굿포유 회원이 아니신가요? <a className='login-a' onClick={() => setOpenRegisterModal(true)}>회원가입</a></span>
+                    </div>
                 </div>
             </div>
-        </div>
+            {openRegisterModal && <Register setOpen={setOpenRegisterModal} />}
+        </>
     );
 };
 

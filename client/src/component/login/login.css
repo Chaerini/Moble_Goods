@@ -57,6 +57,7 @@
     display: flex;
     justify-content: center;
     color: #666;
+    font-size: 12px;
 }
 
 .login-line {
@@ -65,6 +66,6 @@
 }
 
 .login-a {
-    color: inherit;
-    text-decoration: none;
+    color: #191919;
+    text-decoration: underline;
 }
