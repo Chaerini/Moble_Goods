@@ -69,7 +69,7 @@ const MyOrder = () => {
         formatStartDate(formatEndDate());
         // console.log(startDate);
         fetchData();
-    }, [render])
+    }, [render, selectMonth])
 
     // 주문일자 날짜 포맷
     const formatDate = (orderDate) => {
