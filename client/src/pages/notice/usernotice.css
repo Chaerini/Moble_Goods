@@ -1,0 +1,125 @@
+/* 전체 컨텐츠 가운데 정렬 */
+.notice-container {
+    padding: 20px;
+    /* 컨텐츠 주변에 20px의 여백을 줌 */
+    background-color: #fff;
+    /* 폼 자체의 색을 흰색으로 설정 */
+    margin: 0 auto;
+    /* 양옆에 공간을 추가하여 가운데 정렬 */
+    max-width: 1200px;
+    /* 최대 너비를 1200px로 설정 */
+}
+
+/* 공지사항 제목 래퍼 스타일 */
+.notice-header {
+    display: flex;
+    text-align: center;
+    /* 공지사항 제목을 가운데 정렬 */
+    margin-bottom: 20px;
+    justify-content: center;
+    /* 아래쪽에 20px의 여백을 줌 */
+}
+
+/* 공지사항 제목 스타일 - 가운데 정렬 */
+.notice-title {
+    font-size: 24px;
+    /* 폰트 크기를 24px로 설정 */
+    text-align: center;
+    /* 텍스트를 가운데 정렬 */
+    height: 140px;
+    display: flex;
+    align-items: center;
+}
+
+/* 공지사항 제목과 내용 사이의 검정 실선 스타일 */
+.notice-title-underline {
+    border: 1px solid black;
+    /* 두께가 2px인 검정 실선 */
+    /* 아래쪽에 20px의 여백을 줌 */
+}
+
+/* 공지사항 테이블 스타일 */
+.notice-table {
+    width: 100%;
+    /* 테이블의 너비를 100%로 설정 */
+    border-collapse: collapse;
+    /* 테이블 셀 사이의 간격을 없앰 */
+}
+
+/* 테이블 헤드와 바디의 셀 스타일 */
+.notice-table th,
+.notice-table td {
+    padding: 8px;
+    /* 셀의 패딩을 8px로 설정 */
+    /* 텍스트를 가운데 정렬 */
+    background-color: #fff;
+    /* 모든 필드 배경색을 흰색으로 설정 */
+    border: none;
+    /* 셀의 테두리를 없앰 */
+}
+
+.notice-orderMange-td-num {
+    text-align: center;
+}
+
+.notice-tr {
+    border-bottom: 1px solid #eee;
+}
+
+/* 테이블 헤드의 배경 색상 */
+.notice-table th {
+    background-color: #eee;
+    /* 헤드의 배경을 연회색(#ddd)으로 설정 */
+    /* border-bottom: 2px solid #000; */
+    /* 헤드 하단에 두께 2px의 검정 실선을 설정 */
+}
+
+/* 테이블 데이터 셀 배경 색상 */
+.notice-orderMange-td {
+    background-color: #fff;
+    /* 셀의 배경색을 흰색으로 설정 */
+    text-align: left;
+}
+
+/* 공지사항 내용이 있는 셀 스타일 */
+.notice-content {
+    text-align: left;
+    /* 텍스트를 왼쪽 정렬 */
+    background-color: #fff;
+    /* 배경을 흰색으로 설정 */
+    padding: 10px;
+    /* 패딩을 10px로 설정 */
+}
+
+/* 공지사항 내용과 다음 항목 사이의 2px 검정 실선 스타일 */
+.notice-content-underline {
+    margin-top: 10px;
+    /* 위쪽에 10px의 여백을 줌 */
+    /* 두께가 2px인 검정 실선 */
+}
+
+.notice-a {
+    border-bottom: 1px solid #ccc;
+}
+
+/* 각 제목 사이의 연한 그레이 실선 스타일 */
+.notice-row-underline {
+    border: 1px solid #ccc;
+    /* 테두리를 연한 회색(#ccc)으로 설정 */
+    margin: 0;
+    /* 여백을 없앰 */
+}
+
+/* 번호 필드 크기 줄이기 */
+.notice-table th:first-child,
+.notice-table td:first-child {
+    width: 10%;
+    /* 번호 필드의 너비를 10%로 설정 */
+}
+
+/* 번호 필드와 제목 필드 사이의 선 삭제 */
+.notice-table th,
+.notice-table td {
+    border-right: none;
+    /* 오른쪽 테두리 제거 */
+}

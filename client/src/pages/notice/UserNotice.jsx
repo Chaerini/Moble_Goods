@@ -1,125 +1,84 @@
-import {
-    faHouse,
-    faBook,
-    faUser,
-    faX,
-    faPen,
-    faTrash,
-    faPlus,
-    faBoxOpen,
-    faClipboardList
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState,useRef } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import useFetch from "../../hooks/useFetch";
-import "../../component/search/search.css";
-import "./AdminNotice.css";
+import React, { useEffect, useState } from "react"; // React와 필요한 훅들을 가져옴
+import axios from "axios"; // Axios를 가져옴
+import Navbar from '../../component/navbar/navbar.jsx';
+import Header from '../../component/header/header.jsx';
+import Footer from '../../component/footer/footer.jsx';
+import './usernotice.css';
+
 const UserNotice = () => {
-    const [Data, setData] = useState([]);
-    const [searchWord, setSearchWord] = useState();
-    const apiUrl = process.env.REACT_APP_API_URL;
-    const navigate = useNavigate();
-    const [mpData,setMpData] = useState({
-        title:"",
-        content:"",
+  const [Data, setData] = useState([]); // 공지사항 데이터를 저장할 상태
+  const [selectedOrderData, setSelectedOrderData] = useState(null); // 선택된 공지사항 데이터를 저장할 상태
+  const apiUrl = process.env.REACT_APP_API_URL; // API URL 환경 변수
 
-    });
-    const [IsUpDown,setUpDown]= useState(Data)
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 15;
-    const [filteredData, setFilteredData] = useState(null);
-    const [selectedOrderData, setSelectedOrderData] = useState(null);
-    const [notice, setNotice] = useState({
-      title: "",
-      content: "",
-    });
-    // 사용자 정보가 업데이트 됐을 경우 렌더링
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(`${apiUrl}/notice`);
-                console.log("data",response.data.rows);
-                setData(response.data.rows);
-            }catch (error) {
-                console.error('Error fetching data', error);
-            }
-        };
-        
-        fetchData();
-    }, []);
-    // 검색 버튼 클릭 했을 때
-    //주문 
-    const { data, loading, error } = useFetch(`${apiUrl}/notices`);
-    const orderList = Array.isArray(data) ? data : data?.rows || [];
-    if (!Array.isArray(orderList))
-      return <div>예상치 못한 데이터 형식입니다</div>
-    const dataToDisplay = filteredData || orderList;
-
-    const uniqueOrderCount = new Set(dataToDisplay.map((item) => item.order_id))
-      .size;
-  
-    const groupedItems = dataToDisplay.reduce((acc, item) => {
-        if (!acc[item.order_id]) acc[item.order_id] = [];
-        acc[item.order_id].push(item);
-        return acc;
-      }, {});
-    const groupedOrdersArray = Object.values(groupedItems);
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = groupedOrdersArray.slice(
-      indexOfFirstItem,
-      indexOfLastItem
-    );
-    const totalPages = Math.ceil(groupedOrdersArray.length / itemsPerPage);
-  
-    const handleClick = (pageNumber) => setCurrentPage(pageNumber);
-  
-    const renderPageNumbers = () => {
-      const pageNumbers = [];
-      for (let i = 1; i <= totalPages; i++) {
-        pageNumbers.push(
-          <button
-            key={i}
-            onClick={() => handleClick(i)}
-            className={`orderManage-page-num ${
-              currentPage === i ? "active" : ""
-            }`}
-          >
-            {i}
-          </button>
-        );
+  // 컴포넌트가 처음 렌더링 될 때 공지사항 데이터를 가져옴
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/notice`); // 공지사항 데이터를 API로부터 가져옴
+        setData(response.data.rows); // 가져온 데이터를 상태에 저장
+      } catch (error) {
+        console.error('Error fetching data', error); // 오류 발생 시 콘솔에 출력
       }
-      return pageNumbers;
     };
-return (
-    <div className="notice-list-container">
-        <div className="search-input-wrap">
-            <h2 className="notice-list-title"><FontAwesomeIcon icon={faClipboardList}/>공지</h2>
+    fetchData();
+  }, []); // 빈 배열을 의존성으로 사용하여 컴포넌트가 처음 렌더링될 때 한 번만 실행됨
+
+  // 공지사항을 클릭했을 때 내용 표시/숨김 토글
+  const handleToggleContent = (index) => {
+    setSelectedOrderData(selectedOrderData === index ? null : index); // 선택된 인덱스와 같으면 null로, 다르면 해당 인덱스로 설정하여 토글 기능 구현
+  };
+
+  return (
+    <>
+      <Header />
+      <Navbar />
+      <div className="notice-container"> {/* 컨테이너 div */}
+        <div className="notice-header"> {/* 공지사항 제목 래퍼 */}
+          <h1 className="notice-title">공지사항</h1>
         </div>
-                    <div className="notice-table-box">
-                        <table className="myorder-table">
-                            <tr className='myorder-title-tr'>
-                            <th className="myorder-th">제목</th>
-                            <th className="myorder-th">내용</th>
-                            </tr>
-                            <tbody>
-                            {(!Data || Data.length < 0) ? (
-                                <tr className="table-content">사용자 정보가 없습니다.</tr>
-                            ) : (
-                                Data.map((user, index) => (
-                                    <tr className key={index}>
-                                        <td className="orderMange-td">{user.title}</td>
-                                        <td className="orderMange-td">{user.content}</td>
-                                        
-                                        </tr>
-                            )))}
-                             
+        <hr className="notice-title-underline" /> {/* 공지사항 제목과 내용 사이의 검정 실선 */}
+        <div className="notice-table-box"> {/* 공지사항 테이블 박스 */}
+          <table className="notice-table"> {/* 공지사항 테이블 */}
+            <thead className="notice-table-head"> {/* 테이블 헤더 */}
+              <tr>
+                <th>번호</th> {/* 번호 헤더 */}
+                <th>제목</th> {/* 제목 헤더 */}
+              </tr>
+            </thead>
+            <tbody>
+              {(!Data || Data.length < 1) ? ( /* 데이터가 없을 때 표시할 내용 */
+                <tr className="notice-table-content">
+                  <td colSpan="2">사용자 정보가 없습니다.</td> {/* "작성일" 열이 없어져서 colSpan을 2로 변경 */}
+                </tr>
+              ) : (
+                Data.map((user, index) => (
+                  <React.Fragment key={index}>
+                    <tr className="notice-tr" onClick={() => handleToggleContent(index)}> {/* 각 공지사항 행 */}
+                      <td className="notice-orderMange-td-num">{Data.length - index}</td> {/* 번호 */}
+                      <td className="notice-orderMange-td">[안내] {user.title}</td> {/* 제목 */}
+                    </tr>
+                    {selectedOrderData === index && ( /* 선택된 공지사항의 내용 표시 */
+                      <tr className="notice-a" key={`${index}-content`}>
+                        <td></td>
+                        <td className="notice-content"> {/* "작성일" 열이 없어져서 colSpan을 2로 변경 */}
+                          <div>
+                            {user.content} {/* 공지사항 내용 */}
+                            <hr className="notice-content-underline" /> {/* 내용 하단의 실선 */}
+                          </div>
+                        </td>
+                      </tr>
+                    )}
+                    <tr key={`${index}-underline`}>
+                    </tr>
+                  </React.Fragment>
+                ))
+              )}
             </tbody>
-        </table>
+          </table>
         </div>
-    </div>                     
-    );
+      </div>
+      <Footer />
+    </>
+  );
 };
 export default UserNotice;
