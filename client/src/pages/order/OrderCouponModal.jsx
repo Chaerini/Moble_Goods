@@ -12,7 +12,7 @@ function OrderCouponModal({ onClose, applyCoupon, userId }) {
     useEffect(() => {
         const fetchCoupons = async () => {
             try {
-                const response = await axios.get(`${apiUrl}/coupons/user/${userId}`);
+                const response = await axios.get(`${apiUrl}/usercoupons/${userId}`);
                 console.log(response.data.result); // 데이터 확인을 위해 콘솔 로그 추가
                 setCoupons(response.data.result); // 서버에서 응답받은 쿠폰 리스트를 설정합니다.
             } catch (error) {

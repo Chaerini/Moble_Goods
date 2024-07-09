@@ -150,7 +150,7 @@ function Order() {
           quantity: item.quantity,
           price: item.price
         })),
-        coupon_id: selectedCoupon ? selectedCoupon.id : null
+        coupon_id: selectedCoupon ? selectedCoupon.coupon_id : null // 쿠폰 아이디
       };
 
       console.log('Order data prepared:', orderData);
@@ -161,6 +161,19 @@ function Order() {
 
       console.log('Order created with ID:', response.data.id);
 
+      // 쿠폰 사용 상태 업데이트
+      if (selectedCoupon) {
+        console.log(`Updating coupon status for user coupon ID: ${selectedCoupon.user_coupon_id}`);
+        console.log(`PUT 요청 URL: ${apiUrl}/usercoupons/${selectedCoupon.user_coupon_id}`);
+        const updateCouponResponse = await axios.put(`${apiUrl}/usercoupons/${selectedCoupon.user_coupon_id}`, { used: 1 }, {
+          headers: {
+            'auth-token': user.token,
+            'Content-Type': 'application/json'
+          }
+        });
+        console.log('유저쿠폰아디값', selectedCoupon.user_coupon_id);
+      }
+
       setOrderId(response.data.id); // 주문 ID 설정
       setShowOrderComplete(true); // 주문 완료 모달을 표시
     } catch (error) {
@@ -168,6 +181,9 @@ function Order() {
       console.error('오류 응답:', error.response ? error.response.data : '응답 없음');
     }
   };
+
+
+
 
   const closeOrderCompleteModal = () => {
     setShowOrderComplete(false); // 주문 완료 모달을 닫기
