@@ -11,7 +11,7 @@
   
   /* 헤더 스타일 */
   .myqna-header {
-    margin-bottom: 20px;
+    margin-bottom: 55px;
     text-align: center; /* 헤더 중앙 정렬 */
   }
   
@@ -19,7 +19,7 @@
   .myqna-header h1 {
     font-size: 23px; 
     font-weight: normal;
-    margin-top: 90px; /* 위쪽 공간*/
+    margin-top: 60px; /* 위쪽 공간*/
   }
   
   /* 폼 스타일 */

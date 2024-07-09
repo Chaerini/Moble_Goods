@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from 'react-router-dom';
 import "./myqna.css";
 import axios from "axios";
-import { useNavigate } from "react-router";
+import { AuthContext } from "../../Context/AuthContext";
+
 // Dropdown 컴포넌트: 문의 유형과 세부 선택을 위한 드롭다운
 const Dropdown = ({ label, options, onSelect, selectedOption }) => {
+  const { user } = useContext(AuthContext);
+  console.log(user);
   const handleChange = (event) => {
     const value = event.target.value;
     onSelect(value);
@@ -22,6 +26,45 @@ const Dropdown = ({ label, options, onSelect, selectedOption }) => {
     </div>
   );
 };
+
+// 연락처 입력 필드 컴포넌트
+const ContactInput = ({ onChange, value, placeholder }) => {
+  const handleInputChange = (event) => {
+    const input = event.target.value;
+    const formattedInput = formatPhoneNumber(input);
+    onChange({ target: { name: 'contact', value: formattedInput } });
+  };
+
+  const formatPhoneNumber = (input) => {
+    // 숫자만 남기기
+    input = input.replace(/\D/g, '');
+    // 000-0000-0000 형식으로 포맷팅
+    if (input.length <= 3) {
+      return input;
+    } else if (input.length <= 7) {
+      return `${input.slice(0, 3)}-${input.slice(3, 7)}`;
+    } else {
+      return `${input.slice(0, 3)}-${input.slice(3, 7)}-${input.slice(7, 11)}`;
+    }
+  };
+
+  return (
+    <div className="myqna-input-field">
+      <label className="myqna-input-label">연락처</label>
+      <input
+        type="text"
+        name="contact"
+        value={value}
+        onChange={handleInputChange}
+        placeholder={placeholder}
+        className="myqna-input-box"
+        maxLength={13} // 최대 길이 설정
+      />
+    </div>
+  );
+};
+
+
 // 문의 제목 입력 필드 컴포넌트
 const TitleInput = ({ onChange, value, placeholder }) => (
   <div className="myqna-input-field">
@@ -42,27 +85,14 @@ const TitleInput = ({ onChange, value, placeholder }) => (
 const ContentInput = ({ onChange, value, placeholder }) => (
   <div className="myqna-input-field content-field">
     <textarea
-      name="content"
+      name="contents"
       value={value}
       onChange={onChange}
       maxLength={2000}
       placeholder={placeholder}
       className="myqna-textarea-box"
     ></textarea>
-  </div>
-);
-const NameInput = ({ onChange, value, placeholder }) => (
-  <div className="myqna-input-field">
-    <label className="myqna-input-label">작성자<span className="myqna-required">*</span></label>
-    <input
-      type="text"
-      name="userId"
-      value={value}
-      onChange={onChange}
-      maxLength={25}
-      placeholder={placeholder}
-      className="myqna-input-box"
-    />
+    <div className="myqna-char-count">{value.length}/2000</div>
   </div>
 );
 
@@ -83,30 +113,44 @@ const SubmitButton = ({ onSubmit, text, className }) => (
 
 // 전체 폼 컴포넌트
 const ContactForm = () => {
-    const navigate=useNavigate();
-    const [formData, setFormData] = useState({
-        userId:"",
-        title: "",
-        contents: ""
+  const { user } = useContext(AuthContext);
+  const [formData, setFormData] = useState({
+    // contact: "",
+    user_id: user.id,
+    title: "",
+    contents: "",
+    // type: "",
+    // subType: "",
+    // messageAlert: false,
   });
 
-  const handleChange = (e) =>{
-    setFormData((prev) => ({...prev,[e.target.name]:e.target.value}));
-    };
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    });
+  };
+
+  const navigate = useNavigate();
+
   /* 나의 문의 내역보기 하이퍼링크 삽입*/
   const handleViewClick = () => {
-    navigate("/myqnalist");
-};
+    // window.location.href = "http://localhost:3000/myqnalist";
+    navigate('/myqnalist');
+  };
 
   const handleSubmit = async e => {
+    
     try{
-        e.preventDefault();
+    e.preventDefault();
         console.log("====질문=====",formData)
         await axios.post(`http://localhost:8080/api/asks`,formData);
         console.log("추가완료");
-        alert("추가완료")
+        alert("제출이 완료되었습니다.")
     }catch(err){
         console.log("error",err);
+        alert("문의 추가에 실패했습니다.");
     }
   };
 
@@ -127,28 +171,25 @@ const ContactForm = () => {
             selectedOption={formData.subType}
           />
         </div>
-      <MessageAlertCheckbox onChange={handleChange} />
-      <NameInput
-        name="userId"
-        placeholder="아이디를 입력해 주세요. (최대 25자)"
+      <ContactInput
+        value={formData.contact}
         onChange={handleChange}
-        className="myqna-input-box"
+        placeholder="연락처를 입력해 주세요."
       />
+      <MessageAlertCheckbox onChange={handleChange} />
       <TitleInput
-        name="title"
-        placeholder="제목을 입력해 주세요. (최대 25자)"
+        value={formData.title}
         onChange={handleChange}
-        className="myqna-input-box"
+        placeholder="제목을 입력해 주세요. (최대 25자)"
       />
       <ContentInput
-        name="contents"
-        placeholder="문의하실 내용을 입력해 주세요."
+        value={formData.contents}
         onChange={handleChange}
-        className="myqna-textarea-box"
+        placeholder="문의하실 내용을 입력해 주세요."
       />
       <div className="myqna-button-row">
-      <button onClick={handleViewClick} className="myqna-view-button">나의 문의 내역보기</button>
-      <button onClick={handleSubmit} className="myqna-submit-button">등록하기</button>
+      <button onClick={handleViewClick} text="나의 문의 내역보기" className="myqna-view-button" />
+      <button onClick={handleSubmit} text="등록하기" className="myqna-submit-button" />
       </div>
       <p className="myqna-center-text">
         전화문의 <span className="highlight">777-777</span> | 운영시간 <span className="highlight">평일 09:30~17:30</span>
@@ -171,3 +212,4 @@ const Myqna = () => {
 };
 
 export default Myqna;
+
