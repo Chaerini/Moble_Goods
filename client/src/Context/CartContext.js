@@ -235,8 +235,32 @@ export function CartProvider({ children }) {
     }
   };
 
+  const deleteSelectedCartItems = async (selectedIds) => {
+    try {
+      const response = await axios.delete(`${apiUrl}/carts/${user.id}`, {
+        data: { ids: selectedIds },
+        headers: {
+          'Authorization': `Bearer ${user.token}`,
+          'Content-Type': 'application/json'
+        },
+        withCredentials: true
+      });
+
+      if (response.status === 200) {
+        setCartItems(cartItems.filter(item => !selectedIds.includes(item.id)));
+      } else {
+        setError(`Failed to delete selected cart items: ${response.status} ${response.statusText}`);
+      }
+    } catch (error) {
+      setError(error.response ?
+        `Error deleting selected cart items: ${error.response.status} ${error.response.statusText}` :
+        `Error deleting selected cart items: ${error.message}`);
+    }
+  };
+
+
   return (
-    <CartContext.Provider value={{ cartItems, setCartItems, fetchCartItems, addToCart, updateCartItem, deleteCartItem, loading, error }}>
+    <CartContext.Provider value={{ cartItems, setCartItems, fetchCartItems, addToCart, updateCartItem, deleteCartItem, deleteSelectedCartItems, loading, error }}>
       {children}
     </CartContext.Provider>
   );

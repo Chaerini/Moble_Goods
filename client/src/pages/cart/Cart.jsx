@@ -7,7 +7,7 @@ import './Cart.css';
 import { CartContext } from '../../Context/CartContext'; // CartContext 파일 위치를 기준으로 import
 
 export default function Cart() {
-  const { cartItems, setCartItems, updateCartItem, deleteCartItem, loading, error } = useContext(CartContext);
+  const { cartItems, setCartItems, updateCartItem, deleteCartItem, deleteSelectedCartItems, loading, error } = useContext(CartContext);
   const [allChecked, setAllChecked] = useState(false);
   const [selectAll, setSelectAll] = useState(false);
   const navigate = useNavigate();
@@ -54,6 +54,16 @@ export default function Cart() {
     navigate('/order', { state: { selectedItems } });
   };
 
+  const handleDeleteSelected = async () => {
+    const selectedIds = cartItems.filter(item => item.selected).map(item => item.id);
+
+    try {
+      await deleteSelectedCartItems(selectedIds);
+    } catch (error) {
+      console.error("Error deleting selected items:", error);
+    }
+  };
+
   const formatNumber = (num) => {
     return num.toLocaleString('ko-KR');
   };
@@ -74,9 +84,9 @@ export default function Cart() {
           <div className="step">03. 주문 완료</div>
         </div>
         <div className="cart-controls">
-          <button onClick={handleSelectAll}>전체 선택</button>
+          <button onClick={handleSelectAll}>전체 선택/해제</button>
           <button onClick={() => setCartItems(cartItems.map(item => ({ ...item, selected: false })))}>선택 해제</button>
-          <button onClick={() => setCartItems(cartItems.filter(item => !item.selected))}>삭제</button>
+          <button onClick={handleDeleteSelected}>삭제</button>
         </div>
         {loading ? (
           <p>Loading...</p>

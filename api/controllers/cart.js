@@ -53,6 +53,23 @@ export const deleteCart = async (req, res) => {
   }
 };
 
+export const deleteSelectedCartItems = async (req, res) => {
+  const { ids } = req.body;
+  const { userId } = req.params;
+
+  try {
+    const [result] = await pool.query(
+      `DELETE FROM cart WHERE id IN (?) AND user_id = ?`,
+      [ids, userId]
+    );
+    res.status(200).json({ message: 'Selected items deleted successfully' });
+  } catch (error) {
+    console.error("Error deleting selected items from cart:", error);
+    res.status(400).json({ error: error.message });
+  }
+};
+
+
 // 장바구니 조회
 export const getCartByUser = async (req, res) => {
   const userId = req.params.userId; // 현재 로그인된 사용자 ID
